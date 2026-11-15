@@ -12,6 +12,8 @@ const FILES = [
   "./portrait-maya.svg",
   "./portrait-marcus.svg",
   "./portrait-evelyn.svg",
+  "./action-plan-clipboard.png",
+  "./action-plan-clipboard.svg",
   "./manifest.webmanifest",
   "./icon.svg",
   "./icon-192.png",

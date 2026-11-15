@@ -1,0 +1,292 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 1560" width="1040" height="1560" fill="none">
+  <defs>
+    <!-- Clipboard Board Gradients & Shadows -->
+    <filter id="clipboardShadow" x="-10%" y="-5%" width="120%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="18" stdDeviation="24" flood-color="#000000" flood-opacity="0.55"/>
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+
+    <filter id="paperShadow" x="-5%" y="-2%" width="110%" height="106%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#0d0b09" flood-opacity="0.35"/>
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0d0b09" flood-opacity="0.2"/>
+    </filter>
+
+    <filter id="clipShadow" x="-20%" y="-10%" width="140%" height="130%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000000" flood-opacity="0.45"/>
+    </filter>
+
+    <!-- Wood Board Linear Gradient (Roasted Walnut) -->
+    <linearGradient id="boardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#362d25"/>
+      <stop offset="35%" stop-color="#2a221b"/>
+      <stop offset="70%" stop-color="#221b15"/>
+      <stop offset="100%" stop-color="#18130f"/>
+    </linearGradient>
+
+    <!-- Metallic Clamp Gradient (Brushed Steel / Satin Titanium) -->
+    <linearGradient id="metalClampGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f0ece6"/>
+      <stop offset="15%" stop-color="#d4ceca"/>
+      <stop offset="50%" stop-color="#8f8983"/>
+      <stop offset="85%" stop-color="#b8b2ac"/>
+      <stop offset="100%" stop-color="#6e6862"/>
+    </linearGradient>
+
+    <linearGradient id="metalWireGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#736d67"/>
+      <stop offset="30%" stop-color="#e8e4de"/>
+      <stop offset="70%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#66615c"/>
+    </linearGradient>
+
+    <linearGradient id="rivetGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e3dfd8"/>
+      <stop offset="50%" stop-color="#8c857e"/>
+      <stop offset="100%" stop-color="#36322d"/>
+    </linearGradient>
+
+    <!-- Paper Texture & Tints -->
+    <linearGradient id="paperGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fdfbf7"/>
+      <stop offset="100%" stop-color="#f7f3eb"/>
+    </linearGradient>
+  </defs>
+
+  <style>
+    .font-title { font-family: 'Playfair Display', Georgia, -apple-system, serif; font-weight: 700; fill: #1c1917; }
+    .font-sans { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+    .font-mono { font-family: ui-monospace, 'IBM Plex Mono', Menlo, Consolas, monospace; }
+  </style>
+
+  <!-- ========================================== -->
+  <!-- 1. CLIPBOARD BOARD                         -->
+  <!-- ========================================== -->
+  <g filter="url(#clipboardShadow)">
+    <!-- Main Board -->
+    <rect x="50" y="30" width="940" height="1500" rx="24" fill="url(#boardGrad)" stroke="#4a3d32" stroke-width="2.5"/>
+
+    <!-- Subtle Beveled Edge Highlight -->
+    <rect x="52" y="32" width="936" height="1496" rx="22" fill="none" stroke="#635446" stroke-width="1.2" opacity="0.35"/>
+
+    <!-- Top Center Wall-Hanging Hole -->
+    <circle cx="520" cy="62" r="13" fill="#120e0b" stroke="#4a3d32" stroke-width="2.5"/>
+    <!-- Hole Inner Shadow -->
+    <circle cx="520" cy="62" r="11" fill="none" stroke="#000000" stroke-width="2" opacity="0.7"/>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 2. DOCUMENT (PAPER SHEET)                   -->
+  <!-- ========================================== -->
+  <g filter="url(#paperShadow)">
+    <!-- Paper Sheet -->
+    <rect x="90" y="105" width="860" height="1380" rx="5" fill="url(#paperGrad)" stroke="#e8e2d5" stroke-width="1.5"/>
+
+    <!-- Subtle Paper Header Watermark Band -->
+    <rect x="90" y="105" width="860" height="8" rx="4" fill="#558963" opacity="0.75"/>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 3. DOCUMENT CONTENT                        -->
+  <!-- ========================================== -->
+  <g id="documentContent">
+    <!-- Emblem Logo (Empty Bowl & Wheat) -->
+    <g transform="translate(130, 142)">
+      <circle cx="28" cy="28" r="26" fill="#181614"/>
+      <!-- Bowl base -->
+      <path d="M 12 30 Q 28 48 44 30 Z" fill="#f5f0ea"/>
+      <!-- Wheat stalk rising -->
+      <path d="M 28 32 L 28 12" stroke="#e5a93b" stroke-width="2" stroke-linecap="round"/>
+      <ellipse cx="24" cy="18" rx="2.5" ry="4.5" transform="rotate(-28 24 18)" fill="#e5a93b"/>
+      <ellipse cx="32" cy="18" rx="2.5" ry="4.5" transform="rotate(28 32 18)" fill="#e5a93b"/>
+      <ellipse cx="28" cy="12" rx="2" ry="4" fill="#e5a93b"/>
+    </g>
+
+    <!-- Header Text -->
+    <text x="200" y="162" class="font-title" font-size="28" letter-spacing="-0.01em">EMPTY BOWL</text>
+    <text x="200" y="184" class="font-sans" font-size="13" font-weight="700" letter-spacing="0.08em" fill="#558963" text-transform="uppercase">Community Action Plan &amp; Smart Donor Field Guide</text>
+    <text x="200" y="202" class="font-mono" font-size="11" fill="#787167">Build f00000-001 · https://EthanNorland.github.io/foodinsecurity/</text>
+
+    <!-- Decorative Dividing Line -->
+    <line x1="130" y1="222" x2="910" y2="222" stroke="#ded6c8" stroke-width="1.5"/>
+
+    <!-- SECTION 1: ACTION COMMITMENTS -->
+    <text x="130" y="254" class="font-mono" font-size="12" font-weight="700" letter-spacing="0.1em" fill="#b37f22" text-transform="uppercase">01 · COMMUNITY ACTION COMMITMENTS</text>
+
+    <!-- Item 1 -->
+    <g transform="translate(130, 274)">
+      <rect x="0" y="0" width="22" height="22" rx="4" fill="#558963"/>
+      <path d="M 6 11 L 9.5 15 L 16 7" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <text x="34" y="16" class="font-sans" font-size="14" font-weight="700" fill="#1c1917">Locate your campus or neighborhood food pantry</text>
+      <text x="34" y="34" class="font-sans" font-size="12" fill="#696257">Find where food assistance is physically distributed and note operating hours and drop-off requirements.</text>
+    </g>
+
+    <!-- Item 2 -->
+    <g transform="translate(130, 326)">
+      <rect x="0" y="0" width="22" height="22" rx="4" fill="#558963"/>
+      <path d="M 6 11 L 9.5 15 L 16 7" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <text x="34" y="16" class="font-sans" font-size="14" font-weight="700" fill="#1c1917">Donate high-utility staple foods (proteins &amp; cooking oil)</text>
+      <text x="34" y="34" class="font-sans" font-size="12" fill="#696257">Provide peanut butter, canned salmon/tuna, olive oil, dry lentils, and whole grains rather than sugary surplus.</text>
+    </g>
+
+    <!-- Item 3 -->
+    <g transform="translate(130, 378)">
+      <rect x="0" y="0" width="22" height="22" rx="4" fill="#558963"/>
+      <path d="M 6 11 L 9.5 15 L 16 7" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <text x="34" y="16" class="font-sans" font-size="14" font-weight="700" fill="#1c1917">Donate essential non-food hygiene items</text>
+      <text x="34" y="34" class="font-sans" font-size="12" fill="#696257">SNAP dollars cannot purchase diapers, period products, soap, or detergent—items in critical demand.</text>
+    </g>
+
+    <!-- Item 4 -->
+    <g transform="translate(130, 430)">
+      <rect x="0" y="0" width="22" height="22" rx="4" fill="#558963"/>
+      <path d="M 6 11 L 9.5 15 L 16 7" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <text x="34" y="16" class="font-sans" font-size="14" font-weight="700" fill="#1c1917">Destigmatize &amp; designate basic-needs conversations</text>
+      <text x="34" y="34" class="font-sans" font-size="12" fill="#696257">Include pantry information in announcements, flyers, and social media posts to normalize seeking support.</text>
+    </g>
+
+    <!-- Item 5 -->
+    <g transform="translate(130, 482)">
+      <rect x="0" y="0" width="22" height="22" rx="4" fill="#558963"/>
+      <path d="M 6 11 L 9.5 15 L 16 7" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <text x="34" y="16" class="font-sans" font-size="14" font-weight="700" fill="#1c1917">Contact state representatives regarding student SNAP rules</text>
+      <text x="34" y="34" class="font-sans" font-size="12" fill="#696257">Send concise letters urging legislators to exempt full-time college students from arbitrary 20-hr work rules.</text>
+    </g>
+
+    <!-- Item 6 -->
+    <g transform="translate(130, 534)">
+      <rect x="0" y="0" width="22" height="22" rx="4" fill="#558963"/>
+      <path d="M 6 11 L 9.5 15 L 16 7" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <text x="34" y="16" class="font-sans" font-size="14" font-weight="700" fill="#1c1917">Make a financial donation</text>
+      <text x="34" y="34" class="font-sans" font-size="12" fill="#696257">Direct funds enable food banks and mutual aid funds to buy bulk fresh produce and proteins at wholesale rates.</text>
+    </g>
+
+    <!-- Item 7 -->
+    <g transform="translate(130, 586)">
+      <rect x="0" y="0" width="22" height="22" rx="4" fill="#558963"/>
+      <path d="M 6 11 L 9.5 15 L 16 7" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <text x="34" y="16" class="font-sans" font-size="14" font-weight="700" fill="#1c1917">Volunteer at a local food pantry</text>
+      <text x="34" y="34" class="font-sans" font-size="12" fill="#696257">Dedicate time to sorting deliveries, stocking shelves, staffing distribution days, or organizing mutual aid.</text>
+    </g>
+
+    <!-- SECTION 2: PERSONAL REFLECTIONS CARD -->
+    <g transform="translate(130, 650)">
+      <rect x="0" y="0" width="780" height="142" rx="8" fill="#f0ebe0" stroke="#dcd3c3" stroke-width="1.2"/>
+      <rect x="0" y="0" width="6" height="142" rx="3" fill="#558963"/>
+      <text x="24" y="28" class="font-mono" font-size="11" font-weight="700" letter-spacing="0.08em" fill="#558963" text-transform="uppercase">02 · PERSONAL REFLECTIONS &amp; COMMUNITY NOTES</text>
+      <text x="24" y="58" class="font-sans" font-size="13.5" font-style="italic" fill="#2d2924">"Hunger in our communities is often quiet, concealed, and surrounded by shame. When we replace stigma with</text>
+      <text x="24" y="80" class="font-sans" font-size="13.5" font-style="italic" fill="#2d2924">barrier-free mutual aid, dignified choice pantries, and living-wage advocacy, we protect the wellbeing and potential</text>
+      <text x="24" y="102" class="font-sans" font-size="13.5" font-style="italic" fill="#2d2924">of every neighbor and student."</text>
+      <text x="24" y="126" class="font-mono" font-size="10.5" fill="#787167">— Lived Reality Field Observation · Recorded via Empty Bowl Notebook</text>
+    </g>
+
+    <!-- SECTION 3: SMART DONOR'S FIELD GUIDE -->
+    <text x="130" y="830" class="font-mono" font-size="12" font-weight="700" letter-spacing="0.1em" fill="#b37f22" text-transform="uppercase">03 · SMART DONOR'S FIELD GUIDE</text>
+
+    <!-- Two-Column Donation Comparison Box -->
+    <g transform="translate(130, 846)">
+      <!-- Left Column: What to Give (Green Tint) -->
+      <rect x="0" y="0" width="375" height="340" rx="8" fill="#f2f7f3" stroke="#bddbc4" stroke-width="1.2"/>
+      <rect x="0" y="0" width="375" height="38" rx="8" fill="#dceddf"/>
+      <text x="20" y="25" class="font-sans" font-size="14" font-weight="700" fill="#266135">High-Utility Items to Give (✓)</text>
+
+      <g transform="translate(20, 62)" class="font-sans" font-size="12.5" fill="#2b3b2f">
+        <text x="0" y="0" font-weight="600">• Canned Proteins</text>
+        <text x="14" y="18" fill="#546e59">Tuna, salmon, chicken, black beans, chickpeas</text>
+
+        <text x="0" y="48" font-weight="600">• Nutrient-Dense Fats &amp; Spreads</text>
+        <text x="14" y="66" fill="#546e59">Peanut butter, almond butter, sunflower spread</text>
+
+        <text x="0" y="96" font-weight="600">• Heart-Healthy Cooking Oils</text>
+        <text x="14" y="114" fill="#546e59">Olive oil, canola oil, whole and ground spices</text>
+
+        <text x="0" y="144" font-weight="600">• Whole Grain Carbohydrates</text>
+        <text x="14" y="162" fill="#546e59">Brown rice, rolled oats, quinoa, whole-wheat pasta</text>
+
+        <text x="0" y="192" font-weight="600">• Essential Non-Food Hygiene</text>
+        <text x="14" y="210" fill="#546e59">Menstrual hygiene, baby diapers, bar soaps</text>
+      </g>
+
+      <!-- Right Column: What to Avoid (Terracotta Tint) -->
+      <g transform="translate(405, 0)">
+        <rect x="0" y="0" width="375" height="340" rx="8" fill="#faf4f2" stroke="#ebd1c9" stroke-width="1.2"/>
+        <rect x="0" y="0" width="375" height="38" rx="8" fill="#f7ded7"/>
+        <text x="20" y="25" class="font-sans" font-size="14" font-weight="700" fill="#8f3e2b">Items to Avoid Donating (✕)</text>
+
+        <g transform="translate(20, 62)" class="font-sans" font-size="12.5" fill="#422923">
+          <text x="0" y="0" font-weight="600">• Deeply Dented or Rusted Cans</text>
+          <text x="14" y="18" fill="#7a544b">Bulging lids or seams pose serious botulism risk</text>
+
+          <text x="0" y="48" font-weight="600">• Expired or Opened Kitchen Leftovers</text>
+          <text x="14" y="66" fill="#7a544b">Pantries must discard half-used cabinet cleanouts</text>
+
+          <text x="0" y="96" font-weight="600">• Fragile Glass Jars &amp; Bottles</text>
+          <text x="14" y="114" fill="#7a544b">Easily shatter in bulk transit boxes and bins</text>
+
+          <text x="0" y="144" font-weight="600">• High-Sugar Sheet Cakes &amp; Junk</text>
+          <text x="14" y="162" fill="#7a544b">Lacks micronutrients for families managing diabetes</text>
+
+          <text x="0" y="192" font-weight="600">• Complex Appliance Recipes</text>
+          <text x="14" y="210" fill="#7a544b">Many recipients have access only to a microwave</text>
+        </g>
+      </g>
+    </g>
+
+    <!-- Cash Multiplier Banner -->
+    <g transform="translate(130, 1205)">
+      <rect x="0" y="0" width="780" height="70" rx="8" fill="#fcf6ec" stroke="#ebd7b5" stroke-width="1.2"/>
+      <circle cx="36" cy="35" r="18" fill="#e5a93b"/>
+      <text x="36" y="41" text-anchor="middle" class="font-sans" font-size="16" font-weight="700" fill="#181614">$</text>
+      <text x="68" y="28" class="font-sans" font-size="13" font-weight="700" fill="#805610">THE WHOLESALE CASH MULTIPLIER PRINCIPLE</text>
+      <text x="68" y="48" class="font-sans" font-size="12" fill="#5c4217">Food banks leverage commercial wholesale networks: $1 in cash buys 3 to 4 times more fresh produce, lean meat,</text>
+      <text x="68" y="62" class="font-sans" font-size="12" fill="#5c4217">and dairy than a retail consumer buying shelf-stable canned goods at grocery counter prices.</text>
+    </g>
+
+    <!-- Document Footer -->
+    <g transform="translate(130, 1300)">
+      <line x1="0" y1="0" x2="780" y2="0" stroke="#ded6c8" stroke-width="1.2"/>
+      <text x="0" y="26" class="font-sans" font-size="11.5" font-weight="600" fill="#558963">EMPTY BOWL · Lived Realities, Systemic Causes &amp; Tangible Community Solidarity</text>
+      <text x="0" y="44" class="font-mono" font-size="10.5" fill="#787167">Author: Ethan Norland · Written with Gemini · All rights reserved © 2026</text>
+      <text x="780" y="32" text-anchor="end" class="font-mono" font-size="11" fill="#b37f22">f00000-001</text>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 4. HEAVY METALLIC CLIPBOARD CLAMP           -->
+  <!-- ========================================== -->
+  <g id="clipboardClip" filter="url(#clipShadow)">
+    <!-- Upper Spring Wire Loop (Above board cutout) -->
+    <path d="M 460 76 C 460 38, 580 38, 580 76" stroke="url(#metalWireGrad)" stroke-width="7" stroke-linecap="round" fill="none"/>
+    <path d="M 468 76 C 468 46, 572 46, 572 76" stroke="#423e39" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.6"/>
+
+    <!-- Main Metallic Clamp Bracket -->
+    <rect x="360" y="72" width="320" height="66" rx="8" fill="url(#metalClampGrad)" stroke="#59544e" stroke-width="1.8"/>
+
+    <!-- Clamp Top Edge Highlight -->
+    <line x1="362" y1="74" x2="678" y2="74" stroke="#ffffff" stroke-width="1.5" opacity="0.7"/>
+
+    <!-- Twin Industrial Rivets / Screws -->
+    <circle cx="395" cy="105" r="9" fill="url(#rivetGrad)" stroke="#3d3833" stroke-width="1.2"/>
+    <line x1="389" y1="105" x2="401" y2="105" stroke="#2b2723" stroke-width="1.5"/>
+    <circle cx="395" cy="104" r="1.5" fill="#ffffff" opacity="0.6"/>
+
+    <circle cx="645" cy="105" r="9" fill="url(#rivetGrad)" stroke="#3d3833" stroke-width="1.2"/>
+    <line x1="639" y1="105" x2="651" y2="105" stroke="#2b2723" stroke-width="1.5"/>
+    <circle cx="645" cy="104" r="1.5" fill="#ffffff" opacity="0.6"/>
+
+    <!-- Center Spring Cylinder / Pivot Bar -->
+    <rect x="475" y="80" width="90" height="20" rx="4" fill="#383430" stroke="#544f49" stroke-width="1.2"/>
+    <!-- Wire spring coils detail -->
+    <line x1="490" y1="80" x2="495" y2="100" stroke="#b0aaa2" stroke-width="2"/>
+    <line x1="505" y1="80" x2="510" y2="100" stroke="#b0aaa2" stroke-width="2"/>
+    <line x1="520" y1="80" x2="525" y2="100" stroke="#b0aaa2" stroke-width="2"/>
+    <line x1="535" y1="80" x2="540" y2="100" stroke="#b0aaa2" stroke-width="2"/>
+    <line x1="550" y1="80" x2="555" y2="100" stroke="#b0aaa2" stroke-width="2"/>
+
+    <!-- Clamp Lower Lip / Grip Foot (Pressing onto paper) -->
+    <rect x="380" y="126" width="280" height="18" rx="4" fill="#302c28" stroke="#47423c" stroke-width="1"/>
+    <rect x="382" y="128" width="276" height="5" fill="#78726a" opacity="0.5"/>
+
+    <!-- Drop Shadow from Clamp onto Paper -->
+    <rect x="375" y="144" width="290" height="8" fill="#000000" opacity="0.32" filter="blur(2px)"/>
+  </g>
+</svg>

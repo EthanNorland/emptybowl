@@ -19,8 +19,12 @@
   - `whofaceshunger.html`: Dynamic demographic profile card inspector with refined college barrier and worker impact copy.
   - `causesoffoodinsecurity.html`: Budget elasticity simulation showing how fixed costs squeeze food dollars.
   - `personalstories.html`: Stacked linear narrative flow showing all 3 accounts directly on the page with portraits, story titles above character names, and reflection notes with localStorage autosave.
-  - `howyoucanhelp.html`: Interactive 7-point community action checklist with persistent browser state, mutual aid fridge solidarity copy, and downloadable Action Plan text file export (`.txt`).
-- **PWA & Offline:** `manifest.webmanifest`, `sw.js` precaching the app shell and portrait SVGs, responsive design with zero overlap, and version chip `f00000-001 ↻`.
+  - `howyoucanhelp.html`: Interactive 7-point community action checklist with persistent browser state, mutual aid fridge solidarity copy, downloadable Action Plan text file export (`.txt`), and high-resolution clipboard document picture export (`.png`).
+- **Tactile Clipboard Picture Export:**
+  - High-resolution clipboard document illustration ([`action-plan-clipboard.png`](action-plan-clipboard.png) & [`action-plan-clipboard.svg`](action-plan-clipboard.svg)) styled as a tactile sheet of linen paper attached to a dark roasted walnut clipboard with brushed steel spring clamp, dual rivets, and realistic paper shadows.
+  - Features all 7 community action commitments, personal reflection notebook excerpt, 2-column Smart Donor Field Guide (Give vs. Avoid), and wholesale multiplier principle.
+  - Interactive client-side canvas exporter dynamically reflects live checkbox completions and reflection notes.
+- **PWA & Offline:** `manifest.webmanifest`, `sw.js` precaching the app shell, portrait SVGs, and clipboard picture, responsive design with zero overlap, and version chip `f00000-001 ↻`.
 - **Searchable Help:** In-page searchable guide on every screen that locates and highlights controls with a glowing ring.
 - **About Panel:** 4-line standard disclosure with raison d'être quote and "All rights reserved" line.
 - **Local Review Tools:** `tools/markup-server.py` and `tools/markup-inject.js` installed and gitignored.
