@@ -573,7 +573,6 @@
       </div>
       <div style="margin-top: 18px; display: flex; justify-content: flex-end; align-items: center; gap: 10px; flex-wrap: wrap;">
         <button id="btnResetChecklist" class="tool-btn" style="height: 38px; padding: 0 14px;" title="Reset all checklist items to uncompleted">Reset Checklist</button>
-        <button id="btnExportActionPlan" class="tool-btn" style="height: 38px; padding: 0 14px;" title="Download your action commitments as a plain text file">📄 Export as Text (.txt)</button>
         <button id="btnExportPicture" class="nav-btn" style="background: var(--ring); color: #181614; border-color: #d89b2b; font-weight: 700; height: 38px; padding: 0 18px;" title="Download your action commitments and field guide as a high-resolution clipboard document picture (.png)">🖼️ Export as Clipboard Picture (.png)</button>
       </div>
       <div style="margin-top: 10px; text-align: right;">
@@ -682,68 +681,6 @@ checkboxes.forEach(cb => {
   });
 });
 updateChecklistView();
-
-// Export Action Plan & Field Guide
-document.getElementById("btnExportActionPlan")?.addEventListener("click", () => {
-  const items = [
-    "Locate your campus or neighborhood food pantry",
-    "Donate high-utility staple foods (proteins & cooking oil)",
-    "Donate essential non-food hygiene items (diapers, period products)",
-    "Destigmatize & designate basic-needs conversations (announcements, flyers, social media)",
-    "Contact state representatives regarding student SNAP rules",
-    "Make a financial donation to emergency food providers",
-    "Volunteer at a local food pantry"
-  ];
-  
-  let reflectionText = "";
-  try {
-    reflectionText = localStorage.getItem("foodinsecurity.stories.reflection") || "";
-  } catch (e) {}
-
-  let exportContent = `FOOD INSECURITY: ACTION PLAN & FIELD GUIDE\n`;
-  exportContent += `Generated: ${new Date().toLocaleDateString()} · Build f00000-001\n`;
-  exportContent += `Website: https://EthanNorland.github.io/foodinsecurity/\n`;
-  exportContent += `================================================================================\n\n`;
-  
-  exportContent += `1. YOUR COMMUNITY ACTION COMMITMENTS\n`;
-  exportContent += `--------------------------------------------------------------------------------\n`;
-  items.forEach((item, idx) => {
-    const status = checklistState[idx] ? "[X] COMPLETED" : "[ ] PENDING";
-    exportContent += `${status}: ${item}\n`;
-  });
-  exportContent += `\n`;
-
-  if (reflectionText.trim()) {
-    exportContent += `2. YOUR PERSONAL REFLECTION NOTES\n`;
-    exportContent += `--------------------------------------------------------------------------------\n`;
-    exportContent += `${reflectionText.trim()}\n\n`;
-  }
-
-  exportContent += `3. SMART DONOR FIELD GUIDE (HIGH-UTILITY ITEMS)\n`;
-  exportContent += `--------------------------------------------------------------------------------\n`;
-  exportContent += `HIGH VALUE ITEMS TO DONATE:\n`;
-  exportContent += `  • Canned proteins (tuna, chicken, salmon, black beans, chickpeas)\n`;
-  exportContent += `  • Nut butters and seed spreads\n`;
-  exportContent += `  • Cooking oils (olive oil, vegetable oil) and whole spices\n`;
-  exportContent += `  • Whole grain pasta, brown rice, rolled oats, and quinoa\n`;
-  exportContent += `  • Menstrual hygiene products, baby diapers, and bar soaps\n\n`;
-  exportContent += `WHAT TO AVOID:\n`;
-  exportContent += `  • Deeply dented, rusted, or bulging cans (safety hazard)\n`;
-  exportContent += `  • Expired or opened kitchen leftovers\n`;
-  exportContent += `  • Fragile glass jars\n`;
-  exportContent += `  • Sugary surplus junk food or sheet cake\n\n`;
-  exportContent += `WHY CASH MATTERS:\n`;
-  exportContent += `  Food banks leverage wholesale supply channels to purchase 3 to 4 times\n`;
-  exportContent += `  more fresh produce and perishable proteins per dollar than retail donors.\n`;
-  exportContent += `================================================================================\n`;
-
-  const blob = new Blob([exportContent], { type: "text/plain;charset=utf-8" });
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = `foodinsecurity-action-plan-${Date.now()}.txt`;
-  a.click();
-  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
-});
 
 // Reset Checklist
 document.getElementById("btnResetChecklist")?.addEventListener("click", () => {
@@ -1066,7 +1003,6 @@ const HELP_INDEX = [
   { title: "How You Can Help", selector: "#btn-nav-help", text: "Current direct action page." },
   { title: "Community Action Checklist", selector: "#section-action-plan", text: "Interactive commitments with persistent progress tracking." },
   { title: "Export Clipboard Picture", selector: "#btnExportPicture", text: "Download your action commitments and field guide as a clipboard image (.png)." },
-  { title: "Export Action Plan (Text)", selector: "#btnExportActionPlan", text: "Download your completed commitments as a plain text file." },
   { title: "Reset Checklist", selector: "#btnResetChecklist", text: "Reset all checklist checkmarks back to uncompleted." },
   { title: "Smart Donor Guide", selector: ".donation-guide", text: "List of high-utility items and what to avoid." },
   { title: "Cash Multiplier Pillar", selector: ".action-card:nth-child(1)", text: "Learn why wholesale food bank cash donations outperform cans." }
