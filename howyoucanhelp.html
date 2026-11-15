@@ -896,11 +896,12 @@ function buildClipboardSvg(state = [], userNotes = "") {
   <g id="documentContent">
     <g transform="translate(130, 142)">
       <circle cx="28" cy="28" r="26" fill="#181614"/>
-      <path d="M 12 30 Q 28 48 44 30 Z" fill="#f5f0ea"/>
-      <path d="M 28 32 L 28 12" stroke="#e5a93b" stroke-width="2" stroke-linecap="round"/>
-      <ellipse cx="24" cy="18" rx="2.5" ry="4.5" transform="rotate(-28 24 18)" fill="#e5a93b"/>
-      <ellipse cx="32" cy="18" rx="2.5" ry="4.5" transform="rotate(28 32 18)" fill="#e5a93b"/>
-      <ellipse cx="28" cy="12" rx="2" ry="4" fill="#e5a93b"/>
+      <!-- Empty Green Bowl -->
+      <path d="M 23 44 C 23 46 33 46 33 44 Z" fill="#3d6648"/>
+      <path d="M 12 28 C 12 42 22 46 28 46 C 34 46 44 42 44 28 Z" fill="#558963"/>
+      <ellipse cx="28" cy="28" rx="16" ry="3.8" fill="#6ba67c"/>
+      <ellipse cx="28" cy="28" rx="14.2" ry="2.8" fill="#2d4d35"/>
+      <ellipse cx="28" cy="29" rx="9" ry="1.5" fill="#1e3624" opacity="0.6"/>
     </g>
     <text x="200" y="162" class="font-title" font-size="28" letter-spacing="-0.01em">EMPTY BOWL</text>
     <text x="200" y="184" class="font-sans" font-size="13" font-weight="700" letter-spacing="0.08em" fill="#558963" text-transform="uppercase">Community Action Plan &amp; Smart Donor Field Guide</text>
