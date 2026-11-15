@@ -295,13 +295,13 @@
   }
 
   .checklist-item.done {
-    opacity: 0.75;
-    border-color: var(--border-subtle);
+    border-color: var(--accent);
+    background: rgba(85, 137, 99, 0.12);
   }
 
   .checklist-item.done .item-title {
-    text-decoration: line-through;
-    color: var(--ink-muted);
+    color: var(--ink);
+    font-weight: 600;
   }
 
   .checklist-checkbox {
@@ -542,7 +542,7 @@
         <label class="checklist-item" id="item-3">
           <input type="checkbox" class="checklist-checkbox" data-index="3">
           <div class="item-content">
-            <div class="item-title">Destigmatize basic-needs conversations</div>
+            <div class="item-title">Destigmatize & designate basic-needs conversations</div>
             <div class="item-desc">Include pantry information in announcements, flyers, and social media posts.</div>
           </div>
         </label>
@@ -571,7 +571,8 @@
           </div>
         </label>
       </div>
-      <div style="margin-top: 18px; display: flex; justify-content: flex-end;">
+      <div style="margin-top: 18px; display: flex; justify-content: flex-end; gap: 10px; flex-wrap: wrap;">
+        <button id="btnResetChecklist" class="tool-btn" style="height: 36px; padding: 0 14px;" title="Reset all checklist items to uncompleted">Reset Checklist</button>
         <button id="btnExportActionPlan" class="nav-btn" style="background: var(--accent); color: #fff; border-color: var(--accent-hover); font-weight: 600;" title="Download your action commitments and donor guide as a text file">📥 Export Action Plan & Field Guide (.txt)</button>
       </div>
     </section>
@@ -684,7 +685,7 @@ document.getElementById("btnExportActionPlan")?.addEventListener("click", () => 
     "Locate your campus or neighborhood food pantry",
     "Donate high-utility staple foods (proteins & cooking oil)",
     "Donate essential non-food hygiene items (diapers, period products)",
-    "Destigmatize basic-needs conversations (announcements, flyers, social media)",
+    "Destigmatize & designate basic-needs conversations (announcements, flyers, social media)",
     "Contact state representatives regarding student SNAP rules",
     "Make a financial donation to emergency food providers",
     "Volunteer at a local food pantry"
@@ -740,6 +741,15 @@ document.getElementById("btnExportActionPlan")?.addEventListener("click", () => 
   setTimeout(() => URL.revokeObjectURL(a.href), 1000);
 });
 
+// Reset Checklist
+document.getElementById("btnResetChecklist")?.addEventListener("click", () => {
+  checklistState = [false, false, false, false, false, false, false];
+  try {
+    localStorage.setItem(CHECKLIST_KEY, JSON.stringify(checklistState));
+  } catch (e) {}
+  updateChecklistView();
+});
+
 // Help Index
 const HELP_INDEX = [
   { title: "Home Navigation", selector: "#btn-nav-home", text: "Return to the main overview page." },
@@ -748,6 +758,7 @@ const HELP_INDEX = [
   { title: "Personal Stories", selector: "#btn-nav-stories", text: "Read first-person accounts and lived experiences." },
   { title: "How You Can Help", selector: "#btn-nav-help", text: "Current direct action page." },
   { title: "Community Action Checklist", selector: "#section-action-plan", text: "Interactive commitments with persistent progress tracking." },
+  { title: "Reset Checklist", selector: "#btnResetChecklist", text: "Reset all checklist checkmarks back to uncompleted." },
   { title: "Export Action Plan", selector: "#btnExportActionPlan", text: "Download your completed action commitments and field guide as a text file." },
   { title: "Smart Donor Guide", selector: ".donation-guide", text: "List of high-utility items and what to avoid." },
   { title: "Cash Multiplier Pillar", selector: ".action-card:nth-child(1)", text: "Learn why wholesale food bank cash donations outperform cans." }
