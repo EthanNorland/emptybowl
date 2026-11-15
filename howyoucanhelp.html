@@ -8,23 +8,23 @@
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#141416">
+<meta name="theme-color" content="#181614">
 <style>
   :root {
-    --bg: #141416;
-    --panel: #1b1b1e;
-    --panel-hover: #222226;
-    --border: #2e2e34;
-    --border-subtle: #242429;
-    --ink: #f4ede2;
-    --ink-dim: #a69f95;
-    --ink-muted: #736e67;
-    --accent: #c25934;
-    --accent-hover: #d96942;
-    --accent-soft: rgba(194, 89, 52, 0.14);
-    --ring: #f3b060;
-    --card-bg: #1e1e22;
-    --tag-bg: #27272c;
+    --bg: #181614;
+    --panel: #211e1a;
+    --panel-hover: #292520;
+    --border: #36312a;
+    --border-subtle: #2b2721;
+    --ink: #f5f0ea;
+    --ink-dim: #aba398;
+    --ink-muted: #787167;
+    --accent: #558963;
+    --accent-hover: #639c73;
+    --accent-soft: rgba(85, 137, 99, 0.16);
+    --ring: #e5a93b;
+    --card-bg: #26231e;
+    --tag-bg: #2d2924;
     --mono: ui-monospace, 'IBM Plex Mono', Menlo, Consolas, monospace;
     --sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
@@ -437,14 +437,14 @@
   <!-- Top Navigation Header -->
   <header class="site-header">
     <div class="nav-container">
-      <a href="./" class="brand-group" id="nav-brand" title="Food Insecurity Home: overview and foundations">
+      <a href="./" class="brand-group" id="nav-brand" title="Empty Bowl: Overview and foundations">
         <img src="icon.svg" alt="Emblem" class="brand-logo">
-        <span class="brand-title">Food Insecurity</span>
+        <span class="brand-title">Empty Bowl</span>
       </a>
 
       <!-- 5 Primary Destination Buttons -->
       <nav class="page-nav" aria-label="Main Navigation">
-        <a href="./" class="nav-btn" id="btn-nav-home" title="Overview & Core Framework">Food Insecurity</a>
+        <a href="./" class="nav-btn" id="btn-nav-home" title="Overview & Core Framework">Empty Bowl</a>
         <a href="whofaceshunger.html" class="nav-btn" id="btn-nav-who" title="Demographics and vulnerable populations">Who Faces Hunger</a>
         <a href="causesoffoodinsecurity.html" class="nav-btn" id="btn-nav-causes" title="Systemic, economic, and geographic root causes">Causes of Food Insecurity</a>
         <a href="personalstories.html" class="nav-btn" id="btn-nav-stories" title="Lived experiences, campus realities, and human narratives">Personal Stories</a>
@@ -555,6 +555,9 @@
           </div>
         </label>
       </div>
+      <div style="margin-top: 18px; display: flex; justify-content: flex-end;">
+        <button id="btnExportActionPlan" class="nav-btn" style="background: var(--accent); color: #fff; border-color: var(--accent-hover); font-weight: 600;" title="Download your action commitments and donor guide as a text file">📥 Export Action Plan & Field Guide (.txt)</button>
+      </div>
     </section>
 
     <!-- Donation Best Practices -->
@@ -606,12 +609,15 @@
     <div class="about-content">
       <p style="display: flex; align-items: center; gap: 8px;">
         <img src="icon.svg" width="32" height="32" alt="Logo">
-        <strong>Food Insecurity</strong> — An interactive editorial instrument examining hunger, access, and community dignity.
+        <strong>Empty Bowl</strong> — An interactive exploration of food insecurity: who faces hunger, root causes, lived experiences, and tangible community action.
       </p>
       <p>By Ethan Norland, written with Gemini.</p>
-      <p style="font-family: var(--mono); font-size: 12px; color: var(--accent);">Build f00000-001.</p>
+      <p style="font-family: var(--mono); font-size: 12px; color: var(--ring);">Build f00000-001.</p>
       <p style="font-size: 12px; border-top: 1px solid var(--border); padding-top: 10px; margin-top: 12px;">
-        MIT License. <a href="https://EthanNorland.github.io/" target="_blank" rel="noopener">Portfolio</a> · <a href="https://github.com/EthanNorland/foodinsecurity" target="_blank" rel="noopener">Repository</a>
+        © 2026 Ethan Norland. All rights reserved. <a href="https://EthanNorland.github.io/" target="_blank" rel="noopener">Portfolio</a>
+      </p>
+      <p style="font-size: 12px; color: var(--ink-dim); font-style: italic; margin-top: 8px; border-left: 2px solid var(--accent); padding-left: 8px;">
+        "Empty Bowl exists because hunger isn't confined to a stereotype—it affects people of all ages, backgrounds, and jobs right in our own communities, and we need to see the real human reality behind it."
       </p>
     </div>
   </dialog>
@@ -652,6 +658,66 @@ checkboxes.forEach(cb => {
 });
 updateChecklistView();
 
+// Export Action Plan & Field Guide
+document.getElementById("btnExportActionPlan")?.addEventListener("click", () => {
+  const items = [
+    "Locate your campus or neighborhood food pantry",
+    "Donate high-utility staple foods (proteins & cooking oil)",
+    "Donate essential non-food hygiene items (diapers, period products)",
+    "Destigmatize basic-needs conversations in clubs/syllabi",
+    "Contact state representatives regarding student SNAP rules"
+  ];
+  
+  let reflectionText = "";
+  try {
+    reflectionText = localStorage.getItem("foodinsecurity.stories.reflection") || "";
+  } catch (e) {}
+
+  let exportContent = `FOOD INSECURITY: ACTION PLAN & FIELD GUIDE\n`;
+  exportContent += `Generated: ${new Date().toLocaleDateString()} · Build f00000-001\n`;
+  exportContent += `Website: https://EthanNorland.github.io/foodinsecurity/\n`;
+  exportContent += `================================================================================\n\n`;
+  
+  exportContent += `1. YOUR COMMUNITY ACTION COMMITMENTS\n`;
+  exportContent += `--------------------------------------------------------------------------------\n`;
+  items.forEach((item, idx) => {
+    const status = checklistState[idx] ? "[X] COMPLETED" : "[ ] PENDING";
+    exportContent += `${status}: ${item}\n`;
+  });
+  exportContent += `\n`;
+
+  if (reflectionText.trim()) {
+    exportContent += `2. YOUR PERSONAL REFLECTION NOTES\n`;
+    exportContent += `--------------------------------------------------------------------------------\n`;
+    exportContent += `${reflectionText.trim()}\n\n`;
+  }
+
+  exportContent += `3. SMART DONOR FIELD GUIDE (HIGH-UTILITY ITEMS)\n`;
+  exportContent += `--------------------------------------------------------------------------------\n`;
+  exportContent += `HIGH VALUE ITEMS TO DONATE:\n`;
+  exportContent += `  • Canned proteins (tuna, chicken, salmon, black beans, chickpeas)\n`;
+  exportContent += `  • Nut butters and seed spreads\n`;
+  exportContent += `  • Cooking oils (olive oil, vegetable oil) and whole spices\n`;
+  exportContent += `  • Whole grain pasta, brown rice, rolled oats, and quinoa\n`;
+  exportContent += `  • Menstrual hygiene products, baby diapers, and bar soaps\n\n`;
+  exportContent += `WHAT TO AVOID:\n`;
+  exportContent += `  • Deeply dented, rusted, or bulging cans (safety hazard)\n`;
+  exportContent += `  • Expired or opened kitchen leftovers\n`;
+  exportContent += `  • Fragile glass jars\n`;
+  exportContent += `  • Sugary surplus junk food or sheet cake\n\n`;
+  exportContent += `WHY CASH MATTERS:\n`;
+  exportContent += `  Food banks leverage wholesale supply channels to purchase 3 to 4 times\n`;
+  exportContent += `  more fresh produce and perishable proteins per dollar than retail donors.\n`;
+  exportContent += `================================================================================\n`;
+
+  const blob = new Blob([exportContent], { type: "text/plain;charset=utf-8" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = `foodinsecurity-action-plan-${Date.now()}.txt`;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+});
+
 // Help Index
 const HELP_INDEX = [
   { title: "Home Navigation", selector: "#btn-nav-home", text: "Return to the main overview page." },
@@ -660,6 +726,7 @@ const HELP_INDEX = [
   { title: "Personal Stories", selector: "#btn-nav-stories", text: "Read first-person accounts and lived experiences." },
   { title: "How You Can Help", selector: "#btn-nav-help", text: "Current direct action page." },
   { title: "Community Action Checklist", selector: "#section-action-plan", text: "Interactive commitments with persistent progress tracking." },
+  { title: "Export Action Plan", selector: "#btnExportActionPlan", text: "Download your completed action commitments and field guide as a text file." },
   { title: "Smart Donor Guide", selector: ".donation-guide", text: "List of high-utility items and what to avoid." },
   { title: "Cash Multiplier Pillar", selector: ".action-card:nth-child(1)", text: "Learn why wholesale food bank cash donations outperform cans." }
 ];

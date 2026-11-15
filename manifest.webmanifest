@@ -1,13 +1,13 @@
 {
-  "name": "Food Insecurity",
-  "short_name": "FoodInsecurity",
+  "name": "Empty Bowl",
+  "short_name": "EmptyBowl",
   "description": "An interactive exploration of food insecurity: who faces hunger, root causes, lived experiences, and tangible ways to help.",
   "id": "./",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#18181b",
-  "theme_color": "#18181b",
+  "background_color": "#181614",
+  "theme_color": "#181614",
   "icons": [
     {
       "src": "icon-192.png",

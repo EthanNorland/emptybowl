@@ -1,9 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
-  <rect width="512" height="512" rx="104" fill="#1e1e20"/>
-  <!-- Warm nourishing bowl & rising grain mark -->
-  <path d="M128 260 C128 360 210 400 256 400 C302 400 384 360 384 260 Z" fill="#c25934"/>
-  <ellipse cx="256" cy="260" rx="128" ry="24" fill="#df6e45"/>
-  <path d="M256 120 C256 120 280 180 280 210 C280 223 269 234 256 234 C243 234 232 223 232 210 C232 180 256 120 256 120 Z" fill="#f4ede2"/>
-  <path d="M210 150 C210 150 230 196 226 218 C224 228 214 236 202 233 C191 230 186 218 189 207 C196 182 210 150 210 150 Z" fill="#e8dac6"/>
-  <path d="M302 150 C302 150 282 196 286 218 C288 228 298 236 310 233 C321 230 326 218 323 207 C316 182 302 150 302 150 Z" fill="#e8dac6"/>
+  <rect width="512" height="512" rx="104" fill="#181614"/>
+  <!-- Sculptural ceramic bowl in sage & terracotta tones with rising wheat grain -->
+  <path d="M128 260 C128 360 210 404 256 404 C302 404 384 360 384 260 Z" fill="#558963"/>
+  <ellipse cx="256" cy="260" rx="128" ry="24" fill="#679f76"/>
+  <ellipse cx="256" cy="260" rx="114" ry="17" fill="#211e1a"/>
+  <!-- Rising central wheat seed -->
+  <path d="M256 120 C256 120 280 178 280 206 C280 219 269 230 256 230 C243 230 232 219 232 206 C232 178 256 120 256 120 Z" fill="#f5f0ea"/>
+  <!-- Left side seed -->
+  <path d="M212 150 C212 150 232 194 228 214 C226 224 216 231 205 228 C194 225 189 214 192 203 C198 180 212 150 212 150 Z" fill="#e5a93b"/>
+  <!-- Right side seed -->
+  <path d="M300 150 C300 150 280 194 284 214 C286 224 296 231 307 228 C318 225 323 214 320 203 C314 180 300 150 300 150 Z" fill="#e5a93b"/>
 </svg>
