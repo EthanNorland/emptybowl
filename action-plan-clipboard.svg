@@ -168,15 +168,15 @@
       <text x="34" y="34" class="font-sans" font-size="12" fill="#696257">Dedicate time to sorting deliveries, stocking shelves, staffing distribution days, or organizing mutual aid.</text>
     </g>
 
-    <!-- SECTION 2: PERSONAL REFLECTIONS CARD -->
+    <!-- SECTION 2: PERSONAL REFLECTIONS CARD (BLANK / UNFILLED STATE) -->
     <g transform="translate(130, 650)">
-      <rect x="0" y="0" width="780" height="142" rx="8" fill="#f0ebe0" stroke="#dcd3c3" stroke-width="1.2"/>
-      <rect x="0" y="0" width="6" height="142" rx="3" fill="#558963"/>
-      <text x="24" y="28" class="font-mono" font-size="11" font-weight="700" letter-spacing="0.08em" fill="#558963" text-transform="uppercase">02 · PERSONAL REFLECTIONS &amp; COMMUNITY NOTES</text>
-      <text x="24" y="58" class="font-sans" font-size="13.5" font-style="italic" fill="#2d2924">"Hunger in our communities is often quiet, concealed, and surrounded by shame. When we replace stigma with</text>
-      <text x="24" y="80" class="font-sans" font-size="13.5" font-style="italic" fill="#2d2924">barrier-free mutual aid, dignified choice pantries, and living-wage advocacy, we protect the wellbeing and potential</text>
-      <text x="24" y="102" class="font-sans" font-size="13.5" font-style="italic" fill="#2d2924">of every neighbor and student."</text>
-      <text x="24" y="126" class="font-mono" font-size="10.5" fill="#787167">— Lived Reality Field Observation · Recorded via Empty Bowl Notebook</text>
+      <rect x="0" y="0" width="780" height="142" rx="8" fill="#f6f2ea" stroke="#dcd3c3" stroke-width="1.2" stroke-dasharray="4 4"/>
+      <rect x="0" y="0" width="6" height="142" rx="3" fill="#aba398"/>
+      <text x="24" y="28" class="font-mono" font-size="11" font-weight="700" letter-spacing="0.08em" fill="#8c857b" text-transform="uppercase">02 · PERSONAL REFLECTIONS &amp; COMMUNITY NOTES</text>
+      <!-- Blank notebook ruled lines for handwritten notes -->
+      <line x1="24" y1="62" x2="756" y2="62" stroke="#ded5c5" stroke-width="1"/>
+      <line x1="24" y1="94" x2="756" y2="94" stroke="#ded5c5" stroke-width="1"/>
+      <line x1="24" y1="126" x2="756" y2="126" stroke="#ded5c5" stroke-width="1"/>
     </g>
 
     <!-- SECTION 3: SMART DONOR'S FIELD GUIDE -->

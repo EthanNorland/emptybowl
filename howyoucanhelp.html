@@ -802,29 +802,52 @@ function buildClipboardSvg(state = [], userNotes = "") {
     `;
   });
 
-  const rawNotes = (userNotes && userNotes.trim().length > 0)
-    ? userNotes.trim()
-    : "Hunger in our communities is often quiet, concealed, and surrounded by shame. When we replace stigma with barrier-free mutual aid, dignified choice pantries, and living-wage advocacy, we protect the wellbeing and potential of every neighbor and student.";
+  const hasNotes = !!(userNotes && userNotes.trim().length > 0);
+  let section2Svg = "";
 
-  const words = rawNotes.split(/\s+/);
-  const noteLines = [];
-  let cur = [];
-  for (let w of words) {
-    cur.push(w);
-    if (cur.join(" ").length > 88) {
-      noteLines.push(cur.slice(0, -1).join(" "));
-      cur = [w];
-      if (noteLines.length >= 3) break;
+  if (hasNotes) {
+    const rawNotes = userNotes.trim();
+    const words = rawNotes.split(/\s+/);
+    const noteLines = [];
+    let cur = [];
+    for (let w of words) {
+      cur.push(w);
+      if (cur.join(" ").length > 88) {
+        noteLines.push(cur.slice(0, -1).join(" "));
+        cur = [w];
+        if (noteLines.length >= 3) break;
+      }
     }
-  }
-  if (cur.length > 0 && noteLines.length < 3) noteLines.push(cur.join(" "));
+    if (cur.length > 0 && noteLines.length < 3) noteLines.push(cur.join(" "));
 
-  let noteLinesSvg = "";
-  noteLines.forEach((line, i) => {
-    const isFirst = (i === 0);
-    const isLast = (i === noteLines.length - 1);
-    noteLinesSvg += `<text x="24" y="${58 + i * 22}" class="font-sans" font-size="13.5" font-style="italic" fill="#2d2924">${isFirst ? '&quot;' : ''}${escapeXml(line)}${isLast ? '&quot;' : ''}</text>`;
-  });
+    let noteLinesSvg = "";
+    noteLines.forEach((line, i) => {
+      const isFirst = (i === 0);
+      const isLast = (i === noteLines.length - 1);
+      noteLinesSvg += `<text x="24" y="${58 + i * 22}" class="font-sans" font-size="13.5" font-style="italic" fill="#2d2924">${isFirst ? '&quot;' : ''}${escapeXml(line)}${isLast ? '&quot;' : ''}</text>`;
+    });
+
+    section2Svg = `
+    <g transform="translate(130, 650)">
+      <rect x="0" y="0" width="780" height="142" rx="8" fill="#f0ebe0" stroke="#dcd3c3" stroke-width="1.2"/>
+      <rect x="0" y="0" width="6" height="142" rx="3" fill="#558963"/>
+      <text x="24" y="28" class="font-mono" font-size="11" font-weight="700" letter-spacing="0.08em" fill="#558963" text-transform="uppercase">02 · PERSONAL REFLECTIONS &amp; COMMUNITY NOTES</text>
+      ${noteLinesSvg}
+      <text x="24" y="126" class="font-mono" font-size="10.5" fill="#787167">— Lived Reality Field Observation · Recorded via Empty Bowl Notebook</text>
+    </g>
+    `;
+  } else {
+    section2Svg = `
+    <g transform="translate(130, 650)">
+      <rect x="0" y="0" width="780" height="142" rx="8" fill="#f6f2ea" stroke="#dcd3c3" stroke-width="1.2" stroke-dasharray="4 4"/>
+      <rect x="0" y="0" width="6" height="142" rx="3" fill="#aba398"/>
+      <text x="24" y="28" class="font-mono" font-size="11" font-weight="700" letter-spacing="0.08em" fill="#8c857b" text-transform="uppercase">02 · PERSONAL REFLECTIONS &amp; COMMUNITY NOTES</text>
+      <line x1="24" y1="62" x2="756" y2="62" stroke="#ded5c5" stroke-width="1"/>
+      <line x1="24" y1="94" x2="756" y2="94" stroke="#ded5c5" stroke-width="1"/>
+      <line x1="24" y1="126" x2="756" y2="126" stroke="#ded5c5" stroke-width="1"/>
+    </g>
+    `;
+  }
 
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 1560" width="1040" height="1560" fill="none">
   <defs>
@@ -885,13 +908,7 @@ function buildClipboardSvg(state = [], userNotes = "") {
     <line x1="130" y1="222" x2="910" y2="222" stroke="#ded6c8" stroke-width="1.5"/>
     <text x="130" y="254" class="font-mono" font-size="12" font-weight="700" letter-spacing="0.1em" fill="#b37f22" text-transform="uppercase">01 · COMMUNITY ACTION COMMITMENTS</text>
     ${itemsSvg}
-    <g transform="translate(130, 650)">
-      <rect x="0" y="0" width="780" height="142" rx="8" fill="#f0ebe0" stroke="#dcd3c3" stroke-width="1.2"/>
-      <rect x="0" y="0" width="6" height="142" rx="3" fill="#558963"/>
-      <text x="24" y="28" class="font-mono" font-size="11" font-weight="700" letter-spacing="0.08em" fill="#558963" text-transform="uppercase">02 · PERSONAL REFLECTIONS &amp; COMMUNITY NOTES</text>
-      ${noteLinesSvg}
-      <text x="24" y="126" class="font-mono" font-size="10.5" fill="#787167">— Lived Reality Field Observation · Recorded via Empty Bowl Notebook</text>
-    </g>
+    ${section2Svg}
     <text x="130" y="830" class="font-mono" font-size="12" font-weight="700" letter-spacing="0.1em" fill="#b37f22" text-transform="uppercase">03 · SMART DONOR\'S FIELD GUIDE</text>
     <g transform="translate(130, 846)">
       <rect x="0" y="0" width="375" height="340" rx="8" fill="#f2f7f3" stroke="#bddbc4" stroke-width="1.2"/>
