@@ -206,66 +206,60 @@
     max-width: 1080px;
   }
 
-  /* Story Picker */
-  .story-tabs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 24px;
-  }
-
-  .story-tab-btn {
-    padding: 9px 15px;
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    color: var(--ink-dim);
-    font-family: var(--sans);
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.15s ease;
-  }
-
-  .story-tab-btn:hover { color: var(--ink); border-color: var(--ink-muted); }
-
-  .story-tab-btn.selected {
-    background: var(--accent);
-    color: #fff;
-    border-color: var(--accent-hover);
-    font-weight: 600;
-  }
-
   /* Story View Card */
   .story-display {
     background: var(--card-bg);
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 32px;
-    margin-bottom: 36px;
+    margin-bottom: 32px;
   }
 
-  .story-meta {
+  .story-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
+    gap: 22px;
     border-bottom: 1px solid var(--border-subtle);
-    padding-bottom: 14px;
-    margin-bottom: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 22px;
+  }
+
+  .story-portrait {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    background: var(--panel);
+    flex-shrink: 0;
+    display: block;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  }
+
+  .story-headings {
+    flex: 1;
+  }
+
+  .story-title-above {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ring);
+    margin-bottom: 4px;
+    font-weight: 600;
   }
 
   .story-character {
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 700;
     color: var(--ink);
+    line-height: 1.25;
+    margin-bottom: 4px;
   }
 
-  .story-tagline {
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--ring);
+  .story-role {
+    font-size: 13px;
+    color: var(--ink-dim);
   }
 
   .story-quote {
@@ -285,6 +279,10 @@
     color: var(--ink-dim);
     line-height: 1.7;
     margin-bottom: 16px;
+  }
+
+  .story-narrative p:last-child {
+    margin-bottom: 0;
   }
 
   /* Interactive Reflection Notebook */
@@ -383,6 +381,9 @@
     nav.page-nav { justify-content: flex-start; overflow-x: auto; padding-bottom: 4px; }
     .hero-card { padding: 22px 16px; }
     main { padding: 20px 14px 70px 14px; }
+    .story-display { padding: 22px 18px; }
+    .story-header { gap: 16px; }
+    .story-portrait { width: 72px; height: 72px; }
   }
 </style>
 </head>
@@ -423,28 +424,22 @@
       </p>
     </section>
 
-    <!-- Narrative Tabs -->
-    <div class="story-tabs" role="tablist">
-      <button class="story-tab-btn selected" data-id="maya" id="tab-maya" title="Read Maya's story (College student)">Maya · Community College</button>
-      <button class="story-tab-btn" data-id="marcus" id="tab-marcus" title="Read Marcus's story (Working father)">Marcus · Logistics Worker</button>
-      <button class="story-tab-btn" data-id="evelyn" id="tab-evelyn" title="Read Evelyn's story (Retired senior)">Evelyn · Fixed Income</button>
-    </div>
-
-    <!-- Active Story Container -->
-    <article class="story-display" id="storyArticle">
-      <div class="story-meta">
-        <div>
-          <h2 class="story-character" id="storyName">Maya, 20</h2>
-          <p style="font-size: 13px; color: var(--ink-dim);" id="storyRole">Sophomore Biology Student & Commuter</p>
+    <!-- Story 1: Maya -->
+    <article class="story-display" id="story-maya">
+      <div class="story-header">
+        <img src="portrait-maya.svg" alt="Portrait illustration of Maya" class="story-portrait">
+        <div class="story-headings">
+          <div class="story-title-above">The Hidden Campus Arithmetic</div>
+          <h2 class="story-character">Maya, 20</h2>
+          <div class="story-role">Sophomore Biology Student & Commuter</div>
         </div>
-        <span class="story-tagline" id="storyTag">The Hidden Campus Arithmetic</span>
       </div>
 
-      <blockquote class="story-quote" id="storyQuote">
+      <blockquote class="story-quote">
         "People think college students eating dry ramen is just a meme. It isn't funny when you can't focus on your 2-hour organic chemistry exam because your vision is blurry from skipped meals."
       </blockquote>
 
-      <div class="story-narrative" id="storyBody">
+      <div class="story-narrative">
         <p>
           Maya takes 15 credit hours at community college, works 22 hours a week at a coffee shop, and commutes 50 minutes each way by bus. Financial aid covers her tuition and lab fees, but off-campus rent, bus passes, and textbooks rapidly drained her emergency buffer.
         </p>
@@ -453,6 +448,62 @@
         </p>
         <p>
           Maya's grades initially dropped from an A- to a C+ not due to lack of effort, but because cognitive exhaustion and chronic low blood sugar impaired memory retention. Once her college introduced discreet grab-and-go snack lockers, her exam performance immediately recovered.
+        </p>
+      </div>
+    </article>
+
+    <!-- Story 2: Marcus -->
+    <article class="story-display" id="story-marcus">
+      <div class="story-header">
+        <img src="portrait-marcus.svg" alt="Portrait illustration of Marcus" class="story-portrait">
+        <div class="story-headings">
+          <div class="story-title-above">The Mathematics of Dinner</div>
+          <h2 class="story-character">Marcus, 42</h2>
+          <div class="story-role">Warehouse Logistics Specialist & Single Father</div>
+        </div>
+      </div>
+
+      <blockquote class="story-quote">
+        "I stand at the grocery belt watching the register counter tick up dollar by dollar. In my head, I am recalculating down to the cent, knowing exactly what is in my account."
+      </blockquote>
+
+      <div class="story-narrative">
+        <p>
+          Marcus works full-time on the graveyard shift at a suburban fulfillment warehouse. Last spring, his landlord raised rent by $240 a month. With electric heat bills soaring during the winter, his food budget became the only elastic buffer left to cut.
+        </p>
+        <p>
+          "My daughter is eight and my son is eleven. At dinner, I put chicken and vegetables on their plates. When they ask why Daddy is only drinking black tea, I tell them I ate during my shift. I go to bed with a hollow stomach so they never have to know how close we are to the edge."
+        </p>
+        <p>
+          Because Marcus works 40 hours a week at $17.50 an hour, his income sits slightly above the state threshold for SNAP assistance. He is part of the millions of working adults trapped on the benefits cliff.
+        </p>
+      </div>
+    </article>
+
+    <!-- Story 3: Evelyn -->
+    <article class="story-display" id="story-evelyn">
+      <div class="story-header">
+        <img src="portrait-evelyn.svg" alt="Portrait illustration of Evelyn" class="story-portrait">
+        <div class="story-headings">
+          <div class="story-title-above">Prescription or Pantry</div>
+          <h2 class="story-character">Evelyn, 69</h2>
+          <div class="story-role">Retired Home Health Aide</div>
+        </div>
+      </div>
+
+      <blockquote class="story-quote">
+        "You work your whole life taking care of sick people, and when you retire, you find yourself choosing between your heart medication and fresh produce."
+      </blockquote>
+
+      <div class="story-narrative">
+        <p>
+          Evelyn worked 34 years in residential elder care. Now retired, she lives alone in a subsidized apartment on a fixed Social Security check. When her copay for blood-thinning medication doubled, she began stretching her pantry staples into thin soups.
+        </p>
+        <p>
+          "The supermarket is two miles away, and I no longer drive. If I take the bus, I can only carry two grocery bags at a time with my arthritis. The dollar store on the corner has canned chili and white bread, but my doctor warned me that high sodium is ruining my kidneys."
+        </p>
+        <p>
+          When a volunteer from a local community fridge began delivering fresh produce boxes directly to her building, Evelyn's health metrics stabilized within three months. She now serves as a floor captain, helping other seniors access mutual aid.
         </p>
       </div>
     </article>
@@ -507,58 +558,6 @@
 <script>
 "use strict";
 
-const STORIES = {
-  maya: {
-    name: "Maya, 20",
-    role: "Sophomore Biology Student & Commuter",
-    tag: "The Hidden Campus Arithmetic",
-    quote: "\"People think college students eating dry ramen is just a meme. It isn't funny when you can't focus on your 2-hour organic chemistry exam because your vision is blurry from skipped meals.\"",
-    body: `
-      <p>Maya takes 15 credit hours at community college, works 22 hours a week at a coffee shop, and commutes 50 minutes each way by bus. Financial aid covers her tuition and lab fees, but off-campus rent, bus passes, and textbooks rapidly drained her emergency buffer.</p>
-      <p>"I carry an oversized 40-ounce water bottle everywhere. By 1:00 PM, when my stomach starts growling during lectures, I drink water until I feel full. The campus pantry is open on Tuesdays and Thursdays, but the first three times I walked past the door, my heart was racing because I was terrified of seeing a classmate or professor."</p>
-      <p>Maya's grades initially dropped from an A- to a C+ not due to lack of effort, but because cognitive exhaustion and chronic low blood sugar impaired memory retention. Once her college introduced discreet grab-and-go snack lockers, her exam performance immediately recovered.</p>
-    `
-  },
-  marcus: {
-    name: "Marcus, 42",
-    role: "Warehouse Logistics Specialist & Single Father",
-    tag: "The Mathematics of Dinner",
-    quote: "\"I stand at the grocery belt watching the register counter tick up dollar by dollar. In my head, I am recalculating down to the cent, knowing exactly what is in my account.\"",
-    body: `
-      <p>Marcus works full-time on the graveyard shift at a suburban fulfillment warehouse. Last spring, his landlord raised rent by $240 a month. With electric heat bills soaring during the winter, his food budget became the only elastic buffer left to cut.</p>
-      <p>"My daughter is eight and my son is eleven. At dinner, I put chicken and vegetables on their plates. When they ask why Daddy is only drinking black tea, I tell them I ate during my shift. I go to bed with a hollow stomach so they never have to know how close we are to the edge."</p>
-      <p>Because Marcus works 40 hours a week at $17.50 an hour, his income sits slightly above the state threshold for SNAP assistance. He is part of the millions of working adults trapped on the benefits cliff.</p>
-    `
-  },
-  evelyn: {
-    name: "Evelyn, 69",
-    role: "Retired Home Health Aide",
-    tag: "Prescription or Pantry",
-    quote: "\"You work your whole life taking care of sick people, and when you retire, you find yourself choosing between your heart medication and fresh produce.\"",
-    body: `
-      <p>Evelyn worked 34 years in residential elder care. Now retired, she lives alone in a subsidized apartment on a fixed Social Security check. When her copay for blood-thinning medication doubled, she began stretching her pantry staples into thin soups.</p>
-      <p>"The supermarket is two miles away, and I no longer drive. If I take the bus, I can only carry two grocery bags at a time with my arthritis. The dollar store on the corner has canned chili and white bread, but my doctor warned me that high sodium is ruining my kidneys."</p>
-      <p>When a volunteer from a local community fridge began delivering fresh produce boxes directly to her building, Evelyn's health metrics stabilized within three months. She now serves as a floor captain, helping other seniors access mutual aid.</p>
-    `
-  }
-};
-
-const storyTabs = document.querySelectorAll(".story-tab-btn");
-storyTabs.forEach(btn => {
-  btn.addEventListener("click", () => {
-    storyTabs.forEach(b => b.classList.remove("selected"));
-    btn.classList.add("selected");
-    const st = STORIES[btn.dataset.id];
-    if (st) {
-      document.getElementById("storyName").textContent = st.name;
-      document.getElementById("storyRole").textContent = st.role;
-      document.getElementById("storyTag").textContent = st.tag;
-      document.getElementById("storyQuote").innerHTML = st.quote;
-      document.getElementById("storyBody").innerHTML = st.body;
-    }
-  });
-});
-
 // Reflection Notebook Autosave & Undo
 const reflectionInput = document.getElementById("reflectionInput");
 const saveStatus = document.getElementById("saveStatus");
@@ -590,8 +589,9 @@ const HELP_INDEX = [
   { title: "Causes of Food Insecurity", selector: "#btn-nav-causes", text: "Examine economic and structural root causes." },
   { title: "Personal Stories", selector: "#btn-nav-stories", text: "Current lived experiences page." },
   { title: "How You Can Help", selector: "#btn-nav-help", text: "Take direct action with pantries and advocacy." },
-  { title: "Maya's Account", selector: "#tab-maya", text: "Read community college student experience." },
-  { title: "Marcus's Account", selector: "#tab-marcus", text: "Read working single-father perspective." },
+  { title: "Maya's Account", selector: "#story-maya", text: "Read community college student experience." },
+  { title: "Marcus's Account", selector: "#story-marcus", text: "Read working single-father perspective." },
+  { title: "Evelyn's Account", selector: "#story-evelyn", text: "Read retired senior and fixed-income perspective." },
   { title: "Reflection Notebook", selector: "#section-reflection", text: "Jot down insights with persistent browser autosave." }
 ];
 

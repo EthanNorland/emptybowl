@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" fill="none" role="img" aria-label="Portrait illustration of Marcus">
+  <defs>
+    <linearGradient id="marcusBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2d2924"/>
+      <stop offset="100%" stop-color="#1c1a17"/>
+    </linearGradient>
+    <linearGradient id="marcusSkin" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8c5836"/>
+      <stop offset="100%" stop-color="#734426"/>
+    </linearGradient>
+    <linearGradient id="marcusJacket" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#b87b28"/>
+      <stop offset="100%" stop-color="#805014"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background Circle -->
+  <circle cx="60" cy="60" r="58" fill="url(#marcusBg)" stroke="#e5a93b" stroke-width="2.5"/>
+
+  <!-- Neck & Shoulders -->
+  <path d="M 50 66 L 50 80 Q 50 84 60 84 Q 70 84 70 80 L 70 66 Z" fill="url(#marcusSkin)"/>
+  <path d="M 22 116 Q 26 84 48 82 Q 60 84 72 82 Q 94 84 98 116 Z" fill="url(#marcusJacket)"/>
+
+  <!-- Work Shirt Collar & Inner Shirt -->
+  <path d="M 52 82 L 60 96 L 68 82 Z" fill="#2d2924"/>
+  <path d="M 44 82 L 54 94 L 48 83 Z" fill="#99631d"/>
+  <path d="M 76 82 L 66 94 L 72 83 Z" fill="#99631d"/>
+
+  <!-- Head / Face -->
+  <ellipse cx="60" cy="54" rx="16.5" ry="19.5" fill="url(#marcusSkin)"/>
+
+  <!-- Short Hair -->
+  <path d="M 43 50 Q 43 32 60 32 Q 77 32 77 50 Q 73 38 60 38 Q 47 38 43 50 Z" fill="#1f1610"/>
+
+  <!-- Ears -->
+  <ellipse cx="42.5" cy="54" rx="2.5" ry="4.5" fill="#734426"/>
+  <ellipse cx="77.5" cy="54" rx="2.5" ry="4.5" fill="#734426"/>
+
+  <!-- Neat Trimmed Beard & Mustache -->
+  <path d="M 49 59 Q 54 62 60 62 Q 66 62 71 59 Q 72 68 67 72 Q 60 75 53 72 Q 48 68 49 59 Z" fill="#1f1610" opacity="0.95"/>
+  <!-- Mustache -->
+  <path d="M 53 61 Q 60 59 67 61 Q 60 64 53 61 Z" fill="#1a120c"/>
+
+  <!-- Eyebrows -->
+  <path d="M 48 46 Q 53 44 57 46" stroke="#1f1610" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 63 46 Q 67 44 72 46" stroke="#1f1610" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Eyes -->
+  <ellipse cx="53" cy="50.5" rx="2.2" ry="1.6" fill="#1a120c"/>
+  <ellipse cx="67" cy="50.5" rx="2.2" ry="1.6" fill="#1a120c"/>
+  <circle cx="53.6" cy="50" r="0.6" fill="#ffffff"/>
+  <circle cx="67.6" cy="50" r="0.6" fill="#ffffff"/>
+
+  <!-- Nose -->
+  <path d="M 60 48 L 58.5 56 L 61.5 56" stroke="#5a331a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>

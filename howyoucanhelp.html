@@ -483,7 +483,7 @@
         <div class="action-icon">02 · CAMPUS & LOCAL</div>
         <h3 class="action-title">Stock Mutual Aid Fridges</h3>
         <p class="action-body">
-          Community fridges and campus lockers offer barrier-free, 24/7 food access without intrusive intake paperwork, photo IDs, or means-testing questions. They operate on solidarity rather than surveillance.
+          Community fridges and campus lockers offer barrier-free, 24/7 food access without intrusive intake paperwork, photo IDs, or questionnaires. They trust that those taking food need food.
         </p>
       </div>
 
@@ -508,7 +508,7 @@
     <section class="checklist-panel" id="section-action-plan">
       <div class="checklist-header">
         <h2 class="checklist-title">Your Community Action Checklist</h2>
-        <span class="checklist-progress-text" id="checklistProgress">0 of 5 completed</span>
+        <span class="checklist-progress-text" id="checklistProgress">0 of 7 completed</span>
       </div>
       <p style="font-size: 13px; color: var(--ink-dim); margin-bottom: 18px;">
         Track your personal commitments. Checklist status is saved automatically to your browser.
@@ -543,7 +543,7 @@
           <input type="checkbox" class="checklist-checkbox" data-index="3">
           <div class="item-content">
             <div class="item-title">Destigmatize basic-needs conversations</div>
-            <div class="item-desc">Include pantry information in student organization announcements, course syllabi, and club group chats so asking for support is normalized.</div>
+            <div class="item-desc">Include pantry information in announcements, flyers, and social media posts.</div>
           </div>
         </label>
 
@@ -552,6 +552,22 @@
           <div class="item-content">
             <div class="item-title">Contact state representatives regarding student SNAP rules</div>
             <div class="item-desc">Send a concise letter urging legislators to exempt full-time college students from arbitrary 20-hour weekly employment requirements.</div>
+          </div>
+        </label>
+
+        <label class="checklist-item" id="item-5">
+          <input type="checkbox" class="checklist-checkbox" data-index="5">
+          <div class="item-content">
+            <div class="item-title">Make a financial donation</div>
+            <div class="item-desc">Direct funds enable food banks and mutual aid funds to buy bulk fresh produce and perishable essentials at wholesale rates.</div>
+          </div>
+        </label>
+
+        <label class="checklist-item" id="item-6">
+          <input type="checkbox" class="checklist-checkbox" data-index="6">
+          <div class="item-content">
+            <div class="item-title">Volunteer at a local food pantry</div>
+            <div class="item-desc">Dedicate time to sorting deliveries, stocking shelves, staffing distribution days, or organizing neighborhood mutual aid.</div>
           </div>
         </label>
       </div>
@@ -627,11 +643,15 @@
 
 // Persistent Checklist State
 const CHECKLIST_KEY = "foodinsecurity.help.checklist";
-let checklistState = [false, false, false, false, false];
+let checklistState = [false, false, false, false, false, false, false];
 
 try {
   const saved = localStorage.getItem(CHECKLIST_KEY);
-  if (saved) checklistState = JSON.parse(saved);
+  if (saved) {
+    const loaded = JSON.parse(saved);
+    while (loaded.length < 7) loaded.push(false);
+    checklistState = loaded;
+  }
 } catch (e) {}
 
 const checkboxes = document.querySelectorAll(".checklist-checkbox");
@@ -664,8 +684,10 @@ document.getElementById("btnExportActionPlan")?.addEventListener("click", () => 
     "Locate your campus or neighborhood food pantry",
     "Donate high-utility staple foods (proteins & cooking oil)",
     "Donate essential non-food hygiene items (diapers, period products)",
-    "Destigmatize basic-needs conversations in clubs/syllabi",
-    "Contact state representatives regarding student SNAP rules"
+    "Destigmatize basic-needs conversations (announcements, flyers, social media)",
+    "Contact state representatives regarding student SNAP rules",
+    "Make a financial donation to emergency food providers",
+    "Volunteer at a local food pantry"
   ];
   
   let reflectionText = "";
