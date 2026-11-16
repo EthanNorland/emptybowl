@@ -329,34 +329,48 @@
     line-height: 1.45;
   }
 
-  /* In-checklist Pantry Finder */
-  .pantry-finder-box {
-    margin-top: 14px;
-    background: var(--bg);
+  /* Standalone Pantry Finder Panel */
+  .pantry-finder-panel {
+    background: var(--card-bg);
     border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 16px;
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 36px;
     cursor: default;
   }
 
   .pantry-finder-header {
-    margin-bottom: 12px;
+    margin-bottom: 16px;
+  }
+
+  .pantry-finder-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 6px;
   }
 
   .pantry-finder-title {
-    display: block;
-    font-size: 13px;
-    font-weight: 700;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  .pantry-finder-tag {
+    font-family: var(--mono);
+    font-size: 12px;
     color: var(--ring);
-    letter-spacing: 0.02em;
-    margin-bottom: 3px;
   }
 
   .pantry-finder-sub {
     display: block;
-    font-size: 12px;
+    font-size: 13px;
     color: var(--ink-dim);
-    line-height: 1.4;
+    line-height: 1.5;
+    margin: 0;
   }
 
   .pantry-search-bar {
@@ -665,6 +679,7 @@
     .nav-container { flex-direction: column; align-items: stretch; gap: 8px; }
     nav.page-nav { justify-content: flex-start; overflow-x: auto; padding-bottom: 4px; }
     .hero-card { padding: 22px 16px; }
+    .checklist-panel, .pantry-finder-panel { padding: 18px 16px; }
     main { padding: 20px 14px 70px 14px; }
   }
 </style>
@@ -741,6 +756,37 @@
       </div>
     </div>
 
+    <!-- Local Food Bank & Pantry Locator -->
+    <section class="pantry-finder-panel" id="pantryFinderBox">
+      <div class="pantry-finder-header">
+        <div class="pantry-finder-title-row">
+          <h2 class="pantry-finder-title">📍 Find Nearby Pantries &amp; Food Banks</h2>
+          <span class="pantry-finder-tag">Direct Aid Locator</span>
+        </div>
+        <p class="pantry-finder-sub">
+          Type your home address, city, or ZIP code to locate neighborhood distribution centers, check intake policies, get directions, and make targeted financial donations.
+        </p>
+      </div>
+
+      <div class="pantry-search-bar">
+        <div class="pantry-input-wrap">
+          <input type="text" id="pantryAddressInput" placeholder="Enter home street address, city, or ZIP code (e.g. 100 Main St, Grand Rapids, MI or 49503)..." aria-label="Home address or ZIP code for finding nearby pantries">
+          <button type="button" id="btnLocatePantries" class="pantry-search-btn" title="Search for nearby food pantries and donation centers">Find Pantries</button>
+        </div>
+        <div class="pantry-quick-tags">
+          <span style="font-size: 11px; color: var(--ink-muted); font-family: var(--mono);">Quick examples:</span>
+          <button type="button" class="quick-loc-btn" data-loc="Grand Rapids, MI">Grand Rapids, MI</button>
+          <button type="button" class="quick-loc-btn" data-loc="Detroit, MI">Detroit, MI</button>
+          <button type="button" class="quick-loc-btn" data-loc="Chicago, IL">Chicago, IL</button>
+          <button type="button" class="quick-loc-btn" data-loc="New York, NY">New York, NY</button>
+          <button type="button" class="quick-loc-btn" data-loc="Austin, TX">Austin, TX</button>
+        </div>
+      </div>
+
+      <!-- Pantry Results Container -->
+      <div id="pantryResultsList" class="pantry-results-list" aria-live="polite"></div>
+    </section>
+
     <!-- Interactive Community Action Checklist -->
     <section class="checklist-panel" id="section-action-plan">
       <div class="checklist-header">
@@ -792,41 +838,13 @@
           </div>
         </label>
 
-        <div class="checklist-item" id="item-5">
-          <input type="checkbox" class="checklist-checkbox" data-index="5" id="cb-item-5" aria-label="Mark Make a financial donation complete">
+        <label class="checklist-item" id="item-5">
+          <input type="checkbox" class="checklist-checkbox" data-index="5">
           <div class="item-content">
-            <label for="cb-item-5" class="item-title" style="cursor: pointer; display: block;">Make a financial donation</label>
-            <div class="item-desc">
-              Direct funds enable food banks and mutual aid funds to buy bulk fresh produce and perishable essentials at wholesale rates.
-            </div>
-
-            <!-- In-Checklist Pantry & Food Bank Locator -->
-            <div class="pantry-finder-box" id="pantryFinderBox">
-              <div class="pantry-finder-header">
-                <span class="pantry-finder-title">📍 Find Nearby Pantries &amp; Food Banks to Support</span>
-                <span class="pantry-finder-sub">Type your home address, city, or ZIP code to find neighborhood distribution centers that accept direct donations.</span>
-              </div>
-
-              <div class="pantry-search-bar">
-                <div class="pantry-input-wrap">
-                  <input type="text" id="pantryAddressInput" placeholder="Enter home street address, city, or ZIP code (e.g. 100 Main St, Grand Rapids, MI or 49503)..." aria-label="Home address or ZIP code for finding nearby pantries">
-                  <button type="button" id="btnLocatePantries" class="pantry-search-btn" title="Search for nearby food pantries and donation centers">Find Pantries</button>
-                </div>
-                <div class="pantry-quick-tags">
-                  <span style="font-size: 11px; color: var(--ink-muted); font-family: var(--mono);">Quick examples:</span>
-                  <button type="button" class="quick-loc-btn" data-loc="Grand Rapids, MI">Grand Rapids, MI</button>
-                  <button type="button" class="quick-loc-btn" data-loc="Detroit, MI">Detroit, MI</button>
-                  <button type="button" class="quick-loc-btn" data-loc="Chicago, IL">Chicago, IL</button>
-                  <button type="button" class="quick-loc-btn" data-loc="New York, NY">New York, NY</button>
-                  <button type="button" class="quick-loc-btn" data-loc="Austin, TX">Austin, TX</button>
-                </div>
-              </div>
-
-              <!-- Pantry Results Container -->
-              <div id="pantryResultsList" class="pantry-results-list" aria-live="polite"></div>
-            </div>
+            <div class="item-title">Make a financial donation</div>
+            <div class="item-desc">Direct funds enable food banks and mutual aid funds to buy bulk fresh produce and perishable essentials at wholesale rates. Use the locator above to choose a recipient pantry.</div>
           </div>
-        </div>
+        </label>
 
         <label class="checklist-item" id="item-6">
           <input type="checkbox" class="checklist-checkbox" data-index="6">
@@ -1071,11 +1089,6 @@ const pantryAddressInput = document.getElementById("pantryAddressInput");
 const btnLocatePantries = document.getElementById("btnLocatePantries");
 const pantryResultsList = document.getElementById("pantryResultsList");
 const pantryFinderBox = document.getElementById("pantryFinderBox");
-
-// Prevent clicks inside pantry finder box from toggling the checkbox
-pantryFinderBox?.addEventListener("click", (e) => {
-  e.stopPropagation();
-});
 
 function searchPantries(userQuery = "") {
   if (!pantryResultsList) return;
