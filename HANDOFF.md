@@ -19,7 +19,7 @@
   - `whofaceshunger.html`: Dynamic demographic profile card inspector with refined college barrier and worker impact copy.
   - `causesoffoodinsecurity.html`: Budget elasticity simulation showing how fixed costs squeeze food dollars.
   - `personalstories.html`: Stacked linear narrative flow showing all 3 accounts directly on the page with portraits, story titles above character names, and reflection notes with localStorage autosave.
-  - `howyoucanhelp.html`: Dedicated address-based local pantry & food bank finder section positioned directly above the interactive 7-point community action checklist (with persistent browser state), mutual aid fridge solidarity copy, and high-resolution clipboard document picture export (`.png`).
+  - `howyoucanhelp.html`: Dedicated ZIP-activated local pantry & food bank finder section positioned directly above the interactive 7-point community action checklist (with persistent browser state, showing pantries only once a 5-digit ZIP code is entered), mutual aid fridge solidarity copy, and high-resolution clipboard document picture export (`.png`).
 - **Tactile Clipboard Picture Export:**
   - High-resolution clipboard document illustration ([`action-plan-clipboard.png`](action-plan-clipboard.png) & [`action-plan-clipboard.svg`](action-plan-clipboard.svg)) styled as a tactile sheet of linen paper attached to a dark roasted walnut clipboard with brushed steel spring clamp, dual rivets, and realistic paper shadows.
   - Features all 7 community action commitments, personal reflection notebook excerpt, 2-column Smart Donor Field Guide (Give vs. Avoid), and wholesale multiplier principle.
