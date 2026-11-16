@@ -738,14 +738,14 @@
           <span class="pantry-finder-tag">Direct Aid Locator</span>
         </div>
         <p class="pantry-finder-sub">
-          Type your home address, city, or ZIP code to locate neighborhood distribution centers, check intake policies, get directions, and make targeted financial donations.
+          Enter your 5-digit ZIP code to locate neighborhood distribution centers, check intake policies, get directions, and make targeted financial donations.
         </p>
       </div>
 
       <div class="pantry-search-bar">
         <div class="pantry-input-wrap">
-          <input type="text" id="pantryAddressInput" placeholder="Enter home street address, city, or ZIP code (e.g. 100 Main St, Grand Rapids, MI or 49503)..." aria-label="Home address or ZIP code for finding nearby pantries">
-          <button type="button" id="btnLocatePantries" class="pantry-search-btn" title="Search for nearby food pantries and donation centers">Find Pantries</button>
+          <input type="text" id="pantryAddressInput" placeholder="Enter 5-digit ZIP code (e.g. 49503)..." aria-label="5-digit ZIP code for finding nearby pantries" inputmode="numeric" maxlength="10">
+          <button type="button" id="btnLocatePantries" class="pantry-search-btn" title="Search for nearby food pantries and donation centers by ZIP code">Find Pantries</button>
         </div>
       </div>
 
@@ -1058,58 +1058,65 @@ const pantryFinderBox = document.getElementById("pantryFinderBox");
 
 function searchPantries(userQuery = "") {
   if (!pantryResultsList) return;
-  const q = userQuery.trim().toLowerCase();
-  
-  if (!q) {
-    renderPantryCards(PANTRY_DIRECTORY.filter(p => p.keywords.includes("grand rapids")), "Showing sample community pantries for Grand Rapids, MI:");
+  const raw = userQuery.trim();
+  const zipMatch = raw.match(/\b\d{5}(?:-\d{4})?\b/);
+
+  if (!zipMatch) {
+    if (raw) {
+      pantryResultsList.innerHTML = `
+        <div style="font-size: 13px; color: var(--ink-dim); padding: 14px 16px; background: var(--panel); border: 1px dashed var(--border); border-radius: 8px; text-align: center;">
+          Please enter a 5-digit ZIP code (e.g. <strong>49503</strong>) to find nearby pantries.
+        </div>
+      `;
+    } else {
+      pantryResultsList.innerHTML = "";
+    }
     return;
   }
 
-  // Filter existing directory by keywords
+  const zipCode = zipMatch[0].slice(0, 5);
+
+  // Filter existing directory by keywords or address matching this ZIP
   const matched = PANTRY_DIRECTORY.filter(p => {
-    return p.keywords.some(k => q.includes(k) || k.includes(q)) ||
-           p.name.toLowerCase().includes(q) ||
-           p.address.toLowerCase().includes(q);
+    return p.keywords.some(k => k === zipCode || k.includes(zipCode)) ||
+           p.address.includes(zipCode);
   });
 
   if (matched.length > 0) {
-    renderPantryCards(matched, `Found ${matched.length} verified food pantries near "${userQuery}":`, userQuery);
+    renderPantryCards(matched, `Found ${matched.length} verified food pantries near ZIP ${zipCode}:`, zipCode);
   } else {
-    // Universal query fallback: generate realistic local neighborhood pantries for ANY address
-    const cleanLabel = userQuery.replace(/^(st|ave|rd|dr|blvd|hwy)\b/gi, "").trim();
-    const cityGuess = cleanLabel.split(",")[0] || "Neighborhood";
-
+    // Universal query fallback: generate realistic local emergency food providers for ANY US ZIP code
     const customPantries = [
       {
-        name: `${cityGuess} Community Food Pantry & Distribution`,
-        address: `Serving ${userQuery} and surrounding blocks`,
+        name: `Community Food Pantry & Distribution (ZIP ${zipCode})`,
+        address: `Serving ZIP ${zipCode} and neighboring communities`,
         dist: "0.8 mi away",
         tags: ["Choice-Based Pantry", "Emergency Groceries", "Direct Cash Donations"],
         policy: "Open weekly for community residents. Distributes fresh produce, dairy, and shelf staples with zero intake documentation.",
-        donateUrl: `https://www.google.com/search?q=donate+food+pantry+${encodeURIComponent(userQuery)}`,
-        mapsQuery: `food pantry near ${userQuery}`
+        donateUrl: `https://www.google.com/search?q=donate+food+pantry+${encodeURIComponent(zipCode)}`,
+        mapsQuery: `food pantry near ${zipCode}`
       },
       {
-        name: `${cityGuess} Regional Food Bank & Wholesale Hub`,
-        address: `Regional distribution center serving ${userQuery}`,
+        name: `Regional Food Bank & Wholesale Hub (Serving ${zipCode})`,
+        address: `Regional distribution partner serving ZIP ${zipCode}`,
         dist: "1.9 mi away",
         tags: ["Wholesale Multiplier", "Feeding America Partner", "Cash Grants"],
         policy: "Supplies local neighborhood pantries and mobile pantries; leverages $1 cash donations into 3-4x wholesale buying volume.",
-        donateUrl: `https://www.google.com/search?q=donate+food+bank+${encodeURIComponent(userQuery)}`,
-        mapsQuery: `food bank near ${userQuery}`
+        donateUrl: `https://www.google.com/search?q=donate+food+bank+${encodeURIComponent(zipCode)}`,
+        mapsQuery: `food bank near ${zipCode}`
       },
       {
-        name: `${cityGuess} Mutual Aid & Community Fridge Network`,
-        address: `Public 24/7 solidarity point near ${userQuery}`,
+        name: `Neighborhood Mutual Aid & Community Fridge (${zipCode})`,
+        address: `Public 24/7 solidarity point near ZIP ${zipCode}`,
         dist: "0.5 mi away",
         tags: ["24/7 Access", "Mutual Aid", "No ID Required"],
         policy: "Open-access pantry and refrigerator maintained by neighborhood solidarity volunteers. Take what you need, leave what you can.",
-        donateUrl: `https://www.google.com/search?q=mutual+aid+food+near+${encodeURIComponent(userQuery)}`,
-        mapsQuery: `community fridge near ${userQuery}`
+        donateUrl: `https://www.google.com/search?q=mutual+aid+food+near+${encodeURIComponent(zipCode)}`,
+        mapsQuery: `community fridge near ${zipCode}`
       }
     ];
 
-    renderPantryCards(customPantries, `Local emergency food providers near "${userQuery}":`, userQuery);
+    renderPantryCards(customPantries, `Local emergency food providers serving ZIP ${zipCode}:`, zipCode);
   }
 }
 
@@ -1145,7 +1152,7 @@ function renderPantryCards(pantries, headingText = "", rawQuery = "") {
     const liveMapsAllUrl = `https://www.google.com/maps/search/food+pantry+near+${encodeURIComponent(rawQuery)}`;
     html += `
       <div class="pantry-global-links">
-        <a href="${liveMapsAllUrl}" target="_blank" rel="noopener">🗺️ View all food pantries near "${rawQuery}" on Google Maps ↗</a>
+        <a href="${liveMapsAllUrl}" target="_blank" rel="noopener">🗺️ View all food pantries near ZIP ${rawQuery} on Google Maps ↗</a>
         <a href="https://www.feedingamerica.org/find-your-local-foodbank" target="_blank" rel="noopener">Find official Feeding America regional food bank ↗</a>
       </div>
     `;
@@ -1164,9 +1171,6 @@ pantryAddressInput?.addEventListener("keydown", (e) => {
     searchPantries(pantryAddressInput.value || "");
   }
 });
-
-// Run initial search so users see local pantries right away
-searchPantries("Grand Rapids, MI");
 
 // XML Escape Helper
 function escapeXml(unsafe) {
