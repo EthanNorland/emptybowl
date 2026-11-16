@@ -421,32 +421,6 @@
     background: var(--accent-hover);
   }
 
-  .pantry-quick-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    align-items: center;
-    margin-top: 8px;
-  }
-
-  .quick-loc-btn {
-    background: var(--panel);
-    border: 1px solid var(--border-subtle);
-    border-radius: 4px;
-    color: var(--ink-dim);
-    font-family: var(--sans);
-    font-size: 11px;
-    padding: 3px 8px;
-    cursor: pointer;
-    transition: all 0.15s ease;
-  }
-
-  .quick-loc-btn:hover {
-    color: var(--ink);
-    border-color: var(--ink-muted);
-    background: var(--panel-hover);
-  }
-
   .pantry-results-list {
     display: flex;
     flex-direction: column;
@@ -772,14 +746,6 @@
         <div class="pantry-input-wrap">
           <input type="text" id="pantryAddressInput" placeholder="Enter home street address, city, or ZIP code (e.g. 100 Main St, Grand Rapids, MI or 49503)..." aria-label="Home address or ZIP code for finding nearby pantries">
           <button type="button" id="btnLocatePantries" class="pantry-search-btn" title="Search for nearby food pantries and donation centers">Find Pantries</button>
-        </div>
-        <div class="pantry-quick-tags">
-          <span style="font-size: 11px; color: var(--ink-muted); font-family: var(--mono);">Quick examples:</span>
-          <button type="button" class="quick-loc-btn" data-loc="Grand Rapids, MI">Grand Rapids, MI</button>
-          <button type="button" class="quick-loc-btn" data-loc="Detroit, MI">Detroit, MI</button>
-          <button type="button" class="quick-loc-btn" data-loc="Chicago, IL">Chicago, IL</button>
-          <button type="button" class="quick-loc-btn" data-loc="New York, NY">New York, NY</button>
-          <button type="button" class="quick-loc-btn" data-loc="Austin, TX">Austin, TX</button>
         </div>
       </div>
 
@@ -1197,14 +1163,6 @@ pantryAddressInput?.addEventListener("keydown", (e) => {
     e.preventDefault();
     searchPantries(pantryAddressInput.value || "");
   }
-});
-
-document.querySelectorAll(".quick-loc-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const loc = btn.dataset.loc;
-    if (pantryAddressInput) pantryAddressInput.value = loc;
-    searchPantries(loc);
-  });
 });
 
 // Run initial search so users see local pantries right away
