@@ -12,7 +12,7 @@
   - `How You Can Help` (`howyoucanhelp.html`)
 - **Visual Identity & Palette:**
   - Dark Roasted Walnut (`#181614`), Unbleached Linen (`#f5f0ea`), Sage Green (`#72a681`), and Ochre Gold (`#e5a93b`). Contrast ≥ 4.5:1 (AAA on body text).
-  - Empty green ceramic bowl emblem mark in cross section facing the viewer ([`icon.svg`](icon.svg)) with generated 180, 192, 512, and maskable PNG icons.
+  - Empty green ceramic bowl emblem mark in cross section facing the viewer ([`icon.svg`](icon.svg)) with enlarged 40px logo and 21px bold wordmark in the universal header, alongside generated 180, 192, 512, and maskable PNG icons.
   - Photographic character portraits for Maya, Marcus, and Evelyn with coordinated sage studio backdrops ([`Maya.jpeg`](Maya.jpeg), [`Marcus.jpeg`](Marcus.jpeg), [`Evelyn.jpeg`](Evelyn.jpeg)), with studio lighting enhanced across Marcus and facial shadow removed and balanced across Evelyn.
 - **Interactive Modules:**
   - `index.html`: Busted-myth opener + USDA 4-tier food security spectrum explorer paired side-by-side with evocative photography ([`girl dreaming of food.jpeg`](girl%20dreaming%20of%20food.jpeg)) + hub cards with updated volunteer action points.
