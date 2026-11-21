@@ -13,12 +13,12 @@
 - **Visual Identity & Palette:**
   - Dark Roasted Walnut (`#181614`), Unbleached Linen (`#f5f0ea`), Sage Green (`#72a681`), and Ochre Gold (`#e5a93b`). Contrast ≥ 4.5:1 (AAA on body text).
   - Empty green ceramic bowl emblem mark in cross section facing the viewer ([`icon.svg`](icon.svg)) with generated 180, 192, 512, and maskable PNG icons.
-  - Custom vector portraits for Maya, Marcus, and Evelyn in the craft palette (`portrait-maya.svg`, `portrait-marcus.svg`, `portrait-evelyn.svg`).
+  - Photographic character portraits for Maya, Marcus, and Evelyn with coordinated sage studio backdrops ([`Maya.jpeg`](Maya.jpeg), [`Marcus.jpeg`](Marcus.jpeg), [`Evelyn.jpeg`](Evelyn.jpeg)).
 - **Interactive Modules:**
   - `index.html`: Busted-myth opener + USDA 4-tier food security spectrum explorer + hub cards with updated volunteer action points.
   - `whofaceshunger.html`: Dynamic demographic profile card inspector with refined college barrier and worker impact copy.
   - `causesoffoodinsecurity.html`: Budget elasticity simulation showing how fixed costs squeeze food dollars.
-  - `personalstories.html`: Stacked linear narrative flow showing all 3 accounts directly on the page with portraits, story titles above character names, and reflection notes with localStorage autosave.
+  - `personalstories.html`: Stacked linear narrative flow showing all 3 accounts directly on the page with photographic character portraits, story titles above character names, and reflection notes with localStorage autosave.
   - `howyoucanhelp.html`: Dedicated ZIP-activated local pantry & food bank finder section positioned directly above the interactive 7-point community action checklist (with persistent browser state, showing pantries only once a 5-digit ZIP code is entered), mutual aid fridge solidarity copy, and high-resolution clipboard document picture export (`.png`).
 - **Tactile Clipboard Picture Export:**
   - High-resolution clipboard document illustration ([`action-plan-clipboard.png`](action-plan-clipboard.png) & [`action-plan-clipboard.svg`](action-plan-clipboard.svg)) styled as a tactile sheet of linen paper attached to a dark roasted walnut clipboard with brushed steel spring clamp, dual rivets, and realistic paper shadows.
