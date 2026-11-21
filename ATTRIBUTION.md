@@ -12,7 +12,7 @@
   - Link: https://www.feedingamerica.org/
 
 ## Visual Assets & Code
-- **Emblem Mark (`icon.svg`):** Original vector drawing of an empty green ceramic bowl in sage tones.
+- **Emblem Mark (`icon.svg`):** Original craft vector drawing of an empty green ceramic bowl in cross section facing the viewer in roasted walnut and sage tones.
 - **PWA Architecture & Offline Service Worker:** Based on the Single-File HTML App Template and Renato Design Standards.
 - **Typefaces:** System sans-serif stack paired with monospace system fallbacks (`ui-monospace`, `IBM Plex Mono`).
 
