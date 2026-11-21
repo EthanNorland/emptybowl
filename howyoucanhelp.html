@@ -803,90 +803,25 @@
     color: var(--accent);
   }
 
-  .rep-tier-badge.local {
-    background: rgba(100, 160, 220, 0.15);
-    color: #88bbff;
-  }
-
-  .rep-policy-box {
-    font-size: 12px;
-    color: var(--ink-dim);
-    line-height: 1.45;
-    background: rgba(0, 0, 0, 0.2);
-    padding: 8px 10px;
-    border-radius: 4px;
-    border-left: 2px solid var(--ring);
-  }
-
-  .rep-policy-box strong {
-    color: var(--ink);
-    display: block;
-    margin-bottom: 2px;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    font-family: var(--mono);
-  }
-
   .rep-card-contacts {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
     font-size: 12px;
     color: var(--ink-dim);
+    margin-top: 6px;
   }
 
   .rep-contact-row {
     display: flex;
     align-items: baseline;
     gap: 6px;
+    flex-wrap: wrap;
   }
 
   .rep-contact-row a {
     color: var(--ink);
     text-decoration: underline;
-  }
-
-  .rep-card-actions {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-top: auto;
-    padding-top: 8px;
-    border-top: 1px solid var(--border-subtle);
-  }
-
-  .rep-btn-action {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 11px;
-    font-weight: 600;
-    font-family: var(--sans);
-    padding: 4px 8px;
-    border-radius: 4px;
-    text-decoration: none;
-    border: 1px solid var(--border);
-    background: var(--panel);
-    color: var(--ink);
-    cursor: pointer;
-    transition: all 0.12s ease;
-  }
-
-  .rep-btn-action:hover {
-    color: var(--accent);
-    border-color: var(--accent);
-  }
-
-  .rep-btn-action.script-btn {
-    background: rgba(229, 169, 59, 0.12);
-    border-color: rgba(229, 169, 59, 0.35);
-    color: var(--ring);
-  }
-
-  .rep-btn-action.script-btn:hover {
-    background: rgba(229, 169, 59, 0.22);
-    border-color: var(--ring);
   }
 
   @media (max-width: 640px) {
@@ -1190,7 +1125,7 @@
           <span class="rep-finder-tag">Policy &amp; Legislation</span>
         </div>
         <p class="rep-finder-sub">
-          Emergency food aid treats the immediate symptoms of hunger; legislative policy reforms the root causes. Enter your street address and 5-digit ZIP code to find your federal, state, and local representatives, inspect their food security jurisdictions, and contact their offices directly.
+          Emergency food aid treats the immediate symptoms of hunger; legislative policy reforms the root causes. Enter your street address and 5-digit ZIP code to find your federal and state representatives and contact their offices.
         </p>
       </div>
 
@@ -1570,42 +1505,12 @@ function renderInitialRepPrompt() {
       <div style="font-size: 26px; margin-bottom: 6px;">🗳️</div>
       <div style="font-weight: 600; font-size: 14px; color: var(--ink); margin-bottom: 4px;">Enter your street address and ZIP code above</div>
       <div style="font-size: 12px; color: var(--ink-dim); max-width: 480px; margin: 0 auto; line-height: 1.45;">
-        Pinpoint your federal, state, and local representatives with direct office phone numbers, official contact forms, and copyable 30-second food policy phone scripts.
+        Pinpoint your federal and state representatives with direct office phone numbers and official contact details.
       </div>
     </div>
   `;
 }
 renderInitialRepPrompt();
-
-function copyRepScript(scriptText, officialName) {
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(scriptText).then(() => {
-      showRepToast(`✓ 30-Second Advocacy Script for ${officialName} copied to clipboard!`);
-    }).catch(() => {
-      promptUserScript(scriptText, officialName);
-    });
-  } else {
-    promptUserScript(scriptText, officialName);
-  }
-}
-
-function promptUserScript(scriptText, officialName) {
-  window.prompt(`Copy this 30-second phone script for ${officialName}:`, scriptText);
-}
-
-function showRepToast(msg) {
-  const existing = document.getElementById("repToast");
-  if (existing) existing.remove();
-
-  const toast = document.createElement("div");
-  toast.id = "repToast";
-  toast.className = "rep-script-toast";
-  toast.innerHTML = `<span>💬</span><span>${escapeXml(msg)}</span>`;
-  document.body.appendChild(toast);
-  setTimeout(() => {
-    toast.remove();
-  }, 3200);
-}
 
 function searchRepresentatives(userAddress = "", userZip = "") {
   if (!repResultsList) return;
@@ -1626,11 +1531,8 @@ function searchRepresentatives(userAddress = "", userZip = "") {
     return;
   }
 
-  const constituentLoc = rawAddr ? `${rawAddr}, ${zipCode || "MI"}` : (zipCode ? `ZIP code ${zipCode}` : "your district");
-
   let federalReps = [];
   let stateReps = [];
-  let localReps = [];
   let jurisdictionLabel = "";
 
   const isGrandRapids = zipCode.startsWith("495") || zipCode === "49321" || zipCode === "49428" || zipCode === "49418" || rawAddr.toLowerCase().includes("grand rapids");
@@ -1650,9 +1552,7 @@ function searchRepresentatives(userAddress = "", userZip = "") {
         jurisdiction: "State of Michigan · Senate Agriculture Committee",
         phone: "(202) 224-4822",
         localPhone: "(616) 975-0052 (Grand Rapids)",
-        web: "https://www.stabenow.senate.gov/contact",
-        policyFocus: "Senate Agriculture Committee Leadership: Farm Bill negotiations, protecting SNAP purchasing parity, and expanding TEFAP food bank allocations.",
-        script: `Hello, my name is a constituent from ${constituentLoc}. I am calling to urge Senator Stabenow to protect emergency SNAP funding in the federal Farm Bill and lead efforts to eliminate the arbitrary 20-hour weekly work requirement for college students experiencing food hardship.`
+        web: "https://www.stabenow.senate.gov/contact"
       },
       {
         name: "Sen. Gary Peters",
@@ -1662,9 +1562,7 @@ function searchRepresentatives(userAddress = "", userZip = "") {
         jurisdiction: "State of Michigan · Federal Appropriations",
         phone: "(202) 224-6221",
         localPhone: "(616) 233-9150 (Grand Rapids)",
-        web: "https://www.peters.senate.gov/contact",
-        policyFocus: "Child nutrition reauthorization, summer EBT assistance for working parents, and rural food distribution infrastructure.",
-        script: `Hello, I am a constituent calling from ${constituentLoc}. I am asking Senator Peters to expand federal WIC benefits and ensure full funding for summer grocery cards for low-income families with school-age children.`
+        web: "https://www.peters.senate.gov/contact"
       },
       {
         name: "Rep. Hillary Scholten",
@@ -1674,9 +1572,7 @@ function searchRepresentatives(userAddress = "", userZip = "") {
         jurisdiction: "MI-03 (Kent County, Grand Rapids, Muskegon)",
         phone: "(202) 225-3831",
         localPhone: "(616) 451-8383 (Grand Rapids)",
-        web: "https://scholten.house.gov/contact",
-        policyFocus: "Advocating for student basic needs coordinators in higher education and increasing community health and nutrition grants in West Michigan.",
-        script: `Hello, my name is a constituent from ${constituentLoc}. As a voter in Michigan's 3rd District, I urge Representative Scholten to co-sponsor the Student Food Security Act and champion federal grants for college campus food pantries.`
+        web: "https://scholten.house.gov/contact"
       }
     ];
 
@@ -1688,9 +1584,7 @@ function searchRepresentatives(userAddress = "", userZip = "") {
         tierClass: "state",
         jurisdiction: "Executive Office · State of Michigan",
         phone: "(517) 373-3400",
-        web: "https://somgovweb.state.mi.us/GovRelations/ContactGovernor.aspx",
-        policyFocus: "Enacted Michigan Universal Free School Meals for 1.4M public students; administers state DHHS food relief and federal emergency SNAP waivers.",
-        script: `Governor Whitmer, thank you for championing universal free school meals for all Michigan students. As a resident of ${constituentLoc}, I urge you to maintain permanent state budget appropriations for school food and submit administrative waivers expanding SNAP access for working learners.`
+        web: "https://somgovweb.state.mi.us/GovRelations/ContactGovernor.aspx"
       },
       {
         name: "State Sen. Winnie Brinks",
@@ -1700,9 +1594,7 @@ function searchRepresentatives(userAddress = "", userZip = "") {
         jurisdiction: "District 29 (Grand Rapids, East Grand Rapids, Kentwood)",
         phone: "(517) 373-1801",
         email: "SenWBrinks@senate.michigan.gov",
-        web: "https://senatedems.com/brinks/",
-        policyFocus: "State budget funding for Michigan regional food banks (Feeding America West Michigan) and expanding the state Working Families Tax Credit to 30%.",
-        script: `Senator Brinks, as your constituent in District 29 living at ${constituentLoc}, I ask you to prioritize direct state general fund allocations for regional food banks to purchase wholesale Michigan produce and proteins.`
+        web: "https://senatedems.com/brinks/"
       },
       {
         name: "State Rep. Kristian Grant",
@@ -1712,36 +1604,7 @@ function searchRepresentatives(userAddress = "", userZip = "") {
         jurisdiction: "District 82 (Grand Rapids Central & South)",
         phone: "(517) 373-1800",
         email: "KristianGrant@house.mi.gov",
-        web: "https://housedems.com/kristian-grant/",
-        policyFocus: "Urban food desert elimination, incentivizing neighborhood grocery markets, and housing/nutrition stability legislation.",
-        script: `Representative Grant, I am contacting you from ${constituentLoc} to urge legislative support for urban food access initiatives and eliminating the benefits cliff that penalizes working families when their hourly wages increase slightly.`
-      }
-    ];
-
-    localReps = [
-      {
-        name: "Mayor Rosalynn Bliss",
-        role: "Mayor · City of Grand Rapids",
-        tier: "Local",
-        tierClass: "local",
-        jurisdiction: "Municipal Administration · Grand Rapids City Commission",
-        phone: "(616) 456-3168",
-        email: "mayor@grcity.us",
-        web: "https://www.grandrapidsmi.gov/Government/Departments/Office-of-the-Mayor",
-        policyFocus: "Zoning permits for neighborhood mutual aid food fridges, support for community gardens, and municipal public health food grants.",
-        script: `Mayor Bliss, I live at ${constituentLoc} and am calling to ask that the City of Grand Rapids preserve open, barrier-free municipal permits for outdoor community mutual aid fridges and support mobile pantry distributions across Grand Rapids neighborhoods.`
-      },
-      {
-        name: "Kent County Board of Commissioners",
-        role: "County Legislative Body · Kent County",
-        tier: "Local",
-        tierClass: "local",
-        jurisdiction: "Kent County Administration Building, 300 Monroe Ave NW",
-        phone: "(616) 632-7580",
-        email: "county.commissioners@accesskent.com",
-        web: "https://www.accesskent.com/Departments/BoardofCommissioners/",
-        policyFocus: "Senior Meals-on-Wheels county funding, emergency food storage facility grants, and county health department infant nutrition programs.",
-        script: `County Commissioners, as a Kent County resident at ${constituentLoc}, I urge you to allocate county public health and human services funds to bolster emergency refrigeration capacity and senior home meal delivery programs.`
+        web: "https://housedems.com/kristian-grant/"
       }
     ];
   } else if (isDetroit) {
@@ -1754,9 +1617,7 @@ function searchRepresentatives(userAddress = "", userZip = "") {
         tierClass: "federal",
         jurisdiction: "State of Michigan · Senate Agriculture & Appropriations",
         phone: "(202) 224-4822 / (202) 224-6221",
-        web: "https://www.stabenow.senate.gov/contact",
-        policyFocus: "Farm Bill SNAP authorization, Detroit urban agriculture initiatives, and federal TEFAP emergency food grants.",
-        script: `Hello, I am a constituent calling from ${constituentLoc}. Please protect SNAP benefits from proposed federal cuts and ensure urban agricultural programs are funded in the Farm Bill.`
+        web: "https://www.stabenow.senate.gov/contact"
       },
       {
         name: "Rep. Rashida Tlaib",
@@ -1766,9 +1627,7 @@ function searchRepresentatives(userAddress = "", userZip = "") {
         jurisdiction: "MI-12 (Detroit, Dearborn, Western Wayne)",
         phone: "(202) 225-5126",
         localPhone: "(313) 463-8220",
-        web: "https://tlaib.house.gov/contact",
-        policyFocus: "Leading federal champion for ending poverty penalties, universal school meals, and water & nutrition security as human rights.",
-        script: `Hello Representative Tlaib, I am a constituent from ${constituentLoc}. I urge continued leadership on federal legislation to make school lunch universal and expand emergency food aid to all low-income households.`
+        web: "https://tlaib.house.gov/contact"
       }
     ];
     stateReps = [
@@ -1779,9 +1638,7 @@ function searchRepresentatives(userAddress = "", userZip = "") {
         tierClass: "state",
         jurisdiction: "Executive Office · State of Michigan",
         phone: "(517) 373-3400",
-        web: "https://somgovweb.state.mi.us/GovRelations/ContactGovernor.aspx",
-        policyFocus: "Statewide universal school meals and state emergency food bank partnerships.",
-        script: `Governor Whitmer, please maintain full state funding for Michigan's universal school meals program and expand emergency food infrastructure.`
+        web: "https://somgovweb.state.mi.us/GovRelations/ContactGovernor.aspx"
       },
       {
         name: "State Sen. Stephanie Chang",
@@ -1791,22 +1648,7 @@ function searchRepresentatives(userAddress = "", userZip = "") {
         jurisdiction: "District 3 (Detroit East Side / Riverfront)",
         phone: "(517) 373-7346",
         email: "senschang@senate.michigan.gov",
-        web: "https://senatedems.com/chang/",
-        policyFocus: "Water affordability, environmental justice, and urban neighborhood pantry support.",
-        script: `Senator Chang, as your constituent at ${constituentLoc}, I urge you to support state legislation funding community food pantries and expanding SNAP exemptions.`
-      }
-    ];
-    localReps = [
-      {
-        name: "Mayor Mike Duggan",
-        role: "Mayor · City of Detroit",
-        tier: "Local",
-        tierClass: "local",
-        jurisdiction: "City of Detroit Administration · Coleman A. Young Municipal Center",
-        phone: "(313) 224-3400",
-        web: "https://detroitmi.gov/government/mayors-office",
-        policyFocus: "Grocery market neighborhood development, Detroit Food Policy Council, and vacant lot community garden leasing.",
-        script: `Mayor Duggan, I live at ${constituentLoc} and ask the administration to accelerate grocery development in underserved neighborhoods and protect community food fridges.`
+        web: "https://senatedems.com/chang/"
       }
     ];
   } else {
@@ -1817,11 +1659,9 @@ function searchRepresentatives(userAddress = "", userZip = "") {
         role: "U.S. Senators (Representing Your State)",
         tier: "Federal",
         tierClass: "federal",
-        jurisdiction: `U.S. Senate · Federal Farm Bill & SNAP Jurisdiction (ZIP ${zipCode})`,
+        jurisdiction: `U.S. Senate · Federal Legislative Delegation (ZIP ${zipCode})`,
         phone: "(202) 224-3121",
-        web: `https://www.senate.gov/senators/senators-contact.htm`,
-        policyFocus: "Senate Agriculture Committee oversight: Farm Bill reauthorization, SNAP funding allocation, and federal TEFAP emergency food grants.",
-        script: `Hello, I am a constituent calling from ${constituentLoc}. I am asking our Senator to protect SNAP funding in the federal Farm Bill and eliminate the 20-hour weekly work requirement for college students experiencing food hardship.`
+        web: `https://www.senate.gov/senators/senators-contact.htm`
       },
       {
         name: "U.S. House of Representatives Member",
@@ -1830,9 +1670,7 @@ function searchRepresentatives(userAddress = "", userZip = "") {
         tierClass: "federal",
         jurisdiction: `U.S. House of Representatives · District Serving ZIP ${zipCode}`,
         phone: "(202) 225-3121",
-        web: `https://www.house.gov/representatives/find-your-representative?zip=${encodeURIComponent(zipCode)}`,
-        policyFocus: "House Agriculture Committee, WIC appropriations, child tax credits, and college student basic needs funding.",
-        script: `Hello, as a constituent living at ${constituentLoc}, I urge our Representative to co-sponsor legislation ending hunger on college campuses and increasing federal food bank wholesale buying power.`
+        web: `https://www.house.gov/representatives/find-your-representative?zip=${encodeURIComponent(zipCode)}`
       }
     ];
     stateReps = [
@@ -1843,9 +1681,7 @@ function searchRepresentatives(userAddress = "", userZip = "") {
         tierClass: "state",
         jurisdiction: `Executive Branch · State Administration`,
         phone: "(Contact State Capitol Switchboard)",
-        web: `https://www.nga.org/governors/`,
-        policyFocus: "State budget allocations for food assistance, universal school breakfast and lunch programs, and state SNAP administrative waivers.",
-        script: `Hello, I am calling from ${constituentLoc} to urge the Governor to support state-funded universal school meals and maximize state flexibility for food assistance eligibility.`
+        web: `https://www.nga.org/governors/`
       },
       {
         name: "State Legislative Delegation",
@@ -1854,22 +1690,7 @@ function searchRepresentatives(userAddress = "", userZip = "") {
         tierClass: "state",
         jurisdiction: `State Capitol · Legislative District for ZIP ${zipCode}`,
         phone: "(Contact State Legislature)",
-        web: `https://www.openstates.org/find_your_legislator/`,
-        policyFocus: "Enacting state-level student SNAP exemptions, funding regional food banks, and creating tax incentives for grocery stores in food deserts.",
-        script: `As your constituent at ${constituentLoc}, I ask you to support state legislation that invests in local food bank infrastructure and exempts college students from work rules that force them to choose between school and meals.`
-      }
-    ];
-    localReps = [
-      {
-        name: "City Mayor & City Council",
-        role: "Municipal Government Leadership",
-        tier: "Local",
-        tierClass: "local",
-        jurisdiction: `City Hall / Municipal District for ZIP ${zipCode}`,
-        phone: "Call Local City Hall",
-        web: `https://www.google.com/search?q=city+hall+mayor+council+${encodeURIComponent(zipCode)}`,
-        policyFocus: "Zoning permits for outdoor mutual aid fridges, urban community gardens, and emergency shelter grocery provisions.",
-        script: `Hello, I am a local resident calling from ${constituentLoc}. I urge our local officials to protect community mutual aid food fridges and support mobile food distribution to neighborhood transit hubs.`
+        web: `https://www.openstates.org/find_your_legislator/`
       }
     ];
   }
@@ -1886,7 +1707,6 @@ function searchRepresentatives(userAddress = "", userZip = "") {
     `;
 
     reps.forEach(r => {
-      const encodedScriptAttr = encodeURIComponent(r.script);
       html += `
         <div class="rep-card">
           <div class="rep-card-top">
@@ -1897,13 +1717,8 @@ function searchRepresentatives(userAddress = "", userZip = "") {
             <span class="rep-tier-badge ${r.tierClass}">${escapeXml(r.tier)}</span>
           </div>
 
-          <div style="font-size: 11px; color: var(--ink-muted); font-family: var(--mono);">
+          <div style="font-size: 11px; color: var(--ink-muted); font-family: var(--mono); margin-bottom: 6px;">
             📍 ${escapeXml(r.jurisdiction)}
-          </div>
-
-          <div class="rep-policy-box">
-            <strong>Food Policy Influence:</strong>
-            ${escapeXml(r.policyFocus)}
           </div>
 
           <div class="rep-card-contacts">
@@ -1920,18 +1735,13 @@ function searchRepresentatives(userAddress = "", userZip = "") {
                 <a href="mailto:${escapeXml(r.email)}">${escapeXml(r.email)}</a>
               </div>
             ` : ""}
-          </div>
-
-          <div class="rep-card-actions">
-            ${r.phone.startsWith("(") ? `
-              <a href="tel:${r.phone.replace(/[^0-9]/g, '')}" class="rep-btn-action" title="Call office directly">📞 Call Office</a>
-            ` : ""}
             ${r.web ? `
-              <a href="${r.web}" target="_blank" rel="noopener" class="rep-btn-action" title="Open official web contact form">🌐 Contact Form ↗</a>
+              <div class="rep-contact-row">
+                <span>🌐</span>
+                <strong>Contact / Web:</strong>
+                <a href="${r.web}" target="_blank" rel="noopener">${escapeXml(r.web.replace(/^https?:\/\/(www\.)?/, ''))} ↗</a>
+              </div>
             ` : ""}
-            <button type="button" class="rep-btn-action script-btn" data-name="${escapeXml(r.name)}" data-script="${encodedScriptAttr}" title="Copy tailored 30-second telephone script to clipboard">
-              📋 Copy Phone Script
-            </button>
           </div>
         </div>
       `;
@@ -1955,19 +1765,10 @@ function searchRepresentatives(userAddress = "", userZip = "") {
     </div>
   `;
 
-  finalHtml += renderGroup("🇺🇸 Federal Representation", "Farm Bill, SNAP authorization, TEFAP & WIC funding", federalReps);
-  finalHtml += renderGroup("🏛️ State Representation", "State school meals, college SNAP waivers, state budgets", stateReps);
-  finalHtml += renderGroup("🏙️ Local & Municipal Leadership", "Zoning for mutual aid fridges, food councils, local grants", localReps);
+  finalHtml += renderGroup("🇺🇸 Federal Representation", "U.S. Senate & House of Representatives", federalReps);
+  finalHtml += renderGroup("🏛️ State Representation", "State Executive & Legislative Offices", stateReps);
 
   repResultsList.innerHTML = finalHtml;
-
-  repResultsList.querySelectorAll(".script-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const script = decodeURIComponent(btn.dataset.script || "");
-      const name = btn.dataset.name || "Representative";
-      copyRepScript(script, name);
-    });
-  });
 }
 
 btnLocateReps?.addEventListener("click", () => {
