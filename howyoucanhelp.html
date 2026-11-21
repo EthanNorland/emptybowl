@@ -613,7 +613,7 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 10px;
-    margin-bottom: 0;
+    margin-bottom: 6px;
   }
 
   .rep-finder-title {
@@ -630,44 +630,15 @@
   }
 
   .rep-finder-sub {
+    display: block;
     font-size: 13px;
     color: var(--ink-dim);
     line-height: 1.5;
     margin: 0;
   }
 
-  .rep-lookup-action-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 16px;
-    background: var(--panel);
-    border: 1px solid var(--border-subtle);
-    border-radius: 8px;
-    padding: 18px 20px;
-    flex: 1;
-    transition: border-color 0.15s ease;
-  }
-
-  .rep-lookup-action-box:hover {
-    border-color: var(--accent);
-  }
-
-  .rep-lookup-info {
-    flex: 1;
-  }
-
-  .rep-lookup-title {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--ink);
-    margin-bottom: 6px;
-  }
-
-  .rep-lookup-desc {
-    font-size: 13px;
-    color: var(--ink-dim);
-    line-height: 1.5;
+  .rep-action-bar {
+    margin-top: 12px;
   }
 
   .rep-external-link-btn {
@@ -686,7 +657,6 @@
     font-weight: 700;
     text-decoration: none;
     white-space: nowrap;
-    align-self: flex-start;
     transition: background 0.15s ease, transform 0.1s ease;
   }
 
@@ -698,7 +668,6 @@
 
   @media (max-width: 640px) {
     .rep-external-link-btn {
-      align-self: stretch;
       width: 100%;
     }
   }
@@ -922,14 +891,12 @@
             <h2 class="rep-finder-title">🏛️ Find Your Federal &amp; State Legislators</h2>
             <span class="rep-finder-tag">Policy &amp; Legislation</span>
           </div>
+          <p class="rep-finder-sub">
+            Search your address on Plural Policy's non-partisan national tool to identify your U.S. Senators, U.S. Representative, State Senator, and State Representative, complete with direct office contact numbers, email forms, and committee assignments.
+          </p>
         </div>
 
-        <div class="rep-lookup-action-box">
-          <div class="rep-lookup-info">
-            <div class="rep-lookup-desc">
-              Search your address on Plural Policy's non-partisan national tool to identify your U.S. Senators, U.S. Representative, State Senator, and State Representative, complete with direct office contact numbers, email forms, and committee assignments.
-            </div>
-          </div>
+        <div class="rep-action-bar">
           <a href="https://pluralpolicy.com/find-your-legislator/" target="_blank" rel="noopener noreferrer" class="rep-external-link-btn" title="Open Plural Policy Find Your Legislator tool in a new tab">
             <span>Look Up Your Legislators on Plural Policy</span>
             <span aria-hidden="true">↗</span>
