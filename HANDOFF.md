@@ -13,7 +13,7 @@
 - **Visual Identity & Palette:**
   - Dark Roasted Walnut (`#181614`), Unbleached Linen (`#f5f0ea`), Sage Green (`#72a681`), and Ochre Gold (`#e5a93b`). Contrast ≥ 4.5:1 (AAA on body text).
   - Empty green ceramic bowl emblem mark in cross section facing the viewer ([`icon.svg`](icon.svg)) with generated 180, 192, 512, and maskable PNG icons.
-  - Photographic character portraits for Maya, Marcus, and Evelyn with coordinated sage studio backdrops ([`Maya.jpeg`](Maya.jpeg), [`Marcus.jpeg`](Marcus.jpeg), [`Evelyn.jpeg`](Evelyn.jpeg)).
+  - Photographic character portraits for Maya, Marcus, and Evelyn with coordinated sage studio backdrops ([`Maya.jpeg`](Maya.jpeg), [`Marcus.jpeg`](Marcus.jpeg), [`Evelyn.jpeg`](Evelyn.jpeg)), with studio lighting enhanced across Marcus and facial shadow removed and balanced across Evelyn.
 - **Interactive Modules:**
   - `index.html`: Busted-myth opener + USDA 4-tier food security spectrum explorer + hub cards with updated volunteer action points.
   - `whofaceshunger.html`: Dynamic demographic profile card inspector with refined college barrier and worker impact copy.
