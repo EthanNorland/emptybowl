@@ -317,9 +317,9 @@
 
   .spectrum-layout {
     display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
+    grid-template-columns: 1fr 360px;
     gap: 28px;
-    align-items: start;
+    align-items: center;
   }
 
   .spectrum-content {
@@ -330,6 +330,8 @@
   .spectrum-visual {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    max-width: 360px;
   }
 
   .spectrum-img {
@@ -343,18 +345,13 @@
     background: var(--panel);
   }
 
-  .spectrum-visual-caption {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--ink-dim);
-    margin-top: 8px;
-    text-align: right;
-  }
-
   @media (max-width: 900px) {
     .spectrum-layout {
       grid-template-columns: 1fr;
       gap: 20px;
+    }
+    .spectrum-visual {
+      max-width: 400px;
     }
   }
 
@@ -657,7 +654,6 @@
 
         <div class="spectrum-visual">
           <img src="girl dreaming of food.jpeg" alt="Young girl with half a sandwich dreaming of a nourishing meal" class="spectrum-img" width="2752" height="1536" loading="lazy">
-          <span class="spectrum-visual-caption">Dietary compromises &amp; food anxiety</span>
         </div>
       </div>
     </section>
