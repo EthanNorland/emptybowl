@@ -315,6 +315,49 @@
     margin-bottom: 36px;
   }
 
+  .spectrum-layout {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 28px;
+    align-items: start;
+  }
+
+  .spectrum-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .spectrum-visual {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .spectrum-img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    display: block;
+    background: var(--panel);
+  }
+
+  .spectrum-visual-caption {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-dim);
+    margin-top: 8px;
+    text-align: right;
+  }
+
+  @media (max-width: 900px) {
+    .spectrum-layout {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+  }
+
   .level-buttons {
     display: flex;
     flex-wrap: wrap;
@@ -590,23 +633,32 @@
 
     <!-- Interactive Continuum Explorer -->
     <section class="interactive-panel" id="section-continuum">
-      <h2 style="font-size: 18px; font-weight: 600; margin-bottom: 8px;">Explore the Spectrum of Food Security</h2>
-      <p style="font-size: 13px; color: var(--ink-dim); margin-bottom: 16px;">
-        Federal health agencies categorize food access into four distinct ranges. Select a range to inspect its daily realities:
-      </p>
+      <div class="spectrum-layout">
+        <div class="spectrum-content">
+          <h2 style="font-size: 18px; font-weight: 600; margin-bottom: 8px;">Explore the Spectrum of Food Security</h2>
+          <p style="font-size: 13px; color: var(--ink-dim); margin-bottom: 16px;">
+            Federal health agencies categorize food access into four distinct ranges. Select a range to inspect its daily realities:
+          </p>
 
-      <div class="level-buttons" role="tablist">
-        <button class="level-btn selected" data-level="high" id="level-high-btn" title="Inspect High Food Security conditions">1. High Security</button>
-        <button class="level-btn" data-level="marginal" id="level-marginal-btn" title="Inspect Marginal Food Security conditions">2. Marginal Security</button>
-        <button class="level-btn" data-level="low" id="level-low-btn" title="Inspect Low Food Security conditions">3. Low Security</button>
-        <button class="level-btn" data-level="very-low" id="level-verylow-btn" title="Inspect Very Low Food Security conditions">4. Very Low Security</button>
-      </div>
+          <div class="level-buttons" role="tablist">
+            <button class="level-btn selected" data-level="high" id="level-high-btn" title="Inspect High Food Security conditions">1. High Security</button>
+            <button class="level-btn" data-level="marginal" id="level-marginal-btn" title="Inspect Marginal Food Security conditions">2. Marginal Security</button>
+            <button class="level-btn" data-level="low" id="level-low-btn" title="Inspect Low Food Security conditions">3. Low Security</button>
+            <button class="level-btn" data-level="very-low" id="level-verylow-btn" title="Inspect Very Low Food Security conditions">4. Very Low Security</button>
+          </div>
 
-      <div class="level-detail-card" id="levelDisplay">
-        <h3 class="level-detail-title" id="levelTitle">High Food Security</h3>
-        <p class="level-detail-text" id="levelDesc">
-          Households face zero reported problems or anxiety regarding food access. Nutrient-rich meals, varied diet choices, and predictable grocery budgets are consistently maintained without trade-offs.
-        </p>
+          <div class="level-detail-card" id="levelDisplay">
+            <h3 class="level-detail-title" id="levelTitle">High Food Security</h3>
+            <p class="level-detail-text" id="levelDesc">
+              Households face zero reported problems or anxiety regarding food access. Nutrient-rich meals, varied diet choices, and predictable grocery budgets are consistently maintained without trade-offs.
+            </p>
+          </div>
+        </div>
+
+        <div class="spectrum-visual">
+          <img src="girl dreaming of food.jpeg" alt="Young girl with half a sandwich dreaming of a nourishing meal" class="spectrum-img" width="2752" height="1536" loading="lazy">
+          <span class="spectrum-visual-caption">Dietary compromises &amp; food anxiety</span>
+        </div>
       </div>
     </section>
 

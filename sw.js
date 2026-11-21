@@ -12,6 +12,7 @@ const FILES = [
   "./Maya.jpeg",
   "./Marcus.jpeg",
   "./Evelyn.jpeg",
+  "./girl dreaming of food.jpeg",
   "./financial donation.jpeg",
   "./stocking mutual adie fridge.jpeg",
   "./Choice-Based Volunteering.jpeg",
