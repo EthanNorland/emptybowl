@@ -1535,13 +1535,92 @@ function searchRepresentatives(userAddress = "", userZip = "") {
   let stateReps = [];
   let jurisdictionLabel = "";
 
-  const isGrandRapids = zipCode.startsWith("495") || zipCode === "49321" || zipCode === "49428" || zipCode === "49418" || rawAddr.toLowerCase().includes("grand rapids");
-  const isDetroit = zipCode.startsWith("482") || rawAddr.toLowerCase().includes("detroit");
-  const isLansing = zipCode.startsWith("489") || rawAddr.toLowerCase().includes("lansing");
-  const isAnnArbor = zipCode.startsWith("481") || rawAddr.toLowerCase().includes("ann arbor");
-  const isMichigan = zipCode.startsWith("48") || zipCode.startsWith("49") || rawAddr.toLowerCase().includes("mi") || rawAddr.toLowerCase().includes("michigan");
+  const combinedQuery = (rawZip + " " + rawAddr).toLowerCase();
 
-  if (isGrandRapids || (isMichigan && !isDetroit && !isLansing && !isAnnArbor)) {
+  const isKalamazoo = zipCode.startsWith("490") || combinedQuery.includes("kalamazoo") || combinedQuery.includes("portage");
+  const isGrandRapids = (zipCode.startsWith("495") || zipCode === "49321" || zipCode === "49428" || zipCode === "49418" || combinedQuery.includes("grand rapids") || combinedQuery.includes("kent county")) && !isKalamazoo;
+  const isDetroit = (zipCode.startsWith("482") || combinedQuery.includes("detroit") || combinedQuery.includes("wayne county")) && !isKalamazoo && !isGrandRapids;
+  const isLansing = (zipCode.startsWith("489") || combinedQuery.includes("lansing") || combinedQuery.includes("ingham")) && !isKalamazoo && !isGrandRapids;
+  const isAnnArbor = (zipCode.startsWith("481") || combinedQuery.includes("ann arbor") || combinedQuery.includes("washtenaw")) && !isKalamazoo && !isGrandRapids;
+  const isMichigan = zipCode.startsWith("48") || zipCode.startsWith("49") || combinedQuery.includes("mi") || combinedQuery.includes("michigan");
+
+  if (isKalamazoo) {
+    jurisdictionLabel = `Kalamazoo / Kalamazoo County, MI (ZIP ${zipCode || "49008"})`;
+    federalReps = [
+      {
+        name: "Sen. Debbie Stabenow",
+        role: "U.S. Senator · Michigan (Senior Senator)",
+        tier: "Federal",
+        tierClass: "federal",
+        jurisdiction: "State of Michigan · Senate Agriculture Committee",
+        phone: "(202) 224-4822",
+        localPhone: "(269) 385-0039 (Kalamazoo Regional Office)",
+        web: "https://www.stabenow.senate.gov/contact"
+      },
+      {
+        name: "Sen. Gary Peters",
+        role: "U.S. Senator · Michigan",
+        tier: "Federal",
+        tierClass: "federal",
+        jurisdiction: "State of Michigan · Federal Appropriations",
+        phone: "(202) 224-6221",
+        localPhone: "(616) 233-9150 (West Michigan)",
+        web: "https://www.peters.senate.gov/contact"
+      },
+      {
+        name: "Rep. Bill Huizenga",
+        role: "U.S. Representative · Michigan 4th Congressional District",
+        tier: "Federal",
+        tierClass: "federal",
+        jurisdiction: "MI-04 (Kalamazoo County, Battle Creek, Southwest Michigan)",
+        phone: "(202) 225-4401",
+        localPhone: "(269) 569-8595 (Kalamazoo District Office)",
+        web: "https://huizenga.house.gov/contact"
+      }
+    ];
+
+    stateReps = [
+      {
+        name: "Gov. Gretchen Whitmer",
+        role: "Governor · State of Michigan",
+        tier: "State",
+        tierClass: "state",
+        jurisdiction: "Executive Office · State of Michigan",
+        phone: "(517) 373-3400",
+        web: "https://somgovweb.state.mi.us/GovRelations/ContactGovernor.aspx"
+      },
+      {
+        name: "State Sen. Sean McCann",
+        role: "State Senator · Michigan Senate District 19",
+        tier: "State",
+        tierClass: "state",
+        jurisdiction: "District 19 (Kalamazoo County, Portage, Oshtemo)",
+        phone: "(517) 373-5100",
+        email: "SenSMcCann@senate.michigan.gov",
+        web: "https://senatedems.com/mccann/"
+      },
+      {
+        name: "State Rep. Julie Rogers",
+        role: "State Representative · Michigan House District 41",
+        tier: "State",
+        tierClass: "state",
+        jurisdiction: "District 41 (City of Kalamazoo, Kalamazoo Twp)",
+        phone: "(517) 373-1783",
+        email: "JulieRogers@house.mi.gov",
+        web: "https://housedems.com/julie-rogers/"
+      },
+      {
+        name: "State Rep. Christine Morse",
+        role: "State Representative · Michigan House District 40",
+        tier: "State",
+        tierClass: "state",
+        jurisdiction: "District 40 (Portage, Texas Twp, Oshtemo)",
+        phone: "(517) 373-1785",
+        email: "ChristineMorse@house.mi.gov",
+        web: "https://housedems.com/christine-morse/"
+      }
+    ];
+  } else if (isGrandRapids) {
     jurisdictionLabel = `Grand Rapids / Kent County, MI (ZIP ${zipCode || "49503"})`;
     federalReps = [
       {
@@ -1608,7 +1687,7 @@ function searchRepresentatives(userAddress = "", userZip = "") {
       }
     ];
   } else if (isDetroit) {
-    jurisdictionLabel = `Detroit / Wayne County, MI (ZIP ${zipCode})`;
+    jurisdictionLabel = `Detroit / Wayne County, MI (ZIP ${zipCode || "48201"})`;
     federalReps = [
       {
         name: "Sen. Debbie Stabenow & Sen. Gary Peters",
@@ -1626,8 +1705,18 @@ function searchRepresentatives(userAddress = "", userZip = "") {
         tierClass: "federal",
         jurisdiction: "MI-12 (Detroit, Dearborn, Western Wayne)",
         phone: "(202) 225-5126",
-        localPhone: "(313) 463-8220",
+        localPhone: "(313) 463-8220 (Detroit)",
         web: "https://tlaib.house.gov/contact"
+      },
+      {
+        name: "Rep. Shri Thanedar",
+        role: "U.S. Representative · Michigan 13th Congressional District",
+        tier: "Federal",
+        tierClass: "federal",
+        jurisdiction: "MI-13 (Detroit, Downriver, Grosse Pointe)",
+        phone: "(202) 225-5802",
+        localPhone: "(313) 205-0900 (Detroit)",
+        web: "https://thanedar.house.gov/contact"
       }
     ];
     stateReps = [
@@ -1649,6 +1738,165 @@ function searchRepresentatives(userAddress = "", userZip = "") {
         phone: "(517) 373-7346",
         email: "senschang@senate.michigan.gov",
         web: "https://senatedems.com/chang/"
+      }
+    ];
+  } else if (isLansing) {
+    jurisdictionLabel = `Lansing / Ingham County, MI (ZIP ${zipCode || "48933"})`;
+    federalReps = [
+      {
+        name: "Sen. Debbie Stabenow & Sen. Gary Peters",
+        role: "U.S. Senators · Michigan",
+        tier: "Federal",
+        tierClass: "federal",
+        jurisdiction: "State of Michigan · Senate Agriculture & Appropriations",
+        phone: "(202) 224-4822 / (202) 224-6221",
+        web: "https://www.stabenow.senate.gov/contact"
+      },
+      {
+        name: "Rep. Elissa Slotkin",
+        role: "U.S. Representative · Michigan 7th Congressional District",
+        tier: "Federal",
+        tierClass: "federal",
+        jurisdiction: "MI-07 (Ingham, Lansing, Eaton, Clinton)",
+        phone: "(202) 225-4872",
+        localPhone: "(517) 993-0510 (Lansing)",
+        web: "https://slotkin.house.gov/contact"
+      }
+    ];
+    stateReps = [
+      {
+        name: "Gov. Gretchen Whitmer",
+        role: "Governor · State of Michigan",
+        tier: "State",
+        tierClass: "state",
+        jurisdiction: "Executive Office · State of Michigan",
+        phone: "(517) 373-3400",
+        web: "https://somgovweb.state.mi.us/GovRelations/ContactGovernor.aspx"
+      },
+      {
+        name: "State Sen. Sarah Anthony",
+        role: "State Senator · Michigan Senate District 21",
+        tier: "State",
+        tierClass: "state",
+        jurisdiction: "District 21 (Lansing, Ingham County)",
+        phone: "(517) 373-6960",
+        email: "SenSAnthony@senate.michigan.gov",
+        web: "https://senatedems.com/anthony/"
+      },
+      {
+        name: "State Rep. Emily Dievendorf",
+        role: "State Representative · Michigan House District 77",
+        tier: "State",
+        tierClass: "state",
+        jurisdiction: "District 77 (Lansing Central & East)",
+        phone: "(517) 373-2277",
+        email: "EmilyDievendorf@house.mi.gov",
+        web: "https://housedems.com/emily-dievendorf/"
+      }
+    ];
+  } else if (isAnnArbor) {
+    jurisdictionLabel = `Ann Arbor / Washtenaw County, MI (ZIP ${zipCode || "48104"})`;
+    federalReps = [
+      {
+        name: "Sen. Debbie Stabenow & Sen. Gary Peters",
+        role: "U.S. Senators · Michigan",
+        tier: "Federal",
+        tierClass: "federal",
+        jurisdiction: "State of Michigan · Senate Agriculture & Appropriations",
+        phone: "(202) 224-4822 / (202) 224-6221",
+        web: "https://www.stabenow.senate.gov/contact"
+      },
+      {
+        name: "Rep. Debbie Dingell",
+        role: "U.S. Representative · Michigan 6th Congressional District",
+        tier: "Federal",
+        tierClass: "federal",
+        jurisdiction: "MI-06 (Washtenaw County, Ann Arbor, Ypsilanti)",
+        phone: "(202) 225-4071",
+        localPhone: "(734) 481-1100 (Ann Arbor / Ypsilanti)",
+        web: "https://debbiedingell.house.gov/contact"
+      }
+    ];
+    stateReps = [
+      {
+        name: "Gov. Gretchen Whitmer",
+        role: "Governor · State of Michigan",
+        tier: "State",
+        tierClass: "state",
+        jurisdiction: "Executive Office · State of Michigan",
+        phone: "(517) 373-3400",
+        web: "https://somgovweb.state.mi.us/GovRelations/ContactGovernor.aspx"
+      },
+      {
+        name: "State Sen. Jeff Irwin",
+        role: "State Senator · Michigan Senate District 15",
+        tier: "State",
+        tierClass: "state",
+        jurisdiction: "District 15 (Ann Arbor, Washtenaw County)",
+        phone: "(517) 373-2406",
+        email: "SenJIrwin@senate.michigan.gov",
+        web: "https://senatedems.com/irwin/"
+      },
+      {
+        name: "State Rep. Jason Morgan",
+        role: "State Representative · Michigan House District 23",
+        tier: "State",
+        tierClass: "state",
+        jurisdiction: "District 23 (Ann Arbor Central)",
+        phone: "(517) 373-0857",
+        email: "JasonMorgan@house.mi.gov",
+        web: "https://housedems.com/jason-morgan/"
+      }
+    ];
+  } else if (isMichigan) {
+    jurisdictionLabel = `Michigan District (ZIP ${zipCode || "MI"})`;
+    federalReps = [
+      {
+        name: "Sen. Debbie Stabenow",
+        role: "U.S. Senator · Michigan (Senior Senator)",
+        tier: "Federal",
+        tierClass: "federal",
+        jurisdiction: "State of Michigan · Senate Agriculture Committee",
+        phone: "(202) 224-4822",
+        web: "https://www.stabenow.senate.gov/contact"
+      },
+      {
+        name: "Sen. Gary Peters",
+        role: "U.S. Senator · Michigan",
+        tier: "Federal",
+        tierClass: "federal",
+        jurisdiction: "State of Michigan · Federal Appropriations",
+        phone: "(202) 224-6221",
+        web: "https://www.peters.senate.gov/contact"
+      },
+      {
+        name: `U.S. House Representative (MI ZIP ${zipCode})`,
+        role: `U.S. Representative (Serving ZIP ${zipCode})`,
+        tier: "Federal",
+        tierClass: "federal",
+        jurisdiction: `U.S. House of Representatives · District Serving ZIP ${zipCode}`,
+        phone: "(202) 225-3121 (U.S. House Switchboard)",
+        web: `https://www.house.gov/representatives/find-your-representative?zip=${encodeURIComponent(zipCode)}`
+      }
+    ];
+    stateReps = [
+      {
+        name: "Gov. Gretchen Whitmer",
+        role: "Governor · State of Michigan",
+        tier: "State",
+        tierClass: "state",
+        jurisdiction: "Executive Office · State of Michigan",
+        phone: "(517) 373-3400",
+        web: "https://somgovweb.state.mi.us/GovRelations/ContactGovernor.aspx"
+      },
+      {
+        name: `Michigan State Legislature (Serving ZIP ${zipCode})`,
+        role: `State Senator & State Representative (District Serving ZIP ${zipCode})`,
+        tier: "State",
+        tierClass: "state",
+        jurisdiction: `Michigan State Capitol · Legislative District for ZIP ${zipCode}`,
+        phone: "(517) 373-0135 (Senate) · (517) 373-0145 (House)",
+        web: `https://www.legislature.mi.gov/FindYourSenatorAndRepresentative`
       }
     ];
   } else {
