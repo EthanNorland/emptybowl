@@ -206,37 +206,102 @@
     max-width: 1080px;
   }
 
-  /* Demographic Filter Tabs */
+  /* Demographic Filter Tabs / Photographic Cards */
   .demographic-selector {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 24px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    margin-bottom: 28px;
   }
 
-  .demo-btn {
-    padding: 9px 15px;
+  .demo-card {
+    display: flex;
+    flex-direction: column;
     background: var(--panel);
     border: 1px solid var(--border);
-    border-radius: 6px;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.18s ease;
+    cursor: pointer;
+  }
+
+  .demo-card:hover {
+    border-color: var(--ink-muted);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  }
+
+  .demo-card.active {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px var(--accent);
+  }
+
+  .demo-card-img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    display: block;
+    border-bottom: 1px solid var(--border);
+    background: var(--card-bg);
+    transition: filter 0.18s ease;
+  }
+
+  .demo-card:not(.active) .demo-card-img {
+    filter: brightness(0.90) contrast(0.96);
+  }
+
+  .demo-card.active .demo-card-img,
+  .demo-card:hover .demo-card-img {
+    filter: brightness(1.0) contrast(1.0);
+  }
+
+  .demo-card .demo-btn {
+    width: 100%;
+    padding: 12px 10px;
+    background: transparent;
+    border: none;
+    border-radius: 0;
     color: var(--ink-dim);
     font-family: var(--sans);
     font-size: 13px;
     font-weight: 500;
+    line-height: 1.35;
+    text-align: center;
     cursor: pointer;
     transition: all 0.15s ease;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .demo-btn:hover {
+  .demo-card:hover .demo-btn {
     color: var(--ink);
-    border-color: var(--ink-muted);
   }
 
-  .demo-btn.selected {
+  .demo-card.active .demo-btn,
+  .demo-card .demo-btn.selected {
     background: var(--accent);
-    color: #fff;
-    border-color: var(--accent-hover);
+    color: #ffffff;
     font-weight: 600;
+  }
+
+  @media (max-width: 1080px) {
+    .demographic-selector {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .demographic-selector {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .demo-card .demo-btn {
+      font-size: 12px;
+      padding: 10px 6px;
+    }
   }
 
   /* Detailed Profile Card */
@@ -423,11 +488,30 @@
 
     <!-- Demographic Interactive Selector -->
     <div class="demographic-selector" role="tablist" id="demographicTabs">
-      <button class="demo-btn selected" data-group="students" id="btn-demo-students" title="Inspect college student food insecurity">College & University Students</button>
-      <button class="demo-btn" data-group="families" id="btn-demo-families" title="Inspect working families with children">Families with Children</button>
-      <button class="demo-btn" data-group="workers" id="btn-demo-workers" title="Inspect hourly & low-wage workers">Low-Wage Workers</button>
-      <button class="demo-btn" data-group="seniors" id="btn-demo-seniors" title="Inspect older adults and fixed incomes">Seniors & Fixed Incomes</button>
-      <button class="demo-btn" data-group="rural" id="btn-demo-rural" title="Inspect rural & isolated communities">Rural Populations</button>
+      <div class="demo-card active" data-group="students">
+        <img src="College & University students.jpeg" alt="Exhausted college student resting head on notebook during lecture" class="demo-card-img" width="2752" height="1536" loading="lazy">
+        <button class="demo-btn selected" data-group="students" id="btn-demo-students" title="Inspect college student food insecurity">College &amp; University Students</button>
+      </div>
+
+      <div class="demo-card" data-group="families">
+        <img src="families with children.jpeg" alt="Family sharing a humble meal with parents watching their children eat" class="demo-card-img" width="2752" height="1536" loading="lazy">
+        <button class="demo-btn" data-group="families" id="btn-demo-families" title="Inspect working families with children">Families with Children</button>
+      </div>
+
+      <div class="demo-card" data-group="workers">
+        <img src="low-wage workers.jpeg" alt="Low-wage worker in grocery aisle looking down at high price tags on fresh produce" class="demo-card-img" width="2752" height="1536" loading="lazy">
+        <button class="demo-btn" data-group="workers" id="btn-demo-workers" title="Inspect hourly &amp; low-wage workers">Low-Wage Workers</button>
+      </div>
+
+      <div class="demo-card" data-group="seniors">
+        <img src="Seniors & fixed incomes.jpeg" alt="Senior with walker looking into an empty refrigerator with Social Security notices nearby" class="demo-card-img" width="2752" height="1536" loading="lazy">
+        <button class="demo-btn" data-group="seniors" id="btn-demo-seniors" title="Inspect older adults and fixed incomes">Seniors &amp; Fixed Incomes</button>
+      </div>
+
+      <div class="demo-card" data-group="rural">
+        <img src="rural populations.jpeg" alt="Resident walking down rural highway shoulder carrying grocery bags from distant discount store" class="demo-card-img" width="2752" height="1536" loading="lazy">
+        <button class="demo-btn" data-group="rural" id="btn-demo-rural" title="Inspect rural &amp; isolated communities">Rural Populations</button>
+      </div>
     </div>
 
     <!-- Active Profile Display -->
@@ -572,10 +656,14 @@ const PROFILES = {
 };
 
 const demoButtons = document.querySelectorAll(".demo-btn");
+const demoCards = document.querySelectorAll(".demo-card");
+
 demoButtons.forEach(btn => {
   btn.addEventListener("click", () => {
     demoButtons.forEach(b => b.classList.remove("selected"));
+    demoCards.forEach(c => c.classList.remove("active"));
     btn.classList.add("selected");
+    btn.closest(".demo-card")?.classList.add("active");
     const data = PROFILES[btn.dataset.group];
     if (data) {
       document.getElementById("profileTitle").textContent = data.title;
@@ -584,6 +672,15 @@ demoButtons.forEach(btn => {
       document.getElementById("profileDrivers").textContent = data.drivers;
       document.getElementById("profileImpacts").textContent = data.impacts;
       document.getElementById("profileBarrier").textContent = data.barrier;
+    }
+  });
+});
+
+demoCards.forEach(card => {
+  card.addEventListener("click", (e) => {
+    if (!e.target.closest(".demo-btn")) {
+      const btn = card.querySelector(".demo-btn");
+      if (btn) btn.click();
     }
   });
 });
@@ -597,7 +694,9 @@ const HELP_INDEX = [
   { title: "How You Can Help", selector: "#btn-nav-help", text: "Take direct action with pantries and advocacy." },
   { title: "College Students Profile", selector: "#btn-demo-students", text: "View campus food insecurity insights." },
   { title: "Working Families Profile", selector: "#btn-demo-families", text: "Inspect family and child nutrition statistics." },
-  { title: "Seniors Profile", selector: "#btn-demo-seniors", text: "Review older adult and fixed-income challenges." }
+  { title: "Low-Wage Workers Profile", selector: "#btn-demo-workers", text: "Analyze wage stagnation and benefits cliff impacts." },
+  { title: "Seniors Profile", selector: "#btn-demo-seniors", text: "Review older adult and fixed-income challenges." },
+  { title: "Rural Communities Profile", selector: "#btn-demo-rural", text: "Explore geographic food deserts and isolated hunger." }
 ];
 
 const helpDialog = document.getElementById("helpDialog");
