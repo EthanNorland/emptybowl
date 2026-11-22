@@ -27,6 +27,7 @@ const FILES = [
   "./portrait-evelyn.svg",
   "./action-plan-clipboard.png",
   "./action-plan-clipboard.svg",
+  "./Root_Causes_of_Food_Insecurity3.png",
   "./manifest.webmanifest",
   "./icon.svg",
   "./icon-192.png",

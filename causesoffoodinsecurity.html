@@ -169,6 +169,102 @@
     overflow: hidden;
   }
 
+  .hero-card.hero-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+    gap: 32px;
+    align-items: center;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .hero-media {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+  }
+
+  .hero-img-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    display: block;
+    width: 100%;
+    cursor: zoom-in;
+    text-align: left;
+    border-radius: 9px 9px 0 0;
+    overflow: hidden;
+  }
+
+  .hero-infographic-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    border-radius: 9px 9px 0 0;
+    transition: transform 0.25s ease;
+  }
+
+  .hero-img-btn:hover .hero-infographic-img {
+    transform: scale(1.02);
+  }
+
+  .hero-media-caption {
+    padding: 9px 14px;
+    background: var(--panel);
+    border-top: 1px solid var(--border);
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-dim);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-media-caption span:first-child {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .zoom-hint {
+    color: var(--ink-muted);
+    font-size: 11px;
+  }
+
+  dialog.image-zoom-dialog {
+    max-width: 1180px;
+    width: 95vw;
+    padding: 20px;
+  }
+
+  .zoom-dialog-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+    margin-top: 8px;
+    background: #0f0e0c;
+    border-radius: 8px;
+    padding: 8px;
+  }
+
+  .zoom-dialog-body img {
+    max-width: 100%;
+    max-height: 80vh;
+    height: auto;
+    border-radius: 6px;
+    object-fit: contain;
+  }
+
   .hero-card::before {
     content: "";
     position: absolute;
@@ -375,6 +471,13 @@
     padding: 4px 10px; cursor: pointer; z-index: 10000;
   }
 
+  @media (max-width: 900px) {
+    .hero-card.hero-split {
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+  }
+
   @media (max-width: 768px) {
     header.site-header { padding: 10px; }
     .nav-container { flex-direction: column; align-items: stretch; gap: 8px; }
@@ -413,12 +516,30 @@
 
   <!-- Main Content -->
   <main>
-    <section class="hero-card">
-      <span class="hero-tag">Systemic Anatomy</span>
-      <h1 class="page-heading">The Interlocking Drivers of Hunger</h1>
-      <p class="hero-lead">
-        Hunger in wealthy nations is not a production shortfall; it is an economic and distribution failure. Food insecurity emerges where rising cost-of-living, stagnant wages, and spatial inequities collide.
-      </p>
+    <section class="hero-card hero-split">
+      <div class="hero-content">
+        <span class="hero-tag">Systemic Anatomy</span>
+        <h1 class="page-heading">The Interlocking Drivers of Hunger</h1>
+        <p class="hero-lead">
+          Hunger in wealthy nations is not a production shortfall; it is an economic and distribution failure. Food insecurity emerges where rising cost-of-living, stagnant wages, and spatial inequities collide.
+        </p>
+      </div>
+      <div class="hero-media">
+        <button type="button" class="hero-img-btn" id="btnZoomInfographic" title="Click to enlarge the root causes infographic">
+          <img
+            src="Root_Causes_of_Food_Insecurity3.png"
+            alt="Root Causes of Food Insecurity: Economic, Environmental, and Structural Drivers Infographic"
+            class="hero-infographic-img"
+            loading="eager"
+            width="2752"
+            height="1536"
+          />
+        </button>
+        <div class="hero-media-caption">
+          <span>Infographic: Root Causes of Hunger</span>
+          <span class="zoom-hint">Click to enlarge 🔍</span>
+        </div>
+      </div>
     </section>
 
     <!-- Interactive Budget Simulator -->
@@ -534,6 +655,17 @@
     </div>
   </dialog>
 
+  <!-- Image Zoom Dialog -->
+  <dialog id="imageZoomDialog" class="image-zoom-dialog">
+    <div class="dialog-header">
+      <h3>Root Causes of Food Insecurity: Economic, Environmental, and Structural Drivers</h3>
+      <button class="dialog-close" id="btnCloseZoom" title="Close dialog">&times;</button>
+    </div>
+    <div class="zoom-dialog-body">
+      <img src="Root_Causes_of_Food_Insecurity3.png" alt="Root Causes of Food Insecurity: Economic, Environmental, and Structural Drivers Infographic" />
+    </div>
+  </dialog>
+
 <script>
 "use strict";
 
@@ -592,6 +724,7 @@ const HELP_INDEX = [
   { title: "Causes of Food Insecurity", selector: "#btn-nav-causes", text: "Current systemic causes page." },
   { title: "Personal Stories", selector: "#btn-nav-stories", text: "Read first-person accounts and lived experiences." },
   { title: "How You Can Help", selector: "#btn-nav-help", text: "Take direct action with pantries and advocacy." },
+  { title: "Root Causes Infographic", selector: "#btnZoomInfographic", text: "Inspect the economic, environmental, and structural drivers infographic." },
   { title: "Budget Elasticity Simulator", selector: "#section-budget-sim", text: "Toggle unexpected expenses to simulate food budget shrinkage." },
   { title: "Living Wage Pillar", selector: ".cause-card:nth-child(1)", text: "Review income and wage stagnation issues." },
   { title: "Food Deserts Pillar", selector: ".cause-card:nth-child(2)", text: "Examine grocery redlining and access geography." }
@@ -637,6 +770,31 @@ document.getElementById("btnCloseHelp").onclick = () => helpDialog.close();
 const aboutDialog = document.getElementById("aboutDialog");
 document.getElementById("btn-about-toggle").onclick = () => aboutDialog.showModal();
 document.getElementById("btnCloseAbout").onclick = () => aboutDialog.close();
+
+// Infographic Lightbox Dialog
+const btnZoomInfographic = document.getElementById("btnZoomInfographic");
+const imageZoomDialog = document.getElementById("imageZoomDialog");
+const btnCloseZoom = document.getElementById("btnCloseZoom");
+
+if (btnZoomInfographic && imageZoomDialog) {
+  btnZoomInfographic.onclick = () => imageZoomDialog.showModal();
+}
+if (btnCloseZoom && imageZoomDialog) {
+  btnCloseZoom.onclick = () => imageZoomDialog.close();
+}
+if (imageZoomDialog) {
+  imageZoomDialog.addEventListener("click", (e) => {
+    const rect = imageZoomDialog.getBoundingClientRect();
+    if (
+      e.clientX < rect.left ||
+      e.clientX > rect.right ||
+      e.clientY < rect.top ||
+      e.clientY > rect.bottom
+    ) {
+      imageZoomDialog.close();
+    }
+  });
+}
 
 // Version Pill
 const versionChip = document.getElementById("versionChip");
