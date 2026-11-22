@@ -709,11 +709,12 @@
     gap: 10px;
   }
   .btn-quiz-skip {
-    background: transparent;
+    background: var(--surface-container);
     border: 1px solid var(--outline-variant);
-    color: var(--on-surface-variant);
-    padding: 6px 12px;
-    font-size: 12px;
+    color: var(--on-surface);
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 600;
     border-radius: 6px;
     cursor: pointer;
     font-family: var(--font-body);
@@ -721,8 +722,8 @@
   }
   .btn-quiz-skip:hover {
     color: var(--on-surface);
-    border-color: var(--outline);
-    background: var(--surface-container);
+    border-color: var(--primary);
+    background: var(--surface-container-high);
   }
   .quiz-close-x {
     background: none;
@@ -1609,8 +1610,8 @@
         </div>
       </div>
       <div class="quiz-header-actions">
-        <button type="button" class="btn-quiz-skip" id="btnSkipQuiz" title="Dismiss quiz and explore the website">Skip for now</button>
-        <button type="button" class="quiz-close-x" id="btnCloseQuiz" title="Close quiz dialog" aria-label="Close quiz dialog">&times;</button>
+        <button type="button" class="btn-quiz-skip" id="btnSkipQuiz" title="Exit quiz and browse Empty Bowl">Exit Quiz</button>
+        <button type="button" class="quiz-close-x" id="btnCloseQuiz" title="Exit quiz" aria-label="Exit quiz">&times;</button>
       </div>
     </div>
 
@@ -1651,10 +1652,15 @@
                 &check;
               </button>
             </div>
-            <button type="button" class="btn btn-ghost" id="btn-reset-quiz" onclick="handleResetClick(this)">
-              &#x21ba;
-              Reset Quiz
-            </button>
+            <div class="nav-group" style="gap: 8px;">
+              <button type="button" class="btn btn-ghost" id="btn-reset-quiz" onclick="handleResetClick(this)">
+                &#x21ba;
+                Reset Quiz
+              </button>
+              <button type="button" class="btn btn-ghost" id="btn-card-exit" onclick="dismissQuiz()" title="Exit quiz and browse Empty Bowl">
+                Exit Quiz &times;
+              </button>
+            </div>
           </div>
         </section>
 
@@ -1690,6 +1696,9 @@
                 Retake Quiz
               </button>
             </div>
+            <button type="button" class="btn btn-primary" onclick="dismissQuiz()" style="background: var(--primary);">
+              Exit to Empty Bowl &rarr;
+            </button>
           </div>
 
           <div class="review-list" id="summary-review-list"></div>
@@ -1863,7 +1872,7 @@
     <!-- Modal Footer -->
     <div class="quiz-modal-footer">
       <span>Progress is automatically saved to your browser. Re-open anytime via <strong>Quiz 📝</strong> in the header.</span>
-      <button type="button" class="btn-quiz-skip" id="btnCloseQuizFooter">Browse Empty Bowl</button>
+      <button type="button" class="btn-quiz-skip" id="btnCloseQuizFooter">Exit Quiz & Browse Empty Bowl &rarr;</button>
     </div>
   </dialog>
 
@@ -2657,9 +2666,6 @@ function openQuiz() {
 }
 
 function dismissQuiz() {
-  try {
-    sessionStorage.setItem("emptybowl_quiz_dismissed", "1");
-  } catch (e) {}
   if (quizDialog && quizDialog.open) {
     quizDialog.close();
   }
@@ -2678,7 +2684,7 @@ if (btnHeroQuiz) {
 
 if (quizDialog) {
   quizDialog.addEventListener("cancel", () => {
-    try { sessionStorage.setItem("emptybowl_quiz_dismissed", "1"); } catch (e) {}
+    // Native ESC key closes dialog cleanly
   });
 
   quizDialog.addEventListener("click", (e) => {
@@ -2710,19 +2716,43 @@ document.addEventListener("keydown", (e) => {
 // Initialize Harvest Quiz
 initHarvestQuiz();
 
-// Auto-popup for visitors on page load if not already dismissed in this session
-window.addEventListener("DOMContentLoaded", () => {
-  let dismissed = false;
+// Always load the quiz when a user goes to the Empty Bowl page
+function loadQuizOnEntry() {
   try {
-    dismissed = sessionStorage.getItem("emptybowl_quiz_dismissed") === "1";
+    sessionStorage.removeItem("emptybowl_quiz_dismissed");
   } catch (e) {}
+  openQuiz();
+}
 
-  if (!dismissed) {
-    setTimeout(() => {
-      openQuiz();
-    }, 450);
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", loadQuizOnEntry);
+} else {
+  loadQuizOnEntry();
+}
+
+window.addEventListener("pageshow", () => {
+  if (!quizDialog || !quizDialog.open) {
+    loadQuizOnEntry();
   }
 });
+
+// Also trigger if the user clicks the Empty Bowl nav brand or button while on the page
+const navBrandLink = document.querySelector('.nav-brand');
+const navHomeBtn = document.querySelector('.nav-destinations a[href="index.html"]');
+
+if (navBrandLink) {
+  navBrandLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    openQuiz();
+  });
+}
+
+if (navHomeBtn) {
+  navHomeBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    openQuiz();
+  });
+}
 
 // Markup context hook for local review tool
 window.__markupContext = () => ({

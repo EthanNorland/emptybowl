@@ -18,7 +18,14 @@
 - **Interactive Food Insecurity Harvest Bowl Quiz (10 Questions & Pottery Bowl):**
   - Integrated the 10-question Harvest Bowl Quiz modal directly into [`index.html`](index.html), replaced from `/Users/ethannorland/Desktop/food insecurity website/10 question quiz.html`.
   - Also deployed as standalone quiz pages at [`quiz.html`](quiz.html) and [`10 question quiz.html`](10%20question%20quiz.html) with universal top navigation linking across all 5 main pages, and updated [`Food_Insecurity_Quiz.html`](Food_Insecurity_Quiz.html) to automatically redirect to `quiz.html`.
-  - Automatically pops up on first visit to the Empty Bowl home page via `showModal()`, with immediate, user-friendly dismissal controls: top-right `&times;` button, "Skip for now" header button, "Browse Empty Bowl" footer button, backdrop tap, and Escape key handling (`sessionStorage.getItem("emptybowl_quiz_dismissed")`).
+  - Automatically loads whenever a user visits or navigates to the Empty Bowl home page (`index.html`), with immediate and prominent exit controls if they choose not to take it:
+    - Dedicated **"Exit Quiz"** button in the modal header
+    - Top-right close **`&times;`** button
+    - **"Exit Quiz &times;"** button directly inside the question card navigation
+    - **"Exit Quiz & Browse Empty Bowl &rarr;"** button in the modal footer
+    - **"Exit to Empty Bowl &rarr;"** button on the final summary view
+    - Backdrop tap/click outside the dialog and native <kbd>Esc</kbd> key support
+    - Re-launch controls remain accessible at all times via the header `Quiz 📝` button and the hero section callout banner.
   - Permanent re-launch controls: added a `Quiz 📝` button in the site header actions (`#btn-quiz-toggle`) and an "Interactive Knowledge Check" callout card (`#heroQuizBanner`) in the hero card.
   - 10 evidence-based questions covering critical food insecurity concepts: 1 in 8 Americans, SNAP nutrition impact, working families & living wages, forced household trade-offs, college food security, pediatric development, health disparities, older adults & fixed incomes, college hunger, and structural roots of hunger.
   - **Dynamic Interactive Harvest Bowl SVG:** Ceramic pottery bowl that actively fills with fresh food ingredients (Apple, Bread, Carrot, Broccoli, Grain, Tomato, Avocado, Corn, Beans, Greens) as correct answers are selected, complete with dropping keyframe physics, bowl rim reflection, stoneware depth shading, dynamic capacity progress bar (0–100%), real-time status chips, and contextual feedback messages.
