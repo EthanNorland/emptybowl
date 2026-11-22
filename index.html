@@ -1351,63 +1351,6 @@
     color: var(--primary);
   }
 
-  /* Hero Banner Launcher */
-  .quiz-hero-banner {
-    background: linear-gradient(135deg, rgba(85, 137, 99, 0.16) 0%, rgba(229, 169, 59, 0.1) 100%);
-    border: 1px solid var(--accent);
-    border-radius: 8px;
-    padding: 16px 20px;
-    margin-top: 18px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-  .quiz-hero-info {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-  .quiz-hero-pill {
-    font-family: var(--mono);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--accent);
-    font-weight: 600;
-  }
-  .quiz-hero-title {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--ink);
-    margin: 0;
-  }
-  .quiz-hero-desc {
-    font-size: 13px;
-    color: var(--ink-dim);
-    margin: 0;
-    max-width: 580px;
-    line-height: 1.45;
-  }
-  .btn-quiz-cta {
-    background: var(--accent);
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    padding: 10px 18px;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: background 0.15s ease, transform 0.12s ease;
-    font-family: var(--sans);
-  }
-  .btn-quiz-cta:hover {
-    background: var(--accent-hover);
-    transform: translateY(-1px);
-  }
-
   /* Responsive Rules */
   @media (max-width: 768px) {
 
@@ -1479,15 +1422,6 @@
     }
     #quizDialog .ingredient-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-    .quiz-hero-banner {
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 14px;
-    }
-    .btn-quiz-cta {
-      width: 100%;
-      text-align: center;
     }
     .quiz-modal-footer {
       padding: 12px 14px;
@@ -1563,18 +1497,6 @@
       <div class="definition-box">
         <strong>Official Definition:</strong> "A lack of consistent access to enough food for every person in a household to live an active, healthy life."
         <span class="definition-citation">Source: United States Department of Agriculture (USDA) Economic Research Service</span>
-      </div>
-
-      <!-- Quiz Banner Launcher -->
-      <div class="quiz-hero-banner" id="heroQuizBanner">
-        <div class="quiz-hero-info">
-          <span class="quiz-hero-pill">Interactive Knowledge Check · 12 Questions</span>
-          <h3 class="quiz-hero-title">Test Your Understanding: The 10-Question Food Insecurity &amp; Harvest Bowl Quiz</h3>
-          <p class="quiz-hero-desc">
-            Explore 10 evidence-based questions on definitions, nutrition security, root causes, and clinical screening. Earn fresh harvest ingredients to fill the interactive Empty Bowl as you answer correctly!
-          </p>
-        </div>
-        <button type="button" class="btn-quiz-cta" id="btnHeroQuiz" title="Open the 12-question quiz modal">Take the Quiz 📝</button>
       </div>
     </section>
 
@@ -1849,31 +1771,42 @@
               </g>
 
               <!-- TIER 2: Middle Tier (Resting directly on Tier 1 pieces) -->
-              <!-- Q5: Wheat Grain Sheaf (tall in center, emerging from behind bread/avocado) -->
+              <!-- Q5: Wheat Grain Sheaf (tall in center, stalks firmly rooted on top of Bread loaf) -->
               <g class="food-item" id="food-4">
-                <g transform="translate(256, 224)">
-                  <path d="M 0,45 L 0,-28" stroke="#997022" stroke-width="3.5" stroke-linecap="round" />
-                  <path d="M -15,40 L -23,-16" stroke="#997022" stroke-width="3" stroke-linecap="round" />
-                  <path d="M 15,40 L 23,-16" stroke="#997022" stroke-width="3" stroke-linecap="round" />
-                  <ellipse cx="-9" cy="-19" rx="7" ry="11" fill="#d9aa42" transform="rotate(-24 -9 -19)" />
-                  <ellipse cx="9" cy="-19" rx="7" ry="11" fill="#d9aa42" transform="rotate(24 9 -19)" />
-                  <ellipse cx="-10" cy="-3" rx="7" ry="11" fill="#d9aa42" transform="rotate(-24 -10 -3)" />
-                  <ellipse cx="10" cy="-3" rx="7" ry="11" fill="#d9aa42" transform="rotate(24 10 -3)" />
-                  <ellipse cx="0" cy="-32" rx="7" ry="11" fill="#d9aa42" />
-                  <ellipse cx="-23" cy="-13" rx="6" ry="9" fill="#d9aa42" transform="rotate(-30 -23 -13)" />
-                  <ellipse cx="23" cy="-13" rx="6" ry="9" fill="#d9aa42" transform="rotate(30 23 -13)" />
+                <g transform="translate(258, 250)">
+                  <!-- Base sheaf stalks rooted into bread -->
+                  <path d="M 0,58 L 0,-28" stroke="#997022" stroke-width="4" stroke-linecap="round" />
+                  <path d="M -14,54 L -28,-14" stroke="#997022" stroke-width="3.5" stroke-linecap="round" />
+                  <path d="M 14,54 L 28,-14" stroke="#997022" stroke-width="3.5" stroke-linecap="round" />
+                  <!-- Wheat blades filling lateral space towards broccoli and carrot -->
+                  <path d="M -8,38 Q -30,22 -36,2" fill="none" stroke="#b08226" stroke-width="2.5" stroke-linecap="round" />
+                  <path d="M 8,38 Q 30,22 36,2" fill="none" stroke="#b08226" stroke-width="2.5" stroke-linecap="round" />
+                  <!-- Golden wheat ears -->
+                  <ellipse cx="-10" cy="-20" rx="7.5" ry="11.5" fill="#d9aa42" transform="rotate(-24 -10 -20)" />
+                  <ellipse cx="10" cy="-20" rx="7.5" ry="11.5" fill="#d9aa42" transform="rotate(24 10 -20)" />
+                  <ellipse cx="-12" cy="-4" rx="7.5" ry="11.5" fill="#d9aa42" transform="rotate(-24 -12 -4)" />
+                  <ellipse cx="12" cy="-4" rx="7.5" ry="11.5" fill="#d9aa42" transform="rotate(24 12 -4)" />
+                  <ellipse cx="0" cy="-33" rx="8" ry="12.5" fill="#e5b84c" />
+                  <ellipse cx="-25" cy="-14" rx="6.5" ry="10" fill="#d9aa42" transform="rotate(-30 -25 -14)" />
+                  <ellipse cx="25" cy="-14" rx="6.5" ry="10" fill="#d9aa42" transform="rotate(30 25 -14)" />
+                  <!-- Lower ears resting on bread shoulder -->
+                  <ellipse cx="-14" cy="12" rx="7" ry="10.5" fill="#cfa038" transform="rotate(-22 -14 12)" />
+                  <ellipse cx="14" cy="12" rx="7" ry="10.5" fill="#cfa038" transform="rotate(22 14 12)" />
+                  <!-- Golden sheaf wrap band resting on bread -->
+                  <rect x="-11" y="27" width="22" height="7" rx="3.5" fill="#a0721c" />
                 </g>
               </g>
 
               <!-- Q4: Broccoli Crown (rests directly on top of Apple & Bread left side) -->
               <g class="food-item" id="food-3">
-                <g transform="translate(186, 256)">
-                  <path d="M -8,8 L -6,28 L 6,28 L 8,8 Z" fill="#40693a" />
-                  <circle cx="-16" cy="-3" r="16" fill="#42783c" />
-                  <circle cx="16" cy="-3" r="16" fill="#42783c" />
-                  <circle cx="0" cy="-16" r="18" fill="#4c8c58" />
-                  <circle cx="-8" cy="5" r="13" fill="#2f5e39" />
-                  <circle cx="9" cy="5" r="13" fill="#42783c" />
+                <g transform="translate(196, 270)">
+                  <path d="M -8,8 L -6,34 L 6,34 L 8,8 Z" fill="#325a2b" />
+                  <circle cx="-18" cy="-2" r="16" fill="#3c6e37" />
+                  <circle cx="16" cy="-2" r="16" fill="#42783c" />
+                  <circle cx="0" cy="-15" r="19" fill="#4c8c58" />
+                  <circle cx="-9" cy="7" r="14" fill="#2d5528" />
+                  <circle cx="9" cy="7" r="14" fill="#3c6e37" />
+                  <circle cx="-23" cy="5" r="11" fill="#375d31" />
                 </g>
               </g>
 
@@ -1908,7 +1841,7 @@
 
               <!-- Q10: Leafy Greens (rests directly across Broccoli & Avocado) -->
               <g class="food-item" id="food-9">
-                <g transform="translate(196, 215)">
+                <g transform="translate(196, 228)">
                   <path d="M -22,15 C -30,-11 -8,-33 15,-25 C 26,-8 15,19 -22,15 Z" fill="#3a7246" />
                   <path d="M -19,11 Q -1,-4 10,-20" fill="none" stroke="#7eb88b" stroke-width="2.8" stroke-linecap="round" />
                   <path d="M -3,19 C 8,-8 33,-22 41,-8 C 41,14 19,25 -3,19 Z" fill="#4c8c58" />
@@ -2771,7 +2704,6 @@ const btnNeverShowHeader = document.getElementById("btnNeverShowHeader");
 const btnNeverShowFooter = document.getElementById("btnNeverShowFooter");
 const chkNeverShowAgain = document.getElementById("chkNeverShowAgain");
 const btnQuizToggle = document.getElementById("btn-quiz-toggle");
-const btnHeroQuiz = document.getElementById("btnHeroQuiz");
 
 function openQuiz() {
   if (quizDialog && !quizDialog.open) {
@@ -2825,9 +2757,6 @@ if (chkNeverShowAgain) {
 
 if (btnQuizToggle) {
   btnQuizToggle.onclick = openQuiz;
-}
-if (btnHeroQuiz) {
-  btnHeroQuiz.onclick = openQuiz;
 }
 
 if (quizDialog) {
