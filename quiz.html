@@ -571,10 +571,7 @@
       transform: translateY(0);
     }
     .food-item.is-dropping {
-      animation: dropIntoBowl 680ms cubic-bezier(0.34, 1.25, 0.64, 1) forwards;
-    }
-    .bowl-group.is-catching {
-      animation: bowlCatch 500ms ease-out;
+      animation: dropIntoBowl 400ms cubic-bezier(0.4, 0, 0.8, 0.6) forwards;
     }
 
     /* Progress Bar inside Bowl Tracker */
@@ -745,30 +742,19 @@
       color: var(--secondary);
     }
 
-    /* Keyframes */
+    /* Keyframes: Solid gravity drop with zero bounce */
     @keyframes dropIntoBowl {
       0% {
         opacity: 0;
-        transform: translateY(-170px) scale(0.8) rotate(-10deg);
+        transform: translateY(-185px);
       }
-      60% {
+      15% {
         opacity: 1;
-        transform: translateY(8px) scale(1.04) rotate(2deg);
-      }
-      82% {
-        transform: translateY(-3px) scale(0.99);
       }
       100% {
         opacity: 1;
-        transform: translateY(0) scale(1) rotate(0deg);
+        transform: translateY(0);
       }
-    }
-
-    @keyframes bowlCatch {
-      0% { transform: translateY(0); }
-      35% { transform: translateY(4.5px); }
-      70% { transform: translateY(-1.5px); }
-      100% { transform: translateY(0); }
     }
 
     @keyframes fadeSlideUp {
@@ -1500,6 +1486,46 @@
       }
     }
 
+    const FOOD_PHYSICS = [
+      // 0: Apple (bottom-left floor)
+      { under: [], stacked: "translate(208, 308)", bottom: "translate(208, 308)" },
+      // 1: Bread (bottom-center floor)
+      { under: [], stacked: "translate(268, 314)", bottom: "translate(268, 314)" },
+      // 2: Carrot (bottom-right floor)
+      { under: [], stacked: "translate(322, 304) rotate(24)", bottom: "translate(322, 304) rotate(24)" },
+      // 3: Broccoli (under: Apple 0)
+      { under: [0], stacked: "translate(196, 270)", bottom: "translate(196, 306)" },
+      // 4: Wheat Grain (under: Bread 1)
+      { under: [1], stacked: "translate(258, 250)", bottom: "translate(258, 290)" },
+      // 5: Ripe Tomato (under: Bread 1 or Carrot 2)
+      { under: [1, 2], stacked: "translate(305, 258)", bottom: "translate(305, 304)" },
+      // 6: Fresh Avocado (under: Apple 0 or Bread 1)
+      { under: [0, 1], stacked: "translate(236, 256) rotate(-8)", bottom: "translate(236, 304) rotate(-8)" },
+      // 7: Sweet Corn (under: Tomato 5 or Carrot 2)
+      { under: [5, 2], stacked: "translate(328, 222) rotate(18)", stackedAlt: "translate(328, 258) rotate(18)", bottom: "translate(328, 294) rotate(18)" },
+      // 8: Protein Beans (under: Bread 1, Avocado 6, or Tomato 5)
+      { under: [1, 6, 5], stacked: "translate(262, 280)", bottom: "translate(262, 314)" },
+      // 9: Leafy Greens (under: Broccoli 3 or Apple 0)
+      { under: [3, 0], stacked: "translate(196, 228)", stackedAlt: "translate(196, 268)", bottom: "translate(196, 304)" }
+    ];
+
+    function getFoodTransform(i, earnedSet) {
+      const conf = FOOD_PHYSICS[i];
+      if (!conf) return null;
+      if (!conf.under || conf.under.length === 0) return conf.bottom;
+      if (i === 7) {
+        if (earnedSet.has(5)) return conf.stacked;
+        if (earnedSet.has(2)) return conf.stackedAlt;
+        return conf.bottom;
+      }
+      if (i === 9) {
+        if (earnedSet.has(3)) return conf.stacked;
+        if (earnedSet.has(0)) return conf.stackedAlt;
+        return conf.bottom;
+      }
+      return conf.under.some(u => earnedSet.has(u)) ? conf.stacked : conf.bottom;
+    }
+
     function renderFoodBowl(animateId) {
       const earned = getEarnedCount();
       const answered = getAnsweredCount();
@@ -1518,29 +1544,41 @@
       if (meterFill) meterFill.style.width = `${pct}%`;
       if (progressBar) progressBar.setAttribute('aria-valuenow', String(earned));
 
+      const earnedSet = new Set();
+      for (let i = 0; i < QUIZ_QUESTIONS.length; i += 1) {
+        const q = QUIZ_QUESTIONS[i];
+        if (quizState.answers[q.id] === q.correctIndex) {
+          earnedSet.add(i);
+        }
+      }
+
       for (let i = 0; i < QUIZ_QUESTIONS.length; i += 1) {
         const q = QUIZ_QUESTIONS[i];
         const foodEl = document.getElementById(`food-${i}`);
         if (!foodEl) continue;
 
-        const isCorrect = quizState.answers[q.id] === q.correctIndex;
+        const innerG = foodEl.querySelector('g');
+        if (innerG) {
+          const targetTransform = getFoodTransform(i, earnedSet);
+          if (targetTransform) innerG.setAttribute('transform', targetTransform);
+        }
+
+        const isCorrect = earnedSet.has(i);
         foodEl.classList.remove('is-dropping', 'is-in-bowl');
 
         if (isCorrect) {
           if (animateId === q.id) {
-            // Trigger fresh drop animation
+            // Trigger fresh drop animation without bounce
             void foodEl.getBoundingClientRect();
             foodEl.classList.add('is-dropping');
+            setTimeout(() => {
+              foodEl.classList.remove('is-dropping');
+              foodEl.classList.add('is-in-bowl');
+            }, 420);
           } else {
             foodEl.classList.add('is-in-bowl');
           }
         }
-      }
-
-      if (animateId !== null && bowlGroup) {
-        bowlGroup.classList.remove('is-catching');
-        void bowlGroup.getBoundingClientRect();
-        bowlGroup.classList.add('is-catching');
       }
 
       renderIngredientChips();
