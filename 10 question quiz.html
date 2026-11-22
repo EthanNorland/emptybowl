@@ -1,0 +1,1733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="artifact-type" content="tool">
+  <meta name="design-style" content="canopy">
+  <title>Food Insecurity Quiz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..600&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@1.43.0/dist/umd/lucide.min.js"></script>
+  <style>
+    :root {
+      color-scheme: light;
+
+      /* Page and surfaces (earth strata) */
+      --background: #faf6ef;
+      --surface-container-low: #f0eae0;
+      --surface-container: #e8e0d2;
+      --surface-container-high: #ddd3c2;
+
+      /* Ink */
+      --on-surface: #2a302b;
+      --on-surface-variant: #4a524b;
+
+      /* Lines */
+      --outline: #737872;
+      --outline-variant: #cbc5b8;
+
+      /* Accents */
+      --primary: #366948;
+      --on-primary: #ffffff;
+      --primary-container: #d8efe0;
+      --on-primary-container: #1f4d30;
+      --secondary: #5c635c;
+      --tertiary: #8f5822;
+      --tertiary-container: #f2d4a7;
+      --on-tertiary-container: #6e3f0c;
+      --error: #b83230;
+      --on-error: #ffffff;
+      --error-container: #f9e1e0;
+      --on-error-container: #7c1d1b;
+
+      /* Data series */
+      --data-1: #366948;
+      --data-2: #8f5822;
+      --data-3: #a85438;
+      --data-4: #4b6b78;
+      --data-context: #b5b0a3;
+
+      /* Semantic & Focus */
+      --positive: #366948;
+      --warning: #8f5822;
+      --focus: #366948;
+
+      /* Bowl & Food SVG Palette */
+      --bowl-rim: #b89f80;
+      --bowl-inner: #ede2d2;
+      --bowl-inner-shade: #ded0bc;
+      --bowl-outer: #d6c5ad;
+      --bowl-outer-shade: #c1ae93;
+      --bowl-foot: #a89275;
+      --bowl-shadow: rgb(42 48 43 / 0.14);
+      --food-apple: #c8433a;
+      --food-apple-hi: #e26a62;
+      --food-stem: #6b4423;
+      --food-leaf: #4c8c58;
+      --food-leaf-dark: #2f5e39;
+      --food-bread: #d79c59;
+      --food-crust: #9b5c22;
+      --food-carrot: #df7426;
+      --food-carrot-shade: #bc5714;
+      --food-broccoli: #377746;
+      --food-broccoli-stem: #84b276;
+      --food-grain: #d9a74a;
+      --food-grain-shade: #b48129;
+      --food-tomato: #d63f33;
+      --food-avocado-skin: #2d5533;
+      --food-avocado-flesh: #b5ce6f;
+      --food-avocado-pit: #7a4b29;
+      --food-corn: #eec23f;
+      --food-corn-husk: #689b55;
+      --food-bean: #8d4932;
+      --food-bean-dark: #5f2d1e;
+      --food-greens: #438a52;
+      --food-greens-vein: #9bd09c;
+
+      /* Fonts */
+      --font-headline: 'Literata', serif;
+      --font-body: 'Nunito Sans', sans-serif;
+      --font-label: 'Geist Mono', monospace;
+
+      /* Type scale (Focused Tool) */
+      --display-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.35rem);
+      --headline-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.55rem);
+      --subhead-size: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+      --body-size: clamp(0.95rem, 0.92rem + 0.15vw, 1.03125rem);
+      --label-size: 0.75rem;
+
+      /* Shape */
+      --rounded: 0.625rem;
+      --rounded-lg: 1rem;
+      --rounded-full: 9999px;
+
+      /* Spacing scale (4pt base) */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+
+      /* Motion */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-micro: 120ms;
+      --dur-short: 220ms;
+      --dur-long: 420ms;
+
+      /* Effects */
+      --shadow-soft: 0 4px 20px rgb(42 48 43 / 0.06);
+      --shadow-soft-hover: 0 8px 28px rgb(42 48 43 / 0.09);
+      --border-soft: 1px solid rgb(203 197 184 / 0.65);
+      --focus-glow: 0 0 0 3px var(--focus);
+    }
+
+    /* Base reset */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      overflow-x: clip;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: 1.62;
+      -webkit-font-smoothing: antialiased;
+    }
+    header { position: static !important; }
+    button, input, select, textarea { font-family: inherit; }
+
+    /* Focus rings */
+    :focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .page-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-lg);
+      padding: var(--space-lg);
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    .page-grid * { min-width: 0; }
+
+    /* Header */
+    .quiz-header {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      padding-bottom: var(--space-md);
+      border-bottom: var(--border-soft);
+    }
+    .kicker {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: var(--label-size);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--tertiary);
+      margin: 0;
+    }
+    .quiz-title {
+      font-family: var(--font-headline);
+      font-weight: 600;
+      font-size: var(--display-size);
+      line-height: 1.12;
+      letter-spacing: -0.015em;
+      color: var(--on-surface);
+      margin: 0;
+    }
+    .quiz-subtitle {
+      font-size: var(--subhead-size);
+      color: var(--on-surface-variant);
+      max-width: 65ch;
+      margin: 0;
+    }
+
+    /* Canopy 10-step Almanac Rhythm Strip */
+    .almanac-strip {
+      background: var(--surface-container-low);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-sm) var(--space-md);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+    }
+    .almanac-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--secondary);
+    }
+    .almanac-cells {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+    .almanac-cell {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      min-width: 44px;
+      min-height: 44px;
+      padding: 0 var(--space-xs);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--rounded);
+      border: 2px solid transparent;
+      background: var(--surface-container-high);
+      color: var(--secondary);
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-out), transform var(--dur-micro) var(--ease-out);
+    }
+    .almanac-cell:hover {
+      background: var(--surface-container);
+      transform: translateY(-1px);
+    }
+    .almanac-cell.is-current {
+      border-color: var(--tertiary);
+      background: var(--tertiary-container);
+      color: var(--on-tertiary-container);
+    }
+    .almanac-cell.is-correct {
+      background: var(--primary);
+      color: var(--on-primary);
+    }
+    .almanac-cell.is-incorrect {
+      background: var(--error-container);
+      color: var(--on-error-container);
+      border-color: var(--error);
+    }
+    .almanac-cell.is-current.is-correct {
+      box-shadow: 0 0 0 2px var(--tertiary);
+    }
+    .almanac-cell.is-current.is-incorrect {
+      box-shadow: 0 0 0 2px var(--tertiary);
+    }
+
+    /* Main Workspace Layout */
+    .workspace-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) minmax(300px, 0.95fr);
+      gap: var(--space-lg);
+      align-items: start;
+    }
+
+    /* Question Card */
+    .card {
+      background: var(--surface-container-low);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      box-shadow: var(--shadow-soft);
+    }
+    .card.is-leaf-highlight {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+
+    .question-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-md);
+    }
+    .question-topic-badge {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--rounded);
+      background: var(--tertiary-container);
+      color: var(--on-tertiary-container);
+    }
+    .question-reward-tag {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--secondary);
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+    .question-prompt {
+      font-family: var(--font-headline);
+      font-weight: 600;
+      font-size: var(--headline-size);
+      line-height: 1.25;
+      color: var(--on-surface);
+      margin: 0 0 var(--space-lg) 0;
+      max-width: 65ch;
+    }
+
+    /* Options List */
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    .option-btn {
+      width: 100%;
+      min-height: 52px;
+      text-align: left;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: var(--space-md);
+      padding: var(--space-md);
+      border-radius: var(--rounded);
+      border: 2px solid transparent;
+      background: var(--background);
+      color: var(--on-surface);
+      cursor: pointer;
+      transition: background-color var(--dur-short) var(--ease-out),
+                  transform var(--dur-micro) var(--ease-out),
+                  box-shadow var(--dur-short) var(--ease-out);
+    }
+    .option-btn:hover:not(:disabled) {
+      background: var(--surface-container);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-soft);
+    }
+    .option-btn:active:not(:disabled) {
+      transform: translateY(0);
+    }
+    .option-btn:disabled {
+      cursor: default;
+    }
+    .option-letter {
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: var(--label-size);
+      width: 30px;
+      height: 30px;
+      border-radius: var(--rounded);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--surface-container);
+      color: var(--on-surface);
+      flex-shrink: 0;
+    }
+    .option-text {
+      font-size: var(--body-size);
+      line-height: 1.5;
+    }
+    .option-status {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+
+    /* Option Verification States */
+    .option-btn.is-correct-choice {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      box-shadow: inset 0 0 0 2px var(--primary);
+    }
+    .option-btn.is-correct-choice .option-letter {
+      background: var(--primary);
+      color: var(--on-primary);
+    }
+    .option-btn.is-wrong-choice {
+      background: var(--error-container);
+      color: var(--on-error-container);
+      box-shadow: inset 0 0 0 2px var(--error);
+    }
+    .option-btn.is-wrong-choice .option-letter {
+      background: var(--error);
+      color: var(--on-error);
+    }
+    .option-btn.is-dimmed {
+      opacity: 0.68;
+    }
+
+    /* Immediate Explanation Drawer */
+    .explanation-box {
+      margin-top: var(--space-lg);
+      padding: var(--space-md) var(--space-lg);
+      border-radius: var(--rounded);
+      background: var(--background);
+      border-left: 4px solid var(--primary);
+      animation: fadeSlideUp var(--dur-long) var(--ease-out);
+    }
+    .explanation-box.is-incorrect {
+      border-left-color: var(--error);
+    }
+    .explanation-heading {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-family: var(--font-headline);
+      font-weight: 600;
+      font-size: var(--subhead-size);
+      margin: 0 0 var(--space-xs) 0;
+      color: var(--on-primary-container);
+    }
+    .explanation-box.is-incorrect .explanation-heading {
+      color: var(--on-error-container);
+    }
+    .explanation-body {
+      margin: 0 0 var(--space-sm) 0;
+      color: var(--on-surface);
+      max-width: 65ch;
+      line-height: 1.65;
+    }
+    .explanation-source {
+      margin: 0;
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--secondary);
+    }
+
+    /* Card Navigation Footer */
+    .nav-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      margin-top: var(--space-lg);
+      padding-top: var(--space-md);
+      border-top: var(--border-soft);
+    }
+    .nav-group {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+    .btn {
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded);
+      border: 0;
+      font-weight: 700;
+      font-size: var(--body-size);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      transition: background-color var(--dur-micro) var(--ease-out),
+                  transform var(--dur-micro) var(--ease-out);
+    }
+    .btn:hover:not(:disabled) {
+      transform: translateY(-1px);
+    }
+    .btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: var(--on-primary);
+    }
+    .btn-primary:hover:not(:disabled) {
+      background: var(--on-primary-container);
+    }
+    .btn-secondary {
+      background: var(--surface-container);
+      color: var(--on-surface);
+    }
+    .btn-secondary:hover:not(:disabled) {
+      background: var(--surface-container-high);
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--secondary);
+    }
+    .btn-ghost:hover:not(:disabled) {
+      background: var(--surface-container);
+      color: var(--on-surface);
+    }
+    .btn-ghost[data-armed="true"] {
+      background: var(--tertiary-container);
+      color: var(--on-tertiary-container);
+    }
+
+    /* Food Bowl Progress Tracker Widget */
+    .bowl-panel {
+      position: sticky;
+      top: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+    .bowl-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: var(--space-sm);
+    }
+    .bowl-score-wrap {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-xs);
+    }
+    .bowl-score-num {
+      font-family: var(--font-headline);
+      font-weight: 600;
+      font-size: 2.25rem;
+      line-height: 1;
+      font-variant-numeric: lining-nums tabular-nums;
+      color: var(--primary);
+    }
+    .bowl-score-denom {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--secondary);
+    }
+    .bowl-answered-pill {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--rounded-full);
+      background: var(--surface-container);
+      color: var(--on-surface-variant);
+    }
+
+    /* SVG Bowl Stage */
+    .bowl-stage {
+      position: relative;
+      background: var(--background);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-sm);
+      overflow: hidden;
+    }
+    .bowl-svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 240px;
+    }
+
+    /* Food Item Drop Animations */
+    .food-item {
+      opacity: 0;
+      transform-box: fill-box;
+      transform-origin: center;
+      pointer-events: none;
+    }
+    .food-item.is-in-bowl {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    .food-item.is-dropping {
+      animation: dropIntoBowl 680ms var(--ease-out) forwards;
+    }
+    .bowl-group {
+      transform-box: fill-box;
+      transform-origin: center bottom;
+    }
+    .bowl-group.is-catching {
+      animation: bowlCatch 480ms var(--ease-out);
+    }
+
+    /* Progress Bar inside Bowl Tracker */
+    .bowl-meter-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .bowl-meter-label-row {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--secondary);
+    }
+    .bowl-meter-track {
+      height: 10px;
+      border-radius: var(--rounded-full);
+      background: var(--surface-container-high);
+      overflow: hidden;
+    }
+    .bowl-meter-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: var(--rounded-full);
+      background: var(--primary);
+      transition: width var(--dur-long) var(--ease-out);
+    }
+
+    /* Live Feedback Box in Bowl Tracker */
+    .bowl-feedback {
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded);
+      background: var(--surface-container);
+      color: var(--on-surface);
+      font-size: 0.9rem;
+      line-height: 1.5;
+      min-height: 54px;
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .bowl-feedback.is-positive {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+    .bowl-feedback.is-missed {
+      background: var(--tertiary-container);
+      color: var(--on-tertiary-container);
+    }
+
+    /* Ingredient Chip Grid */
+    .ingredient-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-sm);
+    }
+    .ingredient-chip {
+      font-family: var(--font-label);
+      font-size: 0.6875rem;
+      min-height: 44px;
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--rounded);
+      border: 1px solid transparent;
+      background: var(--surface-container);
+      color: var(--secondary);
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-xs);
+      transition: background-color var(--dur-micro) var(--ease-out);
+    }
+    .ingredient-chip:hover {
+      background: var(--surface-container-high);
+    }
+    .ingredient-chip.is-earned {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      font-weight: 600;
+    }
+    .ingredient-chip.is-missed {
+      background: var(--error-container);
+      color: var(--on-error-container);
+    }
+    .ingredient-chip.is-active {
+      border-color: var(--tertiary);
+    }
+
+    /* Final Summary Card (uses Canopy's single pale-leaf highlight card) */
+    .summary-header {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-lg);
+    }
+    .summary-score-line {
+      font-family: var(--font-headline);
+      font-weight: 600;
+      font-size: clamp(2rem, 1.5rem + 1.5vw, 2.75rem);
+      line-height: 1.1;
+      font-variant-numeric: lining-nums tabular-nums;
+      margin: 0;
+    }
+    .summary-takeaways {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+      gap: var(--space-md);
+      margin-bottom: var(--space-lg);
+    }
+    .takeaway-tile {
+      background: var(--background);
+      color: var(--on-surface);
+      padding: var(--space-md);
+      border-radius: var(--rounded);
+    }
+    .takeaway-tile h3 {
+      font-family: var(--font-headline);
+      font-size: var(--subhead-size);
+      margin: 0 0 var(--space-xs) 0;
+    }
+    .takeaway-tile p {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--on-surface-variant);
+    }
+    .review-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      margin-top: var(--space-md);
+    }
+    .review-item {
+      background: var(--background);
+      color: var(--on-surface);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-md);
+    }
+    .review-item-title {
+      font-weight: 700;
+      margin: 0 0 var(--space-xs) 0;
+    }
+    .review-item-meta {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--secondary);
+      margin: 0;
+    }
+
+    /* Footer Sources */
+    .sources-footer {
+      padding-top: var(--space-md);
+      border-top: var(--border-soft);
+      font-size: 0.875rem;
+      color: var(--on-surface-variant);
+      max-width: 75ch;
+    }
+    .sources-footer strong {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--secondary);
+    }
+
+    /* Keyframes */
+    @keyframes dropIntoBowl {
+      0% {
+        opacity: 0;
+        transform: translateY(-120px) scale(0.7) rotate(-8deg);
+      }
+      55% {
+        opacity: 1;
+        transform: translateY(8px) scale(1.06) rotate(3deg);
+      }
+      78% {
+        opacity: 1;
+        transform: translateY(-4px) scale(0.98) rotate(-1deg);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotate(0deg);
+      }
+    }
+
+    @keyframes bowlCatch {
+      0% { transform: scaleY(1) scaleX(1); }
+      35% { transform: scaleY(0.94) scaleX(1.04); }
+      70% { transform: scaleY(1.02) scaleX(0.99); }
+      100% { transform: scaleY(1) scaleX(1); }
+    }
+
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hidden { display: none !important; }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 860px) {
+      .workspace-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .bowl-panel {
+        position: static;
+        order: -1;
+      }
+      .bowl-svg {
+        max-height: 200px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page-grid {
+        padding: var(--space-md);
+        gap: var(--space-md);
+      }
+      .card {
+        padding: var(--space-md);
+      }
+      .ingredient-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-grid">
+    <header class="quiz-header">
+      <p class="kicker">Public Health &amp; Nutrition Knowledge Check</p>
+      <h1 class="quiz-title">Food Insecurity Quiz</h1>
+      <p class="quiz-subtitle">Test your understanding of how food and nutrition insecurity are defined, measured, experienced across communities, and addressed in clinical care. Earn all 10 wholesome ingredients to fill the harvest bowl.</p>
+    </header>
+
+    <!-- Canopy 10-question almanac progress strip -->
+    <nav class="almanac-strip" aria-label="Question progress navigation">
+      <span class="almanac-label" id="strip-status-label">Question 01 of 10</span>
+      <div class="almanac-cells" id="almanac-cells"></div>
+    </nav>
+
+    <div class="workspace-grid">
+      <!-- Primary Quiz Area -->
+      <main id="quiz-main">
+        <section class="card" id="question-card" aria-live="polite">
+          <div class="question-meta">
+            <span class="question-topic-badge" id="q-topic">Question 1 of 10</span>
+            <span class="question-reward-tag" id="q-reward">Ingredient: Crisp Apple</span>
+          </div>
+          <h2 class="question-prompt" id="q-prompt">Loading question…</h2>
+          <div class="options-list" id="q-options" role="group" aria-label="Answer choices"></div>
+
+          <div class="explanation-box hidden" id="q-explanation">
+            <h3 class="explanation-heading" id="q-exp-heading"></h3>
+            <p class="explanation-body" id="q-exp-body"></p>
+            <p class="explanation-source" id="q-exp-source"></p>
+          </div>
+
+          <div class="nav-row">
+            <div class="nav-group">
+              <button type="button" class="btn btn-secondary" id="btn-prev" onclick="goPrevQuestion()">
+                <i data-lucide="arrow-left" width="16" height="16" aria-hidden="true"></i>
+                Previous
+              </button>
+              <button type="button" class="btn btn-primary" id="btn-next" onclick="goNextQuestion()">
+                Next Question
+                <i data-lucide="arrow-right" width="16" height="16" aria-hidden="true"></i>
+              </button>
+              <button type="button" class="btn btn-primary hidden" id="btn-finish" onclick="showSummaryView()">
+                View Bowl &amp; Summary
+                <i data-lucide="check-circle-2" width="16" height="16" aria-hidden="true"></i>
+              </button>
+            </div>
+            <button type="button" class="btn btn-ghost" id="btn-reset-quiz" onclick="handleResetClick(this)">
+              <i data-lucide="rotate-ccw" width="16" height="16" aria-hidden="true"></i>
+              Reset Quiz
+            </button>
+          </div>
+        </section>
+
+        <!-- Final Summary Card (pale-leaf highlight card when viewed) -->
+        <section class="card is-leaf-highlight hidden" id="summary-card" aria-live="polite">
+          <div class="summary-header">
+            <p class="kicker">Quiz Complete</p>
+            <h2 class="summary-score-line" id="summary-score-line">0 / 10 Ingredients Collected</h2>
+            <p id="summary-message"></p>
+          </div>
+
+          <div class="summary-takeaways">
+            <div class="takeaway-tile">
+              <h3>Quantity vs. Nutritional Quality</h3>
+              <p>Traditional food insecurity tracks whether households have enough money for sufficient food, while nutrition security highlights equitable access to nutritious, culturally appropriate foods that support long-term health.</p>
+            </div>
+            <div class="takeaway-tile">
+              <h3>Beyond Official Cutoffs</h3>
+              <p>Even marginal food security—worrying food will run out before more money arrives—is linked to poorer child health, maternal depression, and chronic disease risk.</p>
+            </div>
+            <div class="takeaway-tile">
+              <h3>From Screening to Support</h3>
+              <p>Validated 2-item clinical screeners help healthcare teams connect families to SNAP, WIC, Market Match, and community food resources.</p>
+            </div>
+          </div>
+
+          <div class="nav-row">
+            <div class="nav-group">
+              <button type="button" class="btn btn-primary" onclick="returnToQuestions()">
+                <i data-lucide="book-open" width="16" height="16" aria-hidden="true"></i>
+                Review Questions
+              </button>
+              <button type="button" class="btn btn-secondary" id="btn-retake-summary" onclick="handleResetClick(this)">
+                <i data-lucide="rotate-ccw" width="16" height="16" aria-hidden="true"></i>
+                Retake Quiz
+              </button>
+            </div>
+          </div>
+
+          <div class="review-list" id="summary-review-list"></div>
+        </section>
+      </main>
+
+      <!-- Food Bowl Progress Tracker Widget -->
+      <aside class="card bowl-panel" aria-label="Food Bowl Progress Tracker">
+        <div class="bowl-header">
+          <div>
+            <p class="kicker">Harvest Progress</p>
+            <div class="bowl-score-wrap">
+              <span class="bowl-score-num" id="bowl-score-num">0</span>
+              <span class="bowl-score-denom">/ 10 items</span>
+            </div>
+          </div>
+          <span class="bowl-answered-pill" id="bowl-answered-pill">0 / 10 answered</span>
+        </div>
+
+        <div class="bowl-stage">
+          <svg class="bowl-svg" viewBox="0 0 320 220" role="img" aria-label="Interactive Food Bowl filling with ingredients as questions are answered correctly">
+            <!-- Ground shadow -->
+            <ellipse cx="160" cy="204" rx="92" ry="9" fill="var(--bowl-shadow)" />
+
+            <!-- Bowl group (back interior -> food items -> front wall) -->
+            <g class="bowl-group" id="bowl-group">
+              <!-- Back interior wall of bowl -->
+              <path d="M 46,118 C 46,100 274,100 274,118 C 274,174 232,196 160,196 C 88,196 46,174 46,118 Z"
+                    fill="var(--bowl-inner)" stroke="var(--bowl-rim)" stroke-width="2" />
+              <ellipse cx="160" cy="120" rx="108" ry="18" fill="var(--bowl-inner-shade)" opacity="0.55" />
+
+              <!-- 10 Distinct Food Items nestled in two layers -->
+              <!-- Q1: Apple (back-left) -->
+              <g class="food-item" id="food-0" transform="translate(0,0)">
+                <g transform="translate(88,104)">
+                  <circle cx="0" cy="4" r="17" fill="var(--food-apple)" />
+                  <ellipse cx="-5" cy="-1" rx="4" ry="7" fill="var(--food-apple-hi)" opacity="0.5" transform="rotate(-18 -5 -1)" />
+                  <path d="M -1,-12 Q 2,-21 7,-22" fill="none" stroke="var(--food-stem)" stroke-width="2.6" stroke-linecap="round" />
+                  <path d="M 2,-17 Q 12,-23 14,-14 Q 8,-10 2,-17 Z" fill="var(--food-leaf)" />
+                </g>
+              </g>
+
+              <!-- Q5: Wheat Grain Sheaf (back-center, tall) -->
+              <g class="food-item" id="food-4">
+                <g transform="translate(158,86)">
+                  <path d="M 0,24 L 0,-18" stroke="var(--food-grain-shade)" stroke-width="2.5" stroke-linecap="round" />
+                  <path d="M -9,22 L -14,-10" stroke="var(--food-grain-shade)" stroke-width="2" stroke-linecap="round" />
+                  <path d="M 9,22 L 14,-10" stroke="var(--food-grain-shade)" stroke-width="2" stroke-linecap="round" />
+                  <ellipse cx="-5" cy="-12" rx="4" ry="6" fill="var(--food-grain)" transform="rotate(-24 -5 -12)" />
+                  <ellipse cx="5" cy="-12" rx="4" ry="6" fill="var(--food-grain)" transform="rotate(24 5 -12)" />
+                  <ellipse cx="-6" cy="-2" rx="4" ry="6" fill="var(--food-grain)" transform="rotate(-24 -6 -2)" />
+                  <ellipse cx="6" cy="-2" rx="4" ry="6" fill="var(--food-grain)" transform="rotate(24 6 -2)" />
+                  <ellipse cx="0" cy="-20" rx="4" ry="6" fill="var(--food-grain)" />
+                  <ellipse cx="-14" cy="-8" rx="3.5" ry="5" fill="var(--food-grain)" transform="rotate(-30 -14 -8)" />
+                  <ellipse cx="14" cy="-8" rx="3.5" ry="5" fill="var(--food-grain)" transform="rotate(30 14 -8)" />
+                </g>
+              </g>
+
+              <!-- Q2: Artisan Bread Loaf (back-center-left) -->
+              <g class="food-item" id="food-1">
+                <g transform="translate(124,102)">
+                  <path d="M -22,12 C -24,-8 -14,-18 0,-18 C 14,-18 24,-8 22,12 Z" fill="var(--food-crust)" />
+                  <path d="M -17,10 C -18,-5 -10,-13 0,-13 C 10,-13 18,-5 17,10 Z" fill="var(--food-bread)" />
+                  <path d="M -9,-8 L -3,-2 M 0,-10 L 6,-4 M 8,-6 L 13,-1" stroke="var(--food-crust)" stroke-width="2" stroke-linecap="round" />
+                </g>
+              </g>
+
+              <!-- Q3: Carrot (back-center-right) -->
+              <g class="food-item" id="food-2">
+                <g transform="translate(194,100) rotate(22)">
+                  <path d="M -4,-20 Q -9,-29 -3,-32 M 0,-20 Q 0,-32 3,-32 M 4,-20 Q 10,-28 8,-31" fill="none" stroke="var(--food-leaf)" stroke-width="2.6" stroke-linecap="round" />
+                  <path d="M -10,-18 C -10,-22 10,-22 10,-18 L 2,18 C 1,21 -1,21 -2,18 Z" fill="var(--food-carrot)" />
+                  <path d="M -5,-9 L 2,-9 M -3,0 L 4,0" stroke="var(--food-carrot-shade)" stroke-width="2" stroke-linecap="round" />
+                </g>
+              </g>
+
+              <!-- Q4: Broccoli (back-right) -->
+              <g class="food-item" id="food-3">
+                <g transform="translate(230,104)">
+                  <path d="M -5,4 L -4,18 L 4,18 L 5,4 Z" fill="var(--food-broccoli-stem)" />
+                  <circle cx="-9" cy="-2" r="9" fill="var(--food-broccoli)" />
+                  <circle cx="9" cy="-2" r="9" fill="var(--food-broccoli)" />
+                  <circle cx="0" cy="-9" r="10" fill="var(--food-leaf)" />
+                  <circle cx="-4" cy="3" r="7" fill="var(--food-leaf-dark)" />
+                  <circle cx="5" cy="3" r="7" fill="var(--food-broccoli)" />
+                </g>
+              </g>
+
+              <!-- Q6: Tomato (mid-left) -->
+              <g class="food-item" id="food-5">
+                <g transform="translate(106,120)">
+                  <circle cx="0" cy="2" r="15" fill="var(--food-tomato)" />
+                  <ellipse cx="-5" cy="-3" rx="3.5" ry="5.5" fill="var(--food-apple-hi)" opacity="0.55" transform="rotate(-20 -5 -3)" />
+                  <path d="M 0,-11 L -6,-15 L -2,-11 L 0,-17 L 2,-11 L 7,-14 Z" fill="var(--food-leaf-dark)" />
+                </g>
+              </g>
+
+              <!-- Q7: Avocado (mid-center) -->
+              <g class="food-item" id="food-6">
+                <g transform="translate(154,116) rotate(-10)">
+                  <path d="M 0,-18 C 10,-18 15,-2 14,10 C 13,20 7,24 0,24 C -7,24 -13,20 -14,10 C -15,-2 -10,-18 0,-18 Z" fill="var(--food-avocado-skin)" />
+                  <path d="M 0,-14 C 8,-14 12,-1 11,9 C 10,17 5,20 0,20 C -5,20 -10,17 -11,9 C -12,-1 -8,-14 0,-14 Z" fill="var(--food-avocado-flesh)" />
+                  <circle cx="0" cy="8" r="6.5" fill="var(--food-avocado-pit)" />
+                </g>
+              </g>
+
+              <!-- Q8: Sweet Corn (mid-right) -->
+              <g class="food-item" id="food-7">
+                <g transform="translate(210,118) rotate(14)">
+                  <ellipse cx="0" cy="0" rx="10" ry="18" fill="var(--food-corn)" />
+                  <path d="M -5,-10 L 5,-10 M -7,-3 L 7,-3 M -7,4 L 7,4" stroke="var(--food-grain-shade)" stroke-width="1.3" opacity="0.55" />
+                  <path d="M -11,2 Q -10,19 0,20 Q -4,10 -11,2 Z" fill="var(--food-corn-husk)" />
+                  <path d="M 11,2 Q 10,19 0,20 Q 4,10 11,2 Z" fill="var(--food-leaf)" />
+                </g>
+              </g>
+
+              <!-- Q9: Beans & Legumes (front-left-center) -->
+              <g class="food-item" id="food-8">
+                <g transform="translate(130,127)">
+                  <ellipse cx="-8" cy="2" rx="6.5" ry="4.5" fill="var(--food-bean)" transform="rotate(-22 -8 2)" />
+                  <ellipse cx="4" cy="0" rx="6.5" ry="4.5" fill="var(--food-bean-dark)" transform="rotate(15 4 0)" />
+                  <ellipse cx="-2" cy="7" rx="6.5" ry="4.5" fill="var(--food-bean)" transform="rotate(8 -2 7)" />
+                  <ellipse cx="9" cy="6" rx="6" ry="4" fill="var(--food-bean)" transform="rotate(-16 9 6)" />
+                </g>
+              </g>
+
+              <!-- Q10: Leafy Greens (front-right-center) -->
+              <g class="food-item" id="food-9">
+                <g transform="translate(182,126)">
+                  <path d="M -12,8 C -16,-6 -4,-18 8,-14 C 14,-4 8,10 -12,8 Z" fill="var(--food-greens)" />
+                  <path d="M -10,6 Q -1,-3 5,-11" fill="none" stroke="var(--food-greens-vein)" stroke-width="1.6" stroke-linecap="round" />
+                  <path d="M -2,10 C 4,-4 18,-12 22,-4 C 22,8 10,14 -2,10 Z" fill="var(--food-leaf)" />
+                  <path d="M 1,8 Q 10,1 18,-3" fill="none" stroke="var(--food-greens-vein)" stroke-width="1.4" stroke-linecap="round" />
+                </g>
+              </g>
+
+              <!-- Front outer bowl wall (creates 2.5D depth over food bottoms) -->
+              <path d="M 46,118 Q 160,145 274,118 C 274,174 232,196 160,196 C 88,196 46,174 46,118 Z"
+                    fill="var(--bowl-outer)" stroke="var(--bowl-rim)" stroke-width="2" />
+              <!-- Subtle stoneware shading and rim highlight -->
+              <path d="M 54,142 C 74,178 112,192 160,192 C 208,192 246,178 266,142 C 242,168 202,178 160,178 C 118,178 78,168 54,142 Z"
+                    fill="var(--bowl-outer-shade)" opacity="0.45" />
+              <path d="M 48,118 Q 160,145 272,118" fill="none" stroke="var(--bowl-inner)" stroke-width="2.5" opacity="0.85" />
+              <!-- Bowl foot ring -->
+              <path d="M 116,193 L 122,202 L 198,202 L 204,193 Z" fill="var(--bowl-foot)" />
+              <!-- Subtle botanical emblem on front of bowl -->
+              <path d="M 160,154 Q 154,162 160,168 Q 166,162 160,154 Z" fill="var(--primary)" opacity="0.55" />
+            </g>
+          </svg>
+        </div>
+
+        <div class="bowl-meter-wrap">
+          <div class="bowl-meter-label-row">
+            <span>Bowl Capacity</span>
+            <span id="bowl-pct-label">0% full</span>
+          </div>
+          <div class="bowl-meter-track" role="progressbar" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0" id="bowl-progressbar">
+            <div class="bowl-meter-fill" id="bowl-meter-fill"></div>
+          </div>
+        </div>
+
+        <div class="bowl-feedback" id="bowl-feedback" aria-live="polite">
+          <i data-lucide="utensils" width="18" height="18" aria-hidden="true"></i>
+          <span>Answer questions correctly to drop fresh ingredients into your bowl.</span>
+        </div>
+
+        <div class="ingredient-grid" id="ingredient-grid" aria-label="Ingredient tracker"></div>
+      </aside>
+    </div>
+
+    <footer class="sources-footer">
+      <strong>Sources</strong><br>
+      Grounded in USDA Economic Research Service food security definitions and classifications; Livings et al., <em>The Journal of Nutrition</em> (2024) on food and nutrition insecurity in Los Angeles County; Cook et al., <em>Advances in Nutrition</em> (2013) on marginal food security; Holben, <em>Osteopathic Family Physician</em> (2011) on demographic risk and household triggers; and USPSTF guidance on clinical screening and food assistance referrals.
+    </footer>
+  </div>
+
+  <api-shim></api-shim>
+  <script>
+    const QUIZ_QUESTIONS = [
+      {
+        id: 1,
+        topic: `Definition`,
+        ingredient: `Crisp Apple`,
+        shortIngredient: `Apple`,
+        prompt: `According to the U.S. Department of Agriculture (USDA), how is food insecurity formally defined?`,
+        options: [
+          `A medical inability to absorb essential nutrients properly despite having access to high-quality meals.`,
+          `The complete absence of grocery stores and retail outlets within a ten-mile radius of a residence.`,
+          `The limited or uncertain availability of nutritionally adequate and safe foods, or the limited or uncertain ability to acquire acceptable foods in socially acceptable ways.`,
+          `A temporary state of physiological hunger caused by skipping a single meal due to busy daily schedules.`
+        ],
+        correctIndex: 2,
+        explanation: `The USDA defines food insecurity as the limited or uncertain availability of nutritionally adequate and safe foods, or the limited or uncertain ability to acquire acceptable foods in socially acceptable ways. Unlike hunger—an individual physiological state—food insecurity captures household-level economic and social conditions restricting reliable access to enough food.`,
+        source: `USDA Economic Research Service; USPSTF Evidence Synthesis`
+      },
+      {
+        id: 2,
+        topic: `Nutrition Security`,
+        ingredient: `Whole Grain Bread`,
+        shortIngredient: `Bread`,
+        prompt: `How does the concept of nutrition security differ from traditional food insecurity?`,
+        options: [
+          `Nutrition security measures clinical vitamin absorption levels in individuals, while food insecurity measures household monetary income.`,
+          `Nutrition security applies exclusively to developing nations facing famine, while food insecurity applies to high-income nations.`,
+          `Nutrition security is strictly defined by caloric count, whereas food insecurity measures the retail cost of groceries.`,
+          `Nutrition security emphasizes the nutritional adequacy of accessible food and personal food preferences, whereas traditional food insecurity focuses primarily on having sufficient food quantity.`
+        ],
+        correctIndex: 3,
+        explanation: `Traditional food insecurity surveillance focuses on having enough food and avoids capturing overall diet quality. Nutrition security is a broader construct covering the nutritional adequacy of accessible food as well as factors affecting the ability to meet cultural, religious, taste, and allergy-related dietary needs.`,
+        source: `Livings et al., The Journal of Nutrition (2024); USDA Nutrition Security Framework`
+      },
+      {
+        id: 3,
+        topic: `USDA Classification`,
+        ingredient: `Garden Carrot`,
+        shortIngredient: `Carrot`,
+        prompt: `Under the USDA food security classification system, which category describes a household that experiences anxiety over food sufficiency but shows little to no reduction in food intake or diet quality?`,
+        options: [
+          `Low food security`,
+          `Marginal food security`,
+          `Very low food security`,
+          `High food security`
+        ],
+        correctIndex: 1,
+        explanation: `Under USDA classifications, marginal food security describes households reporting one or two indications of food access difficulty—typically anxiety that food will run out before money is available—with little or no change in diet quality or food intake. Research shows marginally food-secure households still face elevated health and developmental risks.`,
+        source: `USDA Food Security Classifications; Cook et al., Advances in Nutrition (2013)`
+      },
+      {
+        id: 4,
+        topic: `Root Causes`,
+        ingredient: `Fresh Broccoli`,
+        shortIngredient: `Broccoli`,
+        prompt: `What is consistently identified across public health research as the primary driver of household food insecurity?`,
+        options: [
+          `Inadequate household financial resources and poverty`,
+          `A lack of individual interest in food preparation skills`,
+          `High rates of enrollment in government social safety net programs`,
+          `A global deficit in total agricultural food production`
+        ],
+        correctIndex: 0,
+        explanation: `Poverty and inadequate household financial resources are consistently identified as the primary drivers of food insecurity. Even in nations with abundant overall food supplies, low wages, unemployment, and competing expenses such as housing, utilities, and healthcare force households to compromise on food.`,
+        source: `Holben (2011); Children at Risk Call to Action; USPSTF`
+      },
+      {
+        id: 5,
+        topic: `Food Environment`,
+        ingredient: `Heirloom Grain`,
+        shortIngredient: `Grain`,
+        prompt: `Which term describes underserved low-income communities that lack full-service grocery stores and affordable, healthy food options?`,
+        options: [
+          `Food security reserves`,
+          `Food banks`,
+          `Food deserts`,
+          `Food pantries`
+        ],
+        correctIndex: 2,
+        explanation: `Underserved low-income communities with fewer full-service supermarkets, limited transportation options, and scarce affordable, healthy food choices are known as food deserts. Residents in these neighborhoods often face higher prices for lower-quality groceries at small convenience outlets.`,
+        source: `USDA Economic Research Service; Kimbro et al.; USPSTF Screening Guidance`
+      },
+      {
+        id: 6,
+        topic: `Household Shocks`,
+        ingredient: `Vine Tomato`,
+        shortIngredient: `Tomato`,
+        prompt: `Which of the following events represents a sudden financial disruption that can trigger food insecurity in a vulnerable household?`,
+        options: [
+          `Experiencing job loss or facing unexpected medical bills`,
+          `Relocating to an area with multiple full-service supermarkets`,
+          `Receiving an annual increase in steady employment wages`,
+          `Enrolling in a state food assistance program such as SNAP`
+        ],
+        correctIndex: 0,
+        explanation: `Food insecurity is frequently episodic and triggered by sudden shocks to a household budget—such as job loss, reduced work hours, unexpected medical expenditures, or rising housing and utility bills—forcing families to choose between paying for food, rent, heat, or medication.`,
+        source: `Holben (2011); Nutrients COVID-19 Household Survey (2022)`
+      },
+      {
+        id: 7,
+        topic: `Demographics`,
+        ingredient: `Ripe Avocado`,
+        shortIngredient: `Avocado`,
+        prompt: `Based on national demographic data in the United States, which type of household faces a risk of food insecurity roughly double that of the average American household?`,
+        options: [
+          `Households earning incomes above 300% of the federal poverty line`,
+          `Suburban households headed by retired adults aged 65 and older`,
+          `Single-parent households headed by a single female or male`,
+          `Married-couple households without cohabiting children`
+        ],
+        correctIndex: 2,
+        explanation: `National demographic data show that single-parent households with children—headed by a single female or single male—experience food insecurity at roughly twice the rate of the average U.S. household, reflecting tighter single-earner budgets and childcare costs.`,
+        source: `Holben (2011); USDA CPS Food Security Supplement; Balistreri (2017)`
+      },
+      {
+        id: 8,
+        topic: `Regional Findings`,
+        ingredient: `Sweet Corn`,
+        shortIngredient: `Corn`,
+        prompt: `In a study of Los Angeles County residents, which group was significantly more likely to experience nutrition insecurity specifically, but not traditional food insecurity?`,
+        options: [
+          `Non-Hispanic White individuals`,
+          `Non-Hispanic Black individuals`,
+          `Non-Hispanic Asian individuals`,
+          `Hispanic individuals`
+        ],
+        correctIndex: 2,
+        explanation: `In the 2022 Understanding America Study of L.A. County adults, non-Hispanic Asian individuals had significantly higher odds of nutrition insecurity (OR = 2.22; and OR = 3.1 for nutrition insecurity alone) without higher odds of traditional food insecurity—likely reflecting sparser geographic access to culturally relevant healthy foods across the county.`,
+        source: `Livings et al., The Journal of Nutrition (2024)`
+      },
+      {
+        id: 9,
+        topic: `Policy & Assistance`,
+        ingredient: `Red Lentils & Beans`,
+        shortIngredient: `Beans`,
+        prompt: `Which major federal program provides direct electronic monthly benefits to low-income individuals and families specifically to buy groceries?`,
+        options: [
+          `Supplemental Nutrition Assistance Program (SNAP)`,
+          `Low-Income Home Energy Assistance Program (LIHEAP)`,
+          `Temporary Assistance for Needy Families (TANF)`,
+          `Child and Adult Care Food Program (CACFP)`
+        ],
+        correctIndex: 0,
+        explanation: `SNAP is the primary federal food assistance program providing monthly electronic benefits to eligible low-income households specifically for purchasing groceries. Complementary initiatives such as California's Market Match program further stretch SNAP dollars toward fresh fruits and vegetables.`,
+        source: `USDA Food & Nutrition Service; Livings et al. (2024)`
+      },
+      {
+        id: 10,
+        topic: `Clinical Practice`,
+        ingredient: `Leafy Greens`,
+        shortIngredient: `Greens`,
+        prompt: `How can healthcare providers actively help address food insecurity among their patients during routine clinical encounters?`,
+        options: [
+          `Report food-insecure families to law enforcement for financial auditing.`,
+          `Prescribe high-cost synthetic dietary supplements to replace daily food meals.`,
+          `Screen patients for food access challenges using validated tools and connect them to community food resources and benefit programs.`,
+          `Advise patients to skip meals daily to reduce household food expenditure.`
+        ],
+        correctIndex: 2,
+        explanation: `Clinical guidance recommends using validated brief screening tools (such as the 2-item Hunger Vital Sign or 1-item nutrition insecurity screener) to identify patients at risk and linking them to care coordination, SNAP/WIC enrollment, food pantries, medically tailored meals, or "food is medicine" produce prescriptions.`,
+        source: `USPSTF Screening for Food Insecurity; Hager et al. (2010); Livings et al. (2024)`
+      }
+    ];
+
+    const LETTERS = [`A`, `B`, `C`, `D`];
+
+    let quizState = {
+      currentIndex: 0,
+      answers: {}, // { [questionId]: chosenOptionIndex }
+      viewingSummary: false
+    };
+
+    let lastDroppedId = null;
+
+    function getEarnedCount() {
+      let count = 0;
+      for (let i = 0; i < QUIZ_QUESTIONS.length; i += 1) {
+        const q = QUIZ_QUESTIONS[i];
+        if (quizState.answers[q.id] === q.correctIndex) {
+          count += 1;
+        }
+      }
+      return count;
+    }
+
+    function getAnsweredCount() {
+      return Object.keys(quizState.answers).length;
+    }
+
+    async function persistState() {
+      if (window.notebookAppApi && typeof window.notebookAppApi.setAppState === 'function') {
+        try {
+          await window.notebookAppApi.setAppState({
+            currentIndex: quizState.currentIndex,
+            answers: quizState.answers,
+            viewingSummary: quizState.viewingSummary
+          });
+        } catch (err) {
+          // Non-fatal in preview environments
+        }
+      }
+    }
+
+    function renderAlmanacStrip() {
+      const container = document.getElementById('almanac-cells');
+      const statusLabel = document.getElementById('strip-status-label');
+      if (!container) return;
+
+      container.innerHTML = '';
+      for (let i = 0; i < QUIZ_QUESTIONS.length; i += 1) {
+        const q = QUIZ_QUESTIONS[i];
+        const chosen = quizState.answers[q.id];
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'almanac-cell';
+        btn.textContent = i < 9 ? `0${i + 1}` : `${i + 1}`;
+        btn.setAttribute('aria-label', `Jump to Question ${i + 1}`);
+
+        if (!quizState.viewingSummary && i === quizState.currentIndex) {
+          btn.classList.add('is-current');
+        }
+        if (chosen !== undefined) {
+          if (chosen === q.correctIndex) {
+            btn.classList.add('is-correct');
+          } else {
+            btn.classList.add('is-incorrect');
+          }
+        }
+        btn.onclick = (function(idx) {
+          return function() { jumpToQuestion(idx); };
+        })(i);
+        container.appendChild(btn);
+      }
+
+      if (statusLabel) {
+        if (quizState.viewingSummary) {
+          statusLabel.textContent = `Summary · ${getEarnedCount()} of 10 Correct`;
+        } else {
+          const numStr = quizState.currentIndex < 9 ? `0${quizState.currentIndex + 1}` : `${quizState.currentIndex + 1}`;
+          statusLabel.textContent = `Question ${numStr} of 10`;
+        }
+      }
+    }
+
+    function renderFoodBowl(animateId) {
+      const earned = getEarnedCount();
+      const answered = getAnsweredCount();
+
+      const scoreNum = document.getElementById('bowl-score-num');
+      const answeredPill = document.getElementById('bowl-answered-pill');
+      const pctLabel = document.getElementById('bowl-pct-label');
+      const meterFill = document.getElementById('bowl-meter-fill');
+      const progressBar = document.getElementById('bowl-progressbar');
+      const bowlGroup = document.getElementById('bowl-group');
+
+      if (scoreNum) scoreNum.textContent = String(earned);
+      if (answeredPill) answeredPill.textContent = `${answered} / 10 answered`;
+      const pct = Math.round((earned / 10) * 100);
+      if (pctLabel) pctLabel.textContent = `${pct}% full`;
+      if (meterFill) meterFill.style.width = `${pct}%`;
+      if (progressBar) progressBar.setAttribute('aria-valuenow', String(earned));
+
+      for (let i = 0; i < QUIZ_QUESTIONS.length; i += 1) {
+        const q = QUIZ_QUESTIONS[i];
+        const foodEl = document.getElementById(`food-${i}`);
+        if (!foodEl) continue;
+
+        const isCorrect = quizState.answers[q.id] === q.correctIndex;
+        foodEl.classList.remove('is-dropping', 'is-in-bowl');
+
+        if (isCorrect) {
+          if (animateId === q.id) {
+            // Trigger fresh drop animation
+            void foodEl.getBoundingClientRect();
+            foodEl.classList.add('is-dropping');
+          } else {
+            foodEl.classList.add('is-in-bowl');
+          }
+        }
+      }
+
+      if (animateId !== null && bowlGroup) {
+        bowlGroup.classList.remove('is-catching');
+        void bowlGroup.getBoundingClientRect();
+        bowlGroup.classList.add('is-catching');
+      }
+
+      renderIngredientChips();
+    }
+
+    function updateBowlFeedback(type, text) {
+      const box = document.getElementById('bowl-feedback');
+      if (!box) return;
+      box.classList.remove('is-positive', 'is-missed');
+      if (type === 'positive') box.classList.add('is-positive');
+      if (type === 'missed') box.classList.add('is-missed');
+
+      const iconName = type === 'positive' ? 'sparkles' : type === 'missed' ? 'info' : 'utensils';
+      box.innerHTML = `<i data-lucide="${iconName}" width="18" height="18" aria-hidden="true"></i><span>${text}</span>`;
+      if (window.lucide) window.lucide.createIcons();
+    }
+
+    function renderIngredientChips() {
+      const grid = document.getElementById('ingredient-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+
+      for (let i = 0; i < QUIZ_QUESTIONS.length; i += 1) {
+        const q = QUIZ_QUESTIONS[i];
+        const chosen = quizState.answers[q.id];
+        const chip = document.createElement('button');
+        chip.type = 'button';
+        chip.className = 'ingredient-chip';
+
+        if (!quizState.viewingSummary && i === quizState.currentIndex) {
+          chip.classList.add('is-active');
+        }
+        let statusMark = `Q${i + 1}`;
+        if (chosen !== undefined) {
+          if (chosen === q.correctIndex) {
+            chip.classList.add('is-earned');
+            statusMark = `✓ Q${i + 1}`;
+          } else {
+            chip.classList.add('is-missed');
+            statusMark = `× Q${i + 1}`;
+          }
+        }
+
+        chip.innerHTML = `<span>${q.shortIngredient}</span><span>${statusMark}</span>`;
+        chip.onclick = (function(idx) {
+          return function() { jumpToQuestion(idx); };
+        })(i);
+        grid.appendChild(chip);
+      }
+    }
+
+    function renderQuestion() {
+      const qCard = document.getElementById('question-card');
+      const sCard = document.getElementById('summary-card');
+      if (qCard) qCard.classList.remove('hidden');
+      if (sCard) sCard.classList.add('hidden');
+
+      const q = QUIZ_QUESTIONS[quizState.currentIndex];
+      const chosen = quizState.answers[q.id];
+      const isAnswered = chosen !== undefined;
+
+      const topicEl = document.getElementById('q-topic');
+      const rewardEl = document.getElementById('q-reward');
+      const promptEl = document.getElementById('q-prompt');
+      const optionsEl = document.getElementById('q-options');
+      const expEl = document.getElementById('q-explanation');
+      const expHeading = document.getElementById('q-exp-heading');
+      const expBody = document.getElementById('q-exp-body');
+      const expSource = document.getElementById('q-exp-source');
+
+      if (topicEl) topicEl.textContent = `Question ${quizState.currentIndex + 1} of 10 · ${q.topic}`;
+      if (rewardEl) rewardEl.textContent = `Ingredient: ${q.ingredient}`;
+      if (promptEl) promptEl.textContent = q.prompt;
+
+      if (optionsEl) {
+        optionsEl.innerHTML = '';
+        for (let i = 0; i < q.options.length; i += 1) {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'option-btn';
+          btn.disabled = isAnswered;
+
+          let statusHtml = '';
+          if (isAnswered) {
+            if (i === q.correctIndex) {
+              btn.classList.add('is-correct-choice');
+              statusHtml = `<span class="option-status"><i data-lucide="check" width="15" height="15" aria-hidden="true"></i> Correct</span>`;
+            } else if (i === chosen) {
+              btn.classList.add('is-wrong-choice');
+              statusHtml = `<span class="option-status"><i data-lucide="x" width="15" height="15" aria-hidden="true"></i> Your choice</span>`;
+            } else {
+              btn.classList.add('is-dimmed');
+            }
+          }
+
+          btn.innerHTML = `
+            <span class="option-letter">${LETTERS[i]}</span>
+            <span class="option-text">${q.options[i]}</span>
+            ${statusHtml}
+          `;
+
+          if (!isAnswered) {
+            btn.onclick = (function(optIdx) {
+              return function() { selectAnswer(optIdx); };
+            })(i);
+          }
+          optionsEl.appendChild(btn);
+        }
+      }
+
+      if (expEl && expHeading && expBody && expSource) {
+        if (isAnswered) {
+          const isCorrect = chosen === q.correctIndex;
+          expEl.classList.remove('hidden', 'is-incorrect');
+          if (!isCorrect) expEl.classList.add('is-incorrect');
+
+          expHeading.innerHTML = isCorrect
+            ? `<i data-lucide="check-circle-2" width="20" height="20" aria-hidden="true"></i> Correct — ${q.ingredient} added to your bowl`
+            : `<i data-lucide="alert-circle" width="20" height="20" aria-hidden="true"></i> Not quite — the correct answer is ${LETTERS[q.correctIndex]}`;
+          expBody.textContent = q.explanation;
+          expSource.textContent = `Source: ${q.source}`;
+        } else {
+          expEl.classList.add('hidden');
+        }
+      }
+
+      const btnPrev = document.getElementById('btn-prev');
+      const btnNext = document.getElementById('btn-next');
+      const btnFinish = document.getElementById('btn-finish');
+
+      if (btnPrev) btnPrev.disabled = quizState.currentIndex === 0;
+      const allAnswered = getAnsweredCount() === QUIZ_QUESTIONS.length;
+      const isLast = quizState.currentIndex === QUIZ_QUESTIONS.length - 1;
+
+      if (btnNext) {
+        if (isLast) {
+          btnNext.classList.add('hidden');
+        } else {
+          btnNext.classList.remove('hidden');
+        }
+      }
+      if (btnFinish) {
+        const answeredCount = getAnsweredCount();
+        if (allAnswered || isLast) {
+          btnFinish.classList.remove('hidden');
+          btnFinish.disabled = !allAnswered;
+          btnFinish.innerHTML = allAnswered
+            ? `View Bowl &amp; Summary <i data-lucide="check-circle-2" width="16" height="16" aria-hidden="true"></i>`
+            : `Answer All 10 (${answeredCount}/10) <i data-lucide="check-circle-2" width="16" height="16" aria-hidden="true"></i>`;
+        } else {
+          btnFinish.classList.add('hidden');
+        }
+      }
+
+      // Reset inline arming state when changing views
+      disarmResetButtons();
+      renderAlmanacStrip();
+      renderIngredientChips();
+      if (window.lucide) window.lucide.createIcons();
+    }
+
+    function selectAnswer(optionIndex) {
+      const q = QUIZ_QUESTIONS[quizState.currentIndex];
+      if (quizState.answers[q.id] !== undefined) return;
+
+      quizState.answers[q.id] = optionIndex;
+      const isCorrect = optionIndex === q.correctIndex;
+      const earnedNow = getEarnedCount();
+
+      if (isCorrect) {
+        lastDroppedId = q.id;
+        renderFoodBowl(q.id);
+        if (earnedNow === 10) {
+          updateBowlFeedback('positive', `Perfect 10/10! ${q.ingredient} completed your harvest bowl!`);
+        } else {
+          updateBowlFeedback('positive', `Great job! ${q.ingredient} dropped into your bowl (${earnedNow}/10).`);
+        }
+      } else {
+        lastDroppedId = null;
+        renderFoodBowl(null);
+        updateBowlFeedback('missed', `Missed Question ${quizState.currentIndex + 1} (${q.shortIngredient}). Read the explanation and keep filling your bowl.`);
+      }
+
+      renderQuestion();
+      persistState();
+    }
+
+    function jumpToQuestion(idx) {
+      if (idx < 0 || idx >= QUIZ_QUESTIONS.length) return;
+      quizState.viewingSummary = false;
+      quizState.currentIndex = idx;
+      renderQuestion();
+      persistState();
+    }
+
+    function goPrevQuestion() {
+      if (quizState.currentIndex > 0) {
+        quizState.currentIndex -= 1;
+        quizState.viewingSummary = false;
+        renderQuestion();
+        persistState();
+      }
+    }
+
+    function goNextQuestion() {
+      if (quizState.currentIndex < QUIZ_QUESTIONS.length - 1) {
+        quizState.currentIndex += 1;
+        quizState.viewingSummary = false;
+        renderQuestion();
+        persistState();
+      }
+    }
+
+    function showSummaryView() {
+      quizState.viewingSummary = true;
+      const qCard = document.getElementById('question-card');
+      const sCard = document.getElementById('summary-card');
+      if (qCard) qCard.classList.add('hidden');
+      if (sCard) sCard.classList.remove('hidden');
+
+      const earned = getEarnedCount();
+      const scoreLine = document.getElementById('summary-score-line');
+      const msgEl = document.getElementById('summary-message');
+      const listEl = document.getElementById('summary-review-list');
+
+      if (scoreLine) scoreLine.textContent = `${earned} / 10 Ingredients Collected`;
+      if (msgEl) {
+        if (earned === 10) {
+          msgEl.textContent = `You filled the entire harvest bowl! You demonstrated comprehensive mastery of food insecurity definitions, nutrition security, socioeconomic risk factors, and clinical care pathways.`;
+        } else if (earned >= 7) {
+          msgEl.textContent = `Strong work—your bowl is well stocked with ${earned} out of 10 ingredients. Review any missed questions below to sharpen the nuances.`;
+        } else {
+          msgEl.textContent = `You collected ${earned} out of 10 ingredients. Explore the detailed question review below and retake the quiz anytime to fill the rest of your bowl.`;
+        }
+      }
+
+      if (listEl) {
+        listEl.innerHTML = '';
+        for (let i = 0; i < QUIZ_QUESTIONS.length; i += 1) {
+          const q = QUIZ_QUESTIONS[i];
+          const chosen = quizState.answers[q.id];
+          const isCorrect = chosen === q.correctIndex;
+          const row = document.createElement('div');
+          row.className = 'review-item';
+
+          const statusText = chosen === undefined
+            ? `Unanswered`
+            : isCorrect
+              ? `Correct · +${q.shortIngredient}`
+              : `Incorrect · Answer: ${LETTERS[q.correctIndex]}`;
+
+          row.innerHTML = `
+            <div>
+              <p class="review-item-title">Q${i + 1}. ${q.prompt}</p>
+              <p class="review-item-meta">${statusText} — ${q.topic}</p>
+            </div>
+            <button type="button" class="btn btn-secondary" onclick="jumpToQuestion(${i})">Inspect</button>
+          `;
+          listEl.appendChild(row);
+        }
+      }
+
+      disarmResetButtons();
+      renderAlmanacStrip();
+      renderIngredientChips();
+      if (window.lucide) window.lucide.createIcons();
+      persistState();
+    }
+
+    function returnToQuestions() {
+      quizState.viewingSummary = false;
+      renderQuestion();
+      persistState();
+    }
+
+    function disarmResetButtons() {
+      const ids = ['btn-reset-quiz', 'btn-retake-summary'];
+      for (let i = 0; i < ids.length; i += 1) {
+        const b = document.getElementById(ids[i]);
+        if (b) {
+          b.dataset.armed = 'false';
+          const label = ids[i] === 'btn-retake-summary' ? 'Retake Quiz' : 'Reset Quiz';
+          b.innerHTML = `<i data-lucide="rotate-ccw" width="16" height="16" aria-hidden="true"></i> ${label}`;
+        }
+      }
+    }
+
+    function handleResetClick(btn) {
+      if (!btn) return;
+      if (btn.dataset.armed !== 'true') {
+        btn.dataset.armed = 'true';
+        btn.innerHTML = `<i data-lucide="alert-triangle" width="16" height="16" aria-hidden="true"></i> Click again to confirm`;
+        if (window.lucide) window.lucide.createIcons();
+        return;
+      }
+      resetQuiz();
+    }
+
+    function resetQuiz() {
+      quizState = {
+        currentIndex: 0,
+        answers: {},
+        viewingSummary: false
+      };
+      lastDroppedId = null;
+      disarmResetButtons();
+      renderFoodBowl(null);
+      updateBowlFeedback('neutral', `Bowl emptied and ready. Answer questions correctly to add fresh ingredients.`);
+      renderQuestion();
+      persistState();
+    }
+
+    async function initQuiz() {
+      if (window.notebookAppApi && typeof window.notebookAppApi.getAppState === 'function') {
+        try {
+          const saved = await window.notebookAppApi.getAppState();
+          if (saved && typeof saved === 'object') {
+            if (typeof saved.currentIndex === 'number' && saved.currentIndex >= 0 && saved.currentIndex < QUIZ_QUESTIONS.length) {
+              quizState.currentIndex = saved.currentIndex;
+            }
+            if (saved.answers && typeof saved.answers === 'object') {
+              quizState.answers = saved.answers;
+            }
+            if (typeof saved.viewingSummary === 'boolean') {
+              quizState.viewingSummary = saved.viewingSummary;
+            }
+          }
+        } catch (err) {
+          // Proceed with fresh state
+        }
+      }
+
+      renderFoodBowl(null);
+      const earned = getEarnedCount();
+      const answered = getAnsweredCount();
+      if (answered > 0) {
+        updateBowlFeedback(earned > 0 ? 'positive' : 'neutral', `Welcome back! Your bowl currently holds ${earned} of 10 ingredients.`);
+      }
+
+      if (quizState.viewingSummary && answered === QUIZ_QUESTIONS.length) {
+        showSummaryView();
+      } else {
+        quizState.viewingSummary = false;
+        renderQuestion();
+      }
+
+      if (window.lucide) window.lucide.createIcons();
+      if (window.notebookAppApi && typeof window.notebookAppApi.notifyAppReady === 'function') {
+        window.notebookAppApi.notifyAppReady();
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', initQuiz);
+  </script>
+</body>
+</html>

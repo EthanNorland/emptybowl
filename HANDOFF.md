@@ -15,22 +15,18 @@
   - Empty green ceramic bowl emblem mark in cross section facing the viewer ([`icon.svg`](icon.svg)) with enlarged 40px logo and 21px bold wordmark in the universal header, alongside generated 180, 192, 512, and maskable PNG icons.
   - Photographic character portraits for Maya, Marcus, and Evelyn with coordinated sage studio backdrops ([`Maya.jpeg`](Maya.jpeg), [`Marcus.jpeg`](Marcus.jpeg), [`Evelyn.jpeg`](Evelyn.jpeg)), with studio lighting enhanced across Marcus and facial shadow removed and balanced across Evelyn.
 - **Interactive Modules:**
-- **Interactive Food Insecurity Briefing Quiz:**
-  - Integrated 12-question briefing quiz modal directly into [`index.html`](index.html), adapted from [`Food_Insecurity_Quiz.html`](Food_Insecurity_Quiz.html).
+- **Interactive Food Insecurity Harvest Bowl Quiz (10 Questions & Pottery Bowl):**
+  - Integrated the 10-question Harvest Bowl Quiz modal directly into [`index.html`](index.html), replaced from `/Users/ethannorland/Desktop/food insecurity website/10 question quiz.html`.
+  - Also deployed as standalone quiz pages at [`quiz.html`](quiz.html) and [`10 question quiz.html`](10%20question%20quiz.html) with universal top navigation linking across all 5 main pages, and updated [`Food_Insecurity_Quiz.html`](Food_Insecurity_Quiz.html) to automatically redirect to `quiz.html`.
   - Automatically pops up on first visit to the Empty Bowl home page via `showModal()`, with immediate, user-friendly dismissal controls: top-right `&times;` button, "Skip for now" header button, "Browse Empty Bowl" footer button, backdrop tap, and Escape key handling (`sessionStorage.getItem("emptybowl_quiz_dismissed")`).
   - Permanent re-launch controls: added a `Quiz 📝` button in the site header actions (`#btn-quiz-toggle`) and an "Interactive Knowledge Check" callout card (`#heroQuizBanner`) in the hero card.
-  - 12 rigorous evidence-based questions covering 4 academic domains: Causes & Mechanisms, Definitions & Measures, Populations & Disparities, and Policy & Interventions.
-  - Real-time metrics: completion percentage with dynamic progress fill bar, live score calculation, consecutive correct streak, and active filter queue indicator.
-  - Topic filters: All Topics (12), 01 Causes (3), 02 Definitions (3), 03 Disparities (3), and 04 Interventions (3), plus "Review Missed" jump button and "Reset Quiz" state clearer.
-  - Numbered jump strip (1–12) with real-time status styling: open/unanswered, correct (sage green), missed (brick red), active selection ring (amber gold), and filtered dimming.
-  - Detailed debrief panel after every answer with immediate verdict, in-depth empirical explanation, source citation, and embedded data visualizers:
-    1. `tradeoffs`: forced budget trade-offs mini-bar chart (utilities, rent, medical).
-    2. `la_health`: adjusted odds ratio data table for diabetes and poor mental health (L.A. County Model C).
-    3. `predictors_compare`: 2-column sociodemographic predictor comparison (Food vs. Nutrition Insecurity).
-    4. `veterans_compare`: Iraq/Afghanistan war veterans food insecurity comparison bar chart.
-  - Smooth auto-scroll behavior into debrief explanations on selection and reset to top on navigation.
-  - Persistent browser state autosave via `localStorage` (`emptybowl_quiz_state`).
-  - Integrated into Searchable Help index (`#helpDialog`) for quick control location.
+  - 10 evidence-based questions covering critical food insecurity concepts: 1 in 8 Americans, SNAP nutrition impact, working families & living wages, forced household trade-offs, college food security, pediatric development, health disparities, older adults & fixed incomes, college hunger, and structural roots of hunger.
+  - **Dynamic Interactive Harvest Bowl SVG:** Ceramic pottery bowl that actively fills with fresh food ingredients (Apple, Bread, Carrot, Broccoli, Grain, Tomato, Avocado, Corn, Beans, Greens) as correct answers are selected, complete with dropping keyframe physics, bowl rim reflection, stoneware depth shading, dynamic capacity progress bar (0–100%), real-time status chips, and contextual feedback messages.
+  - Numbered jump strip (01–10) with real-time status styling: open/unanswered, correct (sage green container), missed (tertiary clay container), and active selection outline.
+  - Comprehensive question debriefs with verified empirical explanations, correct indicator badges, and source citations.
+  - Final summary view displaying total score, 3 key takeaway tiles (Structural Root Causes, Intersectional Impact, Actionable Policy Levers), and full question review list with reset capability.
+  - Fully responsive on desktop and mobile viewports with flexible 10-pill rhythm strip and stacked layout.
+  - Persistent browser state autosave via `localStorage` (`emptybowl_quiz10_state`).
   - `index.html`: Busted-myth opener + USDA 4-tier food security spectrum explorer paired side-by-side with evocative photography ([`girl dreaming of food.jpeg`](girl%20dreaming%20of%20food.jpeg)) + hub cards with updated volunteer action points.
   - `whofaceshunger.html`: Dynamic demographic profile card inspector featuring 5 photographic selector cards placed directly above each button ([`College & University students.jpeg`](College%20&%20University%20students.jpeg), [`families with children.jpeg`](families%20with%20children.jpeg), [`low-wage workers.jpeg`](low-wage%20workers.jpeg), [`Seniors & fixed incomes.jpeg`](Seniors%20&%20fixed%20incomes.jpeg), [`rural populations.jpeg`](rural%20populations.jpeg)) with refined college barrier and worker impact copy.
   - `causesoffoodinsecurity.html`: Budget elasticity simulation showing how fixed costs squeeze food dollars.
