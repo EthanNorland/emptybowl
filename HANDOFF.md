@@ -18,7 +18,14 @@
 - **Interactive Food Insecurity Harvest Bowl Quiz (10 Questions & Pottery Bowl):**
   - Integrated the 10-question Harvest Bowl Quiz modal directly into [`index.html`](index.html), replaced from `/Users/ethannorland/Desktop/food insecurity website/10 question quiz.html`.
   - Also deployed as standalone quiz pages at [`quiz.html`](quiz.html) and [`10 question quiz.html`](10%20question%20quiz.html) with universal top navigation linking across all 5 main pages, and updated [`Food_Insecurity_Quiz.html`](Food_Insecurity_Quiz.html) to automatically redirect to `quiz.html`.
-  - Automatically loads whenever a user visits or navigates to the Empty Bowl home page (`index.html`), with immediate and prominent exit controls if they choose not to take it:
+  - Automatically loads when a user first visits the Empty Bowl home page (`index.html`), while providing immediate exit controls and persistent "Never show again" choice:
+    - **"Never show again" preference options:**
+      - Header button: **"Never show again"** (`#btnNeverShowHeader`)
+      - Footer checkbox: **"Never show this quiz automatically on future visits"** (`#chkNeverShowAgain`)
+      - Footer button: **"Never Show Again"** (`#btnNeverShowFooter`)
+      - Persisted permanently via `localStorage.setItem('emptybowl_quiz_never_show', 'true')`
+      - When set, `loadQuizOnEntry()` suppresses automatic popups on all future visits
+      - Users can still manually launch the quiz at any time using the header `Quiz 📝` button or the hero banner card
     - Dedicated **"Exit Quiz"** button in the modal header
     - Top-right close **`&times;`** button
     - **"Exit Quiz &times;"** button directly inside the question card navigation
@@ -28,7 +35,7 @@
     - Re-launch controls remain accessible at all times via the header `Quiz 📝` button and the hero section callout banner.
   - Permanent re-launch controls: added a `Quiz 📝` button in the site header actions (`#btn-quiz-toggle`) and an "Interactive Knowledge Check" callout card (`#heroQuizBanner`) in the hero card.
   - 10 evidence-based questions covering critical food insecurity concepts: 1 in 8 Americans, SNAP nutrition impact, working families & living wages, forced household trade-offs, college food security, pediatric development, health disparities, older adults & fixed incomes, college hunger, and structural roots of hunger.
-  - **Dynamic Interactive Brand Logo Harvest Bowl SVG:** Ceramic cross-section bowl styled to match the official Empty Bowl website emblem ([`icon.svg`](icon.svg)), featuring the authentic sage green cut face (`#72a983` -> `#558963` -> `#3a6345`), deep forest cavity (`#365e43` -> `#0e1c12`), floor shadow, polished rim highlights, and foot arch. Fresh food ingredients (Apple, Bread, Carrot, Broccoli, Grain, Tomato, Avocado, Corn, Beans, Greens) drop from high above straight down to the bottom floor of the bowl and physically stack up on top of each other across three structural tiers (Tier 1 floor foundation, Tier 2 middle tier, Tier 3 crowning harvest mound) with realistic drop-and-catch spring physics, dynamic capacity bar (0–100%), and real-time ingredient status chips.
+  - **Dynamic Interactive Brand Logo Harvest Bowl SVG & Gapless Stacking:** Ceramic cross-section bowl styled to match the official Empty Bowl website emblem ([`icon.svg`](icon.svg)), featuring the authentic sage green cut face (`#72a983` -> `#558963` -> `#3a6345`), deep forest cavity (`#365e43` -> `#0e1c12`), floor shadow, polished rim highlights, and foot arch. Fresh food ingredients (Apple, Bread, Carrot, Broccoli, Grain, Tomato, Avocado, Corn, Beans, Greens) drop from high above straight down to the bottom floor of the bowl and physically stack up on top of each other across three structural tiers with zero vertical gaps—each piece touching and resting on top of or nestled into adjacent pieces (Tier 1 floor foundation, Tier 2 middle tier, Tier 3 crowning harvest mound) with realistic drop-and-catch spring physics, dynamic capacity bar (0–100%), and real-time ingredient status chips.
   - Numbered jump strip (01–10) with real-time status styling: open/unanswered, correct (sage green container), missed (tertiary clay container), and active selection outline.
   - Comprehensive question debriefs with verified empirical explanations, correct indicator badges, and source citations.
   - Final summary view displaying total score, 3 key takeaway tiles (Structural Root Causes, Intersectional Impact, Actionable Policy Levers), and full question review list with reset capability.

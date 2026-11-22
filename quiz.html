@@ -1081,111 +1081,111 @@
               <ellipse cx="256" cy="314" rx="66" ry="17" fill="#07100a" opacity="0.95"/>
               <ellipse cx="256" cy="308" rx="92" ry="22" fill="#112015" opacity="0.55"/>
 
-              <!-- ================= FOOD ITEMS (Drop down to bottom and stack upward) ================= -->
-              <!-- TIER 1: Bottom of the bowl (Resting on bowl floor y=308-320) -->
-              <!-- Q1: Crisp Apple (bottom-left) -->
+              <!-- ================= GAPLESS COMPACT HARVEST STACK ================= -->
+              <!-- TIER 1: Bowl Floor (Resting firmly on bottom cavity y=304-314) -->
+              <!-- Q1: Crisp Apple (bottom-left floor, snug against bread) -->
               <g class="food-item" id="food-0">
-                <g transform="translate(198, 308)">
-                  <circle cx="0" cy="5" r="24" fill="#c8433a" />
-                  <ellipse cx="-7" cy="-2" rx="6" ry="10" fill="#e26a62" opacity="0.55" transform="rotate(-18 -7 -2)" />
-                  <path d="M -1,-17 Q 3,-30 10,-31" fill="none" stroke="#6b4423" stroke-width="3.5" stroke-linecap="round" />
-                  <path d="M 3,-24 Q 16,-32 19,-20 Q 11,-15 3,-24 Z" fill="#4c8c58" />
+                <g transform="translate(208, 308)">
+                  <circle cx="0" cy="5" r="28" fill="#c8433a" />
+                  <ellipse cx="-8" cy="-2" rx="7" ry="11" fill="#e26a62" opacity="0.55" transform="rotate(-18 -8 -2)" />
+                  <path d="M -1,-19 Q 3,-32 10,-33" fill="none" stroke="#6b4423" stroke-width="3.5" stroke-linecap="round" />
+                  <path d="M 3,-26 Q 16,-34 20,-22 Q 11,-16 3,-26 Z" fill="#4c8c58" />
                 </g>
               </g>
 
-              <!-- Q2: Artisan Bread Loaf (bottom-center floor) -->
+              <!-- Q2: Artisan Bread Loaf (bottom-center floor, overlaps apple & carrot) -->
               <g class="food-item" id="food-1">
-                <g transform="translate(256, 318)">
-                  <path d="M -34,18 C -37,-12 -22,-27 0,-27 C 22,-27 37,-12 34,18 Z" fill="#b87834" />
-                  <path d="M -26,15 C -28,-7 -16,-20 0,-20 C 16,-20 28,-7 26,15 Z" fill="#d79c59" />
-                  <path d="M -14,-12 L -5,-3 M 0,-15 L 9,-6 M 12,-9 L 20,-1" stroke="#b87834" stroke-width="3" stroke-linecap="round" />
+                <g transform="translate(268, 314)">
+                  <path d="M -42,22 C -46,-14 -28,-32 0,-32 C 28,-32 46,-14 42,22 Z" fill="#b87834" />
+                  <path d="M -32,18 C -35,-8 -20,-24 0,-24 C 20,-24 35,-8 32,18 Z" fill="#d79c59" />
+                  <path d="M -18,-14 L -8,-4 M 0,-18 L 10,-8 M 15,-11 L 24,-2" stroke="#b87834" stroke-width="3.5" stroke-linecap="round" />
                 </g>
               </g>
 
-              <!-- Q3: Farm Carrot (bottom-right floor) -->
+              <!-- Q3: Farm Carrot (bottom-right floor, wedged tight against bread) -->
               <g class="food-item" id="food-2">
-                <g transform="translate(318, 308) rotate(22)">
-                  <path d="M -6,-30 Q -14,-43 -5,-48 M 0,-30 Q 0,-48 5,-48 M 6,-30 Q 15,-42 12,-46" fill="none" stroke="#4c8c58" stroke-width="3.5" stroke-linecap="round" />
-                  <path d="M -15,-27 C -15,-33 15,-33 15,-27 L 3,27 C 1.5,31 -1.5,31 -3,27 Z" fill="#e06928" />
-                  <path d="M -8,-14 L 3,-14 M -5,0 L 6,0 M -4,14 L 2,14" stroke="#c04e14" stroke-width="2.5" stroke-linecap="round" />
+                <g transform="translate(322, 304) rotate(24)">
+                  <path d="M -6,-32 Q -15,-46 -5,-50 M 0,-32 Q 0,-50 6,-50 M 7,-32 Q 16,-44 13,-48" fill="none" stroke="#4c8c58" stroke-width="3.5" stroke-linecap="round" />
+                  <path d="M -16,-28 C -16,-35 16,-35 16,-28 L 4,32 C 2,36 -2,36 -4,32 Z" fill="#e06928" />
+                  <path d="M -9,-14 L 4,-14 M -6,0 L 7,0 M -4,15 L 3,15" stroke="#c04e14" stroke-width="2.5" stroke-linecap="round" />
                 </g>
               </g>
 
-              <!-- TIER 2: Middle Level (Stacked directly on top of Tier 1 y=230-265) -->
-              <!-- Q4: Broccoli Crown (stacked on Apple & Bread) -->
-              <g class="food-item" id="food-3">
-                <g transform="translate(180, 255)">
-                  <path d="M -7,6 L -5,26 L 5,26 L 7,6 Z" fill="#40693a" />
-                  <circle cx="-13" cy="-3" r="13" fill="#42783c" />
-                  <circle cx="13" cy="-3" r="13" fill="#42783c" />
-                  <circle cx="0" cy="-13" r="15" fill="#4c8c58" />
-                  <circle cx="-6" cy="4" r="10" fill="#2f5e39" />
-                  <circle cx="7" cy="4" r="10" fill="#42783c" />
-                </g>
-              </g>
-
-              <!-- Q5: Wheat Grain Sheaf (center upright, stacked behind bread) -->
+              <!-- TIER 2: Middle Tier (Resting directly on Tier 1 pieces) -->
+              <!-- Q5: Wheat Grain Sheaf (tall in center, emerging from behind bread/avocado) -->
               <g class="food-item" id="food-4">
-                <g transform="translate(256, 230)">
-                  <path d="M 0,36 L 0,-27" stroke="#997022" stroke-width="3.5" stroke-linecap="round" />
-                  <path d="M -14,33 L -21,-15" stroke="#997022" stroke-width="3" stroke-linecap="round" />
-                  <path d="M 14,33 L 21,-15" stroke="#997022" stroke-width="3" stroke-linecap="round" />
-                  <ellipse cx="-8" cy="-18" rx="6" ry="9" fill="#d9aa42" transform="rotate(-24 -8 -18)" />
-                  <ellipse cx="8" cy="-18" rx="6" ry="9" fill="#d9aa42" transform="rotate(24 8 -18)" />
-                  <ellipse cx="-9" cy="-3" rx="6" ry="9" fill="#d9aa42" transform="rotate(-24 -9 -3)" />
-                  <ellipse cx="9" cy="-3" rx="6" ry="9" fill="#d9aa42" transform="rotate(24 9 -3)" />
-                  <ellipse cx="0" cy="-30" rx="6" ry="9" fill="#d9aa42" />
-                  <ellipse cx="-21" cy="-12" rx="5" ry="7.5" fill="#d9aa42" transform="rotate(-30 -21 -12)" />
-                  <ellipse cx="21" cy="-12" rx="5" ry="7.5" fill="#d9aa42" transform="rotate(30 21 -12)" />
+                <g transform="translate(256, 224)">
+                  <path d="M 0,45 L 0,-28" stroke="#997022" stroke-width="3.5" stroke-linecap="round" />
+                  <path d="M -15,40 L -23,-16" stroke="#997022" stroke-width="3" stroke-linecap="round" />
+                  <path d="M 15,40 L 23,-16" stroke="#997022" stroke-width="3" stroke-linecap="round" />
+                  <ellipse cx="-9" cy="-19" rx="7" ry="11" fill="#d9aa42" transform="rotate(-24 -9 -19)" />
+                  <ellipse cx="9" cy="-19" rx="7" ry="11" fill="#d9aa42" transform="rotate(24 9 -19)" />
+                  <ellipse cx="-10" cy="-3" rx="7" ry="11" fill="#d9aa42" transform="rotate(-24 -10 -3)" />
+                  <ellipse cx="10" cy="-3" rx="7" ry="11" fill="#d9aa42" transform="rotate(24 10 -3)" />
+                  <ellipse cx="0" cy="-32" rx="7" ry="11" fill="#d9aa42" />
+                  <ellipse cx="-23" cy="-13" rx="6" ry="9" fill="#d9aa42" transform="rotate(-30 -23 -13)" />
+                  <ellipse cx="23" cy="-13" rx="6" ry="9" fill="#d9aa42" transform="rotate(30 23 -13)" />
                 </g>
               </g>
 
-              <!-- Q6: Ripe Tomato (stacked on Bread & Carrot) -->
-              <g class="food-item" id="food-5">
-                <g transform="translate(322, 258)">
-                  <circle cx="0" cy="3" r="22" fill="#d1382d" />
-                  <ellipse cx="-7" cy="-4" rx="5" ry="8" fill="#e26a62" opacity="0.6" transform="rotate(-20 -7 -4)" />
-                  <path d="M 0,-16 L -9,-22 L -3,-16 L 0,-25 L 3,-16 L 10,-21 Z" fill="#2f5e39" />
+              <!-- Q4: Broccoli Crown (rests directly on top of Apple & Bread left side) -->
+              <g class="food-item" id="food-3">
+                <g transform="translate(186, 256)">
+                  <path d="M -8,8 L -6,28 L 6,28 L 8,8 Z" fill="#40693a" />
+                  <circle cx="-16" cy="-3" r="16" fill="#42783c" />
+                  <circle cx="16" cy="-3" r="16" fill="#42783c" />
+                  <circle cx="0" cy="-16" r="18" fill="#4c8c58" />
+                  <circle cx="-8" cy="5" r="13" fill="#2f5e39" />
+                  <circle cx="9" cy="5" r="13" fill="#42783c" />
                 </g>
               </g>
 
-              <!-- Q7: Fresh Avocado (stacked in center-left tier) -->
+              <!-- Q7: Fresh Avocado (sits in crevice between Broccoli, Apple, and Bread) -->
               <g class="food-item" id="food-6">
-                <g transform="translate(220, 246) rotate(-14)">
-                  <path d="M 0,-26 C 15,-26 22,-3 21,15 C 20,30 10,36 0,36 C -10,36 -20,30 -21,15 C -22,-3 -15,-26 0,-26 Z" fill="#314e27" />
-                  <path d="M 0,-20 C 12,-20 18,-1 16,13 C 15,25 7,30 0,30 C -7,30 -15,25 -16,13 C -18,-1 -12,-20 0,-20 Z" fill="#759c40" />
-                  <circle cx="0" cy="12" r="9.5" fill="#5c351c" />
+                <g transform="translate(236, 256) rotate(-8)">
+                  <path d="M 0,-30 C 17,-30 25,-3 24,17 C 23,34 12,40 0,40 C -12,40 -23,34 -24,17 C -25,-3 -17,-30 0,-30 Z" fill="#314e27" />
+                  <path d="M 0,-24 C 14,-24 20,-1 19,15 C 18,29 9,34 0,34 C -9,34 -18,29 -19,15 C -20,-1 -14,-24 0,-24 Z" fill="#759c40" />
+                  <circle cx="0" cy="14" r="11" fill="#5c351c" />
                 </g>
               </g>
 
-              <!-- TIER 3: Crown & Mound (Stacked on Tier 2 y=190-280) -->
-              <!-- Q8: Sweet Corn (upper-right flank) -->
+              <!-- Q6: Ripe Tomato (rests directly on top of Bread and Carrot) -->
+              <g class="food-item" id="food-5">
+                <g transform="translate(305, 258)">
+                  <circle cx="0" cy="4" r="26" fill="#d1382d" />
+                  <ellipse cx="-8" cy="-4" rx="6" ry="10" fill="#e26a62" opacity="0.6" transform="rotate(-20 -8 -4)" />
+                  <path d="M 0,-19 L -10,-25 L -4,-19 L 0,-28 L 4,-19 L 11,-24 Z" fill="#2f5e39" />
+                </g>
+              </g>
+
+              <!-- TIER 3: Crown & Mound (Resting directly on Tier 2 pieces) -->
+              <!-- Q8: Sweet Corn (rests on top of Tomato & Carrot, leaning right) -->
               <g class="food-item" id="food-7">
-                <g transform="translate(345, 210) rotate(26)">
-                  <ellipse cx="0" cy="0" rx="14" ry="26" fill="#f0b830" />
-                  <path d="M -7,-15 L 7,-15 M -10,-4 L 10,-4 M -10,6 L 10,6 M -7,16 L 7,16" stroke="#997022" stroke-width="1.8" opacity="0.6" />
-                  <path d="M -16,3 Q -15,28 0,30 Q -6,15 -16,3 Z" fill="#58853b" />
-                  <path d="M 16,3 Q 15,28 0,30 Q 6,15 16,3 Z" fill="#4c8c58" />
+                <g transform="translate(328, 222) rotate(18)">
+                  <ellipse cx="0" cy="0" rx="16" ry="30" fill="#f0b830" />
+                  <path d="M -8,-17 L 8,-17 M -12,-5 L 12,-5 M -12,6 L 12,6 M -8,18 L 8,18" stroke="#997022" stroke-width="2" opacity="0.6" />
+                  <path d="M -18,3 Q -17,32 0,34 Q -7,17 -18,3 Z" fill="#58853b" />
+                  <path d="M 18,3 Q 17,32 0,34 Q 7,17 18,3 Z" fill="#4c8c58" />
                 </g>
               </g>
 
-              <!-- Q9: Protein Beans (front-center nested over bread) -->
-              <g class="food-item" id="food-8">
-                <g transform="translate(268, 280)">
-                  <ellipse cx="-12" cy="3" rx="9" ry="6.5" fill="#94452e" transform="rotate(-22 -12 3)" />
-                  <ellipse cx="6" cy="0" rx="9" ry="6.5" fill="#692d1c" transform="rotate(15 6 0)" />
-                  <ellipse cx="-3" cy="10" rx="9" ry="6.5" fill="#94452e" transform="rotate(8 -3 10)" />
-                  <ellipse cx="14" cy="9" rx="8.5" ry="6" fill="#94452e" transform="rotate(-16 14 9)" />
-                </g>
-              </g>
-
-              <!-- Q10: Leafy Greens (crowning top-left overflow) -->
+              <!-- Q10: Leafy Greens (rests directly across Broccoli & Avocado) -->
               <g class="food-item" id="food-9">
-                <g transform="translate(178, 192)">
-                  <path d="M -18,12 C -24,-9 -6,-27 12,-21 C 21,-6 12,15 -18,12 Z" fill="#3a7246" />
-                  <path d="M -15,9 Q -1,-4 8,-16" fill="none" stroke="#7eb88b" stroke-width="2.4" stroke-linecap="round" />
-                  <path d="M -3,15 C 6,-6 27,-18 33,-6 C 33,12 15,21 -3,15 Z" fill="#4c8c58" />
-                  <path d="M 2,12 Q 15,1 27,-4" fill="none" stroke="#7eb88b" stroke-width="2.4" stroke-linecap="round" />
+                <g transform="translate(196, 215)">
+                  <path d="M -22,15 C -30,-11 -8,-33 15,-25 C 26,-8 15,19 -22,15 Z" fill="#3a7246" />
+                  <path d="M -19,11 Q -1,-4 10,-20" fill="none" stroke="#7eb88b" stroke-width="2.8" stroke-linecap="round" />
+                  <path d="M -3,19 C 8,-8 33,-22 41,-8 C 41,14 19,25 -3,19 Z" fill="#4c8c58" />
+                  <path d="M 2,14 Q 19,1 33,-4" fill="none" stroke="#7eb88b" stroke-width="2.8" stroke-linecap="round" />
+                </g>
+              </g>
+
+              <!-- Q9: Protein Beans (nestled in front center, bridging Avocado, Bread, and Tomato) -->
+              <g class="food-item" id="food-8">
+                <g transform="translate(262, 280)">
+                  <ellipse cx="-14" cy="3" rx="11" ry="7.5" fill="#94452e" transform="rotate(-22 -14 3)" />
+                  <ellipse cx="7" cy="0" rx="11" ry="7.5" fill="#692d1c" transform="rotate(15 7 0)" />
+                  <ellipse cx="-3" cy="12" rx="11" ry="7.5" fill="#94452e" transform="rotate(8 -3 12)" />
+                  <ellipse cx="16" cy="11" rx="10.5" ry="7" fill="#94452e" transform="rotate(-16 16 11)" />
                 </g>
               </g>
 
