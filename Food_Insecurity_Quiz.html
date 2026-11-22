@@ -1,0 +1,1942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="artifact-type" content="tool">
+  <meta name="design-style" content="briefing">
+  <title>Food Insecurity Quiz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+
+      /* Page and surfaces: warm stone-white paper */
+      --background: #faf9f5;
+      --surface-container-low: #ffffff;
+      --surface-container: #f1efe8;
+      --surface-container-high: #e6e2d6;
+
+      /* Ink */
+      --on-surface: #17181a;
+      --on-surface-variant: #56585c;
+
+      /* Rules */
+      --outline: #17181a;
+      --outline-variant: #dedad0;
+      --border-subtle: #c8c4b8;
+
+      /* Accents */
+      --primary: #17181a;
+      --on-primary: #faf9f5;
+      --primary-container: #f2b705;
+      --on-primary-container: #17181a;
+      --secondary: #1f4e5f;
+      --secondary-bg: #eaf1f4;
+      --tertiary: #785008;
+      --warning-bg: #f5e6c4;
+      --error: #b42318;
+      --error-bg: #fdf2f1;
+      --on-error: #ffffff;
+
+      /* Data series, in order of use */
+      --data-1: #1f4e5f;
+      --data-2: #d99000;
+      --data-3: #2b6e52;
+      --data-4: #b84a39;
+      --data-context: #c4bfb2;
+
+      /* Semantic tokens */
+      --positive: #2b6e52;
+      --positive-bg: #ebf4ef;
+      --warning: #785008;
+      --focus: #1f4e5f;
+
+      /* Fonts */
+      --font-headline: 'Source Serif 4', serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --font-label: 'Geist Mono', monospace;
+
+      /* Type scale (Focused Tool) */
+      --display-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.25rem);
+      --headline-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+      --subhead-size: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+      --body-size: clamp(0.9375rem, 0.9rem + 0.15vw, 1rem);
+      --label-size: 0.75rem;
+
+      /* Shape */
+      --rounded: 0.25rem;
+      --rounded-lg: 0.375rem;
+      --rounded-full: 0.25rem;
+      --badge-radius: 2px;
+
+      /* Style effects */
+      --section-rule: 1.5px solid var(--outline);
+      --card-border: 1px solid var(--outline-variant);
+      --heading-tracking: -0.02em;
+      --label-tracking: 0.08em;
+
+      /* Spacing scale (4pt base) */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+      --space-3xl: 6rem;
+
+      /* Motion */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-micro: 120ms;
+      --dur-short: 220ms;
+      --dur-long: 420ms;
+    }
+
+    /* Base reset */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { overflow-x: clip; margin: 0; padding: 0; }
+    header { position: static !important; }
+
+    body {
+      background-color: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button, input, select, textarea {
+      font-family: inherit;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .page-grid {
+      display: grid;
+      gap: var(--space-lg);
+      padding: var(--space-lg);
+      max-width: 1200px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    .page-grid * { min-width: 0; }
+
+    /* Briefing Dossier Header */
+    .masthead {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .dossier-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      border-bottom: var(--section-rule);
+      padding-bottom: var(--space-sm);
+      margin-bottom: var(--space-sm);
+    }
+
+    .dossier-left {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .dossier-pill {
+      background-color: var(--primary-container);
+      color: var(--on-primary-container);
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.6875rem;
+      letter-spacing: var(--label-tracking);
+      text-transform: uppercase;
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--badge-radius);
+      line-height: 1.2;
+    }
+
+    .dossier-meta {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 500;
+      color: var(--on-surface-variant);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .title {
+      font-family: var(--font-headline);
+      font-size: var(--display-size);
+      font-weight: 600;
+      letter-spacing: var(--heading-tracking);
+      line-height: 1.08;
+      color: var(--on-surface);
+      margin: 0;
+    }
+
+    .standfirst {
+      font-family: var(--font-body);
+      font-size: var(--subhead-size);
+      font-weight: 600;
+      color: var(--secondary);
+      margin: var(--space-xs) 0 0;
+      max-width: 65ch;
+      line-height: 1.45;
+    }
+
+    /* KPI Strip */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr));
+      gap: var(--space-md);
+    }
+
+    .figure-card {
+      background-color: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md) var(--space-lg);
+    }
+
+    .kpi-card {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .kpi-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: var(--label-tracking);
+      color: var(--on-surface-variant);
+    }
+
+    .kpi-value {
+      font-family: var(--font-headline);
+      font-size: var(--headline-size);
+      font-weight: 600;
+      font-variant-numeric: lining-nums tabular-nums;
+      line-height: 1.15;
+      color: var(--on-surface);
+    }
+
+    .kpi-sub {
+      font-family: var(--font-body);
+      font-size: 0.8125rem;
+      color: var(--on-surface-variant);
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 6px;
+      background-color: var(--surface-container);
+      border-radius: var(--rounded);
+      overflow: hidden;
+      margin-top: var(--space-xs);
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background-color: var(--secondary);
+      transition: width var(--dur-short) var(--ease-out);
+    }
+
+    /* Filter & Utility Toolbar */
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+      border-bottom: var(--card-border);
+      padding-bottom: var(--space-md);
+    }
+
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+
+    .filter-btn {
+      min-height: 44px;
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--rounded);
+      border: 1px solid var(--border-subtle);
+      background-color: var(--surface-container-low);
+      color: var(--on-surface);
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      transition: background-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out), box-shadow var(--dur-micro) var(--ease-out);
+    }
+
+    .filter-btn:hover {
+      background-color: var(--surface-container);
+    }
+
+    .filter-btn[aria-pressed="true"] {
+      background-color: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+    }
+
+    .filter-count {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      opacity: 0.85;
+    }
+
+    .utility-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      align-items: center;
+    }
+
+    .btn {
+      min-height: 44px;
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--rounded);
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-xs);
+      border: 1px solid var(--border-subtle);
+      background-color: var(--surface-container-low);
+      color: var(--on-surface);
+      transition: background-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out), box-shadow var(--dur-micro) var(--ease-out);
+    }
+
+    .btn:hover:not(:disabled) {
+      background-color: var(--surface-container);
+    }
+
+    .btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background-color: var(--secondary);
+      border-color: var(--secondary);
+    }
+
+    .btn-warning-armed {
+      background-color: var(--warning-bg);
+      color: var(--tertiary);
+      border-color: var(--tertiary);
+    }
+
+    /* Main Workspace Grid */
+    .quiz-workspace {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: var(--space-lg);
+      align-items: start;
+    }
+
+    .quiz-main {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+
+    .quiz-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+
+    /* Active Question Card */
+    .question-card {
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      container-type: inline-size;
+    }
+
+    .question-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      border-bottom: var(--card-border);
+      padding-bottom: var(--space-sm);
+    }
+
+    .question-meta-left {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .index-num {
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: var(--label-size);
+      color: var(--secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .topic-tag {
+      display: inline-block;
+      background-color: var(--warning-bg);
+      color: var(--tertiary);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--rounded);
+    }
+
+    .status-badge {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--rounded);
+      background-color: var(--surface-container);
+      color: var(--on-surface-variant);
+    }
+
+    .status-badge[data-state="correct"] {
+      background-color: var(--positive-bg);
+      color: var(--positive);
+    }
+
+    .status-badge[data-state="incorrect"] {
+      background-color: var(--error-bg);
+      color: var(--error);
+    }
+
+    .question-stem {
+      font-family: var(--font-headline);
+      font-size: var(--headline-size);
+      font-weight: 600;
+      line-height: 1.25;
+      letter-spacing: -0.015em;
+      color: var(--on-surface);
+      margin: 0;
+      max-width: 65ch;
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      margin-top: var(--space-xs);
+    }
+
+    .option-btn {
+      width: 100%;
+      min-height: 52px;
+      text-align: left;
+      padding: var(--space-md);
+      border-radius: var(--rounded);
+      border: 1px solid var(--border-subtle);
+      background-color: var(--surface-container-low);
+      color: var(--on-surface);
+      font-size: var(--body-size);
+      line-height: 1.5;
+      cursor: pointer;
+      display: grid;
+      grid-template-columns: 32px minmax(0, 1fr) auto;
+      align-items: start;
+      gap: var(--space-md);
+      transition: background-color var(--dur-micro) var(--ease-out), box-shadow var(--dur-micro) var(--ease-out);
+    }
+
+    .option-btn:hover:not(:disabled) {
+      background-color: var(--surface-container);
+      box-shadow: inset 3px 0 0 var(--secondary);
+    }
+
+    .option-btn:disabled {
+      cursor: default;
+    }
+
+    .option-letter {
+      width: 28px;
+      height: 28px;
+      border-radius: var(--badge-radius);
+      background-color: var(--surface-container);
+      color: var(--on-surface);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .option-text {
+      max-width: 65ch;
+    }
+
+    .option-marker {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      align-self: center;
+      white-space: nowrap;
+    }
+
+    /* Answer States (no border-width changes) */
+    .option-btn[data-status="correct"] {
+      background-color: var(--positive-bg);
+      border-color: var(--positive);
+      box-shadow: inset 4px 0 0 var(--positive);
+    }
+    .option-btn[data-status="correct"] .option-letter {
+      background-color: var(--positive);
+      color: var(--surface-container-low);
+    }
+    .option-btn[data-status="correct"] .option-marker {
+      color: var(--positive);
+    }
+
+    .option-btn[data-status="incorrect"] {
+      background-color: var(--error-bg);
+      border-color: var(--error);
+      box-shadow: inset 4px 0 0 var(--error);
+    }
+    .option-btn[data-status="incorrect"] .option-letter {
+      background-color: var(--error);
+      color: var(--on-error);
+    }
+    .option-btn[data-status="incorrect"] .option-marker {
+      color: var(--error);
+    }
+
+    .option-btn[data-status="dimmed"] {
+      opacity: 0.65;
+    }
+
+    /* Instant Analytical Debrief */
+    .debrief-panel {
+      background-color: var(--surface-container);
+      border-top: var(--section-rule);
+      border-radius: 0 0 var(--rounded) var(--rounded);
+      padding: var(--space-md) var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      animation: fadeSlide var(--dur-short) var(--ease-out);
+    }
+
+    .debrief-panel[hidden] {
+      display: none;
+    }
+
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .debrief-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+    }
+
+    .debrief-verdict {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.9375rem;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+
+    .debrief-verdict[data-correct="true"] {
+      color: var(--positive);
+    }
+
+    .debrief-verdict[data-correct="false"] {
+      color: var(--error);
+    }
+
+    .debrief-copy {
+      margin: 0;
+      max-width: 65ch;
+      color: var(--on-surface);
+      font-size: 0.9375rem;
+      line-height: 1.6;
+    }
+
+    .debrief-source {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+      border-top: var(--card-border);
+      padding-top: var(--space-sm);
+    }
+
+    /* Embedded Evidence Visuals inside Debrief */
+    .evidence-box {
+      background-color: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .evidence-title {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--secondary);
+      margin: 0;
+    }
+
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md);
+    }
+
+    @container (max-width: 520px) {
+      .compare-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .compare-col {
+      background-color: var(--background);
+      border: var(--card-border);
+      border-radius: var(--rounded);
+      padding: var(--space-sm) var(--space-md);
+    }
+
+    .compare-col h4 {
+      margin: 0 0 var(--space-xs);
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--on-surface);
+      border-bottom: var(--section-rule);
+      padding-bottom: var(--space-xs);
+    }
+
+    .compare-list {
+      margin: 0;
+      padding-left: var(--space-md);
+      font-size: 0.8125rem;
+      color: var(--on-surface);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .mini-bar-row {
+      display: grid;
+      grid-template-columns: 150px minmax(0, 1fr) 54px;
+      align-items: center;
+      gap: var(--space-sm);
+      font-size: 0.8125rem;
+    }
+
+    .mini-bar-track {
+      height: 10px;
+      background-color: var(--surface-container);
+      border-radius: var(--badge-radius);
+      overflow: hidden;
+    }
+
+    .mini-bar-fill {
+      height: 100%;
+      background-color: var(--data-1);
+    }
+
+    .mini-bar-fill.gold {
+      background-color: var(--data-2);
+    }
+
+    .mini-bar-fill.red {
+      background-color: var(--data-4);
+    }
+
+    .mini-bar-val {
+      font-family: var(--font-label);
+      font-weight: 600;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8125rem;
+      background-color: var(--surface-container-low);
+    }
+
+    .data-table th {
+      text-align: left;
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--on-surface-variant);
+      border-bottom: var(--section-rule);
+      padding: var(--space-xs) var(--space-sm);
+    }
+
+    .data-table td {
+      padding: var(--space-xs) var(--space-sm);
+      border-bottom: var(--card-border);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Question Footer Nav */
+    .question-nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      padding-top: var(--space-sm);
+      border-top: var(--card-border);
+    }
+
+    .nav-hint {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+    }
+
+    .nav-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+
+    /* Completion Dossier Card */
+    .summary-card {
+      border-top: 3px solid var(--primary);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .summary-card[hidden] {
+      display: none;
+    }
+
+    .summary-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: var(--space-md);
+      border-bottom: var(--card-border);
+      padding-bottom: var(--space-md);
+    }
+
+    .summary-title {
+      font-family: var(--font-headline);
+      font-size: var(--headline-size);
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .summary-score-big {
+      font-family: var(--font-headline);
+      font-size: var(--display-size);
+      font-weight: 700;
+      color: var(--secondary);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .domain-summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+      gap: var(--space-md);
+    }
+
+    .domain-stat-tile {
+      background-color: var(--background);
+      border: var(--card-border);
+      border-radius: var(--rounded);
+      padding: var(--space-sm) var(--space-md);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    /* Sidebar */
+    .aside-box {
+      background-color: var(--surface-container);
+      border-top: var(--section-rule);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .sidebar-title {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: var(--label-tracking);
+      color: var(--on-surface);
+      margin: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--space-sm);
+    }
+
+    .q-pill {
+      min-height: 44px;
+      border-radius: var(--rounded);
+      border: 1px solid var(--border-subtle);
+      background-color: var(--surface-container-low);
+      color: var(--on-surface);
+      font-family: var(--font-label);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color var(--dur-micro) var(--ease-out), box-shadow var(--dur-micro) var(--ease-out);
+    }
+
+    .q-pill:hover {
+      background-color: var(--surface-container-high);
+    }
+
+    .q-pill[data-current="true"] {
+      box-shadow: 0 0 0 2px var(--primary);
+      font-weight: 700;
+    }
+
+    .q-pill[data-state="correct"] {
+      background-color: var(--positive-bg);
+      border-color: var(--positive);
+      color: var(--positive);
+    }
+
+    .q-pill[data-state="incorrect"] {
+      background-color: var(--error-bg);
+      border-color: var(--error);
+      color: var(--error);
+    }
+
+    .q-pill[data-dimmed="true"] {
+      opacity: 0.4;
+    }
+
+    .legend-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: var(--badge-radius);
+      border: 1px solid var(--border-subtle);
+      background-color: var(--surface-container-low);
+    }
+
+    .legend-dot.correct {
+      background-color: var(--positive);
+      border-color: var(--positive);
+    }
+
+    .legend-dot.incorrect {
+      background-color: var(--error);
+      border-color: var(--error);
+    }
+
+    .mastery-row {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .mastery-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8125rem;
+      font-weight: 600;
+    }
+
+    .mastery-meta {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+    }
+
+    .mastery-track {
+      height: 6px;
+      background-color: var(--surface-container-high);
+      border-radius: var(--badge-radius);
+      overflow: hidden;
+    }
+
+    .mastery-fill {
+      height: 100%;
+      width: 0%;
+      background-color: var(--data-1);
+      transition: width var(--dur-short) var(--ease-out);
+    }
+
+    .ref-drawer {
+      font-size: 0.8125rem;
+      line-height: 1.55;
+      color: var(--on-surface);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      border-top: var(--card-border);
+      padding-top: var(--space-sm);
+    }
+
+    .ref-drawer[hidden] {
+      display: none;
+    }
+
+    .ref-item strong {
+      color: var(--secondary);
+    }
+
+    .inline-status-msg {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--secondary);
+      min-height: 1.2em;
+    }
+
+    @media (max-width: 920px) {
+      .quiz-workspace {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page-grid {
+        padding: var(--space-md);
+        gap: var(--space-md);
+      }
+      .question-card {
+        padding: var(--space-md);
+      }
+      .mini-bar-row {
+        grid-template-columns: 110px minmax(0, 1fr) 48px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-grid">
+    <header class="masthead">
+      <div class="dossier-bar">
+        <div class="dossier-left">
+          <span class="dossier-pill">Briefing Quiz</span>
+          <span class="dossier-meta">U.S. &amp; L.A. County Research · 12 Questions · 4 Domains</span>
+        </div>
+        <span class="dossier-meta" id="saved-indicator">Progress saved automatically</span>
+      </div>
+      <h1 class="title">Food Insecurity Quiz</h1>
+      <p class="standfirst">Test your understanding of the structural causes of food insecurity, food vs. nutrition insecurity definitions, sociodemographic disparities, and public health interventions.</p>
+    </header>
+
+    <section class="kpi-grid" aria-label="Quiz progress metrics">
+      <div class="figure-card kpi-card">
+        <span class="kpi-label">Completion</span>
+        <span class="kpi-value" id="kpi-progress">0 / 12</span>
+        <div class="progress-track" aria-hidden="true">
+          <div class="progress-fill" id="kpi-progress-bar"></div>
+        </div>
+      </div>
+      <div class="figure-card kpi-card">
+        <span class="kpi-label">Current Score</span>
+        <span class="kpi-value" id="kpi-score">—</span>
+        <span class="kpi-sub" id="kpi-score-sub">Select an option to begin</span>
+      </div>
+      <div class="figure-card kpi-card">
+        <span class="kpi-label">Correct Streak</span>
+        <span class="kpi-value" id="kpi-streak">0</span>
+        <span class="kpi-sub" id="kpi-streak-sub">Consecutive correct answers</span>
+      </div>
+      <div class="figure-card kpi-card">
+        <span class="kpi-label">Active Topic</span>
+        <span class="kpi-value" id="kpi-scope">All Topics</span>
+        <span class="kpi-sub" id="kpi-scope-sub">12 questions in queue</span>
+      </div>
+    </section>
+
+    <div class="toolbar" role="region" aria-label="Topic filters and quiz actions">
+      <div class="filter-group" id="topic-filters">
+        <button type="button" class="filter-btn" data-topic="all" aria-pressed="true" onclick="setTopicFilter('all')">
+          All Topics <span class="filter-count">12</span>
+        </button>
+        <button type="button" class="filter-btn" data-topic="causes" aria-pressed="false" onclick="setTopicFilter('causes')">
+          01 Causes <span class="filter-count">3</span>
+        </button>
+        <button type="button" class="filter-btn" data-topic="definitions" aria-pressed="false" onclick="setTopicFilter('definitions')">
+          02 Definitions <span class="filter-count">3</span>
+        </button>
+        <button type="button" class="filter-btn" data-topic="disparities" aria-pressed="false" onclick="setTopicFilter('disparities')">
+          03 Disparities <span class="filter-count">3</span>
+        </button>
+        <button type="button" class="filter-btn" data-topic="interventions" aria-pressed="false" onclick="setTopicFilter('interventions')">
+          04 Interventions <span class="filter-count">3</span>
+        </button>
+      </div>
+      <div class="utility-group">
+        <button type="button" class="btn" id="btn-missed" onclick="jumpToNextMissed()" disabled>Review Missed (0)</button>
+        <button type="button" class="btn" id="btn-export" onclick="exportSummary()">Export Summary</button>
+        <button type="button" class="btn" id="btn-reset" data-armed="false" onclick="handleResetClick(this)">Reset Quiz</button>
+      </div>
+    </div>
+
+    <div class="quiz-workspace">
+      <main class="quiz-main">
+        <section class="figure-card summary-card" id="summary-card" aria-live="polite" hidden>
+          <div class="summary-header">
+            <div>
+              <span class="index-num">Assessment Complete</span>
+              <h2 class="summary-title" id="summary-heading">Your Food &amp; Nutrition Security Dossier</h2>
+            </div>
+            <div class="summary-score-big" id="summary-pct">0%</div>
+          </div>
+          <p class="debrief-copy" id="summary-verdict"></p>
+          <div class="domain-summary-grid" id="domain-summary-grid"></div>
+          <div class="nav-actions">
+            <button type="button" class="btn btn-primary" onclick="jumpToNextMissed()" id="summary-review-btn">Review Missed Questions</button>
+            <button type="button" class="btn" onclick="exportSummary()">Download Score Report (.txt)</button>
+          </div>
+        </section>
+
+        <article class="figure-card question-card" id="question-card" aria-live="polite">
+          <div class="question-meta-row">
+            <div class="question-meta-left">
+              <span class="index-num" id="q-counter">Question 01 of 12</span>
+              <span class="topic-tag" id="q-topic-tag">01 · Causes &amp; Mechanisms</span>
+            </div>
+            <span class="status-badge" id="q-status-badge" data-state="unanswered">Unanswered</span>
+          </div>
+
+          <h2 class="question-stem" id="q-stem">Loading question…</h2>
+
+          <div class="options-list" id="options-list" role="group" aria-label="Answer choices"></div>
+
+          <div class="debrief-panel" id="debrief-panel" hidden>
+            <div class="debrief-header">
+              <span class="debrief-verdict" id="debrief-verdict"></span>
+            </div>
+            <p class="debrief-copy" id="debrief-explanation"></p>
+            <div id="debrief-visual"></div>
+            <div class="debrief-source" id="debrief-source"></div>
+          </div>
+
+          <div class="question-nav">
+            <span class="nav-hint" id="nav-hint">Choose A–D for instant feedback · Arrow keys to navigate</span>
+            <div class="nav-actions">
+              <button type="button" class="btn" id="btn-prev" onclick="navigateQuestion(-1)">Previous</button>
+              <button type="button" class="btn btn-primary" id="btn-next" onclick="navigateQuestion(1)">Next Question</button>
+            </div>
+          </div>
+        </article>
+      </main>
+
+      <aside class="quiz-sidebar" aria-label="Question index and domain mastery">
+        <div class="figure-card">
+          <h3 class="sidebar-title">
+            <span>Question Index</span>
+            <span class="dossier-meta" id="nav-count-label">12 Items</span>
+          </h3>
+          <div class="nav-grid" id="nav-grid" style="margin-top: var(--space-sm); margin-bottom: var(--space-sm);"></div>
+          <div class="legend-row">
+            <span class="legend-item"><span class="legend-dot"></span> Open</span>
+            <span class="legend-dot correct"></span><span class="legend-item">Right</span>
+            <span class="legend-dot incorrect"></span><span class="legend-item">Missed</span>
+          </div>
+        </div>
+
+        <div class="aside-box">
+          <h3 class="sidebar-title">Domain Mastery</h3>
+          <div id="mastery-bars" style="display: flex; flex-direction: column; gap: var(--space-sm);"></div>
+          <span class="inline-status-msg" id="action-feedback" aria-live="polite"></span>
+        </div>
+
+        <div class="aside-box">
+          <h3 class="sidebar-title">
+            <span>Study Reference</span>
+            <button type="button" class="btn" id="btn-toggle-ref" style="min-height: 44px; padding: var(--space-xs) var(--space-md); font-size: var(--label-size);" aria-expanded="false" onclick="toggleReferenceDrawer()">Show Notes</button>
+          </h3>
+          <p style="margin: 0; font-size: 0.8125rem; color: var(--on-surface-variant);">Key definitions from the USDA HFSSM and Gretchen Swanson Center for Nutrition.</p>
+          <div class="ref-drawer" id="ref-drawer" hidden>
+            <div class="ref-item"><strong>Food Insecurity:</strong> Limited or uncertain access to enough food for an active, healthy life due to limited money or resources.</div>
+            <div class="ref-item"><strong>Marginal Food Security:</strong> 1–2 affirmative items (food anxiety); lumped with "food secure" in standard U.S. counts despite intermediate child and maternal health risks.</div>
+            <div class="ref-item"><strong>Nutrition Security:</strong> Nutritional adequacy of accessible food plus ability to meet cultural, religious, allergy, and taste needs.</div>
+            <div class="ref-item"><strong>L.A. County Sample (Dec 2022):</strong> Understanding America Study, N = 1,071 adults; 23.5% food insecure, 24.5% nutrition insecure, 13.5% both.</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <api-shim></api-shim>
+  <script>
+    const TOPICS = {
+      causes: { id: 'causes', label: `01 · Causes & Mechanisms`, short: `Causes` },
+      definitions: { id: 'definitions', label: `02 · Definitions & Measures`, short: `Definitions` },
+      disparities: { id: 'disparities', label: `03 · Populations & Disparities`, short: `Disparities` },
+      interventions: { id: 'interventions', label: `04 · Policy & Interventions`, short: `Interventions` }
+    };
+
+    const QUESTIONS = [
+      {
+        id: 1,
+        topic: 'causes',
+        stem: `What is the primary root cause of food insecurity in the United States, and what common budget trade-off do households using emergency food pantries report?`,
+        options: [
+          `A shortage of total domestic food supply, forcing rural families to barter for staple grains`,
+          `Poverty and insufficient household resources—compounded by housing, utility, and healthcare costs—forcing choices between food and utilities (41.5%), rent or mortgage (35%), or medical care (31.6%)`,
+          `Lack of household nutrition literacy, leaving families unaware of grocery store locations`,
+          `Seasonal farm closures alone, affecting only households without employed adults`
+        ],
+        correct: 1,
+        explanation: `Despite living in a high-income nation with ample overall food supply, millions experience food insecurity because of poverty and budget shocks such as job loss, benefit reductions, or high living costs. Among households relying on food pantries and emergency food programs, substantial shares report choosing between buying food and paying for utilities or heating (41.5%), rent or mortgage (35.0%), or medical care and medication (31.6%).`,
+        source: `Sources: Food Insecurity in America: A Call to Action; Are Your Patients Hungry? (Hunger in America survey); Livings et al., The Journal of Nutrition (2024).`,
+        visualType: `tradeoffs`
+      },
+      {
+        id: 2,
+        topic: 'causes',
+        stem: `How did economic and supply-chain disruptions during the COVID-19 pandemic worsen both food insecurity and dietary quality?`,
+        options: [
+          `Lockdowns lowered retail prices of fresh produce while raising prices of shelf-stable processed foods`,
+          `Job loss, salary cuts, and distribution delays drove up prices of nutrient-rich foods (fruits, vegetables, legumes), making foods high in saturated fats and added sugars the cheapest options`,
+          `Emergency cash transfers completely eliminated food insecurity across all surveyed regions`,
+          `Restaurant closures prevented households from purchasing calorie-dense foods`
+        ],
+        correct: 1,
+        explanation: `Pandemic confinement, labor shortages, and distribution bottlenecks raised food prices while triggering widespread unemployment and reduced family income. In multi-country survey analyses (n = 12,774), household job loss (aPR = 1.71) and rising household food prices (aPR = 1.54) strongly increased food insecurity. As prices of fruits, vegetables, and legumes climbed, ultra-processed foods high in saturated fats and added sugars became the cheapest alternatives, worsening diet quality and fueling the double burden of malnutrition.`,
+        source: `Source: COVID-19 Food Insecurity Cross-Sectional Study, Nutrients (2022).`,
+        visualType: null
+      },
+      {
+        id: 3,
+        topic: 'causes',
+        stem: `Which combination accurately summarizes the three biological and behavioral pathways linking food insecurity to cardiometabolic diseases such as type 2 diabetes?`,
+        options: [
+          `Cheaper calorie-dense/nutrient-poor diets, cyclic feast-or-scarcity eating tied to monthly paychecks or assistance, and chronic stress activating the HPA axis to elevate cortisol and insulin resistance`,
+          `Excessive dietary protein intake, elevated hydration, and hyperactive thyroid hormone secretion`,
+          `Exclusive reliance on whole-grain vegetarian diets paired with intense manual labor`,
+          `Overconsumption of fresh farmers' market produce triggered by monthly SNAP benefit spikes`
+        ],
+        correct: 0,
+        explanation: `Three reinforcing mechanisms connect food insecurity to cardiometabolic disease: (1) substitution toward cheaper, calorie-dense, nutrient-poor foods higher in fats and refined carbohydrates with fewer fruits and vegetables; (2) cyclic eating patterns driven by monthly paychecks and benefit cycles, where alternating scarcity and binge episodes promote insulin resistance; and (3) chronic stress and anxiety activating the hypothalamic-pituitary-adrenal (HPA) axis, releasing glucocorticoids/cortisol that increase visceral fat, blood glucose, and insulin resistance.`,
+        source: `Source: Food Insecurity and Chronic Disease (Mechanism Review).`,
+        visualType: null
+      },
+      {
+        id: 4,
+        topic: 'definitions',
+        stem: `How does "nutrition security" expand upon traditional "food security," and what single-item screener did the 2022 Los Angeles County study use to measure nutrition insecurity?`,
+        options: [
+          `It tracks total daily kilocalories consumed via a mandatory 7-day weighed food diary`,
+          `It captures the nutritional adequacy of accessible food plus barriers to dietary preferences (cultural/religious needs, allergies, taste), measured by asking whether respondents worried the food they could eat would hurt their health and wellbeing`,
+          `It is an exact synonym for USDA "very low food security" among households with young children`,
+          `It applies strictly to low-income nations facing acute famine and staple crop shortages`
+        ],
+        correct: 1,
+        explanation: `Traditional food security focuses on having enough food without explicitly measuring diet quality. Nutrition security encompasses the nutritional adequacy of accessible food as well as factors affecting whether food meets cultural or religious dietary requirements, taste preferences, and food allergies. In the 2022 L.A. County study, researchers used the Gretchen Swanson Center for Nutrition's validated 1-item screener: "In the last 12 months, I worried that the food I was able to eat would hurt my health and wellbeing" (93% sensitivity, 78% specificity).`,
+        source: `Source: Livings et al., The Journal of Nutrition (2024); Calloway et al., Appetite (2022).`,
+        visualType: null
+      },
+      {
+        id: 5,
+        topic: 'definitions',
+        stem: `In the representative 2022 survey of Los Angeles County adults (N = 1,071), food insecurity (23.5%) and nutrition insecurity (24.5%) had nearly equal prevalence. What did the study discover about their overlap and health predictions?`,
+        options: [
+          `More than 95% of food-insecure adults also reported nutrition insecurity, proving one screener suffices`,
+          `Their overlap was below 60% (only 13.5% reported both); when modeled together, only nutrition insecurity remained a significant predictor of diabetes (OR = 1.75), while both independently predicted poor mental health`,
+          `Food insecurity strongly predicted cardiovascular disease, whereas nutrition insecurity predicted neither diabetes nor mental health`,
+          `Nutrition insecurity had zero association with chronic illness once income and education were controlled`
+        ],
+        correct: 1,
+        explanation: `Although roughly 1 in 4 L.A. County adults experienced food insecurity (23.5%) and 1 in 4 experienced nutrition insecurity (24.5%), only 59.4% of food-insecure adults reported nutrition insecurity and 54.0% of nutrition-insecure adults reported food insecurity (13.5% reported both). In adjusted logistic regressions including both constructs simultaneously (Model C), only nutrition insecurity remained significantly associated with diabetes (OR = 1.75, 95% CI: 1.05–2.93), while both food insecurity (OR = 3.04) and nutrition insecurity (OR = 2.27) independently predicted poor mental health.`,
+        source: `Source: Livings et al., The Journal of Nutrition (2024), Tables 1, 3, and 4.`,
+        visualType: `la_health`
+      },
+      {
+        id: 6,
+        topic: 'definitions',
+        stem: `In standard USDA Household Food Security Survey Module (HFSSM) reporting, households with "marginal food security" (1–2 affirmed items) are grouped as food secure. What does pediatric and maternal research indicate about this group?`,
+        options: [
+          `Marginally food-secure children and mothers show zero difference in health outcomes compared with high-food-security households`,
+          `Marginal food security shows significant, intermediate odds of child fair/poor health, developmental risk, and maternal depressive symptoms—distinct from both food-secure and food-insecure families`,
+          `Marginal food security indicates more severe food deprivation than very low food security`,
+          `Marginal food security is excluded from all federal prevalence reports rather than counted as food secure`
+        ],
+        correct: 1,
+        explanation: `Affirming 1 or 2 items on the 18-item HFSSM (almost always worrying food would run out or that bought food did not last) affected 9.9 million children and 22.2 million adults in the U.S. in 2010, yet federal tables classify these households as "food secure." Research on young children (<48 months) and female caregivers demonstrates a dose-response-like pattern: nonoverlapping confidence intervals show marginal food security carries adverse health risks significantly worse than high food security and intermediate between food security and food insecurity—meaning current reporting underestimates population health impacts.`,
+        source: `Source: Cook et al., Advances in Nutrition (2013).`,
+        visualType: null
+      },
+      {
+        id: 7,
+        topic: 'disparities',
+        stem: `Comparing adjusted sociodemographic predictors of food insecurity versus nutrition insecurity in Los Angeles County (2022), how did the risk profiles of Hispanic and Non-Hispanic Asian adults—and other demographic factors—differ?`,
+        options: [
+          `Income predicted food insecurity only, while age and education were the sole predictors of nutrition insecurity`,
+          `Food insecurity was predicted by lower income, female gender, younger age (<65), lower education, and Hispanic ethnicity (OR = 1.96); nutrition insecurity was predicted by lower income and Non-Hispanic Asian (OR = 2.22) or other race—while nutrition insecurity <em>only</em> was predicted solely by race/ethnicity (Non-Hispanic Asian OR = 3.1), not income`,
+          `Non-Hispanic Asian adults had higher odds of food insecurity (OR = 2.22) but not nutrition insecurity because culturally specific grocers are evenly distributed across the county`,
+          `Hispanic and Non-Hispanic Asian adults exhibited identical odds ratios across both food insecurity and nutrition insecurity models`
+        ],
+        correct: 1,
+        explanation: `In Model A (food insecurity), lower income (<100% FPL OR = 4.56; 100–300% FPL OR = 2.65), female gender (OR = 1.51), younger age (18–40 OR = 2.42; 41–64 OR = 2.17 vs. 65+), some college or less (OR = 2.08), and Hispanic ethnicity (OR = 1.96 vs. Non-Hispanic White) were significant predictors. In Model B (nutrition insecurity), only income (<100% FPL OR = 2.65; 100–300% FPL OR = 1.86) and Non-Hispanic Asian (OR = 2.22) or Non-Hispanic other race (OR = 2.03) were significant. Notably, in the multinomial model for nutrition insecurity "only," income was NOT significant, while Non-Hispanic Asian adults had 3.1 times the odds—reflecting sparse geographic access to diverse culturally relevant healthy foods across >4,000 square miles of L.A. County, whereas Hispanic residents often have accessible cultural markets but face affordability barriers.`,
+        source: `Source: Livings et al., The Journal of Nutrition (2024), Table 2 & Supplemental Table 1.`,
+        visualType: `predictors_compare`
+      },
+      {
+        id: 8,
+        topic: 'disparities',
+        stem: `Why do younger adults (ages 18–40) and U.S. college students experience elevated vulnerability to food and nutrition insecurity compared with adults aged 65 and older?`,
+        options: [
+          `Adults aged 65+ automatically receive free daily grocery delivery from the USDA`,
+          `Younger adults combine tighter financial margins with demanding work, study, and caregiving schedules, and eligible college students often do not know they qualify for SNAP`,
+          `Enrolling in a campus meal plan completely eliminates food insecurity among university students`,
+          `Younger adults have lower caloric requirements that exclude them from food assistance surveys`
+        ],
+        correct: 1,
+        explanation: `In L.A. County, adults aged 18–40 had 2.42 times the odds of food insecurity compared with adults 65 and older. Younger adults face financial barriers alongside demanding schedules—balancing employment, higher education, and family caregiving—that hinder access to healthy foods. Furthermore, college students are frequently unaware of their SNAP eligibility, standard short-form screens can mask marginally food-secure students, and even students with unlimited campus meal plans have reported food insecurity.`,
+        source: `Sources: Livings et al., The Journal of Nutrition (2024); Analysis of Food Insecurity in U.S. Colleges.`,
+        visualType: null
+      },
+      {
+        id: 9,
+        topic: 'disparities',
+        stem: `What did research on U.S. veterans of the Iraq and Afghanistan wars—alongside national household surveillance—reveal about populations at disproportionate risk?`,
+        options: [
+          `Iraq/Afghanistan veterans reported half the national rate of food insecurity because military service guarantees housing and food stipends`,
+          `Nearly 27% of surveyed Iraq/Afghanistan veterans reported food insecurity (12.1% very low food security—over double the U.S. rate), linked to younger age, lower income/pay grade, and unmarried status, but NOT deployment count or service-connected disability`,
+          `Nationally in 2022, White non-Hispanic households had higher food insecurity rates than Black non-Hispanic and Hispanic households`,
+          `Combat exposure was the single strongest predictor of food insecurity among surveyed veterans`
+        ],
+        correct: 1,
+        explanation: `In a survey of Iraq and Afghanistan war veterans matched to VA records, nearly 27% experienced past-year food insecurity (compared with 14.5% nationally in 2012), and 12.1% experienced very low food security (more than double the 5.7% U.S. rate). Risk correlated with younger age, not being married/partnered, more children, lower income, lower final military pay grade, tobacco use, binge drinking, and shorter sleep—while number of deployments and service-connected disability were unrelated. Nationally in 2022, disparities also persisted by race and household structure: 22.4% of Black non-Hispanic and 20.8% of Hispanic households faced food insecurity vs. 9.3% of White households, with single-caregiver households and households with children <6 years at elevated risk.`,
+        source: `Sources: Widome et al., Public Health Nutrition (2014); Preventive Services for Food Insecurity (2022 CPS data).`,
+        visualType: `veterans_compare`
+      },
+      {
+        id: 10,
+        topic: 'interventions',
+        stem: `Because SNAP reduces food insecurity yet some recipients remain food insecure and its effect on nutrition insecurity is less established, which California program specifically boosts nutrition security by matching SNAP dollars 1:1 for produce at farmers' markets?`,
+        options: [
+          `The Low Income Home Energy Assistance Program (LIHEAP)`,
+          `California's Market Match program`,
+          `The Behavioral Risk Factor Surveillance System (BRFSS)`,
+          `The 6-item Household Food Security Short Form`
+        ],
+        correct: 1,
+        explanation: `California's "Market Match" program gives SNAP participants a 1:1 financial match when spending benefits on fresh produce at farmers' markets. By expanding purchasing power while specifically incentivizing fruits and vegetables, Market Match directly targets nutrition security—complementing core federal programs like SNAP, WIC (which boosts prenatal care and reduces low birthweight, infant mortality, anemia, and obesity), and School Breakfast/Lunch programs.`,
+        source: `Sources: Livings et al., The Journal of Nutrition (2024); Food Insecurity in America: A Call to Action.`,
+        visualType: null
+      },
+      {
+        id: 11,
+        topic: 'interventions',
+        stem: `How are primary care clinics operationalizing "Food is Medicine" approaches, and what potential harm of clinical screening do evidence reviews highlight?`,
+        options: [
+          `Clinics screen patients (e.g., via the 2-item Hunger Vital Sign) and connect them to produce prescriptions, medically tailored meals, clinic food pantries, or SNAP/WIC—while guarding against stigma, privacy concerns, and patient fears of Child Protective Services involvement`,
+          `Clinics prescribe emergency canned rations in place of standard diabetes medications without screening`,
+          `Clinics refuse to screen for social risks because patients believe diet is unrelated to chronic disease`,
+          `Primary care clinics administer the full 18-item USDA module verbally before every routine blood draw`
+        ],
+        correct: 0,
+        explanation: `Healthcare systems increasingly use brief validated screens such as the 2-item Hunger Vital Sign (derived from the USDA HFSSM) to link patients to produce prescription programs, medically tailored meals, clinic-affiliated food boxes/pantries, and care coordination for SNAP and WIC. While systematic reviews found no documented harms in screening trials, clinical guidance cautions providers to address potential harms—including social stigma, privacy risks, and patients' fear that disclosing food insecurity could prompt Child Protective Services or legal involvement.`,
+        source: `Sources: Screening for Food Insecurity (JAMA / USPSTF); Preventive Services for Food Insecurity; Livings et al. (2024).`,
+        visualType: null
+      },
+      {
+        id: 12,
+        topic: 'interventions',
+        stem: `Why do public health frameworks—such as the L.A. County Food Equity Roundtable's 10-year Strategic Action Plan—pair food assistance with broader structural and economic policies?`,
+        options: [
+          `Because federal nutrition programs alone cannot offset deep poverty or inequitable food environments; lasting solutions also require living wages, steady employment, tax credits, affordable housing/healthcare, and equitable spatial and cultural access to healthy foods`,
+          `Because WIC and school meal programs have been found to increase childhood obesity rates`,
+          `Because local food banks operate best when isolated from healthcare systems and municipal policy`,
+          `Because nutrition insecurity occurs exclusively among households earning above 300% of the federal poverty level`
+        ],
+        correct: 0,
+        explanation: `Federal nutrition programs (SNAP, WIC, School Lunch and Breakfast) buffer families and improve child nutrition, attendance, and health, but nutrition assistance alone cannot compensate for poverty and near-poverty. Ending both food and nutrition insecurity requires pairing strong nutrition programs with living wages, steady employment, low-income tax credits, affordable healthcare and housing, and targeted food-system investments—like L.A. County's 10-year Strategic Action Plan—that address spatial, financial, and cultural access to nutritious food.`,
+        source: `Sources: Food Insecurity in America: A Call to Action; Livings et al., The Journal of Nutrition (2024).`,
+        visualType: null
+      }
+    ];
+
+    let state = {
+      answers: {},
+      activeTopic: 'all',
+      currentQuestionId: 1,
+      refOpen: false
+    };
+
+    function getFilteredQuestions() {
+      if (state.activeTopic === 'all') return QUESTIONS;
+      return QUESTIONS.filter((q) => q.topic === state.activeTopic);
+    }
+
+    function getCorrectCount(list) {
+      return list.reduce((acc, q) => acc + (state.answers[q.id] === q.correct ? 1 : 0), 0);
+    }
+
+    function getAnsweredList(list) {
+      return list.filter((q) => typeof state.answers[q.id] === 'number');
+    }
+
+    function computeCurrentStreak() {
+      let streak = 0;
+      for (let i = QUESTIONS.length - 1; i >= 0; i--) {
+        const q = QUESTIONS[i];
+        if (typeof state.answers[q.id] === 'number') {
+          if (state.answers[q.id] === q.correct) {
+            streak += 1;
+          } else {
+            break;
+          }
+        }
+      }
+      return streak;
+    }
+
+    function setTopicFilter(topicId) {
+      state.activeTopic = topicId;
+      const filtered = getFilteredQuestions();
+      if (filtered.length > 0 && !filtered.some((q) => q.id === state.currentQuestionId)) {
+        const firstOpen = filtered.find((q) => typeof state.answers[q.id] !== 'number');
+        state.currentQuestionId = firstOpen ? firstOpen.id : filtered[0].id;
+      }
+      saveState();
+      renderAll();
+    }
+
+    function selectQuestion(qId) {
+      const target = QUESTIONS.find((q) => q.id === qId);
+      if (!target) return;
+      if (state.activeTopic !== 'all' && target.topic !== state.activeTopic) {
+        state.activeTopic = 'all';
+      }
+      state.currentQuestionId = qId;
+      saveState();
+      renderAll();
+    }
+
+    function selectAnswer(qId, optIndex) {
+      if (typeof state.answers[qId] === 'number') return;
+      state.answers[qId] = optIndex;
+      saveState();
+      renderAll();
+    }
+
+    function navigateQuestion(delta) {
+      const list = getFilteredQuestions();
+      if (list.length === 0) return;
+      const idx = list.findIndex((q) => q.id === state.currentQuestionId);
+      const nextIdx = Math.max(0, Math.min(list.length - 1, idx + delta));
+      state.currentQuestionId = list[nextIdx].id;
+      saveState();
+      renderAll();
+    }
+
+    function jumpToNextMissed() {
+      const list = getFilteredQuestions();
+      const missed = list.filter((q) => typeof state.answers[q.id] === 'number' && state.answers[q.id] !== q.correct);
+      if (missed.length === 0) {
+        const allMissed = QUESTIONS.filter((q) => typeof state.answers[q.id] === 'number' && state.answers[q.id] !== q.correct);
+        if (allMissed.length === 0) return;
+        state.activeTopic = 'all';
+        state.currentQuestionId = allMissed[0].id;
+      } else {
+        const currentIdx = missed.findIndex((q) => q.id === state.currentQuestionId);
+        const nextMissed = missed[(currentIdx + 1) % missed.length];
+        state.currentQuestionId = nextMissed.id;
+      }
+      saveState();
+      renderAll();
+      const card = document.getElementById('question-card');
+      if (card) card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function handleResetClick(btn) {
+      if (!btn) return;
+      if (btn.dataset.armed !== 'true') {
+        btn.dataset.armed = 'true';
+        btn.textContent = `Confirm Reset?`;
+        btn.classList.add('btn-warning-armed');
+        setFeedbackMessage(`Click "Confirm Reset?" again to clear all answers.`);
+        setTimeout(() => {
+          if (btn.dataset.armed === 'true') {
+            btn.dataset.armed = 'false';
+            btn.textContent = `Reset Quiz`;
+            btn.classList.remove('btn-warning-armed');
+            setFeedbackMessage(``);
+          }
+        }, 4000);
+        return;
+      }
+      btn.dataset.armed = 'false';
+      btn.textContent = `Reset Quiz`;
+      btn.classList.remove('btn-warning-armed');
+      state.answers = {};
+      state.activeTopic = 'all';
+      state.currentQuestionId = 1;
+      saveState();
+      renderAll();
+      setFeedbackMessage(`Quiz reset. All 12 questions are ready.`);
+    }
+
+    function toggleReferenceDrawer() {
+      state.refOpen = !state.refOpen;
+      saveState();
+      renderReferenceDrawer();
+    }
+
+    function setFeedbackMessage(text) {
+      const el = document.getElementById('action-feedback');
+      if (el) el.textContent = text;
+    }
+
+    function exportSummary() {
+      const answered = getAnsweredList(QUESTIONS);
+      const correct = getCorrectCount(QUESTIONS);
+      const pct = answered.length > 0 ? Math.round((correct / QUESTIONS.length) * 100) : 0;
+      const lines = [
+        `FOOD INSECURITY QUIZ — SCORE REPORT`,
+        `===================================`,
+        `Answered: ${answered.length} / ${QUESTIONS.length}`,
+        `Score: ${correct} / ${QUESTIONS.length} (${pct}%)`,
+        ``
+      ];
+      Object.keys(TOPICS).forEach((key) => {
+        const qs = QUESTIONS.filter((q) => q.topic === key);
+        const c = getCorrectCount(qs);
+        const a = getAnsweredList(qs).length;
+        lines.push(`${TOPICS[key].label}: ${c}/${qs.length} correct (${a} answered)`);
+      });
+      lines.push(``, `QUESTION BREAKDOWN:`);
+      QUESTIONS.forEach((q) => {
+        const ans = state.answers[q.id];
+        const status = typeof ans !== 'number' ? `Unanswered` : (ans === q.correct ? `Correct` : `Missed (Answered ${String.fromCharCode(65 + ans)}, Correct ${String.fromCharCode(65 + q.correct)})`);
+        lines.push(`Q${String(q.id).padStart(2, '0')} [${TOPICS[q.topic].short}]: ${status}`);
+      });
+
+      if (window.notebookAppApi && typeof window.notebookAppApi.triggerFileDownload === 'function') {
+        window.notebookAppApi.triggerFileDownload({
+          content: lines.join('\n'),
+          contentType: 'text/plain',
+          encoding: 'UTF-8',
+          filename: 'food-insecurity-quiz-summary.txt'
+        });
+        setFeedbackMessage(`Score report downloaded.`);
+      } else {
+        setFeedbackMessage(`Export ready (${correct}/${QUESTIONS.length} correct).`);
+      }
+    }
+
+    function renderEvidenceVisual(type) {
+      if (type === 'tradeoffs') {
+        return `
+          <div class="evidence-box">
+            <h4 class="evidence-title">Emergency Food Clients: Forced Household Budget Trade-Offs</h4>
+            <div class="mini-bar-row">
+              <span>Food vs. Utilities / Heating</span>
+              <div class="mini-bar-track"><div class="mini-bar-fill red" style="width: 41.5%;"></div></div>
+              <span class="mini-bar-val">41.5%</span>
+            </div>
+            <div class="mini-bar-row">
+              <span>Food vs. Rent / Mortgage</span>
+              <div class="mini-bar-track"><div class="mini-bar-fill gold" style="width: 35%;"></div></div>
+              <span class="mini-bar-val">35.0%</span>
+            </div>
+            <div class="mini-bar-row">
+              <span>Food vs. Medical / Medication</span>
+              <div class="mini-bar-track"><div class="mini-bar-fill" style="width: 31.6%;"></div></div>
+              <span class="mini-bar-val">31.6%</span>
+            </div>
+          </div>
+        `;
+      }
+      if (type === 'la_health') {
+        return `
+          <div class="evidence-box">
+            <h4 class="evidence-title">L.A. County Adjusted Odds Ratios When Both Insecurities Are Modeled Together (Model C)</h4>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Predictor</th>
+                  <th>Diabetes OR (95% CI)</th>
+                  <th>Poor Mental Health OR (95% CI)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Food Insecurity</strong> (23.5%)</td>
+                  <td>1.67 (0.96–2.92) — Not sig.</td>
+                  <td><strong>3.04 (1.88–4.91)</strong> — Sig.</td>
+                </tr>
+                <tr>
+                  <td><strong>Nutrition Insecurity</strong> (24.5%)</td>
+                  <td><strong>1.75 (1.05–2.93)</strong> — Sig.</td>
+                  <td><strong>2.27 (1.46–3.53)</strong> — Sig.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+      if (type === 'predictors_compare') {
+        return `
+          <div class="evidence-box">
+            <h4 class="evidence-title">Significant Sociodemographic Predictors in L.A. County (Table 2 &amp; Multinomial Model)</h4>
+            <div class="compare-grid">
+              <div class="compare-col">
+                <h4>Food Insecurity (Model A)</h4>
+                <ul class="compare-list">
+                  <li><strong>Income &lt;100% FPL:</strong> OR 4.56 (ref &ge;300%)</li>
+                  <li><strong>Income 100–300% FPL:</strong> OR 2.65</li>
+                  <li><strong>Age 18–40 / 41–64:</strong> OR 2.42 / 2.17 (vs. 65+)</li>
+                  <li><strong>Some college or less:</strong> OR 2.08</li>
+                  <li><strong>Hispanic ethnicity:</strong> OR 1.96 (vs. NH White)</li>
+                  <li><strong>Female gender:</strong> OR 1.51</li>
+                </ul>
+              </div>
+              <div class="compare-col">
+                <h4>Nutrition Insecurity (Model B &amp; NI-Only)</h4>
+                <ul class="compare-list">
+                  <li><strong>Income &lt;100% FPL:</strong> OR 2.65 (Model B)</li>
+                  <li><strong>Income 100–300% FPL:</strong> OR 1.86 (Model B)</li>
+                  <li><strong>Non-Hispanic Asian:</strong> OR 2.22 (Model B) &amp; <strong>OR 3.10 for NI-only</strong></li>
+                  <li><strong>Non-Hispanic other race:</strong> OR 2.03 (Model B)</li>
+                  <li><strong>Gender, Age, Education:</strong> Not significant</li>
+                  <li><strong>NI-Only Model:</strong> Income NOT significant</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+      if (type === 'veterans_compare') {
+        return `
+          <div class="evidence-box">
+            <h4 class="evidence-title">Past-Year Food Insecurity: Iraq/Afghanistan Veterans (2012) vs. U.S. Average</h4>
+            <div class="mini-bar-row">
+              <span>Veterans (Any FI)</span>
+              <div class="mini-bar-track"><div class="mini-bar-fill red" style="width: 54%;"></div></div>
+              <span class="mini-bar-val">~27.0%</span>
+            </div>
+            <div class="mini-bar-row">
+              <span>U.S. Households (Any FI)</span>
+              <div class="mini-bar-track"><div class="mini-bar-fill" style="width: 29%;"></div></div>
+              <span class="mini-bar-val">14.5%</span>
+            </div>
+            <div class="mini-bar-row">
+              <span>Veterans (Very Low FI)</span>
+              <div class="mini-bar-track"><div class="mini-bar-fill gold" style="width: 24.2%;"></div></div>
+              <span class="mini-bar-val">12.1%</span>
+            </div>
+            <div class="mini-bar-row">
+              <span>U.S. Households (Very Low)</span>
+              <div class="mini-bar-track"><div class="mini-bar-fill" style="width: 11.4%;"></div></div>
+              <span class="mini-bar-val">5.7%</span>
+            </div>
+          </div>
+        `;
+      }
+      return ``;
+    }
+
+    function renderKPIs() {
+      const allAnswered = getAnsweredList(QUESTIONS);
+      const allCorrect = getCorrectCount(QUESTIONS);
+      const filtered = getFilteredQuestions();
+      const missedTotal = allAnswered.filter((q) => state.answers[q.id] !== q.correct).length;
+
+      const progEl = document.getElementById('kpi-progress');
+      const progBar = document.getElementById('kpi-progress-bar');
+      if (progEl) progEl.textContent = `${allAnswered.length} / ${QUESTIONS.length}`;
+      if (progBar) progBar.style.width = `${Math.round((allAnswered.length / QUESTIONS.length) * 100)}%`;
+
+      const scoreEl = document.getElementById('kpi-score');
+      const scoreSubEl = document.getElementById('kpi-score-sub');
+      if (allAnswered.length === 0) {
+        if (scoreEl) scoreEl.textContent = `—`;
+        if (scoreSubEl) scoreSubEl.textContent = `Select an option to begin`;
+      } else {
+        const pct = Math.round((allCorrect / allAnswered.length) * 100);
+        if (scoreEl) scoreEl.textContent = `${pct}%`;
+        if (scoreSubEl) scoreSubEl.textContent = `${allCorrect} of ${allAnswered.length} answered correct`;
+      }
+
+      const streakEl = document.getElementById('kpi-streak');
+      const streak = computeCurrentStreak();
+      if (streakEl) streakEl.textContent = `${streak}`;
+
+      const scopeEl = document.getElementById('kpi-scope');
+      const scopeSubEl = document.getElementById('kpi-scope-sub');
+      if (scopeEl) scopeEl.textContent = state.activeTopic === 'all' ? `All Topics` : TOPICS[state.activeTopic].short;
+      if (scopeSubEl) scopeSubEl.textContent = `${filtered.length} questions in queue`;
+
+      const missedBtn = document.getElementById('btn-missed');
+      if (missedBtn) {
+        missedBtn.textContent = `Review Missed (${missedTotal})`;
+        missedBtn.disabled = missedTotal === 0;
+      }
+    }
+
+    function renderToolbar() {
+      const buttons = document.querySelectorAll('#topic-filters .filter-btn');
+      buttons.forEach((btn) => {
+        const t = btn.getAttribute('data-topic');
+        btn.setAttribute('aria-pressed', t === state.activeTopic ? 'true' : 'false');
+      });
+    }
+
+    function renderActiveQuestion() {
+      const filtered = getFilteredQuestions();
+      const q = filtered.find((item) => item.id === state.currentQuestionId) || filtered[0] || QUESTIONS[0];
+      state.currentQuestionId = q.id;
+      const qIdxInFiltered = filtered.findIndex((item) => item.id === q.id);
+
+      const counterEl = document.getElementById('q-counter');
+      const topicEl = document.getElementById('q-topic-tag');
+      const badgeEl = document.getElementById('q-status-badge');
+      const stemEl = document.getElementById('q-stem');
+      const optionsList = document.getElementById('options-list');
+      const debriefPanel = document.getElementById('debrief-panel');
+      const debriefVerdict = document.getElementById('debrief-verdict');
+      const debriefExplanation = document.getElementById('debrief-explanation');
+      const debriefVisual = document.getElementById('debrief-visual');
+      const debriefSource = document.getElementById('debrief-source');
+      const btnPrev = document.getElementById('btn-prev');
+      const btnNext = document.getElementById('btn-next');
+
+      const userChoice = state.answers[q.id];
+      const isAnswered = typeof userChoice === 'number';
+      const isCorrect = isAnswered && userChoice === q.correct;
+
+      if (counterEl) {
+        counterEl.textContent = `Question ${String(qIdxInFiltered + 1).padStart(2, '0')} of ${String(filtered.length).padStart(2, '0')} (Item #${String(q.id).padStart(2, '0')})`;
+      }
+      if (topicEl) topicEl.textContent = TOPICS[q.topic].label;
+      if (badgeEl) {
+        if (!isAnswered) {
+          badgeEl.textContent = `Unanswered`;
+          badgeEl.setAttribute('data-state', 'unanswered');
+        } else if (isCorrect) {
+          badgeEl.textContent = `Correct`;
+          badgeEl.setAttribute('data-state', 'correct');
+        } else {
+          badgeEl.textContent = `Incorrect`;
+          badgeEl.setAttribute('data-state', 'incorrect');
+        }
+      }
+      if (stemEl) stemEl.textContent = q.stem;
+
+      if (optionsList) {
+        const letters = ['A', 'B', 'C', 'D'];
+        optionsList.innerHTML = q.options.map((optText, idx) => {
+          let statusAttr = ``;
+          let markerText = ``;
+          if (isAnswered) {
+            if (idx === q.correct) {
+              statusAttr = `data-status="correct"`;
+              markerText = idx === userChoice ? `Your choice · Correct` : `Correct answer`;
+            } else if (idx === userChoice) {
+              statusAttr = `data-status="incorrect"`;
+              markerText = `Your choice`;
+            } else {
+              statusAttr = `data-status="dimmed"`;
+            }
+          }
+          return `
+            <button type="button" class="option-btn" ${statusAttr} ${isAnswered ? 'disabled' : ''} onclick="selectAnswer(${q.id}, ${idx})">
+              <span class="option-letter">${letters[idx]}</span>
+              <span class="option-text">${optText}</span>
+              <span class="option-marker">${markerText}</span>
+            </button>
+          `;
+        }).join('');
+      }
+
+      if (debriefPanel) {
+        if (isAnswered) {
+          debriefPanel.hidden = false;
+          if (debriefVerdict) {
+            debriefVerdict.setAttribute('data-correct', isCorrect ? 'true' : 'false');
+            debriefVerdict.textContent = isCorrect
+              ? `Correct — Option ${String.fromCharCode(65 + q.correct)}`
+              : `Incorrect — The correct answer is Option ${String.fromCharCode(65 + q.correct)}`;
+          }
+          if (debriefExplanation) debriefExplanation.textContent = q.explanation;
+          if (debriefVisual) debriefVisual.innerHTML = renderEvidenceVisual(q.visualType);
+          if (debriefSource) debriefSource.textContent = q.source;
+        } else {
+          debriefPanel.hidden = true;
+        }
+      }
+
+      if (btnPrev) btnPrev.disabled = qIdxInFiltered <= 0;
+      if (btnNext) btnNext.disabled = qIdxInFiltered >= filtered.length - 1;
+    }
+
+    function renderSidebar() {
+      const navGrid = document.getElementById('nav-grid');
+      const navCountLabel = document.getElementById('nav-count-label');
+      const filtered = getFilteredQuestions();
+      const filteredIds = new Set(filtered.map((q) => q.id));
+
+      if (navCountLabel) navCountLabel.textContent = `${filtered.length} Active`;
+      if (navGrid) {
+        navGrid.innerHTML = QUESTIONS.map((q) => {
+          const ans = state.answers[q.id];
+          let stateAttr = `unanswered`;
+          if (typeof ans === 'number') {
+            stateAttr = ans === q.correct ? `correct` : `incorrect`;
+          }
+          const isCurrent = q.id === state.currentQuestionId;
+          const isDimmed = !filteredIds.has(q.id);
+          return `
+            <button
+              type="button"
+              class="q-pill"
+              data-state="${stateAttr}"
+              data-current="${isCurrent ? 'true' : 'false'}"
+              data-dimmed="${isDimmed ? 'true' : 'false'}"
+              aria-label="Jump to question ${q.id}"
+              onclick="selectQuestion(${q.id})"
+            >${String(q.id).padStart(2, '0')}</button>
+          `;
+        }).join('');
+      }
+
+      const masteryContainer = document.getElementById('mastery-bars');
+      if (masteryContainer) {
+        masteryContainer.innerHTML = Object.keys(TOPICS).map((key) => {
+          const qs = QUESTIONS.filter((q) => q.topic === key);
+          const correct = getCorrectCount(qs);
+          const answered = getAnsweredList(qs).length;
+          const pct = Math.round((correct / qs.length) * 100);
+          return `
+            <div class="mastery-row">
+              <div class="mastery-top">
+                <span>${TOPICS[key].label}</span>
+                <span class="mastery-meta">${correct}/${qs.length} (${answered} done)</span>
+              </div>
+              <div class="mastery-track">
+                <div class="mastery-fill" style="width: ${pct}%;"></div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+    }
+
+    function renderCompletionSummary() {
+      const summaryCard = document.getElementById('summary-card');
+      if (!summaryCard) return;
+      const answeredAll = getAnsweredList(QUESTIONS);
+      if (answeredAll.length < QUESTIONS.length) {
+        summaryCard.hidden = true;
+        return;
+      }
+
+      const correctAll = getCorrectCount(QUESTIONS);
+      const pct = Math.round((correctAll / QUESTIONS.length) * 100);
+      summaryCard.hidden = false;
+
+      const pctEl = document.getElementById('summary-pct');
+      const verdictEl = document.getElementById('summary-verdict');
+      const gridEl = document.getElementById('domain-summary-grid');
+      const reviewBtn = document.getElementById('summary-review-btn');
+
+      if (pctEl) pctEl.textContent = `${pct}% (${correctAll}/12)`;
+      if (verdictEl) {
+        if (pct >= 90) {
+          verdictEl.textContent = `Strong command of the research evidence: you accurately distinguished food insecurity from nutrition insecurity, identified demographic divergence in L.A. County, and connected structural causes to policy solutions.`;
+        } else if (pct >= 70) {
+          verdictEl.textContent = `Solid foundation across the four domains. Review the missed items below to sharpen distinctions around sociodemographic predictors, marginal food security, and healthcare-based interventions.`;
+        } else {
+          verdictEl.textContent = `Good progress through the complete 12-question assessment. Use the Domain Mastery breakdown and missed-question review to revisit key definitions and odds ratios from the source studies.`;
+        }
+      }
+
+      if (gridEl) {
+        gridEl.innerHTML = Object.keys(TOPICS).map((key) => {
+          const qs = QUESTIONS.filter((q) => q.topic === key);
+          const correct = getCorrectCount(qs);
+          const domainPct = Math.round((correct / qs.length) * 100);
+          return `
+            <div class="domain-stat-tile">
+              <span class="kpi-label">${TOPICS[key].short}</span>
+              <span class="kpi-value" style="font-size: var(--subhead-size);">${correct} / ${qs.length} (${domainPct}%)</span>
+            </div>
+          `;
+        }).join('');
+      }
+
+      if (reviewBtn) {
+        const missedCount = QUESTIONS.length - correctAll;
+        reviewBtn.hidden = missedCount === 0;
+      }
+    }
+
+    function renderReferenceDrawer() {
+      const drawer = document.getElementById('ref-drawer');
+      const btn = document.getElementById('btn-toggle-ref');
+      if (drawer) drawer.hidden = !state.refOpen;
+      if (btn) {
+        btn.setAttribute('aria-expanded', state.refOpen ? 'true' : 'false');
+        btn.textContent = state.refOpen ? `Hide Notes` : `Show Notes`;
+      }
+    }
+
+    function renderAll() {
+      renderKPIs();
+      renderToolbar();
+      renderActiveQuestion();
+      renderSidebar();
+      renderCompletionSummary();
+      renderReferenceDrawer();
+    }
+
+    async function saveState() {
+      if (window.notebookAppApi && typeof window.notebookAppApi.setAppState === 'function') {
+        try {
+          await window.notebookAppApi.setAppState({
+            answers: state.answers,
+            activeTopic: state.activeTopic,
+            currentQuestionId: state.currentQuestionId,
+            refOpen: state.refOpen
+          });
+        } catch (err) {
+          // Graceful fallback if sandbox host rejects transient state call
+        }
+      }
+    }
+
+    function setupKeyboardShortcuts() {
+      document.addEventListener('keydown', (e) => {
+        if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return;
+        if (e.key === 'ArrowRight') {
+          navigateQuestion(1);
+        } else if (e.key === 'ArrowLeft') {
+          navigateQuestion(-1);
+        } else if (['1', '2', '3', '4'].includes(e.key)) {
+          const idx = parseInt(e.key, 10) - 1;
+          selectAnswer(state.currentQuestionId, idx);
+        }
+      });
+    }
+
+    async function initApp() {
+      if (window.notebookAppApi && typeof window.notebookAppApi.getAppState === 'function') {
+        try {
+          const saved = await window.notebookAppApi.getAppState();
+          if (saved && typeof saved === 'object') {
+            if (saved.answers && typeof saved.answers === 'object') {
+              state.answers = saved.answers;
+            }
+            if (saved.activeTopic && (saved.activeTopic === 'all' || TOPICS[saved.activeTopic])) {
+              state.activeTopic = saved.activeTopic;
+            }
+            if (typeof saved.currentQuestionId === 'number' && QUESTIONS.some((q) => q.id === saved.currentQuestionId)) {
+              state.currentQuestionId = saved.currentQuestionId;
+            }
+            if (typeof saved.refOpen === 'boolean') {
+              state.refOpen = saved.refOpen;
+            }
+          }
+        } catch (err) {
+          // Start fresh if saved state is unavailable
+        }
+      }
+
+      setupKeyboardShortcuts();
+      renderAll();
+
+      if (window.notebookAppApi && typeof window.notebookAppApi.notifyAppReady === 'function') {
+        window.notebookAppApi.notifyAppReady();
+      }
+    }
+
+    initApp();
+  </script>
+</body>
+</html>

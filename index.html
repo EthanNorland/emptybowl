@@ -568,8 +568,845 @@
     cursor: pointer;
   }
 
+
+  /* Quiz Modal & Components (Matching Empty Bowl Dark Roasted Walnut Palette) */
+  dialog#quizDialog {
+    max-width: 880px;
+    width: 94vw;
+    max-height: 88vh;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--panel);
+    color: var(--ink);
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.85);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    margin: auto;
+  }
+  dialog#quizDialog[open] {
+    display: flex;
+  }
+  dialog#quizDialog::backdrop {
+    background: rgba(12, 10, 8, 0.82);
+    backdrop-filter: blur(4px);
+  }
+
+  .quiz-dialog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    background: var(--card-bg);
+    flex-shrink: 0;
+  }
+  .quiz-header-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .quiz-header-brand img {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+  .quiz-header-title-group h2 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0;
+    line-height: 1.2;
+  }
+  .quiz-header-subtitle {
+    font-size: 12px;
+    color: var(--ink-dim);
+    margin: 3px 0 0 0;
+    font-family: var(--mono);
+  }
+  .quiz-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .btn-quiz-skip {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--ink-dim);
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: var(--sans);
+    transition: all 0.15s ease;
+  }
+  .btn-quiz-skip:hover {
+    color: var(--ink);
+    border-color: var(--ink-muted);
+    background: var(--panel-hover);
+  }
+  .quiz-close-x {
+    background: none;
+    border: none;
+    color: var(--ink-dim);
+    font-size: 24px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.15s ease;
+  }
+  .quiz-close-x:hover {
+    color: var(--ink);
+    background: var(--panel-hover);
+  }
+
+  .quiz-modal-body {
+    overflow-y: auto;
+    padding: 20px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    flex: 1 1 auto;
+  }
+
+  /* Quiz KPI Metric Grid */
+  .quiz-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  .quiz-kpi-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .quiz-kpi-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ink-muted);
+  }
+  .quiz-kpi-val {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.2;
+    font-family: var(--mono);
+  }
+  .quiz-kpi-sub {
+    font-size: 11px;
+    color: var(--ink-dim);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .quiz-prog-track {
+    width: 100%;
+    height: 5px;
+    background: var(--panel);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 4px;
+  }
+  .quiz-prog-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--accent);
+    transition: width 0.3s ease;
+  }
+
+  /* Quiz Toolbar / Filters */
+  .quiz-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .quiz-filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .quiz-filter-pill {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    color: var(--ink-dim);
+    padding: 5px 12px;
+    font-size: 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--sans);
+  }
+  .quiz-filter-pill:hover {
+    color: var(--ink);
+    border-color: var(--ink-muted);
+  }
+  .quiz-filter-pill.active {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+    color: #8be09f;
+    font-weight: 600;
+  }
+  .quiz-filter-count {
+    font-family: var(--mono);
+    font-size: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 1px 6px;
+    border-radius: 10px;
+  }
+  .quiz-tool-actions {
+    display: flex;
+    gap: 8px;
+  }
+  .quiz-btn-small {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    color: var(--ink-dim);
+    padding: 5px 11px;
+    font-size: 11px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: var(--sans);
+    transition: all 0.15s ease;
+  }
+  .quiz-btn-small:hover:not(:disabled) {
+    color: var(--ink);
+    border-color: var(--accent);
+  }
+  .quiz-btn-small:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  /* Quick Question Jump Strip */
+  .quiz-nav-strip {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 8px 12px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  .quiz-nav-strip-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ink-muted);
+    margin-right: 4px;
+  }
+  .quiz-num-pill {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--panel);
+    color: var(--ink-dim);
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .quiz-num-pill:hover {
+    border-color: var(--ink-muted);
+    color: var(--ink);
+  }
+  .quiz-num-pill.active {
+    outline: 2px solid var(--ring);
+    outline-offset: 1px;
+    color: var(--ink);
+    font-weight: 700;
+  }
+  .quiz-num-pill.correct {
+    background: rgba(85, 137, 99, 0.25);
+    border-color: var(--accent);
+    color: #8be09f;
+  }
+  .quiz-num-pill.incorrect {
+    background: rgba(217, 83, 79, 0.2);
+    border-color: #d9534f;
+    color: #ff8b88;
+  }
+  .quiz-num-pill.dimmed {
+    opacity: 0.35;
+  }
+
+  /* Question Card */
+  .quiz-question-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .quiz-q-meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .quiz-q-meta-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .quiz-q-counter {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--ring);
+    letter-spacing: 0.05em;
+  }
+  .quiz-q-topic {
+    background: var(--tag-bg);
+    border: 1px solid var(--border);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    color: var(--ink-dim);
+  }
+  .quiz-q-badge {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+    background: var(--panel);
+    color: var(--ink-dim);
+  }
+  .quiz-q-badge[data-state="correct"] {
+    border-color: var(--accent);
+    background: rgba(85, 137, 99, 0.2);
+    color: #8be09f;
+  }
+  .quiz-q-badge[data-state="incorrect"] {
+    border-color: #d9534f;
+    background: rgba(217, 83, 79, 0.2);
+    color: #ff8b88;
+  }
+  .quiz-q-stem {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.45;
+    margin: 0;
+  }
+
+  /* Options list */
+  .quiz-options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .quiz-option-btn {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    display: grid;
+    grid-template-columns: 28px 1fr auto;
+    align-items: center;
+    gap: 12px;
+    text-align: left;
+    color: var(--ink);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  .quiz-option-btn:hover:not(:disabled) {
+    border-color: var(--ink-muted);
+    background: var(--panel-hover);
+    transform: translateX(2px);
+  }
+  .quiz-option-letter {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ink-muted);
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .quiz-option-marker {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .quiz-option-btn[data-status="correct"] {
+    border-color: var(--accent);
+    background: rgba(85, 137, 99, 0.18);
+  }
+  .quiz-option-btn[data-status="correct"] .quiz-option-letter {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+  .quiz-option-btn[data-status="correct"] .quiz-option-marker {
+    color: #8be09f;
+  }
+  .quiz-option-btn[data-status="incorrect"] {
+    border-color: #d9534f;
+    background: rgba(217, 83, 79, 0.16);
+  }
+  .quiz-option-btn[data-status="incorrect"] .quiz-option-letter {
+    background: #d9534f;
+    color: #fff;
+    border-color: #d9534f;
+  }
+  .quiz-option-btn[data-status="incorrect"] .quiz-option-marker {
+    color: #ff8b88;
+  }
+  .quiz-option-btn[data-status="dimmed"] {
+    opacity: 0.5;
+  }
+
+  /* Debrief & Explanation Panel */
+    .quiz-summary-card[hidden],
+  .quiz-debrief-panel[hidden] {
+    display: none !important;
+  }
+
+  .quiz-debrief-panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .quiz-debrief-panel[data-verdict="incorrect"] {
+    border-left-color: #d9534f;
+  }
+  .quiz-debrief-verdict {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .quiz-debrief-verdict[data-correct="true"] {
+    color: #8be09f;
+  }
+  .quiz-debrief-verdict[data-correct="false"] {
+    color: #ff8b88;
+  }
+  .quiz-debrief-explanation {
+    font-size: 13px;
+    color: var(--ink);
+    line-height: 1.6;
+    margin: 0;
+  }
+  .quiz-debrief-source {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-muted);
+    border-top: 1px solid var(--border-subtle);
+    padding-top: 8px;
+  }
+
+  /* Evidence visuals */
+  .evidence-box {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .evidence-title {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ring);
+    margin: 0;
+  }
+  .mini-bar-row {
+    display: grid;
+    grid-template-columns: 160px minmax(0, 1fr) 52px;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    color: var(--ink-dim);
+  }
+  .mini-bar-track {
+    height: 8px;
+    background: var(--panel);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .mini-bar-fill {
+    height: 100%;
+    background: var(--accent);
+  }
+  .mini-bar-fill.gold {
+    background: var(--ring);
+  }
+  .mini-bar-fill.red {
+    background: #d9534f;
+  }
+  .mini-bar-val {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink);
+    text-align: right;
+  }
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+  .data-table th {
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    border-bottom: 1px solid var(--border);
+    padding: 6px 8px;
+  }
+  .data-table td {
+    padding: 8px;
+    border-bottom: 1px solid var(--border-subtle);
+    color: var(--ink-dim);
+  }
+  .data-table td strong {
+    color: var(--ink);
+  }
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .compare-col {
+    background: var(--panel);
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    padding: 10px 12px;
+  }
+  .compare-col h4 {
+    margin: 0 0 6px 0;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ink);
+    border-bottom: 1px solid var(--border-subtle);
+    padding-bottom: 4px;
+  }
+  .compare-list {
+    margin: 0;
+    padding-left: 16px;
+    font-size: 11px;
+    color: var(--ink-dim);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  /* Question Card Nav Row */
+  .quiz-q-nav-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    border-top: 1px solid var(--border-subtle);
+    padding-top: 14px;
+  }
+  .quiz-nav-hint {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-muted);
+  }
+  .quiz-nav-btns {
+    display: flex;
+    gap: 8px;
+  }
+  .quiz-btn {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    color: var(--ink);
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: var(--sans);
+    transition: all 0.15s ease;
+  }
+  .quiz-btn:hover:not(:disabled) {
+    border-color: var(--accent);
+    color: #fff;
+  }
+  .quiz-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  .quiz-btn-primary {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+    font-weight: 600;
+  }
+  .quiz-btn-primary:hover:not(:disabled) {
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+  }
+
+  /* Summary Card (Assessment Complete) */
+  .quiz-summary-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 10px 10px 0;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .quiz-summary-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .quiz-summary-score {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+    font-family: var(--mono);
+  }
+  .quiz-domain-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  .quiz-domain-tile {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px;
+    text-align: center;
+  }
+
+  /* Modal Footer */
+  .quiz-modal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    border-top: 1px solid var(--border);
+    background: var(--card-bg);
+    font-size: 12px;
+    color: var(--ink-muted);
+    flex-shrink: 0;
+  }
+  .quiz-modal-footer strong {
+    color: var(--ring);
+  }
+
+  /* Hero Banner Launcher */
+  .quiz-hero-banner {
+    background: linear-gradient(135deg, rgba(85, 137, 99, 0.16) 0%, rgba(229, 169, 59, 0.1) 100%);
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-top: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .quiz-hero-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .quiz-hero-pill {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .quiz-hero-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0;
+  }
+  .quiz-hero-desc {
+    font-size: 13px;
+    color: var(--ink-dim);
+    margin: 0;
+    max-width: 580px;
+    line-height: 1.45;
+  }
+  .btn-quiz-cta {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s ease, transform 0.12s ease;
+    font-family: var(--sans);
+  }
+  .btn-quiz-cta:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+  }
+
   /* Responsive Rules */
   @media (max-width: 768px) {
+
+    dialog#quizDialog {
+      width: 96vw;
+      max-height: 94vh;
+      border-radius: 8px;
+    }
+    .quiz-dialog-header {
+      padding: 10px 12px;
+      gap: 6px;
+    }
+    .quiz-header-brand {
+      gap: 8px;
+      min-width: 0;
+      flex: 1 1 auto;
+    }
+    .quiz-header-brand img {
+      width: 22px;
+      height: 22px;
+    }
+    .quiz-header-title-group h2 {
+      font-size: 13.5px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .quiz-header-subtitle {
+      display: none;
+    }
+    .quiz-header-actions {
+      flex-shrink: 0;
+      gap: 6px;
+    }
+    .btn-quiz-skip {
+      padding: 4px 8px;
+      font-size: 11px;
+    }
+    .quiz-close-x {
+      padding: 2px 6px;
+      font-size: 20px;
+    }
+    .quiz-modal-body {
+      padding: 12px;
+      gap: 12px;
+    }
+    .quiz-kpi-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+    }
+    .quiz-kpi-card {
+      padding: 8px 10px;
+    }
+    .quiz-kpi-val {
+      font-size: 15px;
+    }
+    .quiz-toolbar {
+      gap: 6px;
+    }
+    .quiz-filter-pill {
+      padding: 4px 10px;
+      font-size: 11px;
+    }
+    .quiz-num-pill {
+      width: 28px;
+      height: 28px;
+      font-size: 11px;
+    }
+    .quiz-question-card {
+      padding: 14px;
+      gap: 12px;
+    }
+    .quiz-q-stem {
+      font-size: 14px;
+    }
+    .quiz-option-btn {
+      padding: 10px 12px;
+      font-size: 13px;
+      grid-template-columns: 24px 1fr auto;
+      gap: 8px;
+    }
+    .quiz-domain-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .compare-grid {
+      grid-template-columns: 1fr;
+    }
+    .mini-bar-row {
+      grid-template-columns: 100px minmax(0, 1fr) 40px;
+      font-size: 11px;
+    }
+    .quiz-hero-banner {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 14px;
+    }
+    .btn-quiz-cta {
+      width: 100%;
+      text-align: center;
+    }
+    .quiz-modal-footer {
+      padding: 10px 12px;
+      flex-direction: column;
+      gap: 8px;
+      text-align: center;
+    }
+
     header.site-header { padding: 10px; }
     .nav-container { flex-direction: column; align-items: stretch; gap: 8px; }
     nav.page-nav { justify-content: flex-start; overflow-x: auto; padding-bottom: 4px; }
@@ -599,6 +1436,7 @@
 
       <!-- Utility Actions -->
       <div class="header-actions">
+        <button class="tool-btn" id="btn-quiz-toggle" title="Take the interactive 12-question food insecurity quiz">Quiz 📝</button>
         <button class="tool-btn" id="btn-help-toggle" title="Searchable Help and control locator">Help (?)</button>
         <button class="tool-btn" id="btn-about-toggle" title="Project origin, author, and license">About</button>
       </div>
@@ -625,6 +1463,18 @@
       <div class="definition-box">
         <strong>Official Definition:</strong> "A lack of consistent access to enough food for every person in a household to live an active, healthy life."
         <span class="definition-citation">Source: United States Department of Agriculture (USDA) Economic Research Service</span>
+      </div>
+
+      <!-- Quiz Banner Launcher -->
+      <div class="quiz-hero-banner" id="heroQuizBanner">
+        <div class="quiz-hero-info">
+          <span class="quiz-hero-pill">Interactive Knowledge Check · 12 Questions</span>
+          <h3 class="quiz-hero-title">Test Your Understanding: The Food Insecurity Briefing Quiz</h3>
+          <p class="quiz-hero-desc">
+            Explore 12 research-based questions on root causes, food vs. nutrition insecurity, vulnerable populations, and healthcare interventions.
+          </p>
+        </div>
+        <button type="button" class="btn-quiz-cta" id="btnHeroQuiz" title="Open the 12-question quiz modal">Take the Quiz 📝</button>
       </div>
     </section>
 
@@ -716,6 +1566,137 @@
     <button id="btnReloadUpdate">Reload</button>
   </div>
 
+  <!-- Food Insecurity Quiz Modal -->
+  <dialog id="quizDialog" class="quiz-modal" aria-labelledby="quizModalTitle">
+    <div class="quiz-dialog-header">
+      <div class="quiz-header-brand">
+        <img src="icon.svg" alt="Empty Bowl Logo">
+        <div class="quiz-header-title-group">
+          <h2 id="quizModalTitle">Food Insecurity Briefing Quiz</h2>
+          <p class="quiz-header-subtitle">12 Evidence-Based Questions · U.S. &amp; L.A. County Research</p>
+        </div>
+      </div>
+      <div class="quiz-header-actions">
+        <button type="button" class="btn-quiz-skip" id="btnSkipQuiz" title="Dismiss quiz and explore the website">Skip for now</button>
+        <button type="button" class="quiz-close-x" id="btnCloseQuiz" title="Close quiz dialog" aria-label="Close quiz dialog">&times;</button>
+      </div>
+    </div>
+
+    <div class="quiz-modal-body">
+      <!-- KPI Metric Strip -->
+      <section class="quiz-kpi-grid" aria-label="Quiz progress metrics">
+        <div class="quiz-kpi-card">
+          <span class="quiz-kpi-label">Completion</span>
+          <span class="quiz-kpi-val" id="quiz-kpi-progress">0 / 12</span>
+          <div class="quiz-prog-track" aria-hidden="true">
+            <div class="quiz-prog-fill" id="quiz-kpi-progress-bar"></div>
+          </div>
+        </div>
+        <div class="quiz-kpi-card">
+          <span class="quiz-kpi-label">Current Score</span>
+          <span class="quiz-kpi-val" id="quiz-kpi-score">—</span>
+          <span class="quiz-kpi-sub" id="quiz-kpi-score-sub">Select an option to begin</span>
+        </div>
+        <div class="quiz-kpi-card">
+          <span class="quiz-kpi-label">Streak</span>
+          <span class="quiz-kpi-val" id="quiz-kpi-streak">0</span>
+          <span class="quiz-kpi-sub" id="quiz-kpi-streak-sub">Consecutive correct</span>
+        </div>
+        <div class="quiz-kpi-card">
+          <span class="quiz-kpi-label">Active Filter</span>
+          <span class="quiz-kpi-val" id="quiz-kpi-scope">All Topics</span>
+          <span class="quiz-kpi-sub" id="quiz-kpi-scope-sub">12 questions in queue</span>
+        </div>
+      </section>
+
+      <!-- Topic Filter Toolbar -->
+      <div class="quiz-toolbar" role="region" aria-label="Topic filters and quiz actions">
+        <div class="quiz-filter-group" id="quiz-topic-filters">
+          <button type="button" class="quiz-filter-pill active" data-topic="all" onclick="setQuizTopicFilter('all')">
+            All Topics <span class="quiz-filter-count">12</span>
+          </button>
+          <button type="button" class="quiz-filter-pill" data-topic="causes" onclick="setQuizTopicFilter('causes')">
+            01 Causes <span class="quiz-filter-count">3</span>
+          </button>
+          <button type="button" class="quiz-filter-pill" data-topic="definitions" onclick="setQuizTopicFilter('definitions')">
+            02 Definitions <span class="quiz-filter-count">3</span>
+          </button>
+          <button type="button" class="quiz-filter-pill" data-topic="disparities" onclick="setQuizTopicFilter('disparities')">
+            03 Disparities <span class="quiz-filter-count">3</span>
+          </button>
+          <button type="button" class="quiz-filter-pill" data-topic="interventions" onclick="setQuizTopicFilter('interventions')">
+            04 Interventions <span class="quiz-filter-count">3</span>
+          </button>
+        </div>
+        <div class="quiz-tool-actions">
+          <button type="button" class="quiz-btn-small" id="quiz-btn-missed" onclick="jumpQuizToNextMissed()" disabled>Review Missed (0)</button>
+          <button type="button" class="quiz-btn-small" id="quiz-btn-reset" onclick="handleQuizReset()">Reset Quiz</button>
+        </div>
+      </div>
+
+      <!-- Quick Question Jump Pills (1-12) -->
+      <div class="quiz-nav-strip" aria-label="Question selector">
+        <span class="quiz-nav-strip-label">Jump to:</span>
+        <div id="quiz-pills-row" style="display: flex; gap: 6px; flex-wrap: wrap;"></div>
+      </div>
+
+      <!-- Summary Card (displayed when all 12 questions are answered) -->
+      <section class="quiz-summary-card" id="quiz-summary-card" aria-live="polite" hidden>
+        <div class="quiz-summary-header">
+          <div>
+            <span class="quiz-kpi-label" style="color: var(--accent);">Assessment Complete</span>
+            <h3 style="font-size: 20px; font-weight: 700; color: var(--ink); margin: 4px 0 0 0;">Your Food &amp; Nutrition Security Dossier</h3>
+          </div>
+          <div class="quiz-summary-score" id="quiz-summary-pct">0%</div>
+        </div>
+        <p style="font-size: 14px; color: var(--ink); line-height: 1.5; margin: 0;" id="quiz-summary-verdict"></p>
+        <div class="quiz-domain-grid" id="quiz-domain-summary-grid"></div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px;">
+          <button type="button" class="quiz-btn quiz-btn-primary" onclick="jumpQuizToNextMissed()" id="quiz-summary-review-btn">Review Missed Questions</button>
+          <button type="button" class="quiz-btn" onclick="handleQuizReset()">Retake Quiz</button>
+        </div>
+      </section>
+
+      <!-- Active Question Card -->
+      <article class="quiz-question-card" id="quiz-question-card" aria-live="polite">
+        <div class="quiz-q-meta-row">
+          <div class="quiz-q-meta-left">
+            <span class="quiz-q-counter" id="quiz-q-counter">Question 01 of 12</span>
+            <span class="quiz-q-topic" id="quiz-q-topic">01 · Causes &amp; Mechanisms</span>
+          </div>
+          <span class="quiz-q-badge" id="quiz-q-badge" data-state="unanswered">Unanswered</span>
+        </div>
+
+        <h3 class="quiz-q-stem" id="quiz-q-stem">Loading question…</h3>
+
+        <div class="quiz-options-list" id="quiz-options-list" role="group" aria-label="Answer options"></div>
+
+        <!-- Debrief & Explanation Panel -->
+        <div class="quiz-debrief-panel" id="quiz-debrief-panel" hidden>
+          <div class="quiz-debrief-verdict" id="quiz-debrief-verdict"></div>
+          <p class="quiz-debrief-explanation" id="quiz-debrief-explanation"></p>
+          <div id="quiz-debrief-visual"></div>
+          <div class="quiz-debrief-source" id="quiz-debrief-source"></div>
+        </div>
+
+        <!-- Question Navigation Controls -->
+        <div class="quiz-q-nav-row">
+          <span class="quiz-nav-hint">Keys [1–4] to select · [&larr;/&rarr;] to navigate</span>
+          <div class="quiz-nav-btns">
+            <button type="button" class="quiz-btn" id="quiz-btn-prev" onclick="navigateQuizQuestion(-1)">Previous</button>
+            <button type="button" class="quiz-btn quiz-btn-primary" id="quiz-btn-next" onclick="navigateQuizQuestion(1)">Next Question</button>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Modal Footer -->
+    <div class="quiz-modal-footer">
+      <span>Progress is automatically saved to your browser. Re-open anytime via <strong>Quiz 📝</strong> in the header.</span>
+      <button type="button" class="btn-quiz-skip" id="btnCloseQuizFooter">Browse Empty Bowl</button>
+    </div>
+  </dialog>
+
   <!-- Help Dialog -->
   <dialog id="helpDialog">
     <div class="dialog-header">
@@ -763,6 +1744,7 @@ const APP = {
 
 // Help Index for Controls and Sections
 const HELP_INDEX = [
+  { title: "Food Insecurity Quiz", selector: "#btn-quiz-toggle", text: "Take our 12-question interactive briefing quiz to test your knowledge on hunger, definitions, and policy." },
   { title: "Home Navigation", selector: "#btn-nav-home", text: "Return to the main overview page and framework." },
   { title: "Who Faces Hunger", selector: "#btn-nav-who", text: "Explore demographics and vulnerable populations." },
   { title: "Causes of Food Insecurity", selector: "#btn-nav-causes", text: "Examine economic, structural, and geographic root causes." },
@@ -904,12 +1886,754 @@ document.getElementById("btnReloadUpdate")?.addEventListener("click", () => {
   });
 });
 
+
+// ==========================================
+// FOOD INSECURITY BRIEFING QUIZ SYSTEM
+// ==========================================
+const QUIZ_TOPICS = {
+      causes: { id: 'causes', label: `01 · Causes & Mechanisms`, short: `Causes` },
+      definitions: { id: 'definitions', label: `02 · Definitions & Measures`, short: `Definitions` },
+      disparities: { id: 'disparities', label: `03 · Populations & Disparities`, short: `Disparities` },
+      interventions: { id: 'interventions', label: `04 · Policy & Interventions`, short: `Interventions` }
+    };
+const QUIZ_QUESTIONS = [
+      {
+        id: 1,
+        topic: 'causes',
+        stem: `What is the primary root cause of food insecurity in the United States, and what common budget trade-off do households using emergency food pantries report?`,
+        options: [
+          `A shortage of total domestic food supply, forcing rural families to barter for staple grains`,
+          `Poverty and insufficient household resources—compounded by housing, utility, and healthcare costs—forcing choices between food and utilities (41.5%), rent or mortgage (35%), or medical care (31.6%)`,
+          `Lack of household nutrition literacy, leaving families unaware of grocery store locations`,
+          `Seasonal farm closures alone, affecting only households without employed adults`
+        ],
+        correct: 1,
+        explanation: `Despite living in a high-income nation with ample overall food supply, millions experience food insecurity because of poverty and budget shocks such as job loss, benefit reductions, or high living costs. Among households relying on food pantries and emergency food programs, substantial shares report choosing between buying food and paying for utilities or heating (41.5%), rent or mortgage (35.0%), or medical care and medication (31.6%).`,
+        source: `Sources: Food Insecurity in America: A Call to Action; Are Your Patients Hungry? (Hunger in America survey); Livings et al., The Journal of Nutrition (2024).`,
+        visualType: `tradeoffs`
+      },
+      {
+        id: 2,
+        topic: 'causes',
+        stem: `How did economic and supply-chain disruptions during the COVID-19 pandemic worsen both food insecurity and dietary quality?`,
+        options: [
+          `Lockdowns lowered retail prices of fresh produce while raising prices of shelf-stable processed foods`,
+          `Job loss, salary cuts, and distribution delays drove up prices of nutrient-rich foods (fruits, vegetables, legumes), making foods high in saturated fats and added sugars the cheapest options`,
+          `Emergency cash transfers completely eliminated food insecurity across all surveyed regions`,
+          `Restaurant closures prevented households from purchasing calorie-dense foods`
+        ],
+        correct: 1,
+        explanation: `Pandemic confinement, labor shortages, and distribution bottlenecks raised food prices while triggering widespread unemployment and reduced family income. In multi-country survey analyses (n = 12,774), household job loss (aPR = 1.71) and rising household food prices (aPR = 1.54) strongly increased food insecurity. As prices of fruits, vegetables, and legumes climbed, ultra-processed foods high in saturated fats and added sugars became the cheapest alternatives, worsening diet quality and fueling the double burden of malnutrition.`,
+        source: `Source: COVID-19 Food Insecurity Cross-Sectional Study, Nutrients (2022).`,
+        visualType: null
+      },
+      {
+        id: 3,
+        topic: 'causes',
+        stem: `Which combination accurately summarizes the three biological and behavioral pathways linking food insecurity to cardiometabolic diseases such as type 2 diabetes?`,
+        options: [
+          `Cheaper calorie-dense/nutrient-poor diets, cyclic feast-or-scarcity eating tied to monthly paychecks or assistance, and chronic stress activating the HPA axis to elevate cortisol and insulin resistance`,
+          `Excessive dietary protein intake, elevated hydration, and hyperactive thyroid hormone secretion`,
+          `Exclusive reliance on whole-grain vegetarian diets paired with intense manual labor`,
+          `Overconsumption of fresh farmers' market produce triggered by monthly SNAP benefit spikes`
+        ],
+        correct: 0,
+        explanation: `Three reinforcing mechanisms connect food insecurity to cardiometabolic disease: (1) substitution toward cheaper, calorie-dense, nutrient-poor foods higher in fats and refined carbohydrates with fewer fruits and vegetables; (2) cyclic eating patterns driven by monthly paychecks and benefit cycles, where alternating scarcity and binge episodes promote insulin resistance; and (3) chronic stress and anxiety activating the hypothalamic-pituitary-adrenal (HPA) axis, releasing glucocorticoids/cortisol that increase visceral fat, blood glucose, and insulin resistance.`,
+        source: `Source: Food Insecurity and Chronic Disease (Mechanism Review).`,
+        visualType: null
+      },
+      {
+        id: 4,
+        topic: 'definitions',
+        stem: `How does "nutrition security" expand upon traditional "food security," and what single-item screener did the 2022 Los Angeles County study use to measure nutrition insecurity?`,
+        options: [
+          `It tracks total daily kilocalories consumed via a mandatory 7-day weighed food diary`,
+          `It captures the nutritional adequacy of accessible food plus barriers to dietary preferences (cultural/religious needs, allergies, taste), measured by asking whether respondents worried the food they could eat would hurt their health and wellbeing`,
+          `It is an exact synonym for USDA "very low food security" among households with young children`,
+          `It applies strictly to low-income nations facing acute famine and staple crop shortages`
+        ],
+        correct: 1,
+        explanation: `Traditional food security focuses on having enough food without explicitly measuring diet quality. Nutrition security encompasses the nutritional adequacy of accessible food as well as factors affecting whether food meets cultural or religious dietary requirements, taste preferences, and food allergies. In the 2022 L.A. County study, researchers used the Gretchen Swanson Center for Nutrition's validated 1-item screener: "In the last 12 months, I worried that the food I was able to eat would hurt my health and wellbeing" (93% sensitivity, 78% specificity).`,
+        source: `Source: Livings et al., The Journal of Nutrition (2024); Calloway et al., Appetite (2022).`,
+        visualType: null
+      },
+      {
+        id: 5,
+        topic: 'definitions',
+        stem: `In the representative 2022 survey of Los Angeles County adults (N = 1,071), food insecurity (23.5%) and nutrition insecurity (24.5%) had nearly equal prevalence. What did the study discover about their overlap and health predictions?`,
+        options: [
+          `More than 95% of food-insecure adults also reported nutrition insecurity, proving one screener suffices`,
+          `Their overlap was below 60% (only 13.5% reported both); when modeled together, only nutrition insecurity remained a significant predictor of diabetes (OR = 1.75), while both independently predicted poor mental health`,
+          `Food insecurity strongly predicted cardiovascular disease, whereas nutrition insecurity predicted neither diabetes nor mental health`,
+          `Nutrition insecurity had zero association with chronic illness once income and education were controlled`
+        ],
+        correct: 1,
+        explanation: `Although roughly 1 in 4 L.A. County adults experienced food insecurity (23.5%) and 1 in 4 experienced nutrition insecurity (24.5%), only 59.4% of food-insecure adults reported nutrition insecurity and 54.0% of nutrition-insecure adults reported food insecurity (13.5% reported both). In adjusted logistic regressions including both constructs simultaneously (Model C), only nutrition insecurity remained significantly associated with diabetes (OR = 1.75, 95% CI: 1.05–2.93), while both food insecurity (OR = 3.04) and nutrition insecurity (OR = 2.27) independently predicted poor mental health.`,
+        source: `Source: Livings et al., The Journal of Nutrition (2024), Tables 1, 3, and 4.`,
+        visualType: `la_health`
+      },
+      {
+        id: 6,
+        topic: 'definitions',
+        stem: `In standard USDA Household Food Security Survey Module (HFSSM) reporting, households with "marginal food security" (1–2 affirmed items) are grouped as food secure. What does pediatric and maternal research indicate about this group?`,
+        options: [
+          `Marginally food-secure children and mothers show zero difference in health outcomes compared with high-food-security households`,
+          `Marginal food security shows significant, intermediate odds of child fair/poor health, developmental risk, and maternal depressive symptoms—distinct from both food-secure and food-insecure families`,
+          `Marginal food security indicates more severe food deprivation than very low food security`,
+          `Marginal food security is excluded from all federal prevalence reports rather than counted as food secure`
+        ],
+        correct: 1,
+        explanation: `Affirming 1 or 2 items on the 18-item HFSSM (almost always worrying food would run out or that bought food did not last) affected 9.9 million children and 22.2 million adults in the U.S. in 2010, yet federal tables classify these households as "food secure." Research on young children (<48 months) and female caregivers demonstrates a dose-response-like pattern: nonoverlapping confidence intervals show marginal food security carries adverse health risks significantly worse than high food security and intermediate between food security and food insecurity—meaning current reporting underestimates population health impacts.`,
+        source: `Source: Cook et al., Advances in Nutrition (2013).`,
+        visualType: null
+      },
+      {
+        id: 7,
+        topic: 'disparities',
+        stem: `Comparing adjusted sociodemographic predictors of food insecurity versus nutrition insecurity in Los Angeles County (2022), how did the risk profiles of Hispanic and Non-Hispanic Asian adults—and other demographic factors—differ?`,
+        options: [
+          `Income predicted food insecurity only, while age and education were the sole predictors of nutrition insecurity`,
+          `Food insecurity was predicted by lower income, female gender, younger age (<65), lower education, and Hispanic ethnicity (OR = 1.96); nutrition insecurity was predicted by lower income and Non-Hispanic Asian (OR = 2.22) or other race—while nutrition insecurity <em>only</em> was predicted solely by race/ethnicity (Non-Hispanic Asian OR = 3.1), not income`,
+          `Non-Hispanic Asian adults had higher odds of food insecurity (OR = 2.22) but not nutrition insecurity because culturally specific grocers are evenly distributed across the county`,
+          `Hispanic and Non-Hispanic Asian adults exhibited identical odds ratios across both food insecurity and nutrition insecurity models`
+        ],
+        correct: 1,
+        explanation: `In Model A (food insecurity), lower income (<100% FPL OR = 4.56; 100–300% FPL OR = 2.65), female gender (OR = 1.51), younger age (18–40 OR = 2.42; 41–64 OR = 2.17 vs. 65+), some college or less (OR = 2.08), and Hispanic ethnicity (OR = 1.96 vs. Non-Hispanic White) were significant predictors. In Model B (nutrition insecurity), only income (<100% FPL OR = 2.65; 100–300% FPL OR = 1.86) and Non-Hispanic Asian (OR = 2.22) or Non-Hispanic other race (OR = 2.03) were significant. Notably, in the multinomial model for nutrition insecurity "only," income was NOT significant, while Non-Hispanic Asian adults had 3.1 times the odds—reflecting sparse geographic access to diverse culturally relevant healthy foods across >4,000 square miles of L.A. County, whereas Hispanic residents often have accessible cultural markets but face affordability barriers.`,
+        source: `Source: Livings et al., The Journal of Nutrition (2024), Table 2 & Supplemental Table 1.`,
+        visualType: `predictors_compare`
+      },
+      {
+        id: 8,
+        topic: 'disparities',
+        stem: `Why do younger adults (ages 18–40) and U.S. college students experience elevated vulnerability to food and nutrition insecurity compared with adults aged 65 and older?`,
+        options: [
+          `Adults aged 65+ automatically receive free daily grocery delivery from the USDA`,
+          `Younger adults combine tighter financial margins with demanding work, study, and caregiving schedules, and eligible college students often do not know they qualify for SNAP`,
+          `Enrolling in a campus meal plan completely eliminates food insecurity among university students`,
+          `Younger adults have lower caloric requirements that exclude them from food assistance surveys`
+        ],
+        correct: 1,
+        explanation: `In L.A. County, adults aged 18–40 had 2.42 times the odds of food insecurity compared with adults 65 and older. Younger adults face financial barriers alongside demanding schedules—balancing employment, higher education, and family caregiving—that hinder access to healthy foods. Furthermore, college students are frequently unaware of their SNAP eligibility, standard short-form screens can mask marginally food-secure students, and even students with unlimited campus meal plans have reported food insecurity.`,
+        source: `Sources: Livings et al., The Journal of Nutrition (2024); Analysis of Food Insecurity in U.S. Colleges.`,
+        visualType: null
+      },
+      {
+        id: 9,
+        topic: 'disparities',
+        stem: `What did research on U.S. veterans of the Iraq and Afghanistan wars—alongside national household surveillance—reveal about populations at disproportionate risk?`,
+        options: [
+          `Iraq/Afghanistan veterans reported half the national rate of food insecurity because military service guarantees housing and food stipends`,
+          `Nearly 27% of surveyed Iraq/Afghanistan veterans reported food insecurity (12.1% very low food security—over double the U.S. rate), linked to younger age, lower income/pay grade, and unmarried status, but NOT deployment count or service-connected disability`,
+          `Nationally in 2022, White non-Hispanic households had higher food insecurity rates than Black non-Hispanic and Hispanic households`,
+          `Combat exposure was the single strongest predictor of food insecurity among surveyed veterans`
+        ],
+        correct: 1,
+        explanation: `In a survey of Iraq and Afghanistan war veterans matched to VA records, nearly 27% experienced past-year food insecurity (compared with 14.5% nationally in 2012), and 12.1% experienced very low food security (more than double the 5.7% U.S. rate). Risk correlated with younger age, not being married/partnered, more children, lower income, lower final military pay grade, tobacco use, binge drinking, and shorter sleep—while number of deployments and service-connected disability were unrelated. Nationally in 2022, disparities also persisted by race and household structure: 22.4% of Black non-Hispanic and 20.8% of Hispanic households faced food insecurity vs. 9.3% of White households, with single-caregiver households and households with children <6 years at elevated risk.`,
+        source: `Sources: Widome et al., Public Health Nutrition (2014); Preventive Services for Food Insecurity (2022 CPS data).`,
+        visualType: `veterans_compare`
+      },
+      {
+        id: 10,
+        topic: 'interventions',
+        stem: `Because SNAP reduces food insecurity yet some recipients remain food insecure and its effect on nutrition insecurity is less established, which California program specifically boosts nutrition security by matching SNAP dollars 1:1 for produce at farmers' markets?`,
+        options: [
+          `The Low Income Home Energy Assistance Program (LIHEAP)`,
+          `California's Market Match program`,
+          `The Behavioral Risk Factor Surveillance System (BRFSS)`,
+          `The 6-item Household Food Security Short Form`
+        ],
+        correct: 1,
+        explanation: `California's "Market Match" program gives SNAP participants a 1:1 financial match when spending benefits on fresh produce at farmers' markets. By expanding purchasing power while specifically incentivizing fruits and vegetables, Market Match directly targets nutrition security—complementing core federal programs like SNAP, WIC (which boosts prenatal care and reduces low birthweight, infant mortality, anemia, and obesity), and School Breakfast/Lunch programs.`,
+        source: `Sources: Livings et al., The Journal of Nutrition (2024); Food Insecurity in America: A Call to Action.`,
+        visualType: null
+      },
+      {
+        id: 11,
+        topic: 'interventions',
+        stem: `How are primary care clinics operationalizing "Food is Medicine" approaches, and what potential harm of clinical screening do evidence reviews highlight?`,
+        options: [
+          `Clinics screen patients (e.g., via the 2-item Hunger Vital Sign) and connect them to produce prescriptions, medically tailored meals, clinic food pantries, or SNAP/WIC—while guarding against stigma, privacy concerns, and patient fears of Child Protective Services involvement`,
+          `Clinics prescribe emergency canned rations in place of standard diabetes medications without screening`,
+          `Clinics refuse to screen for social risks because patients believe diet is unrelated to chronic disease`,
+          `Primary care clinics administer the full 18-item USDA module verbally before every routine blood draw`
+        ],
+        correct: 0,
+        explanation: `Healthcare systems increasingly use brief validated screens such as the 2-item Hunger Vital Sign (derived from the USDA HFSSM) to link patients to produce prescription programs, medically tailored meals, clinic-affiliated food boxes/pantries, and care coordination for SNAP and WIC. While systematic reviews found no documented harms in screening trials, clinical guidance cautions providers to address potential harms—including social stigma, privacy risks, and patients' fear that disclosing food insecurity could prompt Child Protective Services or legal involvement.`,
+        source: `Sources: Screening for Food Insecurity (JAMA / USPSTF); Preventive Services for Food Insecurity; Livings et al. (2024).`,
+        visualType: null
+      },
+      {
+        id: 12,
+        topic: 'interventions',
+        stem: `Why do public health frameworks—such as the L.A. County Food Equity Roundtable's 10-year Strategic Action Plan—pair food assistance with broader structural and economic policies?`,
+        options: [
+          `Because federal nutrition programs alone cannot offset deep poverty or inequitable food environments; lasting solutions also require living wages, steady employment, tax credits, affordable housing/healthcare, and equitable spatial and cultural access to healthy foods`,
+          `Because WIC and school meal programs have been found to increase childhood obesity rates`,
+          `Because local food banks operate best when isolated from healthcare systems and municipal policy`,
+          `Because nutrition insecurity occurs exclusively among households earning above 300% of the federal poverty level`
+        ],
+        correct: 0,
+        explanation: `Federal nutrition programs (SNAP, WIC, School Lunch and Breakfast) buffer families and improve child nutrition, attendance, and health, but nutrition assistance alone cannot compensate for poverty and near-poverty. Ending both food and nutrition insecurity requires pairing strong nutrition programs with living wages, steady employment, low-income tax credits, affordable healthcare and housing, and targeted food-system investments—like L.A. County's 10-year Strategic Action Plan—that address spatial, financial, and cultural access to nutritious food.`,
+        source: `Sources: Food Insecurity in America: A Call to Action; Livings et al., The Journal of Nutrition (2024).`,
+        visualType: null
+      }
+    ];
+
+let quizState = {
+  activeTopic: 'all',
+  currentQuestionId: 1,
+  answers: {}
+};
+
+function loadQuizState() {
+  try {
+    const saved = localStorage.getItem('emptybowl_quiz_state');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (parsed && typeof parsed.answers === 'object') {
+        quizState.answers = parsed.answers;
+      }
+      if (parsed && (parsed.activeTopic === 'all' || QUIZ_TOPICS[parsed.activeTopic])) {
+        quizState.activeTopic = parsed.activeTopic;
+      }
+      if (parsed && typeof parsed.currentQuestionId === 'number' && QUIZ_QUESTIONS.some(q => q.id === parsed.currentQuestionId)) {
+        quizState.currentQuestionId = parsed.currentQuestionId;
+      }
+    }
+  } catch (e) {}
+}
+
+function saveQuizState() {
+  try {
+    localStorage.setItem('emptybowl_quiz_state', JSON.stringify(quizState));
+  } catch (e) {}
+}
+
+function getQuizFilteredQuestions() {
+  if (quizState.activeTopic === 'all') return QUIZ_QUESTIONS;
+  return QUIZ_QUESTIONS.filter(q => q.topic === quizState.activeTopic);
+}
+
+function getQuizCorrectCount(list) {
+  return list.filter(q => quizState.answers[q.id] === q.correct).length;
+}
+
+function getQuizAnsweredList(list) {
+  return list.filter(q => typeof quizState.answers[q.id] === 'number');
+}
+
+function computeQuizStreak() {
+  let streak = 0;
+  for (let i = 0; i < QUIZ_QUESTIONS.length; i++) {
+    const q = QUIZ_QUESTIONS[i];
+    const ans = quizState.answers[q.id];
+    if (typeof ans === 'number') {
+      if (ans === q.correct) {
+        streak++;
+      } else {
+        streak = 0;
+      }
+    }
+  }
+  return streak;
+}
+
+function setQuizTopicFilter(topic) {
+  quizState.activeTopic = topic;
+  const filtered = getQuizFilteredQuestions();
+  const currentInFiltered = filtered.some(q => q.id === quizState.currentQuestionId);
+  if (!currentInFiltered && filtered.length > 0) {
+    quizState.currentQuestionId = filtered[0].id;
+  }
+  saveQuizState();
+  renderQuizAll();
+}
+
+function selectQuizQuestion(id) {
+  quizState.currentQuestionId = id;
+  saveQuizState();
+  renderQuizAll();
+  const mb = document.querySelector(".quiz-modal-body");
+  if (mb) mb.scrollTop = 0;
+}
+
+function selectQuizAnswer(qId, optIndex) {
+  if (typeof quizState.answers[qId] === 'number') return;
+  quizState.answers[qId] = optIndex;
+  saveQuizState();
+  renderQuizAll();
+  setTimeout(() => {
+    const debrief = document.getElementById("quiz-debrief-panel");
+    if (debrief) {
+      debrief.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+  }, 120);
+}
+
+function navigateQuizQuestion(delta) {
+  const list = getQuizFilteredQuestions();
+  if (list.length === 0) return;
+  const idx = list.findIndex(q => q.id === quizState.currentQuestionId);
+  const nextIdx = Math.max(0, Math.min(list.length - 1, idx + delta));
+  quizState.currentQuestionId = list[nextIdx].id;
+  saveQuizState();
+  renderQuizAll();
+  const mb = document.querySelector(".quiz-modal-body");
+  if (mb) mb.scrollTop = 0;
+}
+
+function jumpQuizToNextMissed() {
+  const missed = QUIZ_QUESTIONS.filter(q => typeof quizState.answers[q.id] === 'number' && quizState.answers[q.id] !== q.correct);
+  if (missed.length === 0) return;
+  const currentIdx = missed.findIndex(q => q.id === quizState.currentQuestionId);
+  const nextMissed = missed[(currentIdx + 1) % missed.length];
+  quizState.activeTopic = 'all';
+  quizState.currentQuestionId = nextMissed.id;
+  saveQuizState();
+  renderQuizAll();
+}
+
+function handleQuizReset() {
+  if (confirm("Reset all quiz answers and restart the assessment?")) {
+    quizState.answers = {};
+    quizState.currentQuestionId = 1;
+    quizState.activeTopic = 'all';
+    saveQuizState();
+    renderQuizAll();
+  }
+}
+
+function renderEvidenceVisual(type) {
+      if (type === 'tradeoffs') {
+        return `
+          <div class="evidence-box">
+            <h4 class="evidence-title">Emergency Food Clients: Forced Household Budget Trade-Offs</h4>
+            <div class="mini-bar-row">
+              <span>Food vs. Utilities / Heating</span>
+              <div class="mini-bar-track"><div class="mini-bar-fill red" style="width: 41.5%;"></div></div>
+              <span class="mini-bar-val">41.5%</span>
+            </div>
+            <div class="mini-bar-row">
+              <span>Food vs. Rent / Mortgage</span>
+              <div class="mini-bar-track"><div class="mini-bar-fill gold" style="width: 35%;"></div></div>
+              <span class="mini-bar-val">35.0%</span>
+            </div>
+            <div class="mini-bar-row">
+              <span>Food vs. Medical / Medication</span>
+              <div class="mini-bar-track"><div class="mini-bar-fill" style="width: 31.6%;"></div></div>
+              <span class="mini-bar-val">31.6%</span>
+            </div>
+          </div>
+        `;
+      }
+      if (type === 'la_health') {
+        return `
+          <div class="evidence-box">
+            <h4 class="evidence-title">L.A. County Adjusted Odds Ratios When Both Insecurities Are Modeled Together (Model C)</h4>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Predictor</th>
+                  <th>Diabetes OR (95% CI)</th>
+                  <th>Poor Mental Health OR (95% CI)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Food Insecurity</strong> (23.5%)</td>
+                  <td>1.67 (0.96–2.92) — Not sig.</td>
+                  <td><strong>3.04 (1.88–4.91)</strong> — Sig.</td>
+                </tr>
+                <tr>
+                  <td><strong>Nutrition Insecurity</strong> (24.5%)</td>
+                  <td><strong>1.75 (1.05–2.93)</strong> — Sig.</td>
+                  <td><strong>2.27 (1.46–3.53)</strong> — Sig.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+      if (type === 'predictors_compare') {
+        return `
+          <div class="evidence-box">
+            <h4 class="evidence-title">Significant Sociodemographic Predictors in L.A. County (Table 2 &amp; Multinomial Model)</h4>
+            <div class="compare-grid">
+              <div class="compare-col">
+                <h4>Food Insecurity (Model A)</h4>
+                <ul class="compare-list">
+                  <li><strong>Income &lt;100% FPL:</strong> OR 4.56 (ref &ge;300%)</li>
+                  <li><strong>Income 100–300% FPL:</strong> OR 2.65</li>
+                  <li><strong>Age 18–40 / 41–64:</strong> OR 2.42 / 2.17 (vs. 65+)</li>
+                  <li><strong>Some college or less:</strong> OR 2.08</li>
+                  <li><strong>Hispanic ethnicity:</strong> OR 1.96 (vs. NH White)</li>
+                  <li><strong>Female gender:</strong> OR 1.51</li>
+                </ul>
+              </div>
+              <div class="compare-col">
+                <h4>Nutrition Insecurity (Model B &amp; NI-Only)</h4>
+                <ul class="compare-list">
+                  <li><strong>Income &lt;100% FPL:</strong> OR 2.65 (Model B)</li>
+                  <li><strong>Income 100–300% FPL:</strong> OR 1.86 (Model B)</li>
+                  <li><strong>Non-Hispanic Asian:</strong> OR 2.22 (Model B) &amp; <strong>OR 3.10 for NI-only</strong></li>
+                  <li><strong>Non-Hispanic other race:</strong> OR 2.03 (Model B)</li>
+                  <li><strong>Gender, Age, Education:</strong> Not significant</li>
+                  <li><strong>NI-Only Model:</strong> Income NOT significant</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+      if (type === 'veterans_compare') {
+        return `
+          <div class="evidence-box">
+            <h4 class="evidence-title">Past-Year Food Insecurity: Iraq/Afghanistan Veterans (2012) vs. U.S. Average</h4>
+            <div class="mini-bar-row">
+              <span>Veterans (Any FI)</span>
+              <div class="mini-bar-track"><div class="mini-bar-fill red" style="width: 54%;"></div></div>
+              <span class="mini-bar-val">~27.0%</span>
+            </div>
+            <div class="mini-bar-row">
+              <span>U.S. Households (Any FI)</span>
+              <div class="mini-bar-track"><div class="mini-bar-fill" style="width: 29%;"></div></div>
+              <span class="mini-bar-val">14.5%</span>
+            </div>
+            <div class="mini-bar-row">
+              <span>Veterans (Very Low FI)</span>
+              <div class="mini-bar-track"><div class="mini-bar-fill gold" style="width: 24.2%;"></div></div>
+              <span class="mini-bar-val">12.1%</span>
+            </div>
+            <div class="mini-bar-row">
+              <span>U.S. Households (Very Low)</span>
+              <div class="mini-bar-track"><div class="mini-bar-fill" style="width: 11.4%;"></div></div>
+              <span class="mini-bar-val">5.7%</span>
+            </div>
+          </div>
+        `;
+      }
+      return ``;
+    }
+
+function renderQuizKPIs() {
+  const answeredTotal = getQuizAnsweredList(QUIZ_QUESTIONS).length;
+  const correctTotal = getQuizCorrectCount(QUIZ_QUESTIONS);
+  const streak = computeQuizStreak();
+  const filtered = getQuizFilteredQuestions();
+  const missedTotal = QUIZ_QUESTIONS.filter(q => typeof quizState.answers[q.id] === 'number' && quizState.answers[q.id] !== q.correct).length;
+
+  const progEl = document.getElementById('quiz-kpi-progress');
+  const progBar = document.getElementById('quiz-kpi-progress-bar');
+  const scoreEl = document.getElementById('quiz-kpi-score');
+  const scoreSubEl = document.getElementById('quiz-kpi-score-sub');
+  const streakEl = document.getElementById('quiz-kpi-streak');
+  const streakSubEl = document.getElementById('quiz-kpi-streak-sub');
+  const scopeEl = document.getElementById('quiz-kpi-scope');
+  const scopeSubEl = document.getElementById('quiz-kpi-scope-sub');
+  const missedBtn = document.getElementById('quiz-btn-missed');
+
+  if (progEl) progEl.textContent = `${answeredTotal} / ${QUIZ_QUESTIONS.length}`;
+  if (progBar) {
+    const pct = (answeredTotal / QUIZ_QUESTIONS.length) * 100;
+    progBar.style.width = `${pct}%`;
+  }
+  if (scoreEl) {
+    if (answeredTotal === 0) {
+      scoreEl.textContent = `—`;
+      if (scoreSubEl) scoreSubEl.textContent = `Select an option to begin`;
+    } else {
+      const pct = Math.round((correctTotal / answeredTotal) * 100);
+      scoreEl.textContent = `${pct}%`;
+      if (scoreSubEl) scoreSubEl.textContent = `${correctTotal} correct of ${answeredTotal} answered`;
+    }
+  }
+  if (streakEl) streakEl.textContent = streak;
+  if (streakSubEl) streakSubEl.textContent = streak === 1 ? `1 correct in a row` : `${streak} consecutive correct`;
+
+  if (scopeEl) {
+    scopeEl.textContent = quizState.activeTopic === 'all' ? `All Topics` : QUIZ_TOPICS[quizState.activeTopic].short;
+  }
+  if (scopeSubEl) {
+    scopeSubEl.textContent = `${filtered.length} questions in queue`;
+  }
+  if (missedBtn) {
+    missedBtn.disabled = missedTotal === 0;
+    missedBtn.textContent = `Review Missed (${missedTotal})`;
+  }
+}
+
+function renderQuizToolbar() {
+  const buttons = document.querySelectorAll('#quiz-topic-filters button[data-topic]');
+  buttons.forEach(btn => {
+    const t = btn.getAttribute('data-topic');
+    const isActive = t === quizState.activeTopic;
+    btn.classList.toggle('active', isActive);
+  });
+}
+
+function renderQuizNavStrip() {
+  const pillsRow = document.getElementById('quiz-pills-row');
+  if (!pillsRow) return;
+  const filtered = getQuizFilteredQuestions();
+  const filteredIds = new Set(filtered.map(q => q.id));
+
+  pillsRow.innerHTML = QUIZ_QUESTIONS.map(q => {
+    const ans = quizState.answers[q.id];
+    let stateClass = '';
+    if (typeof ans === 'number') {
+      stateClass = ans === q.correct ? 'correct' : 'incorrect';
+    }
+    const isActive = q.id === quizState.currentQuestionId;
+    const isDimmed = !filteredIds.has(q.id);
+
+    return `
+      <button type="button" class="quiz-num-pill ${stateClass} ${isActive ? 'active' : ''} ${isDimmed ? 'dimmed' : ''}"
+        title="Question ${q.id}${isDimmed ? ' (filtered out)' : ''}"
+        onclick="selectQuizQuestion(${q.id})">
+        ${q.id}
+      </button>
+    `;
+  }).join('');
+}
+
+function renderQuizQuestion() {
+  const filtered = getQuizFilteredQuestions();
+  const q = filtered.find(item => item.id === quizState.currentQuestionId) || filtered[0] || QUIZ_QUESTIONS[0];
+  quizState.currentQuestionId = q.id;
+  const qIdxInFiltered = filtered.findIndex(item => item.id === q.id);
+
+  const counterEl = document.getElementById('quiz-q-counter');
+  const topicEl = document.getElementById('quiz-q-topic');
+  const badgeEl = document.getElementById('quiz-q-badge');
+  const stemEl = document.getElementById('quiz-q-stem');
+  const optionsList = document.getElementById('quiz-options-list');
+  const debriefPanel = document.getElementById('quiz-debrief-panel');
+  const debriefVerdict = document.getElementById('quiz-debrief-verdict');
+  const debriefExplanation = document.getElementById('quiz-debrief-explanation');
+  const debriefVisual = document.getElementById('quiz-debrief-visual');
+  const debriefSource = document.getElementById('quiz-debrief-source');
+  const btnPrev = document.getElementById('quiz-btn-prev');
+  const btnNext = document.getElementById('quiz-btn-next');
+
+  const userChoice = quizState.answers[q.id];
+  const isAnswered = typeof userChoice === 'number';
+  const isCorrect = isAnswered && userChoice === q.correct;
+
+  if (counterEl) {
+    counterEl.textContent = `Question ${String(qIdxInFiltered + 1).padStart(2, '0')} of ${String(filtered.length).padStart(2, '0')} (Item #${String(q.id).padStart(2, '0')})`;
+  }
+  if (topicEl) topicEl.textContent = QUIZ_TOPICS[q.topic].label;
+  if (badgeEl) {
+    if (!isAnswered) {
+      badgeEl.textContent = `Unanswered`;
+      badgeEl.setAttribute('data-state', 'unanswered');
+    } else if (isCorrect) {
+      badgeEl.textContent = `Correct`;
+      badgeEl.setAttribute('data-state', 'correct');
+    } else {
+      badgeEl.textContent = `Incorrect`;
+      badgeEl.setAttribute('data-state', 'incorrect');
+    }
+  }
+  if (stemEl) stemEl.textContent = q.stem;
+
+  if (optionsList) {
+    const letters = ['A', 'B', 'C', 'D'];
+    optionsList.innerHTML = q.options.map((optText, idx) => {
+      let statusAttr = '';
+      let markerText = '';
+      if (isAnswered) {
+        if (idx === q.correct) {
+          statusAttr = 'data-status="correct"';
+          markerText = idx === userChoice ? 'Your choice · Correct' : 'Correct answer';
+        } else if (idx === userChoice) {
+          statusAttr = 'data-status="incorrect"';
+          markerText = 'Your choice';
+        } else {
+          statusAttr = 'data-status="dimmed"';
+        }
+      }
+      return `
+        <button type="button" class="quiz-option-btn" ${statusAttr} ${isAnswered ? 'disabled' : ''} onclick="selectQuizAnswer(${q.id}, ${idx})">
+          <span class="quiz-option-letter">${letters[idx]}</span>
+          <span class="quiz-option-text">${optText}</span>
+          <span class="quiz-option-marker">${markerText}</span>
+        </button>
+      `;
+    }).join('');
+  }
+
+  if (debriefPanel) {
+    if (isAnswered) {
+      debriefPanel.hidden = false;
+      debriefPanel.setAttribute('data-verdict', isCorrect ? 'correct' : 'incorrect');
+      if (debriefVerdict) {
+        debriefVerdict.setAttribute('data-correct', isCorrect ? 'true' : 'false');
+        debriefVerdict.textContent = isCorrect
+          ? `Correct — Option ${String.fromCharCode(65 + q.correct)}`
+          : `Incorrect — The correct answer is Option ${String.fromCharCode(65 + q.correct)}`;
+      }
+      if (debriefExplanation) debriefExplanation.textContent = q.explanation;
+      if (debriefVisual) debriefVisual.innerHTML = renderEvidenceVisual(q.visualType);
+      if (debriefSource) debriefSource.textContent = q.source;
+    } else {
+      debriefPanel.hidden = true;
+    }
+  }
+
+  if (btnPrev) btnPrev.disabled = qIdxInFiltered <= 0;
+  if (btnNext) btnNext.disabled = qIdxInFiltered >= filtered.length - 1;
+}
+
+function renderQuizSummary() {
+  const summaryCard = document.getElementById('quiz-summary-card');
+  if (!summaryCard) return;
+  const answeredAll = getQuizAnsweredList(QUIZ_QUESTIONS);
+  if (answeredAll.length < QUIZ_QUESTIONS.length) {
+    summaryCard.hidden = true;
+    return;
+  }
+
+  const correctAll = getQuizCorrectCount(QUIZ_QUESTIONS);
+  const pct = Math.round((correctAll / QUIZ_QUESTIONS.length) * 100);
+  summaryCard.hidden = false;
+
+  const pctEl = document.getElementById('quiz-summary-pct');
+  const verdictEl = document.getElementById('quiz-summary-verdict');
+  const gridEl = document.getElementById('quiz-domain-summary-grid');
+  const reviewBtn = document.getElementById('quiz-summary-review-btn');
+
+  if (pctEl) pctEl.textContent = `${pct}% (${correctAll}/12)`;
+  if (verdictEl) {
+    if (pct >= 90) {
+      verdictEl.textContent = `Outstanding mastery of the research evidence: you accurately distinguished food insecurity from nutrition insecurity, identified demographic divergence in L.A. County, and connected structural root causes to policy solutions.`;
+    } else if (pct >= 70) {
+      verdictEl.textContent = `Solid foundation across the four domains. Review the missed items below to sharpen distinctions around sociodemographic predictors, marginal food security, and healthcare-based interventions.`;
+    } else {
+      verdictEl.textContent = `Good progress through the complete 12-question assessment. Use the Domain Mastery breakdown and missed-question review to revisit key definitions and odds ratios from the source studies.`;
+    }
+  }
+
+  if (gridEl) {
+    gridEl.innerHTML = Object.keys(QUIZ_TOPICS).map(key => {
+      const qs = QUIZ_QUESTIONS.filter(q => q.topic === key);
+      const correct = getQuizCorrectCount(qs);
+      const domainPct = Math.round((correct / qs.length) * 100);
+      return `
+        <div class="quiz-domain-tile">
+          <span class="quiz-kpi-label">${QUIZ_TOPICS[key].short}</span>
+          <div class="quiz-kpi-val" style="font-size: 15px; margin-top: 4px;">${correct} / ${qs.length}</div>
+          <span class="quiz-kpi-sub">${domainPct}% accurate</span>
+        </div>
+      `;
+    }).join('');
+  }
+
+  if (reviewBtn) {
+    const missedCount = QUIZ_QUESTIONS.length - correctAll;
+    reviewBtn.hidden = missedCount === 0;
+  }
+}
+
+function renderQuizAll() {
+  renderQuizKPIs();
+  renderQuizToolbar();
+  renderQuizNavStrip();
+  renderQuizQuestion();
+  renderQuizSummary();
+}
+
+// Setup Modal Open / Close / Auto-Popup
+const quizDialog = document.getElementById("quizDialog");
+const btnCloseQuiz = document.getElementById("btnCloseQuiz");
+const btnSkipQuiz = document.getElementById("btnSkipQuiz");
+const btnCloseQuizFooter = document.getElementById("btnCloseQuizFooter");
+const btnQuizToggle = document.getElementById("btn-quiz-toggle");
+const btnHeroQuiz = document.getElementById("btnHeroQuiz");
+
+function openQuiz() {
+  if (quizDialog && !quizDialog.open) {
+    quizDialog.showModal();
+    renderQuizAll();
+  }
+}
+
+function dismissQuiz() {
+  try {
+    sessionStorage.setItem("emptybowl_quiz_dismissed", "1");
+  } catch (e) {}
+  if (quizDialog && quizDialog.open) {
+    quizDialog.close();
+  }
+}
+
+if (btnCloseQuiz) btnCloseQuiz.onclick = dismissQuiz;
+if (btnSkipQuiz) btnSkipQuiz.onclick = dismissQuiz;
+if (btnCloseQuizFooter) btnCloseQuizFooter.onclick = dismissQuiz;
+
+if (btnQuizToggle) {
+  btnQuizToggle.onclick = openQuiz;
+}
+if (btnHeroQuiz) {
+  btnHeroQuiz.onclick = openQuiz;
+}
+
+if (quizDialog) {
+  quizDialog.addEventListener("cancel", () => {
+    try { sessionStorage.setItem("emptybowl_quiz_dismissed", "1"); } catch (e) {}
+  });
+
+  quizDialog.addEventListener("click", (e) => {
+    const rect = quizDialog.getBoundingClientRect();
+    const isInDialog = (
+      rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
+      rect.left <= e.clientX && e.clientX <= rect.left + rect.width
+    );
+    if (!isInDialog) {
+      dismissQuiz();
+    }
+  });
+}
+
+// Keyboard shortcuts when quiz is active
+document.addEventListener("keydown", (e) => {
+  if (!quizDialog || !quizDialog.open) return;
+  if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return;
+  if (e.key === 'ArrowRight') {
+    navigateQuizQuestion(1);
+  } else if (e.key === 'ArrowLeft') {
+    navigateQuizQuestion(-1);
+  } else if (['1', '2', '3', '4'].includes(e.key)) {
+    const idx = parseInt(e.key, 10) - 1;
+    selectQuizAnswer(quizState.currentQuestionId, idx);
+  }
+});
+
+// Initialize Quiz
+loadQuizState();
+renderQuizAll();
+
+// Auto-popup for visitors on page load if not already dismissed in this session
+window.addEventListener("DOMContentLoaded", () => {
+  let dismissed = false;
+  try {
+    dismissed = sessionStorage.getItem("emptybowl_quiz_dismissed") === "1";
+  } catch (e) {}
+
+  if (!dismissed) {
+    setTimeout(() => {
+      openQuiz();
+    }, 450);
+  }
+});
+
 // Markup context hook for local review tool
 window.__markupContext = () => ({
   screen: "overview-home",
   version: APP.version,
   helpOpen: helpDialog.open,
-  aboutOpen: aboutDialog.open
+  aboutOpen: aboutDialog.open,
+  quizOpen: quizDialog ? quizDialog.open : false
 });
 </script>
 </body>
