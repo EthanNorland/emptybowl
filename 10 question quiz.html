@@ -5,7 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="artifact-type" content="tool">
   <meta name="design-style" content="canopy">
-  <title>Food Insecurity Quiz</title>
+  <title>Food Insecurity Quiz · Empty Bowl</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon-180.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#181614">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..600&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
@@ -841,15 +845,15 @@
     color: #f5f0ea;
   }
   .brand-logo {
-    width: 36px;
-    height: 36px;
-    border-radius: 6px;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
   }
   .brand-title {
-    font-size: 19px;
+    font-size: 21px;
     font-weight: 700;
     color: #f5f0ea;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.025em;
   }
   nav.page-nav {
     display: flex;
@@ -902,6 +906,96 @@
     .nav-container { flex-direction: column; align-items: stretch; gap: 8px; }
     nav.page-nav { justify-content: flex-start; overflow-x: auto; padding-bottom: 4px; }
   }
+
+  /* Help & About Dialogs */
+  dialog.site-dialog {
+    margin: auto;
+    background: #211e1a;
+    color: #f5f0ea;
+    border: 1px solid #36312a;
+    border-radius: 12px;
+    padding: 24px;
+    max-width: 520px;
+    width: calc(100% - 32px);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+  }
+  dialog.site-dialog::backdrop {
+    background: rgba(12, 11, 9, 0.78);
+    backdrop-filter: blur(4px);
+  }
+  .site-dialog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+  }
+  .site-dialog-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #f5f0ea;
+  }
+  .site-dialog-close {
+    background: none;
+    border: none;
+    color: #aba398;
+    font-size: 22px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 2px 6px;
+  }
+  .site-dialog-close:hover { color: #f5f0ea; }
+  #helpSearch {
+    width: 100%;
+    padding: 10px 12px;
+    background: #181614;
+    border: 1px solid #36312a;
+    border-radius: 6px;
+    color: #f5f0ea;
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+  #helpSearch:focus { border-color: #558963; outline: none; }
+  .help-list {
+    max-height: 280px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .help-entry {
+    text-align: left;
+    padding: 10px 12px;
+    background: #26231e;
+    border: 1px solid #2b2721;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: border-color 0.15s ease;
+  }
+  .help-entry:hover { border-color: #558963; }
+  .help-entry-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #f5f0ea;
+    margin-bottom: 2px;
+  }
+  .help-entry-desc {
+    font-size: 12px;
+    color: #aba398;
+  }
+  .about-content p {
+    font-size: 13px;
+    color: #aba398;
+    margin: 0 0 10px 0;
+    line-height: 1.55;
+  }
+  .about-content strong { color: #f5f0ea; }
+  .about-content a { color: #72a681; text-decoration: none; }
+  .about-content a:hover { text-decoration: underline; }
+  .ring-target {
+    box-shadow: 0 0 0 3px #e5a93b, 0 0 18px rgba(229, 169, 59, 0.55) !important;
+    transition: box-shadow 0.25s ease;
+  }
   </style>
 </head>
 <body>
@@ -925,8 +1019,8 @@
       <!-- Utility Actions -->
       <div class="header-actions">
         <a href="quiz.html" class="tool-btn active" id="btn-quiz-toggle" title="10-Question Harvest Bowl Quiz">Quiz 📝</a>
-        <a href="./#helpDialog" class="tool-btn" id="btn-help-toggle" title="Return to guide">Help (?)</a>
-        <a href="./#aboutDialog" class="tool-btn" id="btn-about-toggle" title="Project origin">About</a>
+        <button type="button" class="tool-btn" id="btn-help-toggle" title="Searchable Help and control locator">Help (?)</button>
+        <button type="button" class="tool-btn" id="btn-about-toggle" title="Project origin, author, and license">About</button>
       </div>
     </div>
   </header>
@@ -1241,6 +1335,38 @@
     </footer>
   </div>
 
+  <!-- Help Dialog -->
+  <dialog id="helpDialog" class="site-dialog">
+    <div class="site-dialog-header">
+      <h3>Searchable Guide</h3>
+      <button type="button" class="site-dialog-close" id="btnCloseHelp" title="Close dialog">&times;</button>
+    </div>
+    <input type="search" id="helpSearch" placeholder="Type a term (e.g. bowl, question, reset, nav)...">
+    <div class="help-list" id="helpResults"></div>
+  </dialog>
+
+  <!-- About Dialog -->
+  <dialog id="aboutDialog" class="site-dialog">
+    <div class="site-dialog-header">
+      <h3>About</h3>
+      <button type="button" class="site-dialog-close" id="btnCloseAbout" title="Close dialog">&times;</button>
+    </div>
+    <div class="about-content">
+      <p style="display: flex; align-items: center; gap: 8px;">
+        <img src="icon.svg" width="32" height="32" alt="Logo">
+        <strong>Empty Bowl</strong> — An interactive exploration of food insecurity: who faces hunger, root causes, lived experiences, and tangible community action.
+      </p>
+      <p>By Ethan Norland, written with Gemini.</p>
+      <p style="font-family: ui-monospace, monospace; font-size: 12px; color: #e5a93b;">Build f00000-001.</p>
+      <p style="font-size: 12px; border-top: 1px solid #36312a; padding-top: 10px; margin-top: 12px;">
+        © 2026 Ethan Norland. All rights reserved. <a href="https://EthanNorland.github.io/" target="_blank" rel="noopener">Portfolio</a>
+      </p>
+      <p style="font-size: 12px; color: #aba398; font-style: italic; margin-top: 8px; border-left: 2px solid #558963; padding-left: 8px;">
+        "Empty Bowl exists because hunger isn't confined to a stereotype—it affects people of all ages, backgrounds, and jobs right in our own communities, and we need to see the real human reality behind it."
+      </p>
+    </div>
+  </dialog>
+
   <api-shim></api-shim>
   <script>
     const QUIZ_QUESTIONS = [
@@ -1432,13 +1558,17 @@
     }
 
     async function persistState() {
+      const payload = {
+        currentIndex: quizState.currentIndex,
+        answers: quizState.answers,
+        viewingSummary: quizState.viewingSummary
+      };
+      try {
+        localStorage.setItem('emptybowl_quiz10_state', JSON.stringify(payload));
+      } catch (e) {}
       if (window.notebookAppApi && typeof window.notebookAppApi.setAppState === 'function') {
         try {
-          await window.notebookAppApi.setAppState({
-            currentIndex: quizState.currentIndex,
-            answers: quizState.answers,
-            viewingSummary: quizState.viewingSummary
-          });
+          await window.notebookAppApi.setAppState(payload);
         } catch (err) {
           // Non-fatal in preview environments
         }
@@ -1884,6 +2014,7 @@
         viewingSummary: false
       };
       lastDroppedId = null;
+      try { localStorage.removeItem('emptybowl_quiz10_state'); } catch (e) {}
       disarmResetButtons();
       renderFoodBowl(null);
       updateBowlFeedback('neutral', `Bowl emptied and ready. Answer questions correctly to add fresh ingredients.`);
@@ -1892,22 +2023,29 @@
     }
 
     async function initQuiz() {
+      let saved = null;
       if (window.notebookAppApi && typeof window.notebookAppApi.getAppState === 'function') {
         try {
-          const saved = await window.notebookAppApi.getAppState();
-          if (saved && typeof saved === 'object') {
-            if (typeof saved.currentIndex === 'number' && saved.currentIndex >= 0 && saved.currentIndex < QUIZ_QUESTIONS.length) {
-              quizState.currentIndex = saved.currentIndex;
-            }
-            if (saved.answers && typeof saved.answers === 'object') {
-              quizState.answers = saved.answers;
-            }
-            if (typeof saved.viewingSummary === 'boolean') {
-              quizState.viewingSummary = saved.viewingSummary;
-            }
-          }
+          saved = await window.notebookAppApi.getAppState();
         } catch (err) {
-          // Proceed with fresh state
+          // Proceed to localStorage fallback
+        }
+      }
+      if (!saved) {
+        try {
+          const raw = localStorage.getItem('emptybowl_quiz10_state');
+          if (raw) saved = JSON.parse(raw);
+        } catch (e) {}
+      }
+      if (saved && typeof saved === 'object') {
+        if (typeof saved.currentIndex === 'number' && saved.currentIndex >= 0 && saved.currentIndex < QUIZ_QUESTIONS.length) {
+          quizState.currentIndex = saved.currentIndex;
+        }
+        if (saved.answers && typeof saved.answers === 'object') {
+          quizState.answers = saved.answers;
+        }
+        if (typeof saved.viewingSummary === 'boolean') {
+          quizState.viewingSummary = saved.viewingSummary;
         }
       }
 
@@ -1932,6 +2070,80 @@
     }
 
     document.addEventListener('DOMContentLoaded', initQuiz);
+
+    // Keyboard shortcuts for quiz navigation and answer selection
+    document.addEventListener('keydown', (e) => {
+      const helpDlg = document.getElementById('helpDialog');
+      const aboutDlg = document.getElementById('aboutDialog');
+      if ((helpDlg && helpDlg.open) || (aboutDlg && aboutDlg.open)) return;
+      if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return;
+      if (e.key === 'ArrowRight') {
+        goNextQuestion();
+      } else if (e.key === 'ArrowLeft') {
+        goPrevQuestion();
+      } else if (['1', '2', '3', '4'].includes(e.key)) {
+        selectAnswer(parseInt(e.key, 10) - 1);
+      }
+    });
+
+    // Searchable Help & About Dialogs
+    const HELP_INDEX = [
+      { title: "Home Navigation", selector: "#btn-nav-home", text: "Return to the Empty Bowl overview page." },
+      { title: "Who Faces Hunger", selector: "#btn-nav-who", text: "Demographics and vulnerable populations." },
+      { title: "Causes of Food Insecurity", selector: "#btn-nav-causes", text: "Examine economic and structural root causes." },
+      { title: "Personal Stories", selector: "#btn-nav-stories", text: "Read first-person accounts and lived experiences." },
+      { title: "How You Can Help", selector: "#btn-nav-help", text: "Take direct action with pantries and advocacy." },
+      { title: "Question Progress Strip", selector: ".almanac-strip", text: "Jump between questions 01-10 and inspect answered status." },
+      { title: "Question Card", selector: "#question-card", text: "Read the current question, select an answer (or press 1-4), and view evidence." },
+      { title: "Harvest Bowl Visualizer", selector: ".bowl-card", text: "Watch earned ingredients drop and stack inside the ceramic bowl." },
+      { title: "Reset Quiz", selector: "#btn-reset-quiz", text: "Clear saved answers and empty the harvest bowl to start fresh." }
+    ];
+
+    const helpDialog = document.getElementById("helpDialog");
+    const helpSearch = document.getElementById("helpSearch");
+    const helpResults = document.getElementById("helpResults");
+
+    function renderHelp(query = "") {
+      if (!helpResults) return;
+      const q = query.toLowerCase().trim();
+      const filtered = HELP_INDEX.filter(item =>
+        item.title.toLowerCase().includes(q) || item.text.toLowerCase().includes(q)
+      );
+      helpResults.innerHTML = "";
+      if (filtered.length === 0) {
+        helpResults.innerHTML = '<div style="font-size:12px; color:#787167; padding:10px;">No matching controls found.</div>';
+        return;
+      }
+      filtered.forEach(item => {
+        const entry = document.createElement("button");
+        entry.type = "button";
+        entry.className = "help-entry";
+        entry.innerHTML = `<div class="help-entry-title">${item.title}</div><div class="help-entry-desc">${item.text}</div>`;
+        entry.onclick = () => {
+          helpDialog.close();
+          const el = document.querySelector(item.selector);
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth", block: "center" });
+            el.classList.add("ring-target");
+            setTimeout(() => el.classList.remove("ring-target"), 1600);
+          }
+        };
+        helpResults.appendChild(entry);
+      });
+    }
+
+    document.getElementById("btn-help-toggle")?.addEventListener("click", () => {
+      renderHelp();
+      helpDialog.showModal();
+      helpSearch.value = "";
+      helpSearch.focus();
+    });
+    helpSearch?.addEventListener("input", (e) => renderHelp(e.target.value));
+    document.getElementById("btnCloseHelp")?.addEventListener("click", () => helpDialog.close());
+
+    const aboutDialog = document.getElementById("aboutDialog");
+    document.getElementById("btn-about-toggle")?.addEventListener("click", () => aboutDialog.showModal());
+    document.getElementById("btnCloseAbout")?.addEventListener("click", () => aboutDialog.close());
   </script>
 </body>
 </html>

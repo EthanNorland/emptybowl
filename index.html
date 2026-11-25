@@ -2228,7 +2228,7 @@ document.getElementById("btnCloseAbout").onclick = () => aboutDialog.close();
 const versionChip = document.getElementById("versionChip");
 versionChip.textContent = APP.version + " ↻";
 
-const SW_ON = "serviceWorker" in navigator && !["localhost", "127.0.0.1"].includes(location.hostname);
+const SW_ON = "serviceWorker" in navigator && (location.protocol === "https:" || location.protocol === "http:") && !["localhost", "127.0.0.1"].includes(location.hostname);
 if (SW_ON) {
   navigator.serviceWorker.register("sw.js").then(reg => {
     reg.addEventListener("updatefound", () => {
@@ -3004,6 +3004,15 @@ initHarvestQuiz();
 
 // Load the quiz when a user goes to the Empty Bowl page unless they chose "never show again"
 function loadQuizOnEntry() {
+  if (location.hash === "#helpDialog") {
+    renderHelp();
+    helpDialog.showModal();
+    return;
+  }
+  if (location.hash === "#aboutDialog") {
+    aboutDialog.showModal();
+    return;
+  }
   if (new URLSearchParams(window.location.search).has("noquiz")) {
     return;
   }
