@@ -9,7 +9,7 @@
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="icon-180.png">
   <link rel="manifest" href="manifest.webmanifest">
-  <meta name="theme-color" content="#f5f0ea">
+  <meta name="theme-color" content="#2b2520">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..600&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
@@ -135,7 +135,7 @@
       overflow-x: clip;
       margin: 0;
       padding: 0;
-      background-color: #f5f0ea;
+      background-color: #2b2520;
       color: var(--on-surface);
       font-family: var(--font-body);
       font-size: var(--body-size);
@@ -167,7 +167,7 @@
       flex-direction: column;
       gap: var(--space-sm);
       padding-bottom: var(--space-md);
-      border-bottom: 1px solid #cfc2b0;
+      border-bottom: 1px solid #524840;
     }
     .kicker {
       font-family: var(--font-body);
@@ -175,7 +175,7 @@
       font-size: var(--label-size);
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: #865606;
+      color: #e5a93b;
       margin: 0;
     }
     .quiz-title {
@@ -184,12 +184,12 @@
       font-size: var(--display-size);
       line-height: 1.12;
       letter-spacing: -0.015em;
-      color: #1f1c18;
+      color: #f5f0ea;
       margin: 0;
     }
     .quiz-subtitle {
       font-size: var(--subhead-size);
-      color: #4a433b;
+      color: #cfc4b8;
       max-width: 65ch;
       margin: 0;
     }
@@ -733,9 +733,9 @@
     /* Footer Sources */
     .sources-footer {
       padding-top: var(--space-md);
-      border-top: 1px solid #cfc2b0;
+      border-top: 1px solid #524840;
       font-size: 0.875rem;
-      color: #4a433b;
+      color: #cfc4b8;
       max-width: 75ch;
     }
     .sources-footer strong {
@@ -743,7 +743,7 @@
       font-size: var(--label-size);
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      color: #1f1c18;
+      color: #f5f0ea;
     }
 
     /* Keyframes: Solid gravity drop with zero bounce */
@@ -821,8 +821,8 @@
     }
   /* Site Header */
   header.site-header {
-    background: rgba(245, 240, 234, 0.94);
-    border-bottom: 1px solid #cfc2b0;
+    background: rgba(43, 37, 32, 0.94);
+    border-bottom: 1px solid #524840;
     padding: 12px 24px;
     position: sticky;
     top: 0;
@@ -842,7 +842,7 @@
     align-items: center;
     gap: 12px;
     text-decoration: none;
-    color: #1f1c18;
+    color: #f5f0ea;
   }
   .brand-logo {
     width: 40px;
@@ -852,7 +852,7 @@
   .brand-title {
     font-size: 21px;
     font-weight: 700;
-    color: #1f1c18;
+    color: #f5f0ea;
     letter-spacing: -0.025em;
   }
   nav.page-nav {
@@ -864,21 +864,21 @@
     padding: 7px 13px;
     font-size: 13px;
     font-family: system-ui, sans-serif;
-    color: #4a433b;
-    background: #ebe3d8;
+    color: #cfc4b8;
+    background: #362f29;
     text-decoration: none;
     border-radius: 6px;
-    border: 1px solid #cfc2b0;
+    border: 1px solid #524840;
     transition: all 0.12s ease;
   }
   .nav-btn:hover {
-    color: #1f1c18;
-    background: #e2d7c8;
+    color: #f5f0ea;
+    background: #413932;
   }
   .nav-btn.active {
     color: #ffffff;
-    background: #2d613c;
-    border-color: #234d2f;
+    background: #467653;
+    border-color: #5a8f68;
     font-weight: 600;
   }
   .header-actions {
@@ -890,18 +890,18 @@
     padding: 6px 12px;
     font-size: 12px;
     font-family: system-ui, sans-serif;
-    background: #ebe3d8;
-    border: 1px solid #cfc2b0;
-    color: #4a433b;
+    background: #362f29;
+    border: 1px solid #524840;
+    color: #cfc4b8;
     border-radius: 6px;
     cursor: pointer;
     text-decoration: none;
     transition: all 0.12s ease;
   }
   .tool-btn:hover, .tool-btn.active {
-    color: #1f1c18;
-    background: #e2d7c8;
-    border-color: #2d613c;
+    color: #f5f0ea;
+    background: #413932;
+    border-color: #558963;
   }
   .tool-btn.active {
     color: #ffffff;
@@ -917,17 +917,17 @@
   /* Help & About Dialogs */
   dialog.site-dialog {
     margin: auto;
-    background: #ebe3d8;
-    color: #1f1c18;
-    border: 1px solid #cfc2b0;
+    background: #362f29;
+    color: #f5f0ea;
+    border: 1px solid #524840;
     border-radius: 12px;
     padding: 24px;
     max-width: 520px;
     width: calc(100% - 32px);
-    box-shadow: 0 12px 32px rgba(31, 28, 24, 0.16);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.55);
   }
   dialog.site-dialog::backdrop {
-    background: rgba(31, 28, 24, 0.45);
+    background: rgba(18, 15, 13, 0.68);
     backdrop-filter: blur(4px);
   }
   .site-dialog-header {
@@ -940,29 +940,29 @@
     margin: 0;
     font-size: 18px;
     font-weight: 700;
-    color: #1f1c18;
+    color: #f5f0ea;
   }
   .site-dialog-close {
     background: none;
     border: none;
-    color: #4a433b;
+    color: #cfc4b8;
     font-size: 22px;
     cursor: pointer;
     line-height: 1;
     padding: 2px 6px;
   }
-  .site-dialog-close:hover { color: #1f1c18; }
+  .site-dialog-close:hover { color: #f5f0ea; }
   #helpSearch {
     width: 100%;
     padding: 10px 12px;
-    background: #f5f0ea;
-    border: 1px solid #cfc2b0;
+    background: #2b2520;
+    border: 1px solid #524840;
     border-radius: 6px;
-    color: #1f1c18;
+    color: #f5f0ea;
     font-size: 13px;
     margin-bottom: 12px;
   }
-  #helpSearch:focus { border-color: #2d613c; outline: none; }
+  #helpSearch:focus { border-color: #558963; outline: none; }
   .help-list {
     max-height: 280px;
     overflow-y: auto;
@@ -973,34 +973,34 @@
   .help-entry {
     text-align: left;
     padding: 10px 12px;
-    background: #f9f6f1;
-    border: 1px solid #dcd0c0;
+    background: #3f3730;
+    border: 1px solid #443b34;
     border-radius: 6px;
     cursor: pointer;
     transition: border-color 0.15s ease;
   }
-  .help-entry:hover { border-color: #2d613c; }
+  .help-entry:hover { border-color: #558963; }
   .help-entry-title {
     font-size: 13px;
     font-weight: 600;
-    color: #1f1c18;
+    color: #f5f0ea;
     margin-bottom: 2px;
   }
   .help-entry-desc {
     font-size: 12px;
-    color: #4a433b;
+    color: #cfc4b8;
   }
   .about-content p {
     font-size: 13px;
-    color: #4a433b;
+    color: #cfc4b8;
     margin: 0 0 10px 0;
     line-height: 1.55;
   }
-  .about-content strong { color: #1f1c18; }
-  .about-content a { color: #2d613c; text-decoration: none; }
+  .about-content strong { color: #f5f0ea; }
+  .about-content a { color: #72a681; text-decoration: none; }
   .about-content a:hover { text-decoration: underline; }
   .ring-target {
-    box-shadow: 0 0 0 3px #865606, 0 0 18px rgba(134, 86, 6, 0.35) !important;
+    box-shadow: 0 0 0 3px #e5a93b, 0 0 18px rgba(229, 169, 59, 0.55) !important;
     transition: box-shadow 0.25s ease;
   }
   </style>
@@ -1364,11 +1364,11 @@
         <strong>Empty Bowl</strong> — An interactive exploration of food insecurity: who faces hunger, root causes, lived experiences, and tangible community action.
       </p>
       <p>By Ethan Norland, written with Gemini.</p>
-      <p style="font-family: ui-monospace, monospace; font-size: 12px; color: #865606;">Build f00000-001.</p>
-      <p style="font-size: 12px; border-top: 1px solid #cfc2b0; padding-top: 10px; margin-top: 12px;">
+      <p style="font-family: ui-monospace, monospace; font-size: 12px; color: #e5a93b;">Build f00000-001.</p>
+      <p style="font-size: 12px; border-top: 1px solid #524840; padding-top: 10px; margin-top: 12px;">
         © 2026 Ethan Norland. All rights reserved. <a href="https://EthanNorland.github.io/" target="_blank" rel="noopener">Portfolio</a>
       </p>
-      <p style="font-size: 12px; color: #4a433b; font-style: italic; margin-top: 8px; border-left: 2px solid #2d613c; padding-left: 8px;">
+      <p style="font-size: 12px; color: #cfc4b8; font-style: italic; margin-top: 8px; border-left: 2px solid #72a681; padding-left: 8px;">
         "Empty Bowl exists because hunger isn't confined to a stereotype—it affects people of all ages, backgrounds, and jobs right in our own communities, and we need to see the real human reality behind it."
       </p>
     </div>
