@@ -1,74 +1,65 @@
 # HANDOFF: Empty Bowl (Food Insecurity)
 
-**Current Build:** `f00000-001` (Markup Review Batch Applied)
-**Status:** 5 cohesive pages assembled with universal top navigation, Dark Walnut & Sage Green organic palette, offline PWA support, interactive modules, and local review tooling.
+**Current Build:** `f00000-001` (HEAD: `310290d` on `main`, synced with `origin/main`)  
+**Updated:** 2026-11-24 21:57 EST  
+**Live Deployment:** `https://EthanNorland.github.io/emptybowl/`  
+**Status:** 5 main pages + standalone quiz pages deployed on Warm Stone / Driftwood (`#2b2520`) theme with 2D editorial cartoon illustrations across 3.75 of the 4 illustrated pages; 1 remaining photo on `howyoucanhelp.html` is queued behind `gemini-3.1-flash-image` quota reset (`2026-11-25T06:26:44Z` / `1:26 AM EST`).
+
+---
+
+## Immediate Priority / What's Next
+
+1. **Convert the remaining photograph on `howyoucanhelp.html` to a 2D cartoon (after `2026-11-25T06:26:44Z` / `1:26:44 AM EST`):**
+   - **Target file:** [`advocating for policy change.jpeg`](advocating%20for%20policy%20change.jpeg) (currently still the original `2752×1536` JPEG photograph).
+   - **Why incomplete:** The `image-generator` subagent hit `429 Too Many Requests` (`RESOURCE_EXHAUSTED` on `gemini-3.1-flash-image`) reporting quota reset in `3h34m44s` (`2026-11-25T06:26:44Z`).
+   - **Action when unblocked:**
+     1. Generate a 16:9 (`1376×768` JPEG) hand-drawn 2D editorial cartoon conversion of `advocating for policy change.jpeg` matching the exact ink-outline + muted earthy gouache/watercolor style of [`financial donation.jpeg`](financial%20donation.jpeg), [`stocking mutual adie fridge.jpeg`](stocking%20mutual%20adie%20fridge.jpeg), and [`Choice-Based Volunteering.jpeg`](Choice-Based%20Volunteering.jpeg). Preserve crisp legible lettering for `"Expand SNAP for Community College Students"` on the two witness signs.
+     2. Copy over [`advocating for policy change.jpeg`](advocating%20for%20policy%20change.jpeg) and update `width="2752" height="1536"` to `width="1376" height="768"` in [`howyoucanhelp.html`](howyoucanhelp.html#L853).
+     3. Verify `howyoucanhelp.html` in headless Chrome (`--user-data-dir=/tmp/chrome-headless-check --dump-dom`), commit, and push to `origin/main`.
+2. **Optional follow-ups:**
+   - Bump `CACHE_NAME` in [`sw.js`](sw.js) so returning PWA/browser visitors immediately fetch the updated cartoon assets instead of serving older cached JPEGs.
+   - Check whether [`causesoffoodinsecurity.html`](causesoffoodinsecurity.html) or any secondary assets need visual updates, and run an end-to-end keyboard navigation, screen-reader accessibility, and mobile viewport audit on GitHub Pages.
+
+---
+
+## Recent Changes (Since Last Handoff)
+
+- **`310290d` — `howyoucanhelp.html` (3 of 4 Action Cards):** Converted [`financial donation.jpeg`](financial%20donation.jpeg), [`stocking mutual adie fridge.jpeg`](stocking%20mutual%20adie%20fridge.jpeg), and [`Choice-Based Volunteering.jpeg`](Choice-Based%20Volunteering.jpeg) to `1376×768` 2D cartoon JPEGs; updated `stocking mutual adie fridge.jpeg` dimensions in [`howyoucanhelp.html`](howyoucanhelp.html#L835) to `1376×768`.
+- **`4c16814` — `personalstories.html` Portraits:** Converted [`Maya.jpeg`](Maya.jpeg), [`Marcus.jpeg`](Marcus.jpeg), and [`Evelyn.jpeg`](Evelyn.jpeg) to `1024×1024` 2D cartoon portraits and updated their `alt` attributes (`"2D cartoon portrait of Maya|Marcus|Evelyn"`).
+- **`ebc78cb` — `whofaceshunger.html` Demographic Cards:** Converted all 5 selector photographs ([`College & University students.jpeg`](College%20&%20University%20students.jpeg), [`families with children.jpeg`](families%20with%20children.jpeg), [`low-wage workers.jpeg`](low-wage%20workers.jpeg), [`Seniors & fixed incomes.jpeg`](Seniors%20&%20fixed%20incomes.jpeg), [`rural populations.jpeg`](rural%20populations.jpeg)) to `1376×768` 2D cartoon illustrations.
+- **`fc35709` — `index.html` Hero Illustration:** Converted [`girl dreaming of food.jpeg`](girl%20dreaming%20of%20food.jpeg) to a matching 2D cartoon illustration.
+- **`174a444` — Sitewide Theme Update (Warm Stone / Driftwood):** Switched all 7 HTML files (`index.html`, `whofaceshunger.html`, `causesoffoodinsecurity.html`, `personalstories.html`, `howyoucanhelp.html`, `quiz.html`, `10 question quiz.html`) and [`manifest.webmanifest`](manifest.webmanifest) to the Warm Stone / Driftwood palette (`--bg: #2b2520`, `--panel: #362f29`, `--panel-hover: #413932`, `--border: #524840`, `--card-bg: #3f3730`, `--ink: #f5f0ea`, `--ink-dim: #cfc4b8`, `--accent: #72a681`, `--ring: #e5a93b`).
+- **`0219339` — Standalone Quiz & Offline Polish:** Fixed standalone quiz Help/About dialogs, `localStorage` persistence, service worker precaching (`sw.js`), and `file://` guard across `quiz.html` and `10 question quiz.html`.
+
+---
 
 ## What Works
-- **Universal Top Navigation:** All 5 pages have top buttons linking to:
+
+- **Universal Top Navigation:** Consistent header on all pages linking to:
   - `Empty Bowl` (`index.html`)
   - `Who Faces Hunger` (`whofaceshunger.html`)
   - `Causes of Food Insecurity` (`causesoffoodinsecurity.html`)
   - `Personal Stories` (`personalstories.html`)
   - `How You Can Help` (`howyoucanhelp.html`)
-- **Visual Identity & Palette:**
-  - Dark Roasted Walnut (`#181614`), Unbleached Linen (`#f5f0ea`), Sage Green (`#72a681`), and Ochre Gold (`#e5a93b`). Contrast ≥ 4.5:1 (AAA on body text).
-  - Empty green ceramic bowl emblem mark in cross section facing the viewer ([`icon.svg`](icon.svg)) with enlarged 40px logo and 21px bold wordmark in the universal header, alongside generated 180, 192, 512, and maskable PNG icons.
-  - Photographic character portraits for Maya, Marcus, and Evelyn with coordinated sage studio backdrops ([`Maya.jpeg`](Maya.jpeg), [`Marcus.jpeg`](Marcus.jpeg), [`Evelyn.jpeg`](Evelyn.jpeg)), with studio lighting enhanced across Marcus and facial shadow removed and balanced across Evelyn.
+- **Visual Identity & Illustration Style:**
+  - Warm Stone / Driftwood palette (`#2b2520` background, `#362f29` panels, `#f5f0ea` body ink, `#72a681` sage green, `#e5a93b` gold accents).
+  - Consistent hand-drawn 2D editorial cartoon / graphic novel artwork (clean dark-ink outlines, soft cel shading, muted earthy gouache/watercolor palette) across `index.html`, `whofaceshunger.html`, `personalstories.html`, and 3 of 4 pillars in `howyoucanhelp.html`.
+  - Empty green ceramic bowl emblem ([`icon.svg`](icon.svg)) and generated PWA PNG icons (`icon-180.png`, `icon-192.png`, `icon-512.png`, `icon-512-maskable.png`).
 - **Interactive Modules:**
-- **Interactive Food Insecurity Harvest Bowl Quiz (10 Questions & Pottery Bowl):**
-  - Integrated the 10-question Harvest Bowl Quiz modal directly into [`index.html`](index.html), replaced from `/Users/ethannorland/Desktop/food insecurity website/10 question quiz.html`.
-  - Also deployed as standalone quiz pages at [`quiz.html`](quiz.html) and [`10 question quiz.html`](10%20question%20quiz.html) with universal top navigation linking across all 5 main pages, and updated [`Food_Insecurity_Quiz.html`](Food_Insecurity_Quiz.html) to automatically redirect to `quiz.html`.
-  - Automatically loads when a user first visits the Empty Bowl home page (`index.html`), while providing immediate exit controls and persistent "Never show again" choice:
-    - **"Never show again" preference options:**
-      - Header button: **"Never show again"** (`#btnNeverShowHeader`)
-      - Footer checkbox: **"Never show this quiz automatically on future visits"** (`#chkNeverShowAgain`)
-      - Footer button: **"Never Show Again"** (`#btnNeverShowFooter`)
-      - Persisted permanently via `localStorage.setItem('emptybowl_quiz_never_show', 'true')`
-      - When set, `loadQuizOnEntry()` suppresses automatic popups on all future visits
-      - Users can still manually launch the quiz at any time using the header `Quiz 📝` button.
-    - Dedicated **"Exit Quiz"** button in the modal header
-    - Top-right close **`&times;`** button
-    - **"Exit Quiz &times;"** button directly inside the question card navigation
-    - **"Exit Quiz & Browse Empty Bowl &rarr;"** button in the modal footer
-    - **"Exit to Empty Bowl &rarr;"** button on the final summary view
-    - Backdrop tap/click outside the dialog and native <kbd>Esc</kbd> key support
-    - Re-launch controls remain accessible at all times via the header `Quiz 📝` button (the redundant hero section callout banner was removed per user request to streamline the main page).
-  - 10 evidence-based questions covering critical food insecurity concepts: 1 in 8 Americans, SNAP nutrition impact, working families & living wages, forced household trade-offs, college food security, pediatric development, health disparities, older adults & fixed incomes, college hunger, and structural roots of hunger.
-  - **Dynamic Interactive Brand Logo Harvest Bowl SVG & Realistic Non-Bouncing Physics:** Ceramic cross-section bowl styled to match the official Empty Bowl website emblem ([`icon.svg`](icon.svg)), featuring the authentic sage green cut face (`#72a983` -> `#558963` -> `#3a6345`), deep forest cavity (`#365e43` -> `#0e1c12`), floor shadow, polished rim highlights, and foot arch. Fresh food ingredients (Apple, Bread, Carrot, Broccoli, Grain, Tomato, Avocado, Corn, Beans, Greens) drop from high above straight down:
-    - **Solid Impact Physics (Zero Bounce):** Drops straight down under gravity acceleration (`dropIntoBowl 400ms cubic-bezier(0.4, 0, 0.8, 0.6)`) and stops dead on impact. All overshoot, rebound bounces, and bowl shaking have been removed so food settles immediately when it hits the surface.
-    - **Dynamic Fall-to-Bottom Logic (`FOOD_PHYSICS`):** Food falls all the way to the bottom ceramic floor of the bowl unless there is food directly underneath it in that column. If underlying food is present (e.g. Apple under Broccoli, Bread under Grain, Tomato/Carrot under Corn, Broccoli/Apple under Greens), it lands flush on top of that food; otherwise, it drops all the way down to rest on the bowl cavity floor.
-    - **Broccoli Crown (`food-3`):** Falls to bottom bowl floor (`translate(196, 306)`) if Apple is absent; lands squarely on top of Apple (`translate(196, 270)`) when present.
-    - **Wheat Grain Sheaf (`food-4`):** Falls to bottom bowl floor (`translate(258, 290)`) if Bread is absent; stalks root directly on top of Bread loaf (`translate(258, 250)`) when present.
-    - **Sweet Corn (`food-7`):** Falls to bottom floor (`translate(328, 294)`) if no food under it; stacks onto Carrot (`translate(328, 258)`) or Tomato (`translate(328, 222)`).
-    - **Leafy Greens (`food-9`):** Falls to bottom floor (`translate(196, 304)`) if empty; stacks onto Apple (`translate(196, 268)`) or Broccoli (`translate(196, 228)`).
-  - Numbered jump strip (01–10) with real-time status styling: open/unanswered, correct (sage green container), missed (tertiary clay container), and active selection outline.
-  - Comprehensive question debriefs with verified empirical explanations, correct indicator badges, and source citations.
-  - Final summary view displaying total score, 3 key takeaway tiles (Structural Root Causes, Intersectional Impact, Actionable Policy Levers), and full question review list with reset capability.
-  - Fully responsive on desktop and mobile viewports with flexible 10-pill rhythm strip and stacked layout.
-  - Persistent browser state autosave via `localStorage` (`emptybowl_quiz10_state`).
-  - `index.html`:
-    - **"The Hidden Arithmetic of Hunger" Section:** Upgraded `.hero-card` to a balanced two-column hero layout (`.hero-split`) pairing the misconception banner and USDA official definition on the left with the photographic character portrait [`girl dreaming of food.jpeg`](girl%20dreaming%20of%20food.jpeg) on the right (captioned "The Human Reality · Childhood Nutrition Hardship").
-    - **"Explore the Spectrum of Food Security" Section:** Embedded [`Food Security Video.mp4`](Food%20Security%20Video.mp4) (an educational briefing video directly alongside the interactive 4-tier USDA spectrum explorer with native playback controls, duration badge, and responsive framing; redundant more info button removed per user request).
-    - Hub cards with updated volunteer action points.
-  - `whofaceshunger.html`: Dynamic demographic profile card inspector featuring 5 photographic selector cards placed directly above each button ([`College & University students.jpeg`](College%20&%20University%20students.jpeg), [`families with children.jpeg`](families%20with%20children.jpeg), [`low-wage workers.jpeg`](low-wage%20workers.jpeg), [`Seniors & fixed incomes.jpeg`](Seniors%20&%20fixed%20incomes.jpeg), [`rural populations.jpeg`](rural%20populations.jpeg)) with refined college barrier and worker impact copy.
-  - `causesoffoodinsecurity.html`: Two-column side-by-side hero card pairing "The Interlocking Drivers of Hunger" overview with the high-resolution [`Root_Causes_of_Food_Insecurity3.png`](Root_Causes_of_Food_Insecurity3.png) infographic (illustrating economic, environmental, and structural root drivers with interactive click-to-enlarge lightbox modal), situated above the interactive Budget Elasticity Simulation showing how fixed expenses squeeze grocery dollars and the 4 Structural Pillars grid. Responsive single-column layout on mobile/tablet viewports.
-  - `personalstories.html`: 2x2 side-by-side grid layout featuring Maya and Marcus's accounts in row 1, and Evelyn's account paired side by side with the Personal Reflections & Notes interactive journal (with persistent browser autosave) in row 2. Automatically adapts to a single-column stack on mobile/tablet screens.
-  - `howyoucanhelp.html`: Dual side-by-side locators grid (`.locators-grid`) pairing the ZIP-activated local pantry & food bank finder section (`#pantryFinderBox`) side by side with the "Find Your Federal & State Legislators" panel (`#repFinderBox`, linking out to Plural Policy's legislator finder tool with description aligned horizontally to the pantry finder description and clean direct lookup button), situated directly above the interactive 7-point community action checklist (with persistent browser state, reset function, and picture export), mutual aid fridge solidarity copy, full 4-pillar photographic action cards ([`financial donation.jpeg`](financial%20donation.jpeg), [`stocking mutual adie fridge.jpeg`](stocking%20mutual%20adie%20fridge.jpeg), [`Choice-Based Volunteering.jpeg`](Choice-Based%20Volunteering.jpeg), [`advocating for policy change.jpeg`](advocating%20for%20policy%20change.jpeg)), and high-resolution clipboard document picture export (`.png`). Responsive single-column stack on mobile/tablet viewports.
-- **Tactile Clipboard Picture Export:**
-  - High-resolution clipboard document illustration ([`action-plan-clipboard.png`](action-plan-clipboard.png) & [`action-plan-clipboard.svg`](action-plan-clipboard.svg)) styled as a tactile sheet of linen paper attached to a dark roasted walnut clipboard with brushed steel spring clamp, dual rivets, and realistic paper shadows.
-  - Features all 7 community action commitments, personal reflection notebook excerpt, 2-column Smart Donor Field Guide (Give vs. Avoid), and wholesale multiplier principle.
-  - Interactive client-side canvas exporter dynamically reflects live checkbox completions and reflection notes.
-- **PWA & Offline:** `manifest.webmanifest`, `sw.js` precaching the app shell, portrait SVGs, and clipboard picture, responsive design with zero overlap, and version chip `f00000-001 ↻`.
-- **Searchable Help:** In-page searchable guide on every screen that locates and highlights controls with a glowing ring.
-- **About Panel:** 4-line standard disclosure with raison d'être quote and "All rights reserved" line.
-- **Local Review Tools:** `tools/markup-server.py` and `tools/markup-inject.js` installed and gitignored.
+  - **10-Question Harvest Bowl Quiz:** Integrated into `index.html` (auto-opens on first visit unless dismissed permanently via `emptybowl_quiz_never_show`, re-launchable from header `Quiz 📝`) and deployed standalone at [`quiz.html`](quiz.html) and [`10 question quiz.html`](10%20question%20quiz.html) (`Food_Insecurity_Quiz.html` redirects to `quiz.html`). Non-bouncing `FOOD_PHYSICS` drop-to-stack SVG mechanics inside the ceramic bowl emblem, 01–10 jump strip, empirical debriefs, summary takeaways, and `localStorage` state (`emptybowl_quiz10_state`).
+  - **`index.html`:** Split `.hero-split` card with USDA definition and cartoon [`girl dreaming of food.jpeg`](girl%20dreaming%20of%20food.jpeg); 4-tier USDA food security spectrum paired with embedded [`Food Security Video.mp4`](Food%20Security%20Video.mp4); navigation hub cards.
+  - **`whofaceshunger.html`:** 5 interactive demographic cards with 2D cartoon illustrations (`1376×768` JPEGs) and barrier breakdowns.
+  - **`causesoffoodinsecurity.html`:** Split hero card pairing "The Interlocking Drivers of Hunger" with click-to-enlarge [`Root_Causes_of_Food_Insecurity3.png`](Root_Causes_of_Food_Insecurity3.png), Budget Elasticity Simulation, and 4 Structural Pillars.
+  - **`personalstories.html`:** 2×2 grid pairing 2D cartoon character portraits ([`Maya.jpeg`](Maya.jpeg), [`Marcus.jpeg`](Marcus.jpeg), [`Evelyn.jpeg`](Evelyn.jpeg)) and narratives with the persistent Personal Reflections & Notes journal.
+  - **`howyoucanhelp.html`:** 4 Action Pillars grid (3 cartoon, 1 photo pending), side-by-side Pantry Finder & Plural Policy Legislator Finder (`.locators-grid`), 7-item interactive action checklist, and client-side + pre-rendered [`action-plan-clipboard.png`](action-plan-clipboard.png) / [`action-plan-clipboard.svg`](action-plan-clipboard.svg) exporter.
+- **PWA, Help & Review Tooling:** [`manifest.webmanifest`](manifest.webmanifest), [`sw.js`](sw.js) precaching, in-page searchable Help modal on every page, About dialog (`Build f00000-001`), and gitignored `tools/markup-server.py` / `tools/markup-inject.js`.
 
-## What's Next
-- Push commits to GitHub repository (`EthanNorland/emptybowl`) and verify GitHub Pages deployment at `https://EthanNorland.github.io/emptybowl/`.
-- Conduct end-to-end audit for keyboard navigation, screen reader accessibility, and mobile layout.
+---
 
-## Rules Learned
-1. All navigation buttons must have tooltips under 25 words and clear accessible names.
-2. In multi-page apps, each page requires its own active state on the corresponding button.
-3. Downloadable text exports should compile both checklist state and reflection text for high utility.
-4. Linear narrative presentation for lived stories creates stronger emotional resonance than tab-hidden views.
+## Operational Notes & Rules Learned
+
+1. All navigation buttons must have tooltips under 25 words and clear accessible names, with an active state corresponding to the current page.
+2. When replacing raster images cleanly in place (same filename, e.g., `1376×768` JPEG), update `width`/`height` attributes in the HTML if the source resolution changed (e.g., `2752×1536` -> `1376×768`) to avoid layout shift, and verify `action-grid` / `demo-selector` rendering in headless Chrome.
+3. For local headless Chrome checks inside the sandbox, always pass `--user-data-dir=/tmp/chrome-headless-check` so Chrome does not fail trying to write outside the sandboxed user profile directory.
+4. `git push origin main` requires unsandboxed execution (`BypassSandbox: true`) for DNS/SSH access to `github.com`.
+5. Interactive exports and linear narrative presentation remain core UX constraints across checklist, journal, and personal story modules.
