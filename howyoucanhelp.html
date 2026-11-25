@@ -8,23 +8,23 @@
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#edf2ee">
+<meta name="theme-color" content="#f5f0ea">
 <style>
   :root {
-    --bg: #edf2ee;
-    --panel: #ffffff;
-    --panel-hover: #e1e9e3;
-    --border: #c5d3c8;
-    --border-subtle: #d5e0d7;
-    --ink: #18221b;
-    --ink-dim: #3d4d42;
-    --ink-muted: #5b6d60;
+    --bg: #f5f0ea;
+    --panel: #ebe3d8;
+    --panel-hover: #e2d7c8;
+    --border: #cfc2b0;
+    --border-subtle: #dcd0c0;
+    --ink: #1f1c18;
+    --ink-dim: #4a433b;
+    --ink-muted: #665e53;
     --accent: #2d613c;
     --accent-hover: #234d2f;
     --accent-soft: rgba(45, 97, 60, 0.12);
-    --ring: #8c5b07;
-    --card-bg: #e6eee8;
-    --tag-bg: #dce6de;
+    --ring: #865606;
+    --card-bg: #f9f6f1;
+    --tag-bg: #ded2c2;
     --mono: ui-monospace, 'IBM Plex Mono', Menlo, Consolas, monospace;
     --sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
@@ -47,7 +47,7 @@
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: rgba(237, 242, 238, 0.94);
+    background: rgba(245, 240, 234, 0.94);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
@@ -733,9 +733,9 @@
   dialog {
     background: var(--panel); color: var(--ink); border: 1px solid var(--border);
     border-radius: 10px; padding: 24px; max-width: 540px; width: 90vw; margin: auto;
-    box-shadow: 0 12px 32px rgba(24, 34, 27, 0.14);
+    box-shadow: 0 12px 32px rgba(31, 28, 24, 0.14);
   }
-  dialog::backdrop { background: rgba(24, 34, 27, 0.45); }
+  dialog::backdrop { background: rgba(31, 28, 24, 0.45); }
   .dialog-header {
     display: flex; justify-content: space-between; align-items: center;
     margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 10px;
@@ -761,7 +761,7 @@
 
   #versionChip {
     position: fixed; right: 14px; bottom: 12px; font-family: var(--mono);
-    font-size: 11px; color: var(--ink-muted); background: rgba(225, 233, 227, 0.92);
+    font-size: 11px; color: var(--ink-muted); background: rgba(235, 227, 216, 0.92);
     backdrop-filter: blur(4px); border: 1px solid var(--border); border-radius: 12px;
     padding: 4px 10px; cursor: pointer; z-index: 10000;
   }
@@ -974,7 +974,7 @@
       </div>
       <div style="margin-top: 18px; display: flex; justify-content: flex-end; align-items: center; gap: 10px; flex-wrap: wrap;">
         <button id="btnResetChecklist" class="tool-btn" style="height: 38px; padding: 0 14px;" title="Reset all checklist items to uncompleted">Reset Checklist</button>
-        <button id="btnExportPicture" class="nav-btn" style="background: #e5a93b; color: #18221b; border-color: #c28822; font-weight: 700; height: 38px; padding: 0 18px;" title="Download your action commitments and field guide as a high-resolution clipboard document picture (.png)">🖼️ Export as Clipboard Picture (.png)</button>
+        <button id="btnExportPicture" class="nav-btn" style="background: #e5a93b; color: #1f1c18; border-color: #c28822; font-weight: 700; height: 38px; padding: 0 18px;" title="Download your action commitments and field guide as a high-resolution clipboard document picture (.png)">🖼️ Export as Clipboard Picture (.png)</button>
       </div>
       <div style="margin-top: 10px; text-align: right;">
         <a href="action-plan-clipboard.png" target="_blank" style="font-family: var(--mono); font-size: 11px; color: var(--ink-dim); text-decoration: underline;" title="Open high-resolution clipboard document picture in a new tab">View pre-rendered clipboard image (1040×1560) ↗</a>
