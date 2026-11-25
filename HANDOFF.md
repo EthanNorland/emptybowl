@@ -64,7 +64,7 @@
 - **Local Review Tools:** `tools/markup-server.py` and `tools/markup-inject.js` installed and gitignored.
 
 ## What's Next
-- Push commits to GitHub repository (`EthanNorland/foodinsecurity`) and verify GitHub Pages deployment at `https://EthanNorland.github.io/foodinsecurity/`.
+- Push commits to GitHub repository (`EthanNorland/emptybowl`) and verify GitHub Pages deployment at `https://EthanNorland.github.io/emptybowl/`.
 - Conduct end-to-end audit for keyboard navigation, screen reader accessibility, and mobile layout.
 
 ## Rules Learned

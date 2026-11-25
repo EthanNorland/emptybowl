@@ -4,7 +4,7 @@ An interactive editorial instrument exploring food insecurity: who faces hunger,
 
 - **Current Build:** `f00000-001`
 - **Identity:** *Empty Bowl* (Subtitle: *Food Insecurity*)
-- **Live Target:** `https://EthanNorland.github.io/foodinsecurity/`
+- **Live Target:** `https://EthanNorland.github.io/emptybowl/`
 
 ## Structure
 The site is organized across 5 interconnected wings, accessible via persistent top navigation on every page:

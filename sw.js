@@ -1,5 +1,5 @@
 // Service Worker for Food Insecurity
-const APP_ID = "foodinsecurity";
+const APP_ID = "emptybowl";
 const VERSION = "f00000-001";
 const CACHE = APP_ID + "-" + VERSION;
 const FILES = [

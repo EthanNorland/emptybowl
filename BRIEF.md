@@ -97,7 +97,7 @@
   - Confirm WCAG AA contrast on every text element.
   - Test searchable Help ringing on all 5 screens.
 - [ ] **Phase 5:** User test with a real student or volunteer; mark up screens using `tools/markup-server.py`.
-- [ ] **Phase 6:** Release build tag (`f00000-002`), write `CHANGELOG.md`, and deploy to GitHub Pages (`https://EthanNorland.github.io/foodinsecurity/`).
+- [ ] **Phase 6:** Release build tag (`f00000-002`), write `CHANGELOG.md`, and deploy to GitHub Pages (`https://EthanNorland.github.io/emptybowl/`).
 
 ## 9. Backlog ("Later" List for Version 2+)
 - Spoken-word audio narrative readings of Maya, Marcus, and Evelyn's accounts.
