@@ -9,7 +9,7 @@
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="icon-180.png">
   <link rel="manifest" href="manifest.webmanifest">
-  <meta name="theme-color" content="#181614">
+  <meta name="theme-color" content="#edf2ee">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..600&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
@@ -135,7 +135,7 @@
       overflow-x: clip;
       margin: 0;
       padding: 0;
-      background-color: var(--background);
+      background-color: #edf2ee;
       color: var(--on-surface);
       font-family: var(--font-body);
       font-size: var(--body-size);
@@ -167,7 +167,7 @@
       flex-direction: column;
       gap: var(--space-sm);
       padding-bottom: var(--space-md);
-      border-bottom: var(--border-soft);
+      border-bottom: 1px solid #c5d3c8;
     }
     .kicker {
       font-family: var(--font-body);
@@ -175,7 +175,7 @@
       font-size: var(--label-size);
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--tertiary);
+      color: #8c5b07;
       margin: 0;
     }
     .quiz-title {
@@ -184,12 +184,12 @@
       font-size: var(--display-size);
       line-height: 1.12;
       letter-spacing: -0.015em;
-      color: var(--on-surface);
+      color: #18221b;
       margin: 0;
     }
     .quiz-subtitle {
       font-size: var(--subhead-size);
-      color: var(--on-surface-variant);
+      color: #3d4d42;
       max-width: 65ch;
       margin: 0;
     }
@@ -733,9 +733,9 @@
     /* Footer Sources */
     .sources-footer {
       padding-top: var(--space-md);
-      border-top: var(--border-soft);
+      border-top: 1px solid #c5d3c8;
       font-size: 0.875rem;
-      color: var(--on-surface-variant);
+      color: #3d4d42;
       max-width: 75ch;
     }
     .sources-footer strong {
@@ -743,7 +743,7 @@
       font-size: var(--label-size);
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      color: var(--secondary);
+      color: #18221b;
     }
 
     /* Keyframes: Solid gravity drop with zero bounce */
@@ -821,8 +821,8 @@
     }
   /* Site Header */
   header.site-header {
-    background: #181614;
-    border-bottom: 1px solid #36312a;
+    background: rgba(237, 242, 238, 0.94);
+    border-bottom: 1px solid #c5d3c8;
     padding: 12px 24px;
     position: sticky;
     top: 0;
@@ -842,7 +842,7 @@
     align-items: center;
     gap: 12px;
     text-decoration: none;
-    color: #f5f0ea;
+    color: #18221b;
   }
   .brand-logo {
     width: 40px;
@@ -852,7 +852,7 @@
   .brand-title {
     font-size: 21px;
     font-weight: 700;
-    color: #f5f0ea;
+    color: #18221b;
     letter-spacing: -0.025em;
   }
   nav.page-nav {
@@ -864,20 +864,21 @@
     padding: 7px 13px;
     font-size: 13px;
     font-family: system-ui, sans-serif;
-    color: #aba398;
+    color: #3d4d42;
+    background: #ffffff;
     text-decoration: none;
     border-radius: 6px;
-    border: 1px solid transparent;
+    border: 1px solid #c5d3c8;
     transition: all 0.12s ease;
   }
   .nav-btn:hover {
-    color: #f5f0ea;
-    background: #26231e;
+    color: #18221b;
+    background: #e1e9e3;
   }
   .nav-btn.active {
-    color: #f5f0ea;
-    background: #26231e;
-    border-color: #558963;
+    color: #ffffff;
+    background: #2d613c;
+    border-color: #234d2f;
     font-weight: 600;
   }
   .header-actions {
@@ -889,17 +890,23 @@
     padding: 6px 12px;
     font-size: 12px;
     font-family: system-ui, sans-serif;
-    background: #211e1a;
-    border: 1px solid #36312a;
-    color: #aba398;
+    background: #ffffff;
+    border: 1px solid #c5d3c8;
+    color: #3d4d42;
     border-radius: 6px;
     cursor: pointer;
     text-decoration: none;
     transition: all 0.12s ease;
   }
   .tool-btn:hover, .tool-btn.active {
-    color: #f5f0ea;
-    border-color: #558963;
+    color: #18221b;
+    background: #e1e9e3;
+    border-color: #2d613c;
+  }
+  .tool-btn.active {
+    color: #ffffff;
+    background: #2d613c;
+    border-color: #234d2f;
   }
   @media (max-width: 768px) {
     header.site-header { padding: 10px; }
@@ -910,17 +917,17 @@
   /* Help & About Dialogs */
   dialog.site-dialog {
     margin: auto;
-    background: #211e1a;
-    color: #f5f0ea;
-    border: 1px solid #36312a;
+    background: #ffffff;
+    color: #18221b;
+    border: 1px solid #c5d3c8;
     border-radius: 12px;
     padding: 24px;
     max-width: 520px;
     width: calc(100% - 32px);
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 12px 32px rgba(24, 34, 27, 0.16);
   }
   dialog.site-dialog::backdrop {
-    background: rgba(12, 11, 9, 0.78);
+    background: rgba(24, 34, 27, 0.45);
     backdrop-filter: blur(4px);
   }
   .site-dialog-header {
@@ -933,29 +940,29 @@
     margin: 0;
     font-size: 18px;
     font-weight: 700;
-    color: #f5f0ea;
+    color: #18221b;
   }
   .site-dialog-close {
     background: none;
     border: none;
-    color: #aba398;
+    color: #3d4d42;
     font-size: 22px;
     cursor: pointer;
     line-height: 1;
     padding: 2px 6px;
   }
-  .site-dialog-close:hover { color: #f5f0ea; }
+  .site-dialog-close:hover { color: #18221b; }
   #helpSearch {
     width: 100%;
     padding: 10px 12px;
-    background: #181614;
-    border: 1px solid #36312a;
+    background: #edf2ee;
+    border: 1px solid #c5d3c8;
     border-radius: 6px;
-    color: #f5f0ea;
+    color: #18221b;
     font-size: 13px;
     margin-bottom: 12px;
   }
-  #helpSearch:focus { border-color: #558963; outline: none; }
+  #helpSearch:focus { border-color: #2d613c; outline: none; }
   .help-list {
     max-height: 280px;
     overflow-y: auto;
@@ -966,34 +973,34 @@
   .help-entry {
     text-align: left;
     padding: 10px 12px;
-    background: #26231e;
-    border: 1px solid #2b2721;
+    background: #e6eee8;
+    border: 1px solid #d5e0d7;
     border-radius: 6px;
     cursor: pointer;
     transition: border-color 0.15s ease;
   }
-  .help-entry:hover { border-color: #558963; }
+  .help-entry:hover { border-color: #2d613c; }
   .help-entry-title {
     font-size: 13px;
     font-weight: 600;
-    color: #f5f0ea;
+    color: #18221b;
     margin-bottom: 2px;
   }
   .help-entry-desc {
     font-size: 12px;
-    color: #aba398;
+    color: #3d4d42;
   }
   .about-content p {
     font-size: 13px;
-    color: #aba398;
+    color: #3d4d42;
     margin: 0 0 10px 0;
     line-height: 1.55;
   }
-  .about-content strong { color: #f5f0ea; }
-  .about-content a { color: #72a681; text-decoration: none; }
+  .about-content strong { color: #18221b; }
+  .about-content a { color: #2d613c; text-decoration: none; }
   .about-content a:hover { text-decoration: underline; }
   .ring-target {
-    box-shadow: 0 0 0 3px #e5a93b, 0 0 18px rgba(229, 169, 59, 0.55) !important;
+    box-shadow: 0 0 0 3px #8c5b07, 0 0 18px rgba(140, 91, 7, 0.35) !important;
     transition: box-shadow 0.25s ease;
   }
   </style>
@@ -1357,11 +1364,11 @@
         <strong>Empty Bowl</strong> — An interactive exploration of food insecurity: who faces hunger, root causes, lived experiences, and tangible community action.
       </p>
       <p>By Ethan Norland, written with Gemini.</p>
-      <p style="font-family: ui-monospace, monospace; font-size: 12px; color: #e5a93b;">Build f00000-001.</p>
-      <p style="font-size: 12px; border-top: 1px solid #36312a; padding-top: 10px; margin-top: 12px;">
+      <p style="font-family: ui-monospace, monospace; font-size: 12px; color: #8c5b07;">Build f00000-001.</p>
+      <p style="font-size: 12px; border-top: 1px solid #c5d3c8; padding-top: 10px; margin-top: 12px;">
         © 2026 Ethan Norland. All rights reserved. <a href="https://EthanNorland.github.io/" target="_blank" rel="noopener">Portfolio</a>
       </p>
-      <p style="font-size: 12px; color: #aba398; font-style: italic; margin-top: 8px; border-left: 2px solid #558963; padding-left: 8px;">
+      <p style="font-size: 12px; color: #3d4d42; font-style: italic; margin-top: 8px; border-left: 2px solid #2d613c; padding-left: 8px;">
         "Empty Bowl exists because hunger isn't confined to a stereotype—it affects people of all ages, backgrounds, and jobs right in our own communities, and we need to see the real human reality behind it."
       </p>
     </div>
