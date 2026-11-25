@@ -9,7 +9,7 @@
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="icon-180.png">
   <link rel="manifest" href="manifest.webmanifest">
-  <meta name="theme-color" content="#181614">
+  <meta name="theme-color" content="#3b281c">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..600&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
@@ -135,7 +135,7 @@
       overflow-x: clip;
       margin: 0;
       padding: 0;
-      background-color: var(--background);
+      background-color: #3b281c;
       color: var(--on-surface);
       font-family: var(--font-body);
       font-size: var(--body-size);
@@ -167,7 +167,7 @@
       flex-direction: column;
       gap: var(--space-sm);
       padding-bottom: var(--space-md);
-      border-bottom: var(--border-soft);
+      border-bottom: 1px solid #664935;
     }
     .kicker {
       font-family: var(--font-body);
@@ -175,7 +175,7 @@
       font-size: var(--label-size);
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--tertiary);
+      color: #e5a93b;
       margin: 0;
     }
     .quiz-title {
@@ -184,12 +184,12 @@
       font-size: var(--display-size);
       line-height: 1.12;
       letter-spacing: -0.015em;
-      color: var(--on-surface);
+      color: #f5f0ea;
       margin: 0;
     }
     .quiz-subtitle {
       font-size: var(--subhead-size);
-      color: var(--on-surface-variant);
+      color: #d6c7b6;
       max-width: 65ch;
       margin: 0;
     }
@@ -733,9 +733,9 @@
     /* Footer Sources */
     .sources-footer {
       padding-top: var(--space-md);
-      border-top: var(--border-soft);
+      border-top: 1px solid #664935;
       font-size: 0.875rem;
-      color: var(--on-surface-variant);
+      color: #d6c7b6;
       max-width: 75ch;
     }
     .sources-footer strong {
@@ -743,7 +743,7 @@
       font-size: var(--label-size);
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      color: var(--secondary);
+      color: #f5f0ea;
     }
 
     /* Keyframes: Solid gravity drop with zero bounce */
@@ -821,8 +821,8 @@
     }
   /* Site Header */
   header.site-header {
-    background: #181614;
-    border-bottom: 1px solid #36312a;
+    background: #332218;
+    border-bottom: 1px solid #664935;
     padding: 12px 24px;
     position: sticky;
     top: 0;
@@ -864,7 +864,7 @@
     padding: 7px 13px;
     font-size: 13px;
     font-family: system-ui, sans-serif;
-    color: #aba398;
+    color: #d6c7b6;
     text-decoration: none;
     border-radius: 6px;
     border: 1px solid transparent;
@@ -872,11 +872,11 @@
   }
   .nav-btn:hover {
     color: #f5f0ea;
-    background: #26231e;
+    background: #523a2a;
   }
   .nav-btn.active {
     color: #f5f0ea;
-    background: #26231e;
+    background: #523a2a;
     border-color: #558963;
     font-weight: 600;
   }
@@ -889,9 +889,9 @@
     padding: 6px 12px;
     font-size: 12px;
     font-family: system-ui, sans-serif;
-    background: #211e1a;
-    border: 1px solid #36312a;
-    color: #aba398;
+    background: #473123;
+    border: 1px solid #664935;
+    color: #d6c7b6;
     border-radius: 6px;
     cursor: pointer;
     text-decoration: none;
@@ -910,9 +910,9 @@
   /* Help & About Dialogs */
   dialog.site-dialog {
     margin: auto;
-    background: #211e1a;
+    background: #473123;
     color: #f5f0ea;
-    border: 1px solid #36312a;
+    border: 1px solid #664935;
     border-radius: 12px;
     padding: 24px;
     max-width: 520px;
@@ -920,7 +920,7 @@
     box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
   }
   dialog.site-dialog::backdrop {
-    background: rgba(12, 11, 9, 0.78);
+    background: rgba(28, 18, 12, 0.78);
     backdrop-filter: blur(4px);
   }
   .site-dialog-header {
@@ -938,7 +938,7 @@
   .site-dialog-close {
     background: none;
     border: none;
-    color: #aba398;
+    color: #d6c7b6;
     font-size: 22px;
     cursor: pointer;
     line-height: 1;
@@ -948,8 +948,8 @@
   #helpSearch {
     width: 100%;
     padding: 10px 12px;
-    background: #181614;
-    border: 1px solid #36312a;
+    background: #3b281c;
+    border: 1px solid #664935;
     border-radius: 6px;
     color: #f5f0ea;
     font-size: 13px;
@@ -966,8 +966,8 @@
   .help-entry {
     text-align: left;
     padding: 10px 12px;
-    background: #26231e;
-    border: 1px solid #2b2721;
+    background: #523a2a;
+    border: 1px solid #573d2d;
     border-radius: 6px;
     cursor: pointer;
     transition: border-color 0.15s ease;
@@ -981,11 +981,11 @@
   }
   .help-entry-desc {
     font-size: 12px;
-    color: #aba398;
+    color: #d6c7b6;
   }
   .about-content p {
     font-size: 13px;
-    color: #aba398;
+    color: #d6c7b6;
     margin: 0 0 10px 0;
     line-height: 1.55;
   }
@@ -1358,10 +1358,10 @@
       </p>
       <p>By Ethan Norland, written with Gemini.</p>
       <p style="font-family: ui-monospace, monospace; font-size: 12px; color: #e5a93b;">Build f00000-001.</p>
-      <p style="font-size: 12px; border-top: 1px solid #36312a; padding-top: 10px; margin-top: 12px;">
+      <p style="font-size: 12px; border-top: 1px solid #664935; padding-top: 10px; margin-top: 12px;">
         © 2026 Ethan Norland. All rights reserved. <a href="https://EthanNorland.github.io/" target="_blank" rel="noopener">Portfolio</a>
       </p>
-      <p style="font-size: 12px; color: #aba398; font-style: italic; margin-top: 8px; border-left: 2px solid #558963; padding-left: 8px;">
+      <p style="font-size: 12px; color: #d6c7b6; font-style: italic; margin-top: 8px; border-left: 2px solid #558963; padding-left: 8px;">
         "Empty Bowl exists because hunger isn't confined to a stereotype—it affects people of all ages, backgrounds, and jobs right in our own communities, and we need to see the real human reality behind it."
       </p>
     </div>
