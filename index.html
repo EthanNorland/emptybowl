@@ -403,9 +403,9 @@
 
   .spectrum-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 420px;
-    gap: 32px;
-    align-items: center;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
   }
 
   .spectrum-content {
@@ -413,11 +413,9 @@
     flex-direction: column;
   }
 
-  .spectrum-visual {
-    display: flex;
-    flex-direction: column;
+  #highSecurityVideoWrap {
     width: 100%;
-    max-width: 420px;
+    max-width: 720px;
   }
 
   .spectrum-video-wrap {
@@ -475,13 +473,6 @@
     .hero-card.hero-split {
       grid-template-columns: 1fr;
       gap: 24px;
-    }
-    .spectrum-layout {
-      grid-template-columns: 1fr;
-      gap: 24px;
-    }
-    .spectrum-visual {
-      max-width: 100%;
     }
   }
 
@@ -1676,26 +1667,6 @@
             </div>
           </div>
         </div>
-
-        <div class="spectrum-visual">
-          <div class="spectrum-video-wrap" id="spectrumVideoWrap">
-            <video
-              id="spectrumVideo"
-              class="spectrum-video-player"
-              controls
-              preload="metadata"
-              playsinline
-              title="Food Security Video"
-            >
-              <source src="Food Security Video.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-            <div class="video-caption-bar">
-              <span>Food Security Video</span>
-              <span class="video-duration-badge">7:16 Educational Briefing</span>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -2145,7 +2116,6 @@ const HELP_INDEX = [
   { title: "Personal Stories", selector: "#btn-nav-stories", text: "Read lived experiences from students and community members." },
   { title: "How You Can Help", selector: "#btn-nav-help", text: "Actionable ways to contribute, donate effectively, and advocate." },
   { title: "Security Spectrum Explorer", selector: "#section-continuum", text: "Inspect the 4 levels of food access defined by the USDA." },
-  { title: "Food Security Video", selector: "#spectrumVideoWrap", text: "Watch the educational briefing video on food security spectrum and systemic dynamics." },
   { title: "Spectrum of Food Security Video", selector: "#highSecurityVideoWrap", text: "Watch the 5:26 earth-tone cartoon briefing located beneath the High Food Security card." },
   { title: "Version & Update Check", selector: "#versionChip", text: "Check whether a newer version of the web app is ready." },
   { title: "About Panel", selector: "#btn-about-toggle", text: "View author byline, build number, and project provenance." }
