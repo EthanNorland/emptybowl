@@ -1657,6 +1657,24 @@
               Households face zero reported problems or anxiety regarding food access. Nutrient-rich meals, varied diet choices, and predictable grocery budgets are consistently maintained without trade-offs.
             </p>
           </div>
+
+          <div class="spectrum-video-wrap" id="highSecurityVideoWrap" style="margin-top: 16px;">
+            <video
+              id="highSecurityVideo"
+              class="spectrum-video-player"
+              controls
+              preload="metadata"
+              playsinline
+              title="The Spectrum of Food Security Video"
+            >
+              <source src="websitevideo.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <div class="video-caption-bar">
+              <span>Spectrum of Food Security</span>
+              <span class="video-duration-badge">5:26 Educational Briefing</span>
+            </div>
+          </div>
         </div>
 
         <div class="spectrum-visual">
@@ -2128,6 +2146,7 @@ const HELP_INDEX = [
   { title: "How You Can Help", selector: "#btn-nav-help", text: "Actionable ways to contribute, donate effectively, and advocate." },
   { title: "Security Spectrum Explorer", selector: "#section-continuum", text: "Inspect the 4 levels of food access defined by the USDA." },
   { title: "Food Security Video", selector: "#spectrumVideoWrap", text: "Watch the educational briefing video on food security spectrum and systemic dynamics." },
+  { title: "Spectrum of Food Security Video", selector: "#highSecurityVideoWrap", text: "Watch the 5:26 earth-tone cartoon briefing located beneath the High Food Security card." },
   { title: "Version & Update Check", selector: "#versionChip", text: "Check whether a newer version of the web app is ready." },
   { title: "About Panel", selector: "#btn-about-toggle", text: "View author byline, build number, and project provenance." }
 ];
@@ -2165,15 +2184,14 @@ document.querySelectorAll(".level-btn").forEach(btn => {
   });
 });
 
-// Food Security Video Player
-const spectrumVideo = document.getElementById("spectrumVideo");
-const spectrumVideoWrap = document.getElementById("spectrumVideoWrap");
-
-if (spectrumVideo && spectrumVideoWrap) {
-  spectrumVideo.addEventListener("play", () => spectrumVideoWrap.classList.add("is-playing"));
-  spectrumVideo.addEventListener("pause", () => spectrumVideoWrap.classList.remove("is-playing"));
-  spectrumVideo.addEventListener("ended", () => spectrumVideoWrap.classList.remove("is-playing"));
-}
+// Food Security Video Players
+document.querySelectorAll(".spectrum-video-wrap").forEach(wrap => {
+  const video = wrap.querySelector("video");
+  if (!video) return;
+  video.addEventListener("play", () => wrap.classList.add("is-playing"));
+  video.addEventListener("pause", () => wrap.classList.remove("is-playing"));
+  video.addEventListener("ended", () => wrap.classList.remove("is-playing"));
+});
 
 // Searchable Help
 const helpDialog = document.getElementById("helpDialog");
