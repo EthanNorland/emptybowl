@@ -993,6 +993,14 @@
   }
 
   /* Workspace Grid */
+  #quizDialog * {
+    min-width: 0;
+  }
+  #quizDialog #quiz-main {
+    padding: 0;
+    margin: 0;
+    max-width: none;
+  }
   #quizDialog .workspace-grid {
     display: grid;
     grid-template-columns: minmax(0, 1.35fr) minmax(280px, 1fr);
@@ -1462,8 +1470,11 @@
   @media (max-width: 768px) {
 
     dialog#quizDialog {
-      width: 96vw;
-      max-height: 94vh;
+      width: calc(100vw - 16px);
+      max-width: calc(100vw - 16px);
+      max-height: 88vh;
+      max-height: calc(100dvh - 44px - env(safe-area-inset-top));
+      margin: max(28px, calc(env(safe-area-inset-top) + 16px)) auto 12px auto;
       border-radius: 10px;
     }
     .quiz-dialog-header {
@@ -1503,6 +1514,7 @@
     .quiz-modal-body {
       padding: 12px;
       gap: 12px;
+      overflow-x: hidden;
     }
     #quizDialog .almanac-cells {
       gap: 4px;
@@ -1740,8 +1752,6 @@
         </div>
       </div>
       <div class="quiz-header-actions">
-        <button type="button" class="btn-quiz-never" id="btnNeverShowHeader" title="Never show this quiz automatically on future visits">Never show again</button>
-        <button type="button" class="btn-quiz-skip" id="btnSkipQuiz" title="Exit quiz and browse Empty Bowl">Exit Quiz</button>
         <button type="button" class="quiz-close-x" id="btnCloseQuiz" title="Exit quiz" aria-label="Exit quiz">&times;</button>
       </div>
     </div>
@@ -2896,9 +2906,7 @@ function initHarvestQuiz() {
 // Setup Modal Open / Close / Auto-Popup
 const quizDialog = document.getElementById("quizDialog");
 const btnCloseQuiz = document.getElementById("btnCloseQuiz");
-const btnSkipQuiz = document.getElementById("btnSkipQuiz");
 const btnCloseQuizFooter = document.getElementById("btnCloseQuizFooter");
-const btnNeverShowHeader = document.getElementById("btnNeverShowHeader");
 const btnNeverShowFooter = document.getElementById("btnNeverShowFooter");
 const chkNeverShowAgain = document.getElementById("chkNeverShowAgain");
 const btnQuizToggle = document.getElementById("btn-quiz-toggle");
@@ -2936,9 +2944,7 @@ function dismissQuiz() {
 }
 
 if (btnCloseQuiz) btnCloseQuiz.onclick = dismissQuiz;
-if (btnSkipQuiz) btnSkipQuiz.onclick = dismissQuiz;
 if (btnCloseQuizFooter) btnCloseQuizFooter.onclick = dismissQuiz;
-if (btnNeverShowHeader) btnNeverShowHeader.onclick = neverShowAgain;
 if (btnNeverShowFooter) btnNeverShowFooter.onclick = neverShowAgain;
 
 if (chkNeverShowAgain) {
