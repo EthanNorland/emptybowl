@@ -829,59 +829,6 @@
     align-items: center;
     gap: 10px;
   }
-  .btn-quiz-skip {
-    background: var(--surface-container);
-    border: 1px solid var(--outline-variant);
-    color: var(--on-surface);
-    padding: 6px 14px;
-    font-size: 13px;
-    font-weight: 600;
-    border-radius: 6px;
-    cursor: pointer;
-    font-family: var(--font-body);
-    transition: all 0.15s ease;
-  }
-  .btn-quiz-skip:hover {
-    color: var(--on-surface);
-    border-color: var(--primary);
-    background: var(--surface-container-high);
-  }
-  .btn-quiz-never {
-    background: transparent;
-    border: 1px solid var(--outline-variant);
-    color: var(--on-surface-variant);
-    padding: 6px 12px;
-    font-size: 12px;
-    font-weight: 500;
-    border-radius: 6px;
-    cursor: pointer;
-    font-family: var(--font-body);
-    transition: all 0.15s ease;
-  }
-  .btn-quiz-never:hover {
-    color: var(--on-surface);
-    border-color: var(--outline);
-    background: var(--surface-container);
-  }
-  .btn-quiz-primary-exit {
-    background: var(--surface-container);
-    border: 1px solid var(--outline-variant);
-    color: var(--on-surface);
-    padding: 7px 16px;
-    font-size: 13px;
-    font-weight: 600;
-    border-radius: 6px;
-    cursor: pointer;
-    font-family: var(--font-body);
-    transition: all 0.15s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .btn-quiz-primary-exit:hover {
-    background: var(--surface-container-high);
-    border-color: var(--primary);
-  }
   .quiz-never-toggle {
     display: inline-flex;
     align-items: center;
@@ -896,12 +843,6 @@
     height: 16px;
     accent-color: var(--primary);
     cursor: pointer;
-  }
-  .quiz-footer-btn-group {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
   }
   .quiz-close-x {
     background: none;
@@ -1503,10 +1444,6 @@
       flex-shrink: 0;
       gap: 6px;
     }
-    .btn-quiz-skip {
-      padding: 4px 8px;
-      font-size: 11px;
-    }
     .quiz-close-x {
       padding: 2px 6px;
       font-size: 20px;
@@ -1548,16 +1485,6 @@
       gap: 10px;
       align-items: stretch;
       text-align: left;
-    }
-    .quiz-footer-btn-group {
-      width: 100%;
-      display: flex;
-      justify-content: flex-end;
-      gap: 8px;
-    }
-    .btn-quiz-never {
-      padding: 5px 10px;
-      font-size: 11px;
     }
 
     header.site-header { padding: 10px; }
@@ -2065,10 +1992,6 @@
         <input type="checkbox" id="chkNeverShowAgain">
         <span>Never show this quiz automatically on future visits</span>
       </label>
-      <div class="quiz-footer-btn-group">
-        <button type="button" class="btn-quiz-never" id="btnNeverShowFooter" title="Permanently stop auto-popup on future visits">Never Show Again</button>
-        <button type="button" class="btn-quiz-primary-exit" id="btnCloseQuizFooter">Exit Quiz & Browse Empty Bowl &rarr;</button>
-      </div>
     </div>
   </dialog>
 
@@ -2906,8 +2829,6 @@ function initHarvestQuiz() {
 // Setup Modal Open / Close / Auto-Popup
 const quizDialog = document.getElementById("quizDialog");
 const btnCloseQuiz = document.getElementById("btnCloseQuiz");
-const btnCloseQuizFooter = document.getElementById("btnCloseQuizFooter");
-const btnNeverShowFooter = document.getElementById("btnNeverShowFooter");
 const chkNeverShowAgain = document.getElementById("chkNeverShowAgain");
 const btnQuizToggle = document.getElementById("btn-quiz-toggle");
 
@@ -2923,15 +2844,6 @@ function openQuiz() {
   }
 }
 
-function neverShowAgain() {
-  try {
-    localStorage.setItem("emptybowl_quiz_never_show", "true");
-  } catch (e) {}
-  if (quizDialog && quizDialog.open) {
-    quizDialog.close();
-  }
-}
-
 function dismissQuiz() {
   if (chkNeverShowAgain && chkNeverShowAgain.checked) {
     try {
@@ -2944,8 +2856,6 @@ function dismissQuiz() {
 }
 
 if (btnCloseQuiz) btnCloseQuiz.onclick = dismissQuiz;
-if (btnCloseQuizFooter) btnCloseQuizFooter.onclick = dismissQuiz;
-if (btnNeverShowFooter) btnNeverShowFooter.onclick = neverShowAgain;
 
 if (chkNeverShowAgain) {
   chkNeverShowAgain.addEventListener("change", () => {
